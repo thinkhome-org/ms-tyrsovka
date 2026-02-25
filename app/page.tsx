@@ -1,5 +1,7 @@
 import Hero from "./components/hero";
 import Aktuality from "./components/aktuality";
+import ProcMy from "./components/proc-my";
+import DostaneteZapisy from "./components/dostanete-zapisy";
 import LogoLoop from "../components/LogoLoop";
 import { SiReact, SiNextdotjs, SiTypescript, SiTailwindcss } from "react-icons/si";
 
@@ -15,7 +17,9 @@ export default function Home() {
         <main className="flex min-h-screen flex-col">
             <Hero />
             <Aktuality />
-            <LogoLoop logos={techLogos} speed={30} fadeOut scaleOnHover gap={60} logoHeight={40} />
+            <ProcMy />
+            <LogoLoop logos={techLogos} speed={30} fadeOut scaleOnHover gap={60} logoHeight={40} className="my-8" />
+            <DostaneteZapisy />
         </main>
     );
 }
