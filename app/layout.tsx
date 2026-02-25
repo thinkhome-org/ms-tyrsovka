@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Quicksand, Source_Sans_3 } from "next/font/google";
 import "./globals.css";
 import Nav from "./components/nav";
+import Footer from "./components/footer";
 
 const quicksand = Quicksand({
     variable: "--font-quicksand",
@@ -28,6 +29,7 @@ export default function RootLayout({
             <body className={`${quicksand.variable} ${sourceSans3.variable} antialiased font-sans`}>
                 <Nav />
                 {children}
+                <Footer />
             </body>
         </html>
     );
