@@ -1,10 +1,15 @@
 import Link from "next/link";
+import Image from "next/image";
 import aktuality from "@/app/data/aktuality.json";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { linkButtonOutlineSm } from "@/lib/button-link-classes";
 
 type Aktualita = {
     title: string;
     slug: string;
     publishedAt: string; // YYYY-MM-DD
+    image: string;
 };
 
 function formatDateCs(dateIso: string) {
@@ -23,51 +28,64 @@ export default function AktualityPage() {
         .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
 
     return (
-        <main className="min-h-screen bg-[#f5f5f5] px-6 text-zinc-900">
-            <div className="mx-auto w-full max-w-6xl pt-10 pb-16 md:pl-28">
+        <main className="flex-1 text-zinc-900">
+            <div className="page-shell section-shell">
                 <div className="flex flex-wrap items-end justify-between gap-4">
                     <div>
-                        <h1 className="text-4xl font-bold tracking-tight text-black sm:text-5xl">
+                        <Badge variant="soft" className="mb-4">
+                            Přehled aktualit
+                        </Badge>
+                        <h1 className="text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
                             Aktuality
                         </h1>
-                        <p className="mt-2 max-w-2xl text-sm leading-relaxed text-zinc-600 sm:text-base">
+                        <p className="mt-3 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
                             Přehled všech novinek a oznámení.
                         </p>
                     </div>
 
-                    <Link
-                        href="/"
-                        className="inline-flex h-9 items-center gap-2 rounded-lg border border-black/10 bg-white/80 px-4 text-sm font-medium uppercase tracking-wide text-zinc-800 shadow-sm transition hover:bg-[#A0C4FF]"
-                    >
+                    <Link href="/" className={linkButtonOutlineSm}>
                         ← Zpět
                     </Link>
                 </div>
 
-                <div className="mt-10 grid grid-cols-1 gap-4 md:grid-cols-2">
+                <div className="mt-10 grid grid-cols-1 gap-5 lg:grid-cols-2">
                     {items.map((item) => (
                         <Link
                             key={item.slug}
                             href={`/aktuality/${item.slug}`}
-                            className="group rounded-xl border border-black/10 bg-white/80 p-5 shadow-sm transition hover:border-black/20 hover:bg-[#A0C4FF]/25"
+                            className="group block"
                         >
-                            <div className="flex items-start justify-between gap-4">
-                                <div className="min-w-0">
-                                    <div className="w-full truncate text-lg font-semibold leading-snug text-zinc-900 transition-colors group-hover:text-black">
-                                        {item.title}
+                            <Card className="overflow-hidden border-border/70 bg-card/90 transition-transform duration-300 group-hover:-translate-y-1">
+                                <div className="grid gap-0 sm:grid-cols-[200px_1fr]">
+                                    <div className="relative h-48 bg-muted sm:h-full">
+                                        <Image
+                                            src={item.image}
+                                            alt={item.title}
+                                            fill
+                                            className="object-cover"
+                                            sizes="(max-width: 640px) 100vw, 200px"
+                                        />
                                     </div>
-                                    <div className="mt-2 text-sm text-zinc-600">
-                                        <time dateTime={item.publishedAt}>
-                                            {formatDateCs(item.publishedAt)}
-                                        </time>
+                                    <div>
+                                        <CardHeader className="pb-3">
+                                            <Badge variant="outline" className="w-fit">
+                                                <time dateTime={item.publishedAt}>
+                                                    {formatDateCs(item.publishedAt)}
+                                                </time>
+                                            </Badge>
+                                            <CardTitle className="w-full truncate text-xl">
+                                                {item.title}
+                                            </CardTitle>
+                                        </CardHeader>
+                                        <CardContent>
+                                            <p className="text-sm leading-relaxed text-muted-foreground">
+                                                Otevřít detail aktuality a
+                                                zobrazit další informace.
+                                            </p>
+                                        </CardContent>
                                     </div>
                                 </div>
-                                <span
-                                    aria-hidden
-                                    className="mt-1 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-black/10 bg-white/70 text-zinc-700 transition group-hover:translate-x-0.5 group-hover:border-black/20"
-                                >
-                                    →
-                                </span>
-                            </div>
+                            </Card>
                         </Link>
                     ))}
                 </div>

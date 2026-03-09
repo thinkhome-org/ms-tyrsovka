@@ -3,31 +3,35 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useRef, useEffect } from "react";
+import { ChevronDown, Shield } from "lucide-react";
+import { buttonVariants } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
 
 const NAV_ITEMS = [
-    { label: "Aktuality", href: "#" },
+    { label: "Aktuality", href: "/aktuality" },
     { label: "Informace", href: "#", hasDropdown: true },
-    { label: "O škole", href: "#", hasDropdown: true },
+    { label: "O škole", href: "/o-nas", hasDropdown: true },
     { label: "Jídelníček", href: "#" },
     { label: "Fotogalerie", href: "#", hasDropdown: true },
-    { label: "Správa MŠ", href: "#", icon: true },
-    { label: "Kontakt", href: "#" },
+    { label: "Správa MŠ", href: "/uredni-deska", icon: true },
+    { label: "Kontakt", href: "#kontakt" },
 ];
 
 const DROPDOWN_CONTENT = {
-    "Informace": [
+    Informace: [
         { label: "Důležité dokumenty", href: "#" },
         { label: "Provozní řád", href: "#" },
         { label: "Školní řád", href: "#" },
-        { label: "Poplatky", href: "#" },
+        { label: "Zápisy", href: "/zapisy" },
     ],
-    "O skole": [
-        { label: "Historie školy", href: "#" },
-        { label: "Pedagogický tým", href: "#" },
+    "O škole": [
+        { label: "O nás", href: "/o-nas" },
+        { label: "Pedagogický tým", href: "/o-nas" },
         { label: "Vybavení", href: "#" },
         { label: "Akce a projekty", href: "#" },
     ],
-    "Fotogalerie": [
+    Fotogalerie: [
         { label: "Školní rok 2025/26", href: "#" },
         { label: "Školní rok 2024/25", href: "#" },
         { label: "Školní akce", href: "#" },
@@ -58,16 +62,35 @@ export default function Nav() {
     };
 
     return (
-        <header className="w-full bg-white">
-            <nav className="w-full overflow-visible">
-                <div className="flex w-full items-center justify-between bg-white px-6 py-2 overflow-visible">
-                    <div className="flex flex-wrap items-center gap-4 overflow-visible">
-                        <Link href="/" className="flex items-center">
-                            <Image src="/logo.png" alt="MS Tyršovka logo" width={60} height={60} priority />
+        <header className="sticky top-0 z-50 w-full border-b border-border/60 bg-background/80 backdrop-blur-xl">
+            <nav className="page-shell overflow-visible py-3">
+                <div className="flex items-center justify-between gap-4 overflow-visible">
+                    <div className="flex min-w-0 items-center gap-4">
+                        <Link href="/" className="flex items-center gap-3">
+                            <div className="relative flex size-12 items-center justify-center overflow-hidden rounded-2xl border border-border/70 bg-card shadow-sm">
+                                <Image
+                                    src="/logo.png"
+                                    alt="MS Tyršovka logo"
+                                    width={44}
+                                    height={44}
+                                    priority
+                                    className="object-contain"
+                                />
+                            </div>
+                            <div className="hidden min-w-0 sm:block">
+                                <div className="truncate text-base font-semibold tracking-tight">
+                                    MŠ Tyršovka
+                                </div>
+                                <div className="truncate text-sm text-muted-foreground">
+                                    Mateřská škola pro radost z pohybu
+                                </div>
+                            </div>
                         </Link>
+                        <div className="hidden h-10 w-px bg-border/70 lg:block" />
+                        <div className="hidden flex-wrap items-center gap-2 overflow-visible lg:flex">
                         {NAV_ITEMS.slice(0, 5).map((item) => (
-                            <div 
-                                key={item.label} 
+                            <div
+                                key={item.label}
                                 className="relative"
                                 ref={(el) => {
                                     if (item.hasDropdown) {
@@ -78,57 +101,73 @@ export default function Nav() {
                                 {item.hasDropdown ? (
                                     <button
                                         onClick={() => toggleDropdown(item.label)}
-                                        className="flex h-8 items-center gap-2 rounded-lg border border-black/10 bg-white/80 px-3 text-sm font-medium uppercase tracking-wide text-zinc-800 shadow-sm transition hover:bg-[#A0C4FF]"
+                                        className={cn(
+                                            buttonVariants({
+                                                variant: openDropdown === item.label ? "secondary" : "ghost",
+                                                size: "sm",
+                                            }),
+                                            "rounded-full px-4 text-sm"
+                                        )}
                                     >
                                         {item.label}
-                                        <span aria-hidden className="text-zinc-500">
-                                            <svg 
-                                                viewBox="0 0 12 8" 
-                                                className={`h-2 w-3 transition-transform ${openDropdown === item.label ? 'rotate-180' : ''}`}
-                                                fill="none"
-                                            >
-                                                <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                                            </svg>
-                                        </span>
+                                        <ChevronDown
+                                            className={cn(
+                                                "size-4 text-muted-foreground transition-transform",
+                                                openDropdown === item.label && "rotate-180"
+                                            )}
+                                        />
                                     </button>
                                 ) : (
-                                    <Link href={item.href} className="flex h-8 items-center gap-2 rounded-lg border border-black/10 bg-white/80 px-3 text-sm font-medium uppercase tracking-wide text-zinc-800 shadow-sm transition hover:bg-[#A0C4FF]">
+                                    <Link
+                                        href={item.href}
+                                        className={cn(
+                                            buttonVariants({ variant: "ghost", size: "sm" }),
+                                            "rounded-full px-4 text-sm"
+                                        )}
+                                    >
                                         {item.label}
                                     </Link>
                                 )}
-                                
+
                                 {item.hasDropdown && openDropdown === item.label && (
-                                    <div className="absolute top-full left-0 mt-2 w-56 z-50">
-                                        <div className="rounded-xl border border-white/20 bg-white/70 backdrop-blur-md shadow-xl p-2">
+                                    <div className="absolute left-0 top-full z-50 mt-3 w-64">
+                                        <Card className="rounded-2xl border-border/70 bg-background/95 p-2 backdrop-blur-xl">
                                             {DROPDOWN_CONTENT[item.label as keyof typeof DROPDOWN_CONTENT]?.map((dropdownItem) => (
                                                 <Link
                                                     key={dropdownItem.label}
                                                     href={dropdownItem.href}
-                                                    className="block px-4 py-2.5 text-sm font-medium text-zinc-700 rounded-lg transition-colors hover:bg-white/60 hover:text-zinc-900"
+                                                    className="block rounded-xl px-4 py-3 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
                                                     onClick={() => setOpenDropdown(null)}
                                                 >
                                                     {dropdownItem.label}
                                                 </Link>
                                             ))}
-                                        </div>
+                                        </Card>
                                     </div>
                                 )}
                             </div>
                         ))}
                     </div>
+                    </div>
 
-                    <div className="flex items-center gap-3">
-                        <Link href={NAV_ITEMS[5].href} className="flex h-8 items-center gap-2 rounded-lg border border-black/10 bg-white/80 px-3 text-sm font-medium uppercase tracking-wide text-zinc-800 shadow-sm transition hover:bg-white">
-                            <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-zinc-100">
-                                <svg viewBox="0 0 24 24" className="h-3 w-3 text-zinc-600" fill="none">
-                                    <path d="M8 10.5C8 8.57 9.57 7 11.5 7C13.43 7 15 8.57 15 10.5C15 12.43 13.43 14 11.5 14C9.57 14 8 12.43 8 10.5Z" stroke="currentColor" strokeWidth="1.5" />
-                                    <path d="M5 18.5C6.5 16.5 9 15.5 11.5 15.5C14 15.5 16.5 16.5 18 18.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-                                    <path d="M11.5 2.5C6.53 2.5 2.5 6.53 2.5 11.5C2.5 16.47 6.53 20.5 11.5 20.5C16.47 20.5 20.5 16.47 20.5 11.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-                                </svg>
-                            </span>
+                    <div className="flex items-center gap-2">
+                        <Link
+                            href={NAV_ITEMS[5].href}
+                            className={cn(
+                                buttonVariants({ variant: "outline", size: "sm" }),
+                                "hidden rounded-full px-4 md:inline-flex"
+                            )}
+                        >
+                            <Shield className="size-4" />
                             {NAV_ITEMS[5].label}
                         </Link>
-                        <Link href={NAV_ITEMS[6].href} className="flex h-8 items-center gap-2 rounded-lg border border-black/10 bg-white/80 px-3 text-sm font-medium uppercase tracking-wide text-zinc-800 shadow-sm transition hover:bg-white">
+                        <Link
+                            href={NAV_ITEMS[6].href}
+                            className={cn(
+                                buttonVariants({ variant: "dark", size: "sm" }),
+                                "rounded-full px-4"
+                            )}
+                        >
                             {NAV_ITEMS[6].label}
                         </Link>
                     </div>

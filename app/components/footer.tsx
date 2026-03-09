@@ -1,33 +1,34 @@
 import Image from "next/image";
 import Link from "next/link";
+import { Separator } from "@/components/ui/separator";
 
 export default function Footer() {
     return (
-        <footer className="w-full bg-black px-6 text-white">
-            <div className="mx-auto w-full max-w-7xl py-12 md:pl-28 2xl:max-w-360">
-                <div className="grid grid-cols-1 gap-10 md:grid-cols-2">
+        <footer id="kontakt" className="w-full bg-foreground text-background">
+            <div className="page-shell py-14 sm:py-16">
+                <div className="grid grid-cols-1 gap-10 md:grid-cols-[1.2fr_auto_0.8fr] md:items-start">
                     <div className="space-y-4">
                         <div className="flex items-center gap-4">
-                            <div className="relative h-12 w-12 overflow-hidden rounded-xl border border-white/15 bg-white">
+                            <div className="relative h-14 w-14 overflow-hidden rounded-2xl border border-white/15 bg-white shadow-sm">
                                 <Image
                                     src="/logo.png"
                                     alt="MŠ Tyršovka"
                                     fill
-                                    className="object-contain p-1"
-                                    sizes="48px"
+                                    className="object-contain p-2"
+                                    sizes="56px"
                                 />
                             </div>
                             <div>
-                                <div className="text-lg font-semibold tracking-tight text-white">
+                                <div className="text-xl font-semibold tracking-tight text-white">
                                     MŠ Tyršovka
                                 </div>
-                                <div className="text-sm text-white/70">
+                                <div className="text-sm text-white/65">
                                     Mateřská škola
                                 </div>
                             </div>
                         </div>
 
-                        <div className="text-sm text-white/75 leading-relaxed">
+                        <div className="space-y-1 text-sm leading-relaxed text-white/75">
                             <div>
                                 <span className="font-medium text-white">
                                     IČO:
@@ -44,22 +45,33 @@ export default function Footer() {
 
                         <Link
                             href="/uredni-deska"
-                            className="inline-flex h-10 items-center rounded-lg border border-white/20 bg-white/10 px-5 text-sm font-medium uppercase tracking-wide text-white shadow-sm transition hover:bg-white/15"
+                            className="inline-flex h-9 items-center justify-center rounded-full border border-white/15 bg-white/5 px-5 text-sm font-medium text-white shadow-sm transition-colors hover:bg-white/10 hover:text-white focus-visible:outline focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-foreground"
                         >
                             Úřední deska
                         </Link>
                     </div>
 
-                    <div className="space-y-4 md:justify-self-end">
-                        <div className="text-sm font-medium uppercase tracking-wide text-white/70">
+                    <Separator
+                        orientation="vertical"
+                        className="hidden min-h-32 bg-white/10 md:block"
+                    />
+
+                    <div className="space-y-4 md:justify-self-end md:text-right">
+                        <div className="text-sm font-medium uppercase tracking-[0.18em] text-white/55">
                             Kontakt
                         </div>
-                        <div className="text-sm text-white/75 leading-relaxed">
+                        <div className="space-y-1 text-sm leading-relaxed text-white/75">
                             <div>
                                 <span className="font-medium text-white">
                                     Telefon:
                                 </span>{" "}
                                 +420 000 000 000 (placeholder)
+                            </div>
+                            <div>
+                                <span className="font-medium text-white">
+                                    E-mail:
+                                </span>{" "}
+                                info@ms-tyrsovka.cz (placeholder)
                             </div>
                         </div>
                     </div>

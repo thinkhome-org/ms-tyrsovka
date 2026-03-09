@@ -14,11 +14,25 @@ const techLogos = [
 
 export default function Home() {
     return (
-        <main className="flex min-h-screen flex-col">
+        <main className="flex min-h-screen flex-1 flex-col">
             <Hero />
             <Aktuality />
             <ProcMy />
-            <LogoLoop logos={techLogos} speed={30} fadeOut scaleOnHover gap={60} logoHeight={40} className="my-8" />
+            <section className="bg-transparent">
+                <div className="page-shell py-10">
+                    <div className="border-y border-border py-6">
+                        <LogoLoop
+                            logos={techLogos}
+                            speed={30}
+                            fadeOut
+                            scaleOnHover
+                            gap={60}
+                            logoHeight={40}
+                            className="my-1"
+                        />
+                    </div>
+                </div>
+            </section>
             <DostaneteZapisy />
         </main>
     );

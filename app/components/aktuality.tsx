@@ -1,6 +1,10 @@
 import Link from "next/link";
 import Image from "next/image";
 import aktuality from "@/app/data/aktuality.json";
+import { Card, CardContent } from "@/components/ui/card";
+
+const linkButtonClass =
+    "inline-flex h-9 items-center justify-center rounded-md border border-border bg-background px-4 text-sm font-medium text-foreground transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline focus-visible:ring-2 focus-visible:ring-ring/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background";
 
 type Aktualita = {
     title: string;
@@ -26,63 +30,62 @@ export default function Aktuality() {
         .slice(0, 4);
 
     return (
-        <section className="w-full bg-white px-6 text-zinc-900">
-            <div className="mx-auto w-full max-w-7xl pt-14 pb-20 md:pl-28 2xl:max-w-360">
-                <div className="flex items-end justify-between gap-6">
+        <section id="aktuality" className="bg-transparent text-zinc-900">
+            <div className="page-shell section-shell border-t border-border">
+                <div className="flex flex-col gap-6 pt-10 sm:flex-row sm:items-end sm:justify-between">
                     <div>
-                        <h2 className="text-3xl font-bold tracking-tight text-black sm:text-4xl">
+                        <h2 className="section-title">
                             Aktuality
                         </h2>
-                        <p className="mt-2 max-w-2xl text-sm leading-relaxed text-zinc-600 sm:text-base">
-                            Nejdůležitější novinky a oznámení pro rodiče.
+                        <p className="mt-2 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
+                            Nejdůležitější novinky, oznámení a rychlé informace
+                            pro rodiče na jednom místě.
                         </p>
                     </div>
                     <Link
                         href="/aktuality"
-                        className="hidden sm:inline-flex h-9 items-center gap-2 rounded-lg border border-black/10 bg-white/80 px-4 text-sm font-medium uppercase tracking-wide text-zinc-800 shadow-sm transition hover:bg-[#A0C4FF]"
+                        className={`${linkButtonClass} hidden sm:inline-flex`}
                     >
                         Všechny aktuality
                     </Link>
                 </div>
 
-                <div className="mt-10 -mx-2 overflow-x-auto pb-2">
-                    <div className="flex min-w-full w-max flex-nowrap gap-4 px-2">
+                <div className="mt-8 overflow-x-auto pb-2 sm:overflow-visible sm:pb-0">
+                    <div className="flex w-max min-w-full items-stretch gap-4 sm:grid sm:w-full sm:grid-cols-2 xl:grid-cols-4">
                         {items.map((item) => (
                             <Link
                                 key={item.slug}
                                 href={`/aktuality/${item.slug}`}
-                                className="group w-[280px] shrink-0 overflow-hidden rounded-xl border border-black/10 bg-white/80 shadow-sm transition hover:border-black/20 hover:bg-[#A0C4FF]/15 sm:w-[320px]"
+                                className="group flex h-full w-[280px] shrink-0 grow sm:w-auto"
                             >
-                                <div className="relative h-40 w-full bg-zinc-100 sm:h-48">
-                                    <Image
-                                        src={item.image}
-                                        alt={item.title}
-                                        fill
-                                        className="object-cover"
-                                        sizes="(max-width: 640px) 280px, 320px"
-                                    />
-                                </div>
-
-                                <div className="p-4 sm:p-5">
-                                    <div className="w-full truncate text-base font-semibold leading-snug text-zinc-900 transition-colors group-hover:text-black">
-                                        {item.title}
+                                <Card className="flex h-full grow flex-col overflow-hidden border-border bg-card">
+                                    <div className="relative h-40 w-full bg-muted sm:h-44">
+                                        <Image
+                                            src={item.image}
+                                            alt={item.title}
+                                            fill
+                                            className="object-cover"
+                                            sizes="(max-width: 640px) 300px, 340px"
+                                        />
                                     </div>
-                                    <div className="mt-2 text-sm text-zinc-600">
-                                        <time dateTime={item.publishedAt}>
-                                            {formatDateCs(item.publishedAt)}
-                                        </time>
-                                    </div>
-                                </div>
+                                    <CardContent className="flex grow flex-col p-4 sm:p-5">
+                                        <div className="mb-2 text-sm text-muted-foreground">
+                                            <time dateTime={item.publishedAt}>
+                                                {formatDateCs(item.publishedAt)}
+                                            </time>
+                                        </div>
+                                        <div className="line-clamp-2 text-base font-semibold leading-snug text-foreground">
+                                            {item.title}
+                                        </div>
+                                    </CardContent>
+                                </Card>
                             </Link>
                         ))}
                     </div>
                 </div>
 
                 <div className="mt-8 sm:hidden">
-                    <Link
-                        href="/aktuality"
-                        className="inline-flex h-9 items-center gap-2 rounded-lg border border-black/10 bg-white/80 px-4 text-sm font-medium uppercase tracking-wide text-zinc-800 shadow-sm transition hover:bg-[#A0C4FF]"
-                    >
+                    <Link href="/aktuality" className={linkButtonClass}>
                         Všechny aktuality
                     </Link>
                 </div>
