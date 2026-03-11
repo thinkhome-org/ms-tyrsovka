@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500" fill="none">
+  <rect width="800" height="500" fill="#f1f5f9"/>
+  <rect x="300" y="180" width="200" height="140" rx="8" stroke="#cbd5e1" stroke-width="2" fill="none"/>
+  <path d="M350 250 L390 290 L450 230 L500 270 L550 230" stroke="#94a3b8" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="370" cy="220" r="25" stroke="#94a3b8" stroke-width="2" fill="none"/>
+  <text x="400" y="360" text-anchor="middle" fill="#64748b" font-family="system-ui,sans-serif" font-size="14">Obrázek partnera</text>
+</svg>

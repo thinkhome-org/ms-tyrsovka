@@ -17,7 +17,7 @@ const NAV_ITEMS = [
     { label: "Informace", href: "#", sub: true },
     { label: "O škole", href: "/o-nas", sub: true },
     { label: "Správa MŠ", href: "/uredni-deska" },
-    { label: "Kontakt", href: "#kontakt" },
+    { label: "Kontakty", href: "/kontakty" },
 ] as const;
 
 const SUB_ITEMS: Record<string, { label: string; href: string }[]> = {
@@ -35,7 +35,7 @@ const SUB_ITEMS: Record<string, { label: string; href: string }[]> = {
         { label: "Plán akcí", href: "/plan-akci" },
     ],
     "O škole": [
-        { label: "O nás + Provozní zaměstnanci", href: "/o-nas" },
+        { label: "O nás", href: "/o-nas" },
         { label: "Třídy", href: "/tridy" },
         { label: "ŠVP", href: "/svp" },
     ],

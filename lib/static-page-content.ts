@@ -3,26 +3,22 @@ import type { StaticPageContent } from "@/app/components/static-content-page";
 export const PRO_ZAJEMCE_PAGE: StaticPageContent = {
     eyebrow: "Informace",
     title: "Pro zájemce",
-    description:
-        "Rozcestník pro rodiny, které se s MŠ Tyršovka teprve seznamují. Najdete tu hlavní kroky od prvního zájmu až po nástup dítěte do školky.",
+    description: "Rozcestník pro rodiny, které se s MŠ Tyršovka teprve seznamují. Najdete tu hlavní kroky od prvního zájmu až po nástup dítěte do školky.",
     quickLinks: [
         {
             href: "/zapisy",
             label: "Zápisy 2026/2027",
-            description:
-                "Termíny, předzápis, osobní zápis a kritéria přijímání do MŠ.",
+            description: "Termíny, předzápis, osobní zápis a kritéria přijímání do MŠ.",
         },
         {
             href: "/nove-prijati",
             label: "Nově přijatí",
-            description:
-                "Adaptace, co s sebou do MŠ a důležité první informace pro nástup.",
+            description: "Adaptace, co s sebou do MŠ a důležité první informace pro nástup.",
         },
         {
             href: "/rezim-dne-a-provozni-doba",
             label: "Režim dne",
-            description:
-                "Příchody, vyzvedávání, omluvenky a provozní doba školky.",
+            description: "Příchody, vyzvedávání, omluvenky a provozní doba školky.",
         },
     ],
     markdown: `
@@ -57,8 +53,7 @@ Nová struktura odděluje:
 export const NOVE_PRIJATI_PAGE: StaticPageContent = {
     eyebrow: "Informace",
     title: "Nově přijatí",
-    description:
-        "Praktické informace pro rodiče nově přijatých dětí: co připravit, jak zvládnout adaptaci a kde sledovat důležité novinky.",
+    description: "Praktické informace pro rodiče nově přijatých dětí: co připravit, jak zvládnout adaptaci a kde sledovat důležité novinky.",
     markdown: `
 ## Setkání pro rodiče nově přijatých dětí
 
@@ -107,8 +102,7 @@ Nejlepší je vždy individuální domluva s učitelkami podle potřeb dítěte.
 export const REZIM_DNE_PAGE: StaticPageContent = {
     eyebrow: "Informace",
     title: "Režim dne a provozní doba",
-    description:
-        "Přehled otevírací doby, příchodů, vyzvedávání dětí a omlouvání docházky v novém přehlednějším formátu.",
+    description: "Přehled otevírací doby, příchodů, vyzvedávání dětí a omlouvání docházky v novém přehlednějším formátu.",
     markdown: `
 ## Provozní doba
 
@@ -146,8 +140,7 @@ Docházku je možné omlouvat přes aplikaci **Naše MŠ**, výjimečně pomocí
 export const JIDELNICEK_PAGE: StaticPageContent = {
     eyebrow: "Informace",
     title: "Jídelníček",
-    description:
-        "Aktuální jídelní lístek převzatý z původního webu a zasazený do nového rozhraní. Pro rychlý přístup zůstává i přímý odkaz na originál.",
+    description: "Aktuální jídelní lístek převzatý z původního webu a zasazený do nového rozhraní. Pro rychlý přístup zůstává i přímý odkaz na originál.",
     markdown: `
 ## Aktuální jídelní lístek
 
@@ -165,8 +158,7 @@ Na původním webu školy je jídelníček zveřejněný jako obrázek. Tady zů
 export const PLAN_AKCI_PAGE: StaticPageContent = {
     eyebrow: "Informace",
     title: "Plán akcí",
-    description:
-        "Akce školy převedené z původního webu do nové struktury. Stránka je připravená tak, aby později šla snadno nahradit CMS obsahem.",
+    description: "Akce školy převedené z původního webu do nové struktury. Stránka je připravená tak, aby později šla snadno nahradit CMS obsahem.",
     markdown: `
 ## Plán akcí MŠ Tyršovka na rok 2025/26
 
@@ -219,31 +211,47 @@ Bližší informace škola uvádí ve třídách. Další akce mohou být průb�
 export const SVP_PAGE: StaticPageContent = {
     eyebrow: "O škole",
     title: "ŠVP",
-    description:
-        "Školní vzdělávací program je na původním webu zveřejněný jako PDF. V nové struktuře má vlastní stránku a jasný přístup z menu.",
-    quickLinks: [
+    description: "Školní vzdělávací program je na původním webu zveřejněný jako PDF. V nové struktuře má vlastní stránku a jasný přístup z menu.",
+    buttonLinks: [
         {
-            href: "/o-nas",
-            label: "O škole",
-            description:
-                "Představení školy, zázemí, kontakty a provozní zaměstnanci.",
-        },
-        {
-            href: "/tridy",
-            label: "Třídy",
-            description:
-                "Přehled tříd, věkového rozdělení a základního zaměření jednotlivých skupin.",
+            label: "Otevřít ŠVP (PDF)",
+            href: "http://files.site.site3.eu/4b/b0/4bb03022-3f21-4c9c-9d24-cdba6f56369b.pdf",
         },
     ],
     markdown: `
-## ŠVP k nahlédnutí
-
-Původní web MŠ Tyršovka na této stránce zveřejňuje školní vzdělávací program jako samostatný PDF dokument.
-
-- [Otevřít ŠVP (PDF)](http://files.site.site3.eu/4b/b0/4bb03022-3f21-4c9c-9d24-cdba6f56369b.pdf)
-
-## Proč má stránka vlastní místo
-
-V nové navigaci dává samostatná položka **ŠVP** větší smysl než schovat dokument jen do obecného seznamu odkazů. Rodiče i zájemci se k němu dostanou přímo z části **O škole**.
 `.trim(),
 };
+
+export const PROJEKTY_A_VYZVY_PAGE: StaticPageContent = {
+    eyebrow: "O škole",
+    title: "Projekty a výzvy",
+    description: "Přehled projektů, do kterých se MŠ Tyršovka zapojuje. Stránka je vedená stejným obsahem jako původní web, ale v novém přehlednějším formátu a připravená pro pozdější CMS správu.",
+    buttonLinks: [
+        {
+            label: "Původní stránka",
+            href: "https://www.tyrsovka.cz/o-%C5%A1kole/projekty-a-vyzvy",
+        },
+    ],
+    markdown: `
+## Aktuálně realizovaný projekt
+
+Od **1. 1. 2025** realizuje škola tento projekt:
+
+![Projekt školy](https://files.site.site3.eu/b6/e1/b6e100e8-9465-480a-ad4c-72b0306595f9.png)
+
+![Vizualizace projektu](https://files.site.site3.eu/0f/15/0f154f96-38f2-47e6-b33c-909784a30c33.webp)
+
+---
+## Se Sokolem do života
+
+Každoročně se škola zapojuje do projektu **Se Sokolem do života**, který vede děti k pohybu a podporuje jejich vztah ke zdravému životnímu stylu.
+
+![Se Sokolem do života](https://files.site.site3.eu/f5/8d/f58d7736-3e1a-43a8-ab67-517150cd9b81.jpg)
+
+---
+## Recyklohraní
+
+MŠ Tyršovka je zapojena také do projektu **Recyklohraní**, v rámci kterého děti i škola plní různé úkoly a sbírají například baterie, tonery nebo drobná elektrozařízení.
+`.trim(),
+};
+

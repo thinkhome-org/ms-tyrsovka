@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import type { ComponentPropsWithoutRef } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { Card, CardContent } from "@/components/ui/card";
@@ -64,8 +65,8 @@ const markdownComponents = {
             {children}
         </blockquote>
     ),
-    img: ({ src, alt }: { src?: string; alt?: string }) =>
-        src ? (
+    img: ({ src, alt }: ComponentPropsWithoutRef<"img">) =>
+        typeof src === "string" ? (
             <span className="my-4 block overflow-hidden rounded-lg bg-muted">
                 <Image
                     src={src}

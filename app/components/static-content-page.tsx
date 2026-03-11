@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import type { ComponentPropsWithoutRef } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -11,6 +12,11 @@ export type StaticPageLink = {
     description: string;
 };
 
+export type StaticPageButtonLink = {
+    label: string;
+    href: string;
+};
+
 export type StaticPageContent = {
     eyebrow: string;
     title: string;
@@ -19,6 +25,8 @@ export type StaticPageContent = {
     backHref?: string;
     backLabel?: string;
     quickLinks?: StaticPageLink[];
+    /** Rendered as outline buttons (e.g. PDF download on SVP page) */
+    buttonLinks?: StaticPageButtonLink[];
 };
 
 const markdownComponents = {
@@ -74,8 +82,8 @@ const markdownComponents = {
             {children}
         </blockquote>
     ),
-    img: ({ src, alt }: { src?: string; alt?: string }) =>
-        src ? (
+    img: ({ src, alt }: ComponentPropsWithoutRef<"img">) =>
+        typeof src === "string" ? (
             <span className="my-4 block overflow-hidden rounded-lg border border-border bg-muted">
                 <Image
                     src={src}
@@ -145,6 +153,22 @@ export default function StaticContentPage({
                         </Link>
                     </header>
 
+                    {content.buttonLinks?.length ? (
+                        <div className="mt-8 flex flex-wrap gap-3">
+                            {content.buttonLinks.map((bl) => (
+                                <Link
+                                    key={bl.href}
+                                    href={bl.href}
+                                    target={bl.href.startsWith("http") ? "_blank" : undefined}
+                                    rel={bl.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                                    className={linkButtonOutlineSm}
+                                >
+                                    {bl.label}
+                                </Link>
+                            ))}
+                        </div>
+                    ) : null}
+
                     {content.quickLinks?.length ? (
                         <section className="mt-12">
                             <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -169,7 +193,7 @@ export default function StaticContentPage({
                                             </p>
                                             <Link
                                                 href={link.href}
-                                                className="inline-flex text-sm font-medium text-primary underline underline-offset-2"
+                                                className={linkButtonOutlineSm}
                                             >
                                                 Otevřít stránku
                                             </Link>

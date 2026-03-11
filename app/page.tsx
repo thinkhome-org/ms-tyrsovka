@@ -19,13 +19,6 @@ export default function Home() {
             <ProcMy />
             <Aktuality />
 
-            <section className="bg-transparent">
-                <div className="page-shell py-16 sm:py-20">
-                    <div className="border-y border-border py-8 sm:py-10">
-                        <LogoLoop logos={techLogos} speed={30} fadeOut scaleOnHover gap={60} logoHeight={40} className="my-1" />
-                    </div>
-                </div>
-            </section>
             <DostaneteZapisy />
         </main>
     );
