@@ -23,7 +23,7 @@ const NAV_ITEMS = [
 const SUB_ITEMS: Record<string, { label: string; href: string }[]> = {
     "Život ve školce": [
         { label: "Aktuality", href: "/aktuality" },
-        { label: "Galerie", href: "#" },
+        { label: "Galerie", href: "/galerie" },
     ],
     Informace: [
         { label: "Jídelníček", href: "/jidelnicek" },
