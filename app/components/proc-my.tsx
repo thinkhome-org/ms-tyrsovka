@@ -29,7 +29,7 @@ const VALUES = [
 export default function ProcMy() {
     return (
         <section className="text-zinc-900">
-            <div className="page-shell border-t border-border py-20 sm:py-24 lg:py-28">
+            <div className="page-shell py-20 sm:py-24 lg:py-28">
                 {/* Top row: heading left, description + CTA right */}
                 <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
                     <div>

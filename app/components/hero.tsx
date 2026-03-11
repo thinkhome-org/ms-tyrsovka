@@ -142,38 +142,6 @@ export default function Hero() {
                     ))}
                 </div>
 
-                {/* Bottom strip */}
-                <div className="flex flex-col gap-8 border-t border-border pt-10 sm:flex-row sm:items-start sm:justify-between">
-                    <div className="flex flex-col gap-8 sm:flex-row sm:gap-16">
-                        <div className="max-w-xs">
-                            <div className="flex items-center gap-2 text-sm font-medium text-foreground">
-                                <CalendarDays className="size-4 text-muted-foreground" />
-                                Každodenní rytmus
-                            </div>
-                            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                                Vyvážený program plný pohybu, hry a klidných
-                                momentů.
-                            </p>
-                        </div>
-                        <div className="max-w-xs">
-                            <div className="text-sm font-medium text-foreground">
-                                Co je pro nás důležité
-                            </div>
-                            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                                Respektující přístup, zdravé návyky a úzká
-                                spolupráce s rodiči.
-                            </p>
-                        </div>
-                    </div>
-
-                    <Link
-                        href="/galerie"
-                        className="flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-                    >
-                        Celá galerie
-                        <ArrowRight className="size-4" />
-                    </Link>
-                </div>
             </div>
         </section>
     );
