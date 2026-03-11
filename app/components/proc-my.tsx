@@ -1,79 +1,76 @@
 import Link from "next/link";
-import Image from "next/image";
-import { Check } from "lucide-react";
-import { Card } from "@/components/ui/card";
 
 const primaryButtonClass =
     "inline-flex h-10 items-center justify-center gap-2 rounded-md bg-primary px-5 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline focus-visible:ring-2 focus-visible:ring-ring/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background";
 
+const VALUES = [
+    {
+        title: "Pohyb a zdraví",
+        description:
+            "Každodenní aktivity venku, tělocvična a pohybové programy vedoucí k přirozenému rozvoji dítěte.",
+    },
+    {
+        title: "Bezpečné prostředí",
+        description:
+            "Respektující přístup, malé skupiny a zkušený pedagogický tým, který každé dítě zná jménem.",
+    },
+    {
+        title: "Spolupráce s rodiči",
+        description:
+            "Pravidelné informace, setkání i otevřená komunikace – rodiče jsou součástí života školky.",
+    },
+    {
+        title: "Bohatý program",
+        description:
+            "Výlety, divadla, sportovní dny, tvůrčí dílny a sezónní akce po celý školní rok.",
+    },
+];
+
 export default function ProcMy() {
     return (
-        <section className="bg-transparent text-zinc-900">
-            <div className="page-shell section-shell border-t border-border">
-                <div className="grid grid-cols-1 gap-12 pt-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-start lg:gap-16">
+        <section className="text-zinc-900">
+            <div className="page-shell border-t border-border py-20 sm:py-24 lg:py-28">
+                {/* Top row: heading left, description + CTA right */}
+                <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
                     <div>
-                        <h2 className="section-title">
+                        <p className="text-sm font-medium uppercase tracking-[0.18em] text-muted-foreground">
+                            O nás
+                        </p>
+                        <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl lg:text-5xl">
                             Proč my
                         </h2>
-                        <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-                            Sem přijde krátké vysvětlení, čím je naše školka
-                            výjimečná. Prozatím placeholder text – později sem
-                            doplníme konkrétní informace a benefity.
-                        </p>
-                        <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-                            Můžeš tu mít pár vět o přístupu k dětem, zázemí,
-                            aktivitách nebo spolupráci s rodiči.
-                        </p>
-
-                        <div className="mt-10 grid gap-0 border-y border-border">
-                            {[
-                                "Přirozený rozvoj pohybu a zdravých návyků",
-                                "Bezpečné prostředí a individuální přístup",
-                                "Silná spolupráce s rodiči",
-                                "Bohatý program během celého roku",
-                            ].map((item) => (
-                                <div
-                                    key={item}
-                                    className="flex items-start gap-3 border-b border-border py-5 last:border-b-0"
-                                >
-                                    <div className="mt-0.5 text-primary">
-                                        <Check className="size-4" />
-                                    </div>
-                                    <p className="text-sm leading-relaxed text-muted-foreground">
-                                        {item}
-                                    </p>
-                                </div>
-                            ))}
-                        </div>
-
-                        <div className="mt-10">
-                            <Link href="/o-nas" className={primaryButtonClass}>
-                                O nás
-                            </Link>
-                        </div>
                     </div>
+                    <div className="flex max-w-lg flex-col gap-6 lg:items-end lg:text-right">
+                        <p className="text-base leading-relaxed text-muted-foreground sm:text-lg">
+                            Jsme školka, kde se děti cítí bezpečně, pohybují
+                            se s radostí a rostou v přirozeném prostředí.
+                        </p>
+                        <Link href="/o-nas" className={primaryButtonClass}>
+                            O nás
+                        </Link>
+                    </div>
+                </div>
 
-                    <div className="relative overflow-hidden rounded-md bg-card">
-                        <div className="relative h-72 w-full sm:h-96 md:h-[420px]">
-                            <Image
-                                src="/proc-my.png"
-                                alt="Děti venku"
-                                fill
-                                className="object-cover"
-                                sizes="(max-width: 768px) 100vw, 40vw"
-                                priority={false}
-                            />
-                        </div>
-                        <div className="border-t border-border p-5">
+                {/* Value columns */}
+                <div className="mt-16 grid grid-cols-1 gap-0 border-t border-border sm:grid-cols-2 lg:grid-cols-4">
+                    {VALUES.map((item, i) => (
+                        <div
+                            key={item.title}
+                            className="flex flex-col gap-4 border-b border-r-0 border-border px-0 py-10 sm:border-r sm:px-8 sm:last:border-r-0 lg:py-12 lg:first:pl-0"
+                        >
+                            <span className="text-xs font-medium tabular-nums text-muted-foreground/60">
+                                0{i + 1}
+                            </span>
+                            <h3 className="text-lg font-semibold tracking-tight text-foreground">
+                                {item.title}
+                            </h3>
                             <p className="text-sm leading-relaxed text-muted-foreground">
-                                Místo, kde se děti učí skrze zážitek, pohyb a
-                                bezpečné vztahy.
+                                {item.description}
                             </p>
                         </div>
-                    </div>
+                    ))}
                 </div>
             </div>
         </section>
     );
 }
-

@@ -1,15 +1,12 @@
 import Link from "next/link";
 import Image from "next/image";
+import { ArrowRight } from "lucide-react";
 import aktuality from "@/app/data/aktuality.json";
-import { Card, CardContent } from "@/components/ui/card";
-
-const linkButtonClass =
-    "inline-flex h-9 items-center justify-center rounded-md border border-border bg-background px-4 text-sm font-medium text-foreground transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline focus-visible:ring-2 focus-visible:ring-ring/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background";
 
 type Aktualita = {
     title: string;
     slug: string;
-    publishedAt: string; // YYYY-MM-DD
+    publishedAt: string;
     image: string;
 };
 
@@ -18,7 +15,7 @@ function formatDateCs(dateIso: string) {
     if (Number.isNaN(date.getTime())) return dateIso;
     return new Intl.DateTimeFormat("cs-CZ", {
         day: "2-digit",
-        month: "2-digit",
+        month: "long",
         year: "numeric",
     }).format(date);
 }
@@ -27,70 +24,78 @@ export default function Aktuality() {
     const items = (aktuality as Aktualita[])
         .slice()
         .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt))
-        .slice(0, 4);
+        .slice(0, 5);
 
     return (
-        <section id="aktuality" className="bg-transparent text-zinc-900">
-            <div className="page-shell section-shell border-t border-border">
-                <div className="flex flex-col gap-8 pt-12 sm:flex-row sm:items-end sm:justify-between">
+        <section id="aktuality" className="text-zinc-900">
+            <div className="page-shell py-20 sm:py-24 lg:py-28">
+                {/* Header */}
+                <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
                     <div>
-                        <h2 className="section-title">
+                        <p className="text-sm font-medium uppercase tracking-[0.18em] text-muted-foreground">
+                            Novinky
+                        </p>
+                        <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl lg:text-5xl">
                             Aktuality
                         </h2>
-                        <p className="mt-2 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-                            Nejdůležitější novinky, oznámení a rychlé informace
-                            pro rodiče na jednom místě.
-                        </p>
                     </div>
                     <Link
                         href="/aktuality"
-                        className={`${linkButtonClass} hidden sm:inline-flex`}
+                        className="hidden shrink-0 items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground sm:flex"
                     >
                         Všechny aktuality
+                        <ArrowRight className="size-4" />
                     </Link>
                 </div>
 
-                <div className="mt-12 overflow-x-auto pb-2 sm:overflow-visible sm:pb-0">
-                    <div className="flex w-max min-w-full items-stretch gap-6 sm:grid sm:w-full sm:grid-cols-2 sm:gap-8 xl:grid-cols-4">
-                        {items.map((item) => (
-                            <Link
-                                key={item.slug}
-                                href={`/aktuality/${item.slug}`}
-                                className="group flex h-full w-[280px] shrink-0 grow sm:w-auto"
+                {/* List */}
+                <div className="mt-12 border-t border-border">
+                    {items.map((item) => (
+                        <Link
+                            key={item.slug}
+                            href={`/aktuality/${item.slug}`}
+                            className="group flex items-center gap-5 border-b border-border py-4 transition-colors hover:bg-accent/30 sm:gap-8 sm:py-5"
+                        >
+                            <div className="relative h-14 w-20 shrink-0 overflow-hidden rounded-md bg-muted sm:h-16 sm:w-24">
+                                <Image
+                                    src={item.image}
+                                    alt={item.title}
+                                    fill
+                                    className="object-cover transition-transform duration-300 group-hover:scale-[1.04]"
+                                    sizes="96px"
+                                />
+                            </div>
+                            <time
+                                dateTime={item.publishedAt}
+                                className="hidden w-40 shrink-0 text-sm text-muted-foreground lg:block"
                             >
-                                <Card className="flex h-full grow flex-col overflow-hidden bg-card">
-                                    <div className="relative h-40 w-full bg-muted sm:h-44">
-                                        <Image
-                                            src={item.image}
-                                            alt={item.title}
-                                            fill
-                                            className="object-cover"
-                                            sizes="(max-width: 640px) 300px, 340px"
-                                        />
-                                    </div>
-                                    <CardContent className="flex grow flex-col p-4 sm:p-5">
-                                        <div className="mb-2 text-sm text-muted-foreground">
-                                            <time dateTime={item.publishedAt}>
-                                                {formatDateCs(item.publishedAt)}
-                                            </time>
-                                        </div>
-                                        <div className="line-clamp-2 text-base font-semibold leading-snug text-foreground">
-                                            {item.title}
-                                        </div>
-                                    </CardContent>
-                                </Card>
-                            </Link>
-                        ))}
-                    </div>
+                                {formatDateCs(item.publishedAt)}
+                            </time>
+                            <span className="flex-1 text-base font-medium text-foreground sm:text-lg">
+                                {item.title}
+                            </span>
+                            <time
+                                dateTime={item.publishedAt}
+                                className="shrink-0 text-sm text-muted-foreground lg:hidden"
+                            >
+                                {formatDateCs(item.publishedAt)}
+                            </time>
+                            <ArrowRight className="size-4 shrink-0 text-muted-foreground transition-transform duration-200 group-hover:translate-x-1" />
+                        </Link>
+                    ))}
                 </div>
 
-                <div className="mt-8 sm:hidden">
-                    <Link href="/aktuality" className={linkButtonClass}>
+                {/* Mobile CTA */}
+                <div className="mt-8 flex sm:hidden">
+                    <Link
+                        href="/aktuality"
+                        className="flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+                    >
                         Všechny aktuality
+                        <ArrowRight className="size-4" />
                     </Link>
                 </div>
             </div>
         </section>
     );
 }
-
