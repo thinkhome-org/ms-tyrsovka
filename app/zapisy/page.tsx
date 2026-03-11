@@ -84,13 +84,12 @@ export default function ZapisyPage() {
         <main className="flex-1 text-zinc-900">
             <div className="page-shell section-shell">
                 <div className="mx-auto max-w-4xl">
-                    {/* Desktop: title + intro on the left, images on the right. Mobile: title block first, then images, then Zpět. */}
-                    <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between md:gap-8">
+                    <header className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between md:gap-8">
                         <div className="min-w-0 max-w-3xl flex-1">
                             <p className="text-sm font-medium uppercase tracking-[0.18em] text-muted-foreground">
                                 Informace pro rodiče
                             </p>
-                            <h1 className="mt-3 text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
+                            <h1 className="mt-2 text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
                                 {SITE_PAGES.zapisy.title}
                             </h1>
                             <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
@@ -103,12 +102,11 @@ export default function ZapisyPage() {
                         <div className="flex shrink-0 flex-col items-start gap-2 sm:flex-row md:flex-col md:items-end">
                             {ZAPISY_HEADER_IMAGES.length > 0 && (
                                 <div className="w-full md:w-[280px] lg:w-[320px]">
-                                    {/* Mobile: compact row or small grid */}
                                     <div className="flex gap-2 overflow-x-auto pb-1 sm:grid sm:grid-cols-2 sm:overflow-visible md:flex md:flex-col md:gap-3">
                                         {ZAPISY_HEADER_IMAGES.map((img, i) => (
                                             <div
                                                 key={i}
-                                                className="relative h-40 shrink-0 overflow-hidden rounded-lg bg-muted sm:h-36 md:aspect-4/3 md:h-auto"
+                                                className="relative h-40 shrink-0 overflow-hidden rounded-xl bg-muted sm:h-36 md:aspect-4/3 md:h-auto"
                                             >
                                                 <Image
                                                     src={img.src}
@@ -122,20 +120,20 @@ export default function ZapisyPage() {
                                     </div>
                                 </div>
                             )}
-                            <Link
-                                href="/"
-                                className={linkButtonOutlineSm}
-                            >
+                            <Link href="/" className={linkButtonOutlineSm}>
                                 ← Zpět
                             </Link>
                         </div>
-                    </div>
+                    </header>
                 </div>
 
-                <div className="mx-auto mt-12 max-w-4xl space-y-6">
+                <div className="mx-auto mt-12 max-w-4xl space-y-8 sm:mt-14">
                     {MARKDOWN_SECTIONS.map((section, index) => (
-                        <Card key={index} className="overflow-hidden bg-card">
-                            <CardContent className="p-6 sm:p-10">
+                        <Card
+                            key={index}
+                            className="content-card overflow-hidden"
+                        >
+                            <CardContent className="p-6 sm:p-8 md:p-10">
                                 <ReactMarkdown
                                     remarkPlugins={[remarkGfm]}
                                     components={markdownComponents}

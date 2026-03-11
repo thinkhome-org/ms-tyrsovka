@@ -153,7 +153,7 @@ h6 {
   }
 
   .section-shell {
-    @apply py-20 sm:py-24;
+    @apply py-16 sm:py-20 lg:py-24;
   }
 
   .section-title {
@@ -162,5 +162,10 @@ h6 {
 
   .section-copy {
     @apply text-base leading-relaxed text-muted-foreground sm:text-lg;
+  }
+
+  /* Content pages: cards with consistent elevation and radius */
+  .content-card {
+    @apply rounded-xl border border-border bg-card shadow-sm;
   }
 }

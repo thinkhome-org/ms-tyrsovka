@@ -64,10 +64,12 @@ export const NOVE_PRIJATI_PAGE: StaticPageContent = {
 
 Na původním webu škola uvádí setkání pro rodiče nově přijatých dětí před začátkem školního roku. Slouží k předání informací o adaptaci, zvyklostech školy, placení, docházce a dalším formalitám.
 
+---
 ## Kde najdete průběžné informace
 
 Nástupem do MŠ souhlasíte se školním řádem. Škola zároveň uvádí, že všechny potřebné informace, omluvenky, aktuální dění a fotogalerii najdete v aplikaci **Naše MŠ**. Přihlašovací údaje rodiče obdrží při nástupu od učitelek.
 
+---
 ## Co je potřeba do MŠ
 
 - přezůvky s plnou patou, dobře obouvatelné
@@ -75,6 +77,7 @@ Nástupem do MŠ souhlasíte se školním řádem. Škola zároveň uvádí, že
 - náhradní oblečení: spodní prádlo, ponožky, trička, tepláky nebo legíny
 - oblečení do deště: holínky, pláštěnka nebo softshellová bunda s impregnací
 
+---
 ## Adaptace na nové prostředí
 
 Vstup do mateřské školy je pro děti i rodiče velká změna. Škola doporučuje adaptaci neuspěchat, vyčlenit si na ni čas a předem s dětmi trénovat samostatnost. Pomáhá také pohodlné oblečení, pozitivní mluvení o školce a průběžný kontakt s učitelkami.
@@ -88,10 +91,12 @@ Vstup do mateřské školy je pro děti i rodiče velká změna. Škola doporuč
 
 Nejlepší je vždy individuální domluva s učitelkami podle potřeb dítěte.
 
+---
 ## Vize MŠ
 
 Škola se zaměřuje na zdravý životní styl, sportovní a pohybové aktivity, zdravé stravování, prevenci rizikového chování a rozvoj emoční i sociální inteligence. Proto škola na původním webu výslovně žádá, aby se při oslavách nenosily sladkosti a rodiče volili zdravější alternativy nebo drobné dárky.
 
+---
 ## Materiální pomoc, která se hodí
 
 - hygienické potřeby: papírové kapesníky, kuchyňské utěrky, tekuté mýdlo, vlhčené ubrousky, toaletní papír
@@ -115,6 +120,7 @@ export const REZIM_DNE_PAGE: StaticPageContent = {
 - **7:00-16:30** - v provozu jsou všechny pavilony
 - **16:30-17:30** - provoz zajišťuje opět Citrónová třída (2. pavilon, přízemí)
 
+---
 ## Příchod do školky
 
 - od **6:30 do 7:00** funguje pouze Citrónová třída
@@ -124,11 +130,13 @@ export const REZIM_DNE_PAGE: StaticPageContent = {
 
 Škola doporučuje chodit raději dříve, aby mělo dítě čas se rozkoukat a pohrát si před začátkem programu.
 
+---
 ## Vyzvedávání dětí
 
 - po obědě: **12:15-12:45**
 - odpoledne: od **14:30**
 
+---
 ## Omluva docházky
 
 Docházku je možné omlouvat přes aplikaci **Naše MŠ**, výjimečně pomocí třídního telefonu formou SMS. Omluva má být podle školy nahlášena **do 8:30 v den absence**, jinak je účtováno stravné.

@@ -124,12 +124,12 @@ export default function StaticContentPage({
         <main className="flex-1 text-zinc-900">
             <div className="page-shell section-shell">
                 <div className="mx-auto max-w-5xl">
-                    <div className="flex flex-wrap items-end justify-between gap-4">
-                        <div className="max-w-3xl">
+                    <header className="flex flex-wrap items-end justify-between gap-6">
+                        <div className="min-w-0 max-w-3xl">
                             <p className="text-sm font-medium uppercase tracking-[0.18em] text-muted-foreground">
                                 {content.eyebrow}
                             </p>
-                            <h1 className="mt-3 text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
+                            <h1 className="mt-2 text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
                                 {content.title}
                             </h1>
                             <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
@@ -143,30 +143,33 @@ export default function StaticContentPage({
                         >
                             {content.backLabel ?? "← Zpět"}
                         </Link>
-                    </div>
+                    </header>
 
                     {content.quickLinks?.length ? (
-                        <section className="mt-10">
-                            <div className="grid gap-4 md:grid-cols-3">
+                        <section className="mt-12">
+                            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
                                 {content.quickLinks.map((link) => (
-                                    <Card key={link.href} className="bg-card">
-                                        <CardHeader className="pb-3">
+                                    <Card
+                                        key={link.href}
+                                        className="content-card overflow-hidden transition-shadow hover:shadow-md"
+                                    >
+                                        <CardHeader className="pb-2">
                                             <CardTitle className="text-xl">
                                                 <Link
                                                     href={link.href}
-                                                    className="hover:text-primary"
+                                                    className="transition-colors hover:text-primary"
                                                 >
                                                     {link.label}
                                                 </Link>
                                             </CardTitle>
                                         </CardHeader>
-                                        <CardContent className="space-y-4">
+                                        <CardContent className="space-y-4 pt-0">
                                             <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
                                                 {link.description}
                                             </p>
                                             <Link
                                                 href={link.href}
-                                                className="text-sm font-medium text-primary underline underline-offset-2"
+                                                className="inline-flex text-sm font-medium text-primary underline underline-offset-2"
                                             >
                                                 Otevřít stránku
                                             </Link>
@@ -177,10 +180,13 @@ export default function StaticContentPage({
                         </section>
                     ) : null}
 
-                    <div className="mt-10 space-y-6">
+                    <div className="mt-12 space-y-8 sm:mt-14">
                         {sections.map((section, index) => (
-                            <Card key={index} className="overflow-hidden bg-card">
-                                <CardContent className="p-6 sm:p-10">
+                            <Card
+                                key={index}
+                                className="content-card overflow-hidden"
+                            >
+                                <CardContent className="p-6 sm:p-8 md:p-10">
                                     <ReactMarkdown
                                         remarkPlugins={[remarkGfm]}
                                         components={markdownComponents}
