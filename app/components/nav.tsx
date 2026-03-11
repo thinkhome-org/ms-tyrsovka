@@ -8,43 +8,40 @@ import { ChevronDown, Menu, Shield, X } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
-import { SITE_PAGES } from "@/lib/site-content";
 
 // ─── data ────────────────────────────────────────────────────────────────────
 
 const NAV_ITEMS = [
-    { label: "Aktuality", href: "/aktuality" },
+    { label: "Život ve školce", href: "#", sub: true },
+    { label: "Pro zájemce", href: "/pro-zajemce" },
     { label: "Informace", href: "#", sub: true },
     { label: "O škole", href: "/o-nas", sub: true },
-    { label: "Jídelníček", href: "#" },
-    { label: "Fotogalerie", href: "#", sub: true },
     { label: "Správa MŠ", href: "/uredni-deska" },
     { label: "Kontakt", href: "#kontakt" },
 ] as const;
 
 const SUB_ITEMS: Record<string, { label: string; href: string }[]> = {
+    "Život ve školce": [
+        { label: "Aktuality", href: "/aktuality" },
+        { label: "Galerie", href: "#" },
+    ],
     Informace: [
-        { label: "Důležité dokumenty", href: "#" },
-        { label: "Provozní řád", href: "#" },
-        { label: "Školní řád", href: "#" },
-        { label: SITE_PAGES.zapisy.navLabel, href: "/zapisy" },
+        { label: "Jídelníček", href: "/jidelnicek" },
+        { label: "Nově přijatí", href: "/nove-prijati" },
+        {
+            label: "Režim dne a provozní doba",
+            href: "/rezim-dne-a-provozni-doba",
+        },
+        { label: "Plán akcí", href: "/plan-akci" },
     ],
     "O škole": [
-        { label: "O nás", href: "/o-nas" },
+        { label: "O nás + Provozní zaměstnanci", href: "/o-nas" },
         { label: "Třídy", href: "/tridy" },
-        { label: "Provozní zaměstnanci", href: "/o-nas" },
-        { label: "Vybavení", href: "#" },
-        { label: "Akce a projekty", href: "#" },
-    ],
-    Fotogalerie: [
-        { label: "Školní rok 2025/26", href: "#" },
-        { label: "Školní rok 2024/25", href: "#" },
-        { label: "Školní akce", href: "#" },
-        { label: "Výlety", href: "#" },
+        { label: "ŠVP", href: "/svp" },
     ],
 };
 
-const DESKTOP_NAV = NAV_ITEMS.slice(0, 5);
+const DESKTOP_NAV = NAV_ITEMS.slice(0, 4);
 
 // ─── Mobile overlay ───────────────────────────────────────────────────────────
 
@@ -227,7 +224,7 @@ function MobileMenu({ onClose }: { onClose: () => void }) {
                     }}
                 >
                     <Link
-                        href={NAV_ITEMS[5].href}
+                        href={NAV_ITEMS[4].href}
                         onClick={onClose}
                         className={cn(
                             buttonVariants({ variant: "outline", size: "lg" }),
@@ -235,17 +232,17 @@ function MobileMenu({ onClose }: { onClose: () => void }) {
                         )}
                     >
                         <Shield className="size-4" />
-                        {NAV_ITEMS[5].label}
+                        {NAV_ITEMS[4].label}
                     </Link>
                     <Link
-                        href={NAV_ITEMS[6].href}
+                        href={NAV_ITEMS[5].href}
                         onClick={onClose}
                         className={cn(
                             buttonVariants({ variant: "dark", size: "lg" }),
                             "w-full justify-center rounded-md"
                         )}
                     >
-                        {NAV_ITEMS[6].label}
+                        {NAV_ITEMS[5].label}
                     </Link>
                 </div>
             </nav>
@@ -343,11 +340,7 @@ function DesktopNav() {
 
 export default function Nav() {
     const [mobileOpen, setMobileOpen] = useState(false);
-    const [mounted, setMounted] = useState(false);
-
-    useEffect(() => {
-        setMounted(true);
-    }, []);
+    const canUsePortal = typeof document !== "undefined";
 
     // Close mobile menu when resizing to desktop
     useEffect(() => {
@@ -394,23 +387,23 @@ export default function Nav() {
                     {/* Desktop CTAs */}
                     <div className="hidden items-center gap-2 lg:flex">
                         <Link
-                            href={NAV_ITEMS[5].href}
+                            href={NAV_ITEMS[4].href}
                             className={cn(
                                 buttonVariants({ variant: "outline", size: "sm" }),
                                 "rounded-md px-4"
                             )}
                         >
                             <Shield className="size-4" />
-                            {NAV_ITEMS[5].label}
+                            {NAV_ITEMS[4].label}
                         </Link>
                         <Link
-                            href={NAV_ITEMS[6].href}
+                            href={NAV_ITEMS[5].href}
                             className={cn(
                                 buttonVariants({ variant: "dark", size: "sm" }),
                                 "rounded-md px-4"
                             )}
                         >
-                            {NAV_ITEMS[6].label}
+                            {NAV_ITEMS[5].label}
                         </Link>
                     </div>
 
@@ -433,7 +426,7 @@ export default function Nav() {
             </header>
 
             {/* Full-screen mobile overlay — portalled to <body> */}
-            {mounted &&
+            {canUsePortal &&
                 mobileOpen &&
                 createPortal(
                     <MobileMenu onClose={() => setMobileOpen(false)} />,
