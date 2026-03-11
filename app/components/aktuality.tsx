@@ -32,7 +32,7 @@ export default function Aktuality() {
     return (
         <section id="aktuality" className="bg-transparent text-zinc-900">
             <div className="page-shell section-shell border-t border-border">
-                <div className="flex flex-col gap-6 pt-10 sm:flex-row sm:items-end sm:justify-between">
+                <div className="flex flex-col gap-8 pt-12 sm:flex-row sm:items-end sm:justify-between">
                     <div>
                         <h2 className="section-title">
                             Aktuality
@@ -50,15 +50,15 @@ export default function Aktuality() {
                     </Link>
                 </div>
 
-                <div className="mt-8 overflow-x-auto pb-2 sm:overflow-visible sm:pb-0">
-                    <div className="flex w-max min-w-full items-stretch gap-4 sm:grid sm:w-full sm:grid-cols-2 xl:grid-cols-4">
+                <div className="mt-12 overflow-x-auto pb-2 sm:overflow-visible sm:pb-0">
+                    <div className="flex w-max min-w-full items-stretch gap-6 sm:grid sm:w-full sm:grid-cols-2 sm:gap-8 xl:grid-cols-4">
                         {items.map((item) => (
                             <Link
                                 key={item.slug}
                                 href={`/aktuality/${item.slug}`}
                                 className="group flex h-full w-[280px] shrink-0 grow sm:w-auto"
                             >
-                                <Card className="flex h-full grow flex-col overflow-hidden border-border bg-card">
+                                <Card className="flex h-full grow flex-col overflow-hidden bg-card">
                                     <div className="relative h-40 w-full bg-muted sm:h-44">
                                         <Image
                                             src={item.image}

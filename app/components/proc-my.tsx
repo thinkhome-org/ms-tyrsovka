@@ -10,7 +10,7 @@ export default function ProcMy() {
     return (
         <section className="bg-transparent text-zinc-900">
             <div className="page-shell section-shell border-t border-border">
-                <div className="grid grid-cols-1 gap-10 pt-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
+                <div className="grid grid-cols-1 gap-12 pt-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-start lg:gap-16">
                     <div>
                         <h2 className="section-title">
                             Proč my
@@ -25,7 +25,7 @@ export default function ProcMy() {
                             aktivitách nebo spolupráci s rodiči.
                         </p>
 
-                        <div className="mt-8 grid gap-0 border-y border-border">
+                        <div className="mt-10 grid gap-0 border-y border-border">
                             {[
                                 "Přirozený rozvoj pohybu a zdravých návyků",
                                 "Bezpečné prostředí a individuální přístup",
@@ -34,7 +34,7 @@ export default function ProcMy() {
                             ].map((item) => (
                                 <div
                                     key={item}
-                                    className="flex items-start gap-3 border-b border-border py-4 last:border-b-0"
+                                    className="flex items-start gap-3 border-b border-border py-5 last:border-b-0"
                                 >
                                     <div className="mt-0.5 text-primary">
                                         <Check className="size-4" />
@@ -46,15 +46,15 @@ export default function ProcMy() {
                             ))}
                         </div>
 
-                        <div className="mt-8">
+                        <div className="mt-10">
                             <Link href="/o-nas" className={primaryButtonClass}>
                                 O nás
                             </Link>
                         </div>
                     </div>
 
-                    <div className="relative overflow-hidden rounded-lg border border-border bg-card">
-                        <div className="relative h-64 w-full sm:h-80 md:h-[360px]">
+                    <div className="relative overflow-hidden rounded-md bg-card">
+                        <div className="relative h-72 w-full sm:h-96 md:h-[420px]">
                             <Image
                                 src="/proc-my.png"
                                 alt="Děti venku"

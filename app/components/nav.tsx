@@ -8,6 +8,7 @@ import { ChevronDown, Menu, Shield, X } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
+import { SITE_PAGES } from "@/lib/site-content";
 
 // ─── data ────────────────────────────────────────────────────────────────────
 
@@ -26,11 +27,12 @@ const SUB_ITEMS: Record<string, { label: string; href: string }[]> = {
         { label: "Důležité dokumenty", href: "#" },
         { label: "Provozní řád", href: "#" },
         { label: "Školní řád", href: "#" },
-        { label: "Zápisy", href: "/zapisy" },
+        { label: SITE_PAGES.zapisy.navLabel, href: "/zapisy" },
     ],
     "O škole": [
         { label: "O nás", href: "/o-nas" },
-        { label: "Pedagogický tým", href: "/o-nas" },
+        { label: "Třídy", href: "/tridy" },
+        { label: "Provozní zaměstnanci", href: "/o-nas" },
         { label: "Vybavení", href: "#" },
         { label: "Akce a projekty", href: "#" },
     ],
@@ -89,13 +91,13 @@ function MobileMenu({ onClose }: { onClose: () => void }) {
             }}
         >
             {/* Header row — identical markup/classes to the sticky navbar */}
-            <div className="page-shell flex items-center justify-between gap-4 border-b border-border/60 py-3">
+            <div className="page-shell flex items-center justify-between gap-4 border-b border-border py-3">
                 <Link
                     href="/"
                     onClick={onClose}
                     className="flex shrink-0 items-center gap-3"
                 >
-                    <div className="relative flex size-12 items-center justify-center overflow-hidden rounded-2xl border border-border/70 bg-card shadow-sm">
+                    <div className="relative flex size-12 items-center justify-center overflow-hidden rounded-md bg-card">
                         <Image
                             src="/logo.png"
                             alt="MŠ Tyršovka logo"
@@ -123,7 +125,7 @@ function MobileMenu({ onClose }: { onClose: () => void }) {
                     type="button"
                     aria-label="Zavřít menu"
                     onClick={onClose}
-                    className="flex size-10 shrink-0 items-center justify-center rounded-md border border-border/70 bg-background text-foreground"
+                    className="flex size-10 shrink-0 items-center justify-center rounded-md border border-border bg-background text-foreground"
                 >
                     <X className="size-5" />
                 </button>
@@ -291,7 +293,7 @@ function DesktopNav() {
                                                 : "ghost",
                                         size: "sm",
                                     }),
-                                    "rounded-full px-4 text-sm"
+                                    "rounded-md px-4 text-sm"
                                 )}
                             >
                                 {item.label}
@@ -304,14 +306,14 @@ function DesktopNav() {
                             </button>
 
                             {openDropdown === item.label && (
-                                <div className="absolute left-0 top-full z-50 mt-3 w-64">
-                                    <Card className="rounded-2xl border-border/70 bg-background/95 p-2 backdrop-blur-xl">
+                                <div className="absolute left-0 top-full z-50 mt-2 w-56">
+                                    <Card className="border border-border bg-background p-1">
                                         {SUB_ITEMS[item.label]?.map((sub) => (
                                             <Link
                                                 key={sub.label}
                                                 href={sub.href}
                                                 onClick={() => setOpenDropdown(null)}
-                                                className="block rounded-xl px-4 py-3 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+                                                className="block rounded px-3 py-2.5 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
                                             >
                                                 {sub.label}
                                             </Link>
@@ -325,7 +327,7 @@ function DesktopNav() {
                             href={item.href}
                             className={cn(
                                 buttonVariants({ variant: "ghost", size: "sm" }),
-                                "rounded-full px-4 text-sm"
+                                "rounded-md px-4 text-sm"
                             )}
                         >
                             {item.label}
@@ -359,11 +361,11 @@ export default function Nav() {
 
     return (
         <>
-            <header className="sticky top-0 z-50 w-full border-b border-border/60 bg-background/80 backdrop-blur-xl">
+            <header className="sticky top-0 z-50 w-full border-b border-border bg-background">
                 <div className="page-shell flex items-center justify-between gap-4 py-3">
                     {/* Logo */}
                     <Link href="/" className="flex shrink-0 items-center gap-3">
-                        <div className="relative flex size-12 items-center justify-center overflow-hidden rounded-2xl border border-border/70 bg-card shadow-sm">
+                        <div className="relative flex size-12 items-center justify-center overflow-hidden rounded-md bg-card">
                             <Image
                                 src="/logo.png"
                                 alt="MŠ Tyršovka logo"
@@ -395,7 +397,7 @@ export default function Nav() {
                             href={NAV_ITEMS[5].href}
                             className={cn(
                                 buttonVariants({ variant: "outline", size: "sm" }),
-                                "rounded-full px-4"
+                                "rounded-md px-4"
                             )}
                         >
                             <Shield className="size-4" />
@@ -405,7 +407,7 @@ export default function Nav() {
                             href={NAV_ITEMS[6].href}
                             className={cn(
                                 buttonVariants({ variant: "dark", size: "sm" }),
-                                "rounded-full px-4"
+                                "rounded-md px-4"
                             )}
                         >
                             {NAV_ITEMS[6].label}
@@ -419,7 +421,7 @@ export default function Nav() {
                         aria-expanded={mobileOpen}
                         aria-controls="mobile-nav-dialog"
                         onClick={() => setMobileOpen((o) => !o)}
-                        className="flex size-10 shrink-0 items-center justify-center rounded-md border border-border/70 bg-background text-foreground lg:hidden"
+                        className="flex size-10 shrink-0 items-center justify-center rounded-md border border-border bg-background text-foreground lg:hidden"
                     >
                         {mobileOpen ? (
                             <X className="size-5" />

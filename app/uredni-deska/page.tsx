@@ -25,7 +25,7 @@ export default function UredniDeskaPage() {
                     </Link>
                 </div>
 
-                <Card className="mt-10 border-border/70 bg-card/90">
+                <Card className="mt-10 bg-card">
                     <CardContent className="p-6 sm:p-8">
                         <p className="leading-relaxed text-muted-foreground">
                             Zde budou zveřejňované dokumenty a oznámení. Prozatím

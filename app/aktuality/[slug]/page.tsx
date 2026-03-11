@@ -53,7 +53,7 @@ export default async function AktualitaDetailPage({
                     </Link>
                 </div>
 
-                <Card className="mt-8 overflow-hidden border-border/70 bg-card/90">
+                <Card className="mt-8 overflow-hidden bg-card">
                     <div className="relative h-64 w-full bg-muted sm:h-80 lg:h-112">
                         <Image
                             src={item.image}

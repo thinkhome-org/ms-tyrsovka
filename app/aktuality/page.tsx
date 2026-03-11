@@ -55,7 +55,7 @@ export default function AktualityPage() {
                             href={`/aktuality/${item.slug}`}
                             className="group block"
                         >
-                            <Card className="overflow-hidden border-border/70 bg-card/90 transition-transform duration-300 group-hover:-translate-y-1">
+                            <Card className="overflow-hidden bg-card">
                                 <div className="grid gap-0 sm:grid-cols-[200px_1fr]">
                                     <div className="relative h-48 bg-muted sm:h-full">
                                         <Image

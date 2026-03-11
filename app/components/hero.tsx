@@ -18,12 +18,12 @@ const HERO_IMAGES = [
 function HeroImageGrid() {
     return (
         <>
-            <div className="grid h-full min-h-[360px] w-full grid-cols-[2fr_3fr] grid-rows-[3fr_2fr_2fr] gap-2 rounded-lg border border-border bg-card p-2 sm:min-h-[420px] sm:gap-3 sm:p-3 lg:hidden">
+            <div className="grid h-full min-h-[360px] w-full grid-cols-[2fr_3fr] grid-rows-[3fr_2fr_2fr] gap-2 rounded-md bg-card p-2 sm:min-h-[420px] sm:gap-3 sm:p-3 lg:hidden">
                 {HERO_IMAGES.map((img, i) => (
                     <div
                         key={i}
                         className={cn(
-                            "relative overflow-hidden rounded-md border border-border/80 bg-muted transition-transform duration-300 hover:scale-[1.02]",
+                            "relative overflow-hidden rounded-md bg-muted",
                             i === 0 && "row-span-2"
                         )}
                     >
@@ -39,7 +39,7 @@ function HeroImageGrid() {
             </div>
 
             <div
-                className="hidden h-full min-h-[520px] w-full gap-3 rounded-lg border border-border bg-card p-3 lg:grid"
+                className="hidden h-full min-h-[520px] w-full gap-3 rounded-md bg-card p-3 lg:grid"
                 style={{
                     gridTemplateColumns: "1fr 1fr 2fr 3fr 2fr 1fr",
                     gridTemplateRows: "2fr 3fr 2fr",
@@ -48,7 +48,7 @@ function HeroImageGrid() {
                 {HERO_IMAGES.map((img, i) => (
                     <div
                         key={i}
-                        className="relative overflow-hidden rounded-md border border-border/80 bg-muted transition-transform duration-300 hover:scale-[1.02]"
+                        className="relative overflow-hidden rounded-md bg-muted"
                         style={{
                             gridColumn: img.col,
                             gridRow: img.row,
@@ -74,8 +74,8 @@ export default function Hero() {
             id="hero"
             className="relative isolate overflow-hidden text-zinc-900"
         >
-            <div className="page-shell section-shell grid items-start gap-10 lg:min-h-[calc(100vh-5rem)] lg:items-center lg:gap-14 lg:grid-cols-[1.05fr_0.95fr]">
-                <div className="z-10 flex max-w-2xl flex-col gap-7 py-2 sm:py-4 lg:py-8">
+            <div className="page-shell section-shell grid items-start gap-12 lg:min-h-[calc(100vh-5rem)] lg:items-center lg:gap-20 lg:grid-cols-[1.05fr_0.95fr]">
+                <div className="z-10 flex max-w-2xl flex-col gap-8 py-2 sm:py-6 lg:py-10">
                     <div className="space-y-5">
                         <p className="text-sm font-medium uppercase tracking-[0.18em] text-muted-foreground">
                             Mateřská škola
@@ -111,7 +111,7 @@ export default function Hero() {
                         </Link>
                     </div>
 
-                    <div className="grid gap-6 border-t border-border pt-6 sm:grid-cols-2">
+                    <div className="grid gap-8 border-t border-border pt-8 sm:grid-cols-2">
                         <div>
                             <div className="flex items-center gap-2 text-sm font-medium text-foreground">
                                 <CalendarDays className="size-4 text-muted-foreground" />

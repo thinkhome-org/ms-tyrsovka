@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { Quicksand, Source_Sans_3 } from "next/font/google";
+import { Lora, Source_Sans_3 } from "next/font/google";
 import "./globals.css";
 import Nav from "./components/nav";
 import Footer from "./components/footer";
 
-const quicksand = Quicksand({
-    variable: "--font-quicksand",
-    subsets: ["latin"],
+const lora = Lora({
+    variable: "--font-heading-serif",
+    subsets: ["latin", "latin-ext"],
 });
 
 const sourceSans3 = Source_Sans_3({
@@ -27,7 +27,7 @@ export default function RootLayout({
     return (
         <html lang="cs">
             <body
-                className={`${quicksand.variable} ${sourceSans3.variable} flex min-h-screen flex-col antialiased font-sans`}
+                className={`${lora.variable} ${sourceSans3.variable} flex min-h-screen flex-col antialiased font-sans`}
             >
                 <Nav />
                 {children}

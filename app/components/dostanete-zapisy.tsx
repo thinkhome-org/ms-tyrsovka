@@ -8,7 +8,7 @@ export default function DostaneteZapisy() {
     return (
         <section className="bg-transparent text-zinc-900">
             <div className="page-shell section-shell border-t border-border">
-                <div className="grid grid-cols-1 pt-10 lg:grid-cols-[1.08fr_auto_0.92fr]">
+                <div className="grid grid-cols-1 gap-12 pt-12 lg:grid-cols-[1.08fr_auto_0.92fr] lg:gap-16">
                         <div>
                             <CardHeader className="px-0 pb-5">
                                 <CardTitle className="text-3xl">
@@ -16,7 +16,7 @@ export default function DostaneteZapisy() {
                                 </CardTitle>
                             </CardHeader>
                             <CardContent className="px-0">
-                                <div className="overflow-hidden rounded-lg border border-border bg-background">
+                                <div className="overflow-hidden rounded-md bg-background">
                                     <div className="aspect-16/10 w-full">
                                         <iframe
                                             title="Mapa – MŠ Tyršovka"
@@ -53,12 +53,12 @@ export default function DostaneteZapisy() {
                         />
 
                         <div>
-                            <CardHeader className="px-0 pb-4 pt-10 lg:pt-0 lg:pl-10">
+                            <CardHeader className="px-0 pb-6 pt-10 lg:pt-0 lg:pl-12">
                                 <CardTitle className="text-3xl">
                                     Zápisy
                                 </CardTitle>
                             </CardHeader>
-                            <CardContent className="px-0 lg:pl-10">
+                            <CardContent className="px-0 lg:pl-12">
                                 <p className="max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
                                     Sem přijde krátké info k zápisům, termínům a
                                     potřebným dokumentům. Prozatím placeholder

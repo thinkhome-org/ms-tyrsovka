@@ -4,12 +4,12 @@ import { Separator } from "@/components/ui/separator";
 
 export default function Footer() {
     return (
-        <footer id="kontakt" className="w-full bg-foreground text-background">
+        <footer id="kontakt" className="w-full bg-black text-white">
             <div className="page-shell py-14 sm:py-16">
                 <div className="grid grid-cols-1 gap-10 md:grid-cols-[1.2fr_auto_0.8fr] md:items-start">
                     <div className="space-y-4">
                         <div className="flex items-center gap-4">
-                            <div className="relative h-14 w-14 overflow-hidden rounded-2xl border border-white/15 bg-white shadow-sm">
+                            <div className="relative h-14 w-14 overflow-hidden rounded-md bg-white/10">
                                 <Image
                                     src="/logo.png"
                                     alt="MŠ Tyršovka"
@@ -45,7 +45,7 @@ export default function Footer() {
 
                         <Link
                             href="/uredni-deska"
-                            className="inline-flex h-9 items-center justify-center rounded-full border border-white/15 bg-white/5 px-5 text-sm font-medium text-white shadow-sm transition-colors hover:bg-white/10 hover:text-white focus-visible:outline focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-foreground"
+                            className="inline-flex h-9 items-center justify-center rounded-md border border-white/20 bg-white/5 px-5 text-sm font-medium text-white transition-colors hover:bg-white/10 hover:text-white focus-visible:outline focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-foreground"
                         >
                             Úřední deska
                         </Link>

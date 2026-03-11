@@ -16,20 +16,13 @@ export default function Home() {
     return (
         <main className="flex min-h-screen flex-1 flex-col">
             <Hero />
-            <Aktuality />
             <ProcMy />
+            <Aktuality />
+
             <section className="bg-transparent">
-                <div className="page-shell py-10">
-                    <div className="border-y border-border py-6">
-                        <LogoLoop
-                            logos={techLogos}
-                            speed={30}
-                            fadeOut
-                            scaleOnHover
-                            gap={60}
-                            logoHeight={40}
-                            className="my-1"
-                        />
+                <div className="page-shell py-16 sm:py-20">
+                    <div className="border-y border-border py-8 sm:py-10">
+                        <LogoLoop logos={techLogos} speed={30} fadeOut scaleOnHover gap={60} logoHeight={40} className="my-1" />
                     </div>
                 </div>
             </section>
