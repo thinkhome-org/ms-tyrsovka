@@ -95,8 +95,7 @@ export default function ZapisyPage() {
                             </h1>
                             <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
                                 Termíny, předzápis, osobní zápis a kritéria
-                                přijímání do MŠ. Obsah stránky lze později
-                                spravovat z CMS (markdown).
+                                přijímání do MŠ.
                             </p>
                         </div>
 

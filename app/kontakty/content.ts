@@ -16,7 +16,7 @@ export const KONTAKTY_CONTENT = {
     eyebrow: "Kontakty",
     title: "Kontakty",
     description:
-        "Přehled kontaktů na vedení školy, provoz i jednotlivé třídy v novém přehledném rozložení. Obsah vychází z původních kontaktních stránek MŠ Tyršovka.",
+        "Přehled kontaktů na vedení školy, provoz i jednotlivé třídy.",
     introTitle: "Jak nás nejlépe kontaktovat",
     introText:
         "Omluvenky zadávejte do aplikace Naše MŠ. Do tříd volejte nebo pište jen v naléhavých případech. Při ranním provozu, odpoledním provozu nebo pobytu na zahradě škola doporučuje kontaktovat Citrónovou třídu.",

@@ -24,85 +24,80 @@ export const PRO_ZAJEMCE_PAGE: StaticPageContent = {
     markdown: `
 ## Co si projít jako první
 
-Pokud o MŠ Tyršovka teprve uvažujete, začněte stránkou se zápisy, termíny a podmínkami přijetí. Na ni navazují praktické informace pro nově přijaté děti a režim dne.
+Pokud o MŠ Tyršovka teprve uvažujete, začněte stránkou se zápisy – najdete tam termíny, podmínky přijetí a postup podání přihlášky. Na ni navazují praktické informace pro nově přijaté děti a přehled každodenního režimu školky.
 
-## Aktuálně zvýrazněné termíny
+## Nejbližší termíny
 
-Na původním webu školy jsou pro zájemce viditelně komunikované zejména tyto události:
-
-- **Zápisy do MŠ**
-- **Den otevřených dveří - 19. 3. 2026**
-- **Vítání jara - 31. 3. 2026**
-
-## Jak si stránku nově členit
-
-Nová struktura odděluje:
-
-- **první orientaci pro nové rodiny** na této stránce
-- **samotný zápis** na stránce \`/zapisy\`
-- **nástup a adaptaci** na stránce \`/nove-prijati\`
-- **každodenní provoz** na stránce \`/rezim-dne-a-provozni-doba\`
+- **Zápisy do MŠ pro školní rok 2026/2027**
+- **Den otevřených dveří – 19. 3. 2026**
+- **Vítání jara – 31. 3. 2026**
 
 ## Kontakt pro dotazy
 
-- **ředitelka:** [reditelka@tyrsovka.cz](mailto:reditelka@tyrsovka.cz)
-- **telefon:** +420 737 381 935
+- **Ředitelka:** [reditelka@tyrsovka.cz](mailto:reditelka@tyrsovka.cz)
+- **Telefon:** +420 737 381 935
 `.trim(),
 };
 
 export const NOVE_PRIJATI_PAGE: StaticPageContent = {
     eyebrow: "Informace",
     title: "Nově přijatí",
-    description: "Praktické informace pro rodiče nově přijatých dětí: co připravit, jak zvládnout adaptaci a kde sledovat důležité novinky.",
+    description: "Vše, co potřebujete vědět před nástupem dítěte do MŠ Tyršovka – co si připravit, jak probíhá adaptace a kde najdete průběžné informace.",
     markdown: `
 ## Setkání pro rodiče nově přijatých dětí
 
-Na původním webu škola uvádí setkání pro rodiče nově přijatých dětí před začátkem školního roku. Slouží k předání informací o adaptaci, zvyklostech školy, placení, docházce a dalším formalitám.
+V pondělí **23. 6. 2025** v **16:30** se uskuteční schůzka pro rodiče nově přijatých dětí **ve sborovně – 3. pavilon, suterén**. Setkání je pouze pro rodiče (případně vámi pověřenou osobu) – místnost není uzpůsobena pro volný pohyb dětí. Předáme vám důležité informace o adaptaci, zvyklostech v naší škole, placení, docházce a dalších formalitách a rádi odpovíme na vaše dotazy. Předpokládaný konec v 17:30. Těšíme se na vás.
 
 ---
-## Kde najdete průběžné informace
+## Důležité informace
 
-Nástupem do MŠ souhlasíte se školním řádem. Škola zároveň uvádí, že všechny potřebné informace, omluvenky, aktuální dění a fotogalerii najdete v aplikaci **Naše MŠ**. Přihlašovací údaje rodiče obdrží při nástupu od učitelek.
+Nástupem do naší mateřské školy souhlasíte se **školním řádem**, který je k dispozici v šatnách dětí i na těchto stránkách.
+
+**Všechny potřebné informace, omluvenky, aktuální dění a fotogalerie najdete v aplikaci Naše MŠ.** Přihlašovací údaje obdržíte při nástupu od učitelek.
 
 ---
 ## Co je potřeba do MŠ
 
-- přezůvky s plnou patou, dobře obouvatelné
-- oblečení na ven podle aktuálního počasí
-- náhradní oblečení: spodní prádlo, ponožky, trička, tepláky nebo legíny
-- oblečení do deště: holínky, pláštěnka nebo softshellová bunda s impregnací
+- **přezůvky** – obuv s plnou patou, pro děti dobře obouvatelné (ne Crocsy, ne plyšové)
+- **oblečení na ven** – přiměřené aktuálnímu počasí
+- **náhradní oblečení** – spodní prádlo, ponožky, trička, tepláky nebo legíny (průběžně doplňujte zásoby)
+- **oblečení do deště** – holínky, pláštěnka nebo softshellová bunda s impregnací (chodíme ven za každého počasí)
 
 ---
 ## Adaptace na nové prostředí
 
-Vstup do mateřské školy je pro děti i rodiče velká změna. Škola doporučuje adaptaci neuspěchat, vyčlenit si na ni čas a předem s dětmi trénovat samostatnost. Pomáhá také pohodlné oblečení, pozitivní mluvení o školce a průběžný kontakt s učitelkami.
+Vstup do MŠ je pro děti i rodiče velkou životní změnou. Doporučujeme adaptaci neuspěchat a vyčlenit si na ni dostatek času. Trénujte s dětmi samostatnost, volte pohodlné oblečení, mluvte o školce pozitivně a motivujte děti na nové kamarády a zážitky. Pomoci může i některá z knih s tematikou nástupu do školky (např. Flandil ve školce).
 
 ### Doporučený průběh adaptace
 
-1. **1. den v MŠ** - společné prohlédnutí prostor, seznámení s učitelkami, odchod domů mezi 9:00 a 9:30.
-2. **2. až 5. den v MŠ** - krátký samostatný pobyt dítěte bez rodičů, vyzvedávání po svačině kolem 9:30 až 10:00.
-3. **2. týden v MŠ** - pokud dítě zvládá pobyt dobře, zůstává na dopoledne a odchází po obědě mezi 12:15 a 12:45.
-4. **3. týden v MŠ** - dle dohody s učitelkami lze zkoušet celodenní pobyt s vyzvedáváním po odpolední svačině od 14:30.
+1. **1. den v MŠ** – společné prohlédnutí prostor, seznámení s učitelkami, odchod domů v 9:00–9:30.
+2. **2.–5. den v MŠ** – krátký samostatný pobyt bez rodičů, vyzvedávání po svačině (cca 9:30–10:00).
+3. **2. týden v MŠ** – pokud dítě zvládá pobyt dobře, zůstává na dopoledne, odchod po obědě (12:15–12:45).
+4. **3. týden v MŠ** – dle dohody s učitelkami lze zkoušet celodenní pobyt, vyzvedávání po odpolední svačině od 14:30.
 
-Nejlepší je vždy individuální domluva s učitelkami podle potřeb dítěte.
-
----
-## Vize MŠ
-
-Škola se zaměřuje na zdravý životní styl, sportovní a pohybové aktivity, zdravé stravování, prevenci rizikového chování a rozvoj emoční i sociální inteligence. Proto škola na původním webu výslovně žádá, aby se při oslavách nenosily sladkosti a rodiče volili zdravější alternativy nebo drobné dárky.
+Vždy je nejlepší individuální domluva s učitelkami podle potřeb vašeho dítěte. Buďte s učitelkami v každodenním kontaktu a nebojte se ptát. Při jakýchkoli změnách (zdravotní stav, změna kontaktů, osoby oprávněné k vyzvedávání) je prosím informujte.
 
 ---
-## Materiální pomoc, která se hodí
+## Zaměření a vize MŠ
 
-- hygienické potřeby: papírové kapesníky, kuchyňské utěrky, tekuté mýdlo, vlhčené ubrousky, toaletní papír
-- výtvarný materiál: papíry do tiskárny, lepidla, čtvrtky, silné trojhranné pastelky, fixy, barevné papíry a další tvořivý materiál
+Jsme mateřská škola zaměřená na výchovu a vzdělávání ke zdravému životnímu stylu. Klademe důraz na sportovní a pohybové aktivity, zdravé stravování, prevenci rizikového chování a rozvoj emoční, sociální inteligence a psychické odolnosti.
+
+**Proto říkáme NE sladkostem při oslavách.** Prosíme o zdravější alternativu nebo drobné dárky (samolepky, kartičky…) pro děti.
+
+---
+## Uvítáme každou materiální pomoc
+
+- **Hygienické potřeby** – papírové kapesníky v krabičce, kuchyňské utěrky, tekuté mýdlo, vlhčené ubrousky, toaletní papír
+- **Výtvarný materiál** – papíry do tiskárny, lepidla v tyčince, čtvrtky, silné trojhranné pastelky, silné fixy, barevné papíry, zdobící materiál (nejlépe po dohodě s třídními učitelkami)
+
+Těšíme se na vzájemnou spolupráci.
 `.trim(),
 };
 
 export const REZIM_DNE_PAGE: StaticPageContent = {
     eyebrow: "Informace",
     title: "Režim dne a provozní doba",
-    description: "Přehled otevírací doby, příchodů, vyzvedávání dětí a omlouvání docházky v novém přehlednějším formátu.",
+    description: "Přehled otevírací doby, příchodů, vyzvedávání dětí a omlouvání docházky.",
     markdown: `
 ## Provozní doba
 
@@ -140,25 +135,18 @@ Docházku je možné omlouvat přes aplikaci **Naše MŠ**, výjimečně pomocí
 export const JIDELNICEK_PAGE: StaticPageContent = {
     eyebrow: "Informace",
     title: "Jídelníček",
-    description: "Aktuální jídelní lístek převzatý z původního webu a zasazený do nového rozhraní. Pro rychlý přístup zůstává i přímý odkaz na originál.",
+    description: "Aktuální jídelní lístek.",
     markdown: `
 ## Aktuální jídelní lístek
 
-Na původním webu školy je jídelníček zveřejněný jako obrázek. Tady zůstává zachovaný stejný obsah, ale v čistším a přehlednějším rozhraní.
-
 ![Aktuální jídelní lístek](https://files.site.site3.eu/03/f6/03f6cdea-3f9e-47fb-b705-89d491a38e44.jpg)
-
-## Přímý odkaz
-
-- [Otevřít originální obrázek jídelníčku](https://files.site.site3.eu/03/f6/03f6cdea-3f9e-47fb-b705-89d491a38e44.jpg)
-- [Původní stránka Jídelníček](https://www.tyrsovka.cz/jidelnicek)
 `.trim(),
 };
 
 export const PLAN_AKCI_PAGE: StaticPageContent = {
     eyebrow: "Informace",
     title: "Plán akcí",
-    description: "Akce školy převedené z původního webu do nové struktury. Stránka je připravená tak, aby později šla snadno nahradit CMS obsahem.",
+    description: "Akce školy.",
     markdown: `
 ## Plán akcí MŠ Tyršovka na rok 2025/26
 
@@ -211,7 +199,7 @@ Bližší informace škola uvádí ve třídách. Další akce mohou být průb�
 export const SVP_PAGE: StaticPageContent = {
     eyebrow: "O škole",
     title: "ŠVP",
-    description: "Školní vzdělávací program je na původním webu zveřejněný jako PDF. V nové struktuře má vlastní stránku a jasný přístup z menu.",
+    description: "Školní vzdělávací program.",
     buttonLinks: [
         {
             label: "Otevřít ŠVP (PDF)",
@@ -225,13 +213,7 @@ export const SVP_PAGE: StaticPageContent = {
 export const PROJEKTY_A_VYZVY_PAGE: StaticPageContent = {
     eyebrow: "O škole",
     title: "Projekty a výzvy",
-    description: "Přehled projektů, do kterých se MŠ Tyršovka zapojuje. Stránka je vedená stejným obsahem jako původní web, ale v novém přehlednějším formátu a připravená pro pozdější CMS správu.",
-    buttonLinks: [
-        {
-            label: "Původní stránka",
-            href: "https://www.tyrsovka.cz/o-%C5%A1kole/projekty-a-vyzvy",
-        },
-    ],
+    description: "Přehled projektů, do kterých se MŠ Tyršovka zapojuje.",
     markdown: `
 ## Aktuálně realizovaný projekt
 

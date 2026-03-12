@@ -98,8 +98,7 @@ export default function TridyPage() {
                         </h1>
                         <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
                             Přehled tříd, věkového rozdělení a hlavního zaměření
-                            jednotlivých skupin. Aktuální kontakty a pedagogické
-                            obsazení škola uvádí na samostatné kontaktní stránce.
+                            jednotlivých skupin. 
                         </p>
                     </div>
 

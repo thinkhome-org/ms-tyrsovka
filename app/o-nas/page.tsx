@@ -54,8 +54,7 @@ export default function ONasPage() {
                         <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
                             MŠ Tyršovka je mateřská škola zaměřená na zdravý
                             životní styl, pohyb, bezpečné prostředí a respektující
-                            přístup k dětem. Tato stránka shrnuje základní
-                            představení školy a provozní zázemí.
+                            přístup k dětem. 
                         </p>
                     </div>
 
@@ -136,10 +135,6 @@ export default function ONasPage() {
                 <section className="mt-14 border-t border-border pt-10">
                     <div className="max-w-2xl">
                         <h2 className="section-title">Co je pro školu důležité</h2>
-                        <p className="section-copy mt-3">
-                            Stručný přehled toho, na čem škola podle zveřejněných
-                            informací staví svůj každodenní provoz.
-                        </p>
                     </div>
 
                     <div className="mt-8 grid gap-5 md:grid-cols-3">
@@ -167,11 +162,7 @@ export default function ONasPage() {
                     <Card className="bg-card">
                         <CardHeader className="gap-3">
                             <CardTitle className="text-2xl">Třídy v MŠ</CardTitle>
-                            <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
-                                Přehled tříd a jejich zaměření je nově na
-                                samostatné stránce, aby zůstalo „O nás“ přehledné
-                                a stručné.
-                            </p>
+            
                         </CardHeader>
                         <CardContent>
                             <Link href="/tridy" className={linkButtonPrimaryLg}>

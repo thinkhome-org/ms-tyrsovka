@@ -16,7 +16,7 @@ const NAV_ITEMS = [
     { label: "Pro zájemce", href: "/pro-zajemce" },
     { label: "Informace", href: "#", sub: true },
     { label: "O škole", href: "/o-nas", sub: true },
-    { label: "Správa MŠ", href: "/uredni-deska" },
+    { label: "Správa MŠ", href: "https://nasems.cz/" },
     { label: "Kontakty", href: "/kontakty" },
 ] as const;
 
