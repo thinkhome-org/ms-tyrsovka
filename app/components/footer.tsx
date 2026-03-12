@@ -60,6 +60,25 @@ export default function Footer() {
                         </div>
                     </div>
                 </div>
+
+                <div className="mt-12 flex justify-center border-t border-white/10 pt-8">
+                    <a
+                        href="https://thinkhome.org"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex h-6 items-center gap-2 opacity-50 transition-opacity hover:opacity-70"
+                        aria-label="Vytvořeno Thinkhome"
+                    >
+                        <span className="text-xs leading-none text-white/70">Vytvořeno</span>
+                        <Image
+                            src="https://raw.githubusercontent.com/thinkhome-org/web-new/master/images/logo/primary/SVG%20Transparent/primary_white-on-transparent.svg"
+                            alt="Thinkhome"
+                            width={100}
+                            height={21}
+                            className="block h-5 w-auto"
+                        />
+                    </a>
+                </div>
             </div>
         </footer>
     );

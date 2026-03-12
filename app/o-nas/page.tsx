@@ -71,7 +71,7 @@ export default function ONasPage() {
                     </Link>
                 </div>
 
-                <section className="mt-10 grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
+                <section className="mt-10">
                     <Card className="bg-card">
                         <CardHeader>
                             <CardTitle className="text-2xl">MŠ Tyršovka</CardTitle>
@@ -102,40 +102,6 @@ export default function ONasPage() {
                                 pedagoga a provozní zaměstnance, kteří společně
                                 zajišťují provoz od 6:30 do 17:30.
                             </p>
-                        </CardContent>
-                    </Card>
-
-                    <Card className="bg-card">
-                        <CardHeader>
-                            <CardTitle className="text-2xl">
-                                Kontakt a adresa
-                            </CardTitle>
-                        </CardHeader>
-                        <CardContent className="space-y-5 text-sm leading-relaxed text-muted-foreground sm:text-base">
-                            <div>
-                                <p className="font-medium text-foreground">
-                                    Kontaktujte nás
-                                </p>
-                                <p className="mt-2">reditelka@tyrsovka.cz</p>
-                                <p>+420 737 381 935</p>
-                            </div>
-                            <div>
-                                <p className="font-medium text-foreground">
-                                    Adresa
-                                </p>
-                                <p className="mt-2">
-                                    Lysinská 184/45
-                                    <br />
-                                    143 00, Praha 4 - Modřany
-                                </p>
-                            </div>
-                            <div>
-                                <p className="font-medium text-foreground">
-                                    Identifikační údaje
-                                </p>
-                                <p className="mt-2">Datová schránka: 9u4k2vr</p>
-                                <p>IČ: 63109719</p>
-                            </div>
                         </CardContent>
                     </Card>
                 </section>
