@@ -17,6 +17,9 @@ const sourceSans3 = Source_Sans_3({
 export const metadata: Metadata = {
     title: "MŠ Tyršovka",
     description: "Moderní web mateřské školy MŠ Tyršovka.",
+    icons: {
+        icon: "/logo.png",
+    },
 };
 
 export default function RootLayout({
