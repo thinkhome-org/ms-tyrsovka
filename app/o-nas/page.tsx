@@ -4,6 +4,14 @@ import {
     linkButtonOutlineSm,
     linkButtonPrimaryLg,
 } from "@/lib/button-link-classes";
+import { buildPageMetadata } from "@/lib/seo";
+
+export const metadata = buildPageMetadata({
+    title: "O nás",
+    description:
+        "Představení MŠ Tyršovka: zaměření na zdravý životní styl, podpora každého dítěte a klidné zázemí v Modřanech. Provozní zaměstnanci.",
+    path: "/o-nas",
+});
 
 const SCHOOL_PILLARS = [
     {

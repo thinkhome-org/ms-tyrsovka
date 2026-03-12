@@ -3,6 +3,7 @@ import { Lora, Source_Sans_3 } from "next/font/google";
 import "./globals.css";
 import Nav from "./components/nav";
 import Footer from "./components/footer";
+import { getBaseUrl, defaultMetadata } from "@/lib/seo";
 
 const lora = Lora({
     variable: "--font-heading-serif",
@@ -15,10 +16,26 @@ const sourceSans3 = Source_Sans_3({
 });
 
 export const metadata: Metadata = {
-    title: "MŠ Tyršovka",
-    description: "Moderní web mateřské školy MŠ Tyršovka.",
+    metadataBase: new URL(getBaseUrl()),
+    title: {
+        default: defaultMetadata.siteName,
+        template: `%s | ${defaultMetadata.siteName}`,
+    },
+    description: defaultMetadata.defaultDescription,
     icons: {
         icon: "/logo.png",
+    },
+    openGraph: {
+        title: defaultMetadata.siteName,
+        description: defaultMetadata.defaultDescription,
+        locale: "cs_CZ",
+        type: "website",
+        images: [{ url: "/logo.png", width: 512, height: 512, alt: defaultMetadata.siteName }],
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: defaultMetadata.siteName,
+        description: defaultMetadata.defaultDescription,
     },
 };
 

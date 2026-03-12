@@ -1,7 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import { linkButtonOutlineSm } from "@/lib/button-link-classes";
+import { buildPageMetadata } from "@/lib/seo";
 import { SPOLUPRACE_CONTENT } from "./content";
+
+export const metadata = buildPageMetadata({
+    title: SPOLUPRACE_CONTENT.title,
+    description: SPOLUPRACE_CONTENT.description,
+    path: "/spoluprace",
+});
 
 export default function SpolupracePage() {
     const { eyebrow, title, description, items } = SPOLUPRACE_CONTENT;

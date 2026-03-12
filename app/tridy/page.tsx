@@ -1,6 +1,14 @@
 import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { linkButtonOutlineSm } from "@/lib/button-link-classes";
+import { buildPageMetadata } from "@/lib/seo";
+
+export const metadata = buildPageMetadata({
+    title: "Třídy",
+    description:
+        "Přehled tříd MŠ Tyršovka: Jahodová, Meruňková, Borůvková, Citrónová, Jablková a Hrušková. Věkové skupiny a zaměření tříd.",
+    path: "/tridy",
+});
 
 const CLASSROOMS = [
     {

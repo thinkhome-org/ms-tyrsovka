@@ -6,7 +6,15 @@ import remarkGfm from "remark-gfm";
 import { Card, CardContent } from "@/components/ui/card";
 import { linkButtonOutlineSm } from "@/lib/button-link-classes";
 import { SITE_PAGES } from "@/lib/site-content";
+import { buildPageMetadata } from "@/lib/seo";
 import { ZAPISY_HEADER_IMAGES, ZAPISY_MARKDOWN } from "./content";
+
+export const metadata = buildPageMetadata({
+    title: SITE_PAGES.zapisy.title,
+    description:
+        "Termíny zápisu do MŠ Tyršovka, předzápis, osobní zápis a kritéria přijímání pro školní rok 2026/2027.",
+    path: "/zapisy",
+});
 
 const MARKDOWN_SECTIONS = ZAPISY_MARKDOWN.split(/\n---\n/g)
     .map((section) => section.trim())

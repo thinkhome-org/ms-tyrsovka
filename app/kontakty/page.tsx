@@ -9,7 +9,14 @@ import {
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { linkButtonOutlineSm } from "@/lib/button-link-classes";
+import { buildPageMetadata } from "@/lib/seo";
 import { KONTAKTY_CONTENT } from "./content";
+
+export const metadata = buildPageMetadata({
+    title: KONTAKTY_CONTENT.title,
+    description: KONTAKTY_CONTENT.description,
+    path: "/kontakty",
+});
 
 function DetailRow({
     icon,

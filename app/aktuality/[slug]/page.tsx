@@ -1,10 +1,12 @@
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import aktuality from "@/app/data/aktuality.json";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { linkButtonOutlineSm } from "@/lib/button-link-classes";
+import { buildPageMetadata, buildAbsoluteUrl } from "@/lib/seo";
 
 type Aktualita = {
     title: string;
@@ -27,6 +29,23 @@ export function generateStaticParams() {
     return (aktuality as Aktualita[]).map((a) => ({ slug: a.slug }));
 }
 
+export async function generateMetadata({
+    params,
+}: {
+    params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+    const { slug } = await params;
+    const item = (aktuality as Aktualita[]).find((a) => a.slug === slug);
+    if (!item) return {};
+    const path = `/aktuality/${slug}`;
+    return buildPageMetadata({
+        title: item.title,
+        description: `${item.title} – aktuality MŠ Tyršovka.`,
+        path,
+        imagePath: item.image.startsWith("http") ? item.image : buildAbsoluteUrl(item.image),
+    });
+}
+
 export default async function AktualitaDetailPage({
     params,
 }: {
@@ -37,8 +56,25 @@ export default async function AktualitaDetailPage({
     const item = (aktuality as Aktualita[]).find((a) => a.slug === slug);
     if (!item) notFound();
 
+    const articleJsonLd = {
+        "@context": "https://schema.org",
+        "@type": "NewsArticle",
+        headline: item.title,
+        datePublished: item.publishedAt,
+        image: buildAbsoluteUrl(item.image.startsWith("http") ? item.image : item.image),
+        publisher: {
+            "@type": "Organization",
+            name: "MŠ Tyršovka",
+            logo: { "@type": "ImageObject", url: buildAbsoluteUrl("/logo.png") },
+        },
+    };
+
     return (
         <main className="flex-1 text-zinc-900">
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+            />
             <div className="page-shell section-shell">
                 <div className="flex flex-wrap items-center justify-between gap-4">
                     <div className="text-sm text-muted-foreground">

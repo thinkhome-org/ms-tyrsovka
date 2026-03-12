@@ -4,6 +4,7 @@ import aktuality from "@/app/data/aktuality.json";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { linkButtonOutlineSm } from "@/lib/button-link-classes";
+import { buildPageMetadata } from "@/lib/seo";
 
 type Aktualita = {
     title: string;
@@ -11,6 +12,13 @@ type Aktualita = {
     publishedAt: string; // YYYY-MM-DD
     image: string;
 };
+
+export const metadata = buildPageMetadata({
+    title: "Aktuality",
+    description:
+        "Novinky, oznámení a důležité informace pro rodiče MŠ Tyršovka.",
+    path: "/aktuality",
+});
 
 function formatDateCs(dateIso: string) {
     const date = new Date(dateIso);

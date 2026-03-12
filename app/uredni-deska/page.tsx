@@ -2,7 +2,15 @@ import Link from "next/link";
 import { Download, ExternalLink } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { linkButtonOutlineSm } from "@/lib/button-link-classes";
+import { buildPageMetadata } from "@/lib/seo";
 import { UREDNI_DESKA_SECTIONS } from "./content";
+
+export const metadata = buildPageMetadata({
+    title: "Úřední deska",
+    description:
+        "Důležité dokumenty MŠ Tyršovka: výroční zprávy, formuláře ke stažení a školní řád.",
+    path: "/uredni-deska",
+});
 
 export default function UredniDeskaPage() {
     return (
