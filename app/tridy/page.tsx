@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { linkButtonOutlineSm } from "@/lib/button-link-classes";
@@ -14,7 +15,7 @@ const CLASSROOMS = [
     {
         name: "Jahodová třída",
         age: "2,5–4 let",
-        placeholder: "Foto třídy",
+        image: "/tridy/jahodova.png",
         email: "jahodova@tyrsovka.cz",
         phone: "+420 XXX XXX 001",
         paragraphs: [
@@ -25,7 +26,7 @@ const CLASSROOMS = [
     {
         name: "Meruňková třída",
         age: "2,5–4 let",
-        placeholder: "Foto třídy",
+        image: "/tridy/merunkova.png",
         email: "merunkova@tyrsovka.cz",
         phone: "+420 XXX XXX 002",
         paragraphs: [
@@ -36,7 +37,7 @@ const CLASSROOMS = [
     {
         name: "Borůvková třída",
         age: "3–5 let",
-        placeholder: "Foto třídy",
+        image: "/tridy/boruvkova.png",
         email: "boruvkova@tyrsovka.cz",
         phone: "+420 XXX XXX 003",
         paragraphs: [
@@ -47,7 +48,7 @@ const CLASSROOMS = [
     {
         name: "Citrónová třída",
         age: "3–5 let",
-        placeholder: "Foto třídy",
+        image: "/tridy/citronova.png",
         email: "citronova@tyrsovka.cz",
         phone: "+420 XXX XXX 004",
         paragraphs: [
@@ -58,7 +59,7 @@ const CLASSROOMS = [
     {
         name: "Jablková třída",
         age: "4–6 let",
-        placeholder: "Foto třídy",
+        image: "/tridy/jablkova.png",
         email: "jablkova@tyrsovka.cz",
         phone: "+420 XXX XXX 005",
         paragraphs: [
@@ -69,7 +70,7 @@ const CLASSROOMS = [
     {
         name: "Hrušková třída",
         age: "5–7 let",
-        placeholder: "Foto třídy",
+        image: "/tridy/hruskova.png",
         email: "hruskova@tyrsovka.cz",
         phone: "+420 XXX XXX 006",
         paragraphs: [
@@ -79,18 +80,6 @@ const CLASSROOMS = [
     },
 ];
 
-function PlaceholderPhoto({ label }: { label: string }) {
-    return (
-        <div className="relative aspect-4/3 overflow-hidden rounded-md bg-muted/80">
-            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.4),transparent)]" />
-            <div className="absolute inset-0 flex items-center justify-center">
-                <span className="text-sm font-medium text-muted-foreground">
-                    {label}
-                </span>
-            </div>
-        </div>
-    );
-}
 
 export default function TridyPage() {
     return (
@@ -123,9 +112,15 @@ export default function TridyPage() {
                         >
                             <div className="grid gap-0 md:grid-cols-[220px_1fr]">
                                 <div className="p-4 md:p-5">
-                                    <PlaceholderPhoto
-                                        label={`${classroom.name} – ${classroom.placeholder}`}
-                                    />
+                                    <div className="relative aspect-square overflow-hidden rounded-md bg-muted/50">
+                                        <Image
+                                            src={classroom.image}
+                                            alt={classroom.name}
+                                            fill
+                                            className="object-cover"
+                                            sizes="220px"
+                                        />
+                                    </div>
                                 </div>
                                 <div>
                                     <CardHeader className="pb-3">

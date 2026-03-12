@@ -144,6 +144,7 @@ function MobileMenu({ onClose }: { onClose: () => void }) {
                                         s === item.label ? null : item.label
                                     )
                                 }
+                                className="font-(family-name:--font-heading-serif)"
                                 style={{
                                     display: "flex",
                                     width: "100%",
@@ -197,6 +198,7 @@ function MobileMenu({ onClose }: { onClose: () => void }) {
                             <Link
                                 href={item.href}
                                 onClick={onClose}
+                                className="font-(family-name:--font-heading-serif)"
                                 style={{
                                     display: "block",
                                     padding: "1.1rem 0",
@@ -219,8 +221,6 @@ function MobileMenu({ onClose }: { onClose: () => void }) {
                         display: "flex",
                         flexDirection: "column",
                         gap: "0.75rem",
-                        paddingTop: "1.5rem",
-                        borderTop: "1px solid var(--border)",
                     }}
                 >
                     <Link

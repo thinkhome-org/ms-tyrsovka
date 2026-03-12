@@ -21,6 +21,7 @@ export const PRO_ZAJEMCE_PAGE: StaticPageContent = {
             description: "Příchody, vyzvedávání, omluvenky a provozní doba školky.",
         },
     ],
+    buttonLinks: [{ label: "Kontakty", href: "/kontakty" }],
     markdown: `
 ## Co si projít jako první
 
@@ -31,11 +32,6 @@ Pokud o MŠ Tyršovka teprve uvažujete, začněte stránkou se zápisy – najd
 - **Zápisy do MŠ pro školní rok 2026/2027**
 - **Den otevřených dveří – 19. 3. 2026**
 - **Vítání jara – 31. 3. 2026**
-
-## Kontakt pro dotazy
-
-- **Ředitelka:** [reditelka@tyrsovka.cz](mailto:reditelka@tyrsovka.cz)
-- **Telefon:** +420 737 381 935
 `.trim(),
 };
 
