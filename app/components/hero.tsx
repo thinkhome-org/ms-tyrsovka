@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { CalendarDays, ArrowRight } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { GALLERY_ALBUMS } from "@/app/galerie/content";
@@ -44,6 +43,8 @@ export default function Hero() {
     const [photos, setPhotos] = useState<typeof ALL_PHOTOS>([]);
 
     useEffect(() => {
+        // Keep the random selection client-only to avoid a hydration mismatch.
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setPhotos(shuffle(ALL_PHOTOS).slice(0, 7));
     }, []);
 
