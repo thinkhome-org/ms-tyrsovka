@@ -459,10 +459,10 @@
     },
     {
       "id": "package_scripts_toolchain",
-      "label": "Next React TypeScript ESLint toolchain",
+      "label": "Next 16.3.5, React 19.3.0, ESLint 10.10.0; TS7 kompilátor a TS6 API alias",
       "file_type": "concept",
       "source_file": "package.json",
-      "source_location": "L5"
+      "source_location": null
     },
     {
       "id": "tsconfig_alias",
@@ -487,17 +487,17 @@
     },
     {
       "id": "eslint_next_presets",
-      "label": "Next Core Web Vitals a TypeScript lint presety",
+      "label": "Next lint presety obalené fixupConfigRules pro ESLint 10",
       "file_type": "concept",
       "source_file": "eslint.config.mjs",
-      "source_location": "L1"
+      "source_location": null
     },
     {
       "id": "lib_button_link_classes_server_safety",
-      "label": "Serverově bezpečné třídy odkazů",
+      "label": "Odkazové třídy odvozené z jediné serverově bezpečné buttonVariants; historické Lg je 40 px",
       "file_type": "concept",
       "source_file": "lib/button-link-classes.ts",
-      "source_location": "L1"
+      "source_location": null
     },
     {
       "id": "lib_utils_class_merge",
@@ -511,14 +511,14 @@
       "label": "Vývojový rozcestník MŠ Tyršovka",
       "file_type": "concept",
       "source_file": "README.md",
-      "source_location": "L1"
+      "source_location": null
     },
     {
       "id": "docs_developing_guide",
       "label": "Architektura konfigurace SEO a ověřování",
       "file_type": "concept",
       "source_file": "docs/DEVELOPING.md",
-      "source_location": "L1"
+      "source_location": null
     },
     {
       "id": "docs_graph_guide",
@@ -529,10 +529,10 @@
     },
     {
       "id": "docs_ui_guide",
-      "label": "Úplný katalog rout a UI",
+      "label": "Mapa rout, shadcn navigace, externí lightbox a vymezené výsledky browser smoke testů",
       "file_type": "concept",
       "source_file": "docs/UI.md",
-      "source_location": "L1"
+      "source_location": null
     },
     {
       "id": "docs_content_guide",
@@ -1874,7 +1874,7 @@
       "label": "Domov (/)",
       "file_type": "concept",
       "source_file": "app/page.tsx",
-      "source_location": "L42",
+      "source_location": null,
       "source_url": null,
       "captured_at": null,
       "author": null,
@@ -1885,7 +1885,7 @@
       "label": "Archiv aktualit (/aktuality)",
       "file_type": "concept",
       "source_file": "app/aktuality/page.tsx",
-      "source_location": "L33",
+      "source_location": null,
       "source_url": null,
       "captured_at": null,
       "author": null,
@@ -1896,7 +1896,7 @@
       "label": "Detail aktuality podle slugu (/aktuality/[slug])",
       "file_type": "concept",
       "source_file": "app/aktuality/[slug]/page.tsx",
-      "source_location": "L49",
+      "source_location": null,
       "source_url": null,
       "captured_at": null,
       "author": null,
@@ -1907,7 +1907,7 @@
       "label": "Galerie alb (/galerie)",
       "file_type": "concept",
       "source_file": "app/galerie/page.tsx",
-      "source_location": "L116",
+      "source_location": null,
       "source_url": null,
       "captured_at": null,
       "author": null,
@@ -1918,7 +1918,7 @@
       "label": "Jídelníček (/jidelnicek)",
       "file_type": "concept",
       "source_file": "app/jidelnicek/page.tsx",
-      "source_location": "L11",
+      "source_location": null,
       "source_url": null,
       "captured_at": null,
       "author": null,
@@ -1984,7 +1984,7 @@
       "label": "Školní vzdělávací program (/svp)",
       "file_type": "concept",
       "source_file": "app/svp/page.tsx",
-      "source_location": "L11",
+      "source_location": null,
       "source_url": null,
       "captured_at": null,
       "author": null,
@@ -1995,7 +1995,7 @@
       "label": "Kontakty školy (/kontakty)",
       "file_type": "concept",
       "source_file": "app/kontakty/page.tsx",
-      "source_location": "L54",
+      "source_location": null,
       "source_url": null,
       "captured_at": null,
       "author": null,
@@ -2006,7 +2006,7 @@
       "label": "Představení školy (/o-nas)",
       "file_type": "concept",
       "source_file": "app/o-nas/page.tsx",
-      "source_location": "L50",
+      "source_location": null,
       "source_url": null,
       "captured_at": null,
       "author": null,
@@ -2017,7 +2017,7 @@
       "label": "Šest věkových tříd (/tridy)",
       "file_type": "concept",
       "source_file": "app/tridy/page.tsx",
-      "source_location": "L83",
+      "source_location": null,
       "source_url": null,
       "captured_at": null,
       "author": null,
@@ -2050,7 +2050,7 @@
       "label": "Zápisy 2026/2027 (/zapisy)",
       "file_type": "concept",
       "source_file": "app/zapisy/page.tsx",
-      "source_location": "L94",
+      "source_location": null,
       "source_url": null,
       "captured_at": null,
       "author": null,
@@ -2072,7 +2072,7 @@
       "label": "Cesty menu: školka, informace, škola, správa, kontakty",
       "file_type": "concept",
       "source_file": "app/components/nav.tsx",
-      "source_location": "L14",
+      "source_location": null,
       "source_url": null,
       "captured_at": null,
       "author": null,
@@ -2080,10 +2080,10 @@
     },
     {
       "id": "app_components_nav_mobile_dialog_behavior",
-      "label": "Mobilní menu: portal, akordeon, Escape, scroll lock, počáteční focus",
+      "label": "Mobilní Sheet a single collapsible Accordion; Radix vlastní modalitu, Escape a focus",
       "file_type": "concept",
       "source_file": "app/components/nav.tsx",
-      "source_location": "L48",
+      "source_location": null,
       "source_url": null,
       "captured_at": null,
       "author": null,
@@ -2091,33 +2091,21 @@
     },
     {
       "id": "app_components_nav_desktop_dropdown_behavior",
-      "label": "Desktop: jeden dropdown, zavření kliknutím mimo",
+      "label": "Desktop shadcn NavigationMenu mapuje podmenu přes asChild na Next odkazy",
       "file_type": "concept",
       "source_file": "app/components/nav.tsx",
-      "source_location": "L254",
+      "source_location": null,
       "source_url": null,
       "captured_at": null,
       "author": null,
       "contributor": null
     },
     {
-      "id": "app_components_nav_mobile_focus_gap",
-      "label": "Dialog bez focus trap a bez cílového id aria-controls",
-      "file_type": "rationale",
-      "source_file": "app/components/nav.tsx",
-      "source_location": "L76",
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "rationale": "aria-controls odkazuje na mobile-nav-dialog, ale dialog id nemá; počáteční focus nenahrazuje focus trap."
-    },
-    {
       "id": "app_components_nav_external_school_admin",
       "label": "Správa MŠ je externí nasems.cz, nikoli lokální administrace",
       "file_type": "concept",
       "source_file": "app/components/nav.tsx",
-      "source_location": "L19",
+      "source_location": null,
       "source_url": null,
       "captured_at": null,
       "author": null,
@@ -2139,7 +2127,7 @@
       "label": "Samostatná kopie kontaktu v Organization JSON-LD",
       "file_type": "concept",
       "source_file": "app/page.tsx",
-      "source_location": "L25",
+      "source_location": null,
       "source_url": null,
       "captured_at": null,
       "author": null,
@@ -2172,7 +2160,7 @@
       "label": "Hero vybírá sedm fotografií všech alb, čtyři na mobilu",
       "file_type": "concept",
       "source_file": "app/components/hero.tsx",
-      "source_location": "L10",
+      "source_location": null,
       "source_url": null,
       "captured_at": null,
       "author": null,
@@ -2183,7 +2171,7 @@
       "label": "Náhodný výběr až po mountu chrání hydrataci",
       "file_type": "rationale",
       "source_file": "app/components/hero.tsx",
-      "source_location": "L45",
+      "source_location": null,
       "source_url": null,
       "captured_at": null,
       "author": null,
@@ -2195,7 +2183,7 @@
       "label": "Čtyři hodnoty: pohyb, bezpečí, rodiče, program",
       "file_type": "concept",
       "source_file": "app/components/proc-my.tsx",
-      "source_location": "L6",
+      "source_location": null,
       "source_url": null,
       "captured_at": null,
       "author": null,
@@ -2203,7 +2191,7 @@
     },
     {
       "id": "app_components_aktuality_latest_five_news",
-      "label": "Pět nejnovějších záznamů podle ISO data",
+      "label": "Pět nejnovějších záznamů podle ISO data; flex titulek min-w-0 a wrap-break-word umožňuje zalomení",
       "file_type": "concept",
       "source_file": "app/components/aktuality.tsx",
       "source_location": "L23",
@@ -2228,7 +2216,7 @@
       "label": "Tělo aktuality je ukázkový text, bez skutečného článku",
       "file_type": "concept",
       "source_file": "app/aktuality/[slug]/page.tsx",
-      "source_location": "L113",
+      "source_location": null,
       "source_url": null,
       "captured_at": null,
       "author": null,
@@ -2239,7 +2227,7 @@
       "label": "JSON slug generuje statické parametry i metadata, neznámý vrací notFound",
       "file_type": "concept",
       "source_file": "app/aktuality/[slug]/page.tsx",
-      "source_location": "L28",
+      "source_location": null,
       "source_url": null,
       "captured_at": null,
       "author": null,
@@ -2261,7 +2249,7 @@
       "label": "Aktivní album akce s fallbackem, lokální stav mimo URL",
       "file_type": "concept",
       "source_file": "app/galerie/page.tsx",
-      "source_location": "L116",
+      "source_location": null,
       "source_url": null,
       "captured_at": null,
       "author": null,
@@ -2269,32 +2257,10 @@
     },
     {
       "id": "app_galerie_page_lightbox_flow",
-      "label": "Snapshot alba, cyklické šipky, Escape a backdrop",
+      "label": "Index miniatury otevírá dynamicky načtený knihovní lightbox aktivního alba; -1 zavírá",
       "file_type": "concept",
       "source_file": "app/galerie/page.tsx",
-      "source_location": "L123",
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null
-    },
-    {
-      "id": "app_galerie_page_modal_accessibility_gap",
-      "label": "Lightbox bez dialog role a řízení focusu",
-      "file_type": "rationale",
-      "source_file": "app/galerie/page.tsx",
-      "source_location": "L42",
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null
-    },
-    {
-      "id": "app_galerie_page_body_scroll_lock",
-      "label": "Lightbox resetuje overflow na prázdné, menu obnovuje původní",
-      "file_type": "rationale",
-      "source_file": "app/galerie/page.tsx",
-      "source_location": "L24",
+      "source_location": null,
       "source_url": null,
       "captured_at": null,
       "author": null,
@@ -2305,7 +2271,7 @@
       "label": "GFM sekce oddělené newline --- newline, quickLinks, buttonLinks",
       "file_type": "concept",
       "source_file": "app/components/static-content-page.tsx",
-      "source_location": "L121",
+      "source_location": null,
       "source_url": null,
       "captured_at": null,
       "author": null,
@@ -2316,7 +2282,7 @@
       "label": "GFM tabulky v horizontálním scrollu",
       "file_type": "concept",
       "source_file": "app/components/static-content-page.tsx",
-      "source_location": "L97",
+      "source_location": null,
       "source_url": null,
       "captured_at": null,
       "author": null,
@@ -2327,7 +2293,7 @@
       "label": "HTTP markdown/button odkazy do nové karty s noopener noreferrer",
       "file_type": "concept",
       "source_file": "app/components/static-content-page.tsx",
-      "source_location": "L64",
+      "source_location": null,
       "source_url": null,
       "captured_at": null,
       "author": null,
@@ -2335,10 +2301,10 @@
     },
     {
       "id": "app_zapisy_page_separate_markdown_renderer",
-      "label": "Zápisy mají vlastní GFM renderer a stejný oddělovač sekcí",
+      "label": "Zápisy sdílejí textové markdown komponenty; vlastní obrázky 800×500 a rozdělení sekcí",
       "file_type": "concept",
       "source_file": "app/zapisy/page.tsx",
-      "source_location": "L19",
+      "source_location": null,
       "source_url": null,
       "captured_at": null,
       "author": null,
@@ -2360,7 +2326,7 @@
       "label": "Lokální pole tříd s placeholder telefony XXX",
       "file_type": "concept",
       "source_file": "app/tridy/page.tsx",
-      "source_location": "L14",
+      "source_location": null,
       "source_url": null,
       "captured_at": null,
       "author": null,
@@ -2371,7 +2337,7 @@
       "label": "Telefon odstraní whitespace pro tel; mailto; bez formuláře",
       "file_type": "concept",
       "source_file": "app/kontakty/page.tsx",
-      "source_location": "L118",
+      "source_location": null,
       "source_url": null,
       "captured_at": null,
       "author": null,
@@ -2390,10 +2356,10 @@
     },
     {
       "id": "app_globals_semantic_design_tokens",
-      "label": "OKLCH semantic tokeny, modrá primary, Lora a Source Sans 3",
+      "label": "Semantic tokeny: neutrální #FAFAF8, modrá primary, šest pastelových sekčních akcentů",
       "file_type": "concept",
       "source_file": "app/globals.css",
-      "source_location": "L65",
+      "source_location": null,
       "source_url": null,
       "captured_at": null,
       "author": null,
@@ -2404,7 +2370,7 @@
       "label": "Dark tokeny existují; UI zde nemá theme přepínač",
       "file_type": "rationale",
       "source_file": "app/globals.css",
-      "source_location": "L100",
+      "source_location": null,
       "source_url": null,
       "captured_at": null,
       "author": null,
@@ -2415,7 +2381,7 @@
       "label": "page-shell a section-shell sjednocují šířku a breakpoint padding",
       "file_type": "concept",
       "source_file": "app/globals.css",
-      "source_location": "L150",
+      "source_location": null,
       "source_url": null,
       "captured_at": null,
       "author": null,
@@ -2445,10 +2411,10 @@
     },
     {
       "id": "components_ui_button_button_variants_contract",
-      "label": "Šest variant, čtyři velikosti, disabled a focus styly",
+      "label": "Serverově bezpečné varianty tlačítek, React 19 ref přes props, disabled a focus styly",
       "file_type": "concept",
       "source_file": "components/ui/button.tsx",
-      "source_location": "L7",
+      "source_location": null,
       "source_url": null,
       "captured_at": null,
       "author": null,
@@ -2466,44 +2432,406 @@
       "contributor": null
     },
     {
-      "id": "app_components_proc_my_independent_button_styles",
-      "label": "Proč my má vlastní kopii primárních button tříd",
+      "id": "app_components_hero_css_motion_policy",
+      "label": "CSS stagger fade a hover zoom pouze motion-safe",
+      "file_type": "concept",
+      "source_file": "app/components/hero.tsx",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "rationale": "Nativní CSS místo vlastní animační obsluhy; výběr fotografií zůstává po mountu kvůli hydrataci."
+    },
+    {
+      "id": "app_components_nav_responsive_close",
+      "label": "Výběr odkazu a resize od 1024 px zavře řízený mobilní Sheet",
+      "file_type": "concept",
+      "source_file": "app/components/nav.tsx",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "app_components_proc_my_shared_cta",
+      "label": "CTA O nás používá sdílené odkazové varianty",
       "file_type": "concept",
       "source_file": "app/components/proc-my.tsx",
-      "source_location": "L3",
+      "source_location": null,
       "source_url": null,
       "captured_at": null,
       "author": null,
       "contributor": null
     },
     {
-      "id": "app_components_aktuality_puvodni_legacy_news_ui",
-      "label": "Nepoužívané staré aktuality: čtyři horizontální karty",
+      "id": "app_components_static_content_page_shared_markdown_text",
+      "label": "Exportované textové markdown styly sdílené se Zápisy",
       "file_type": "concept",
-      "source_file": "app/components/aktuality-puvodni.tsx",
-      "source_location": "L22",
+      "source_file": "app/components/static-content-page.tsx",
+      "source_location": null,
       "source_url": null,
       "captured_at": null,
       "author": null,
       "contributor": null
     },
     {
-      "id": "components_logoloop_unused_logo_carousel",
-      "label": "Nepoužívaný nekonečný pás log, ResizeObserver a RAF",
+      "id": "app_globals_motion_safe_scroll",
+      "label": "Plynulý scroll pouze při povoleném pohybu",
       "file_type": "concept",
-      "source_file": "components/LogoLoop.tsx",
-      "source_location": "L198",
+      "source_file": "app/globals.css",
+      "source_location": null,
       "source_url": null,
       "captured_at": null,
       "author": null,
       "contributor": null
     },
     {
-      "id": "components_logoloop_reduced_motion_behavior",
-      "label": "Reduced motion zastaví pás; kopie log jsou aria-hidden",
+      "id": "app_page_absolute_home_title",
+      "label": "Absolutní HTML titulek MŠ Tyršovka bez zdvojení layout šablony",
       "file_type": "concept",
-      "source_file": "components/LogoLoop.tsx",
-      "source_location": "L137",
+      "source_file": "app/page.tsx",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "app_galerie_page_native_masonry",
+      "label": "CSS columns 2–5 sloupců; lazy async img v tlačítkách min 44 px",
+      "file_type": "concept",
+      "source_file": "app/galerie/page.tsx",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "app_galerie_page_tabs_selection",
+      "label": "Řízené Tabs s počty; vykreslen pouze aktivní panel; prázdná alba nejsou podporována",
+      "file_type": "concept",
+      "source_file": "app/galerie/page.tsx",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "app_galerie_photo_lightbox_library_viewer",
+      "label": "Yet Another React Lightbox s Zoom a Counter, české labely, ARIA a backdrop close",
+      "file_type": "concept",
+      "source_file": "app/galerie/photo-lightbox.tsx",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "rationale": "Knihovna vlastní prohlížení fotografií místo vlastního modálního vieweru."
+    },
+    {
+      "id": "components_ui_accordion_radix_accordion",
+      "label": "Radix Accordion se shadcn styly, focus ringem a reduced-motion omezením animace",
+      "file_type": "concept",
+      "source_file": "components/ui/accordion.tsx",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "components_ui_sheet_radix_modal",
+      "label": "Radix Dialog jako Sheet; portál, overlay, strany a české 44px zavření",
+      "file_type": "concept",
+      "source_file": "components/ui/sheet.tsx",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "components_ui_navigation_menu_radix_navigation",
+      "label": "Radix navigace s volitelným viewportem, triggery a odkazy",
+      "file_type": "concept",
+      "source_file": "components/ui/navigation-menu.tsx",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "components_ui_tabs_radix_tabs",
+      "label": "Radix Tabs s orientací, default/line variantou a focus styly",
+      "file_type": "concept",
+      "source_file": "components/ui/tabs.tsx",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "scripts_check_built_metadata_title_regression",
+      "label": "Node assert kontroluje HTML titulky buildu a přesný titulek homepage",
+      "file_type": "concept",
+      "source_file": "scripts/check-built-metadata.mjs",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "rationale": "Malý spustitelný regresní check; netestuje UI interakce ani externí obrázky."
+    },
+    {
+      "id": "package_typescript_compatibility",
+      "label": "@typescript/native alias na TS7; typescript alias na @typescript/typescript6 pro nástroje",
+      "file_type": "concept",
+      "source_file": "package.json",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "readme_source_scope",
+      "label": "Graf mapuje lokální zdroje, nikoli produkci či externí služby",
+      "file_type": "concept",
+      "source_file": "README.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "docs_developing_validation_boundaries",
+      "label": "Webpack a čistý lint po odstranění LogoLoop; TS7/TS6 kompatibilita, pnpm store mismatch a metadata check",
+      "file_type": "concept",
+      "source_file": "docs/DEVELOPING.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "docs_ui_browser_scope",
+      "label": "Dokumentovaný smoke: 16 statických URL a pět článků na 390/1440 px; neznámý slug 404",
+      "file_type": "concept",
+      "source_file": "docs/UI.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "rationale": "Počty miniatur a HTTP úspěch nejsou důkazem načtení všech externích obrázků ani úplným vizuálním auditem."
+    },
+    {
+      "id": "scripts_build_graph_pnpm_topology",
+      "label": "pnpm snapshots tvoří tranzitivní graf s peer kontexty a aliasy; importer definuje přímé vazby",
+      "file_type": "concept",
+      "source_file": "scripts/build-graph.py",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "rationale": "Používá autoritativní pnpm lock místo neaktuálního npm lock; nedokazuje fyzické node_modules."
+    },
+    {
+      "id": "scripts_build_graph_semantic_hash_gate",
+      "label": "Změněné sémantické zdroje vynechány podle SHA-256; AST, inventář a literální reference doplněny",
+      "file_type": "concept",
+      "source_file": "scripts/build-graph.py",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "rationale": "Nevydávat starou interpretaci zdroje za čerstvě přečtenou."
+    },
+    {
+      "id": "scripts_check_graph_acceptance_scope",
+      "label": "Assert kontrola endpointů, hashů, inventáře, rout, assets, URL galerie a pnpm manifest/snapshots",
+      "file_type": "concept",
+      "source_file": "scripts/check-graph.py",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "rationale": "Integrita dat a pokrytí nejsou vizuální kontrola grafu ani webu."
+    },
+    {
+      "id": "docs_graph_pnpm_evidence",
+      "label": "Tranzitivní pnpm snapshot topologie; historický npm lock pouze inventarizován",
+      "file_type": "concept",
+      "source_file": "docs/GRAPH.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "rationale": "Dokumentace odlišuje lokální reference od ověřených externích služeb."
+    },
+    {
+      "id": "app_globals_pastel_topic_tokens",
+      "label": "Šest pastelových témat: news #FFF2B8, parents #FFE0CC, school #F8D6DC, menu #E8DCF2, gallery #D8EBFA, contact #DCEEDD",
+      "file_type": "concept",
+      "source_file": "app/globals.css",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "rationale": "Téma dekoruje obsah, nenahrazuje textový název nebo funkční stav."
+    },
+    {
+      "id": "app_globals_pastel_application",
+      "label": "data-section vybírá krátkou linku h1; konkrétní header/dialog nav odkazy spodní linku; aktivní gallery tab lokální background a tmavý foreground",
+      "file_type": "concept",
+      "source_file": "app/globals.css",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "app_components_static_content_page_section_contract",
+      "label": "Explicitní section parents | school | menu; výchozí parents předáno do main data-section",
+      "file_type": "concept",
+      "source_file": "app/components/static-content-page.tsx",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "app_aktuality_page_topic_accent",
+      "label": "Sekční téma news pro pastelový akcent bez změny obsahu či layoutu",
+      "file_type": "concept",
+      "source_file": "app/aktuality/page.tsx",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "app_aktuality__slug__page_topic_accent",
+      "label": "Sekční téma news pro pastelový akcent bez změny obsahu či layoutu",
+      "file_type": "concept",
+      "source_file": "app/aktuality/[slug]/page.tsx",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "app_kontakty_page_topic_accent",
+      "label": "Sekční téma contact pro pastelový akcent bez změny obsahu či layoutu",
+      "file_type": "concept",
+      "source_file": "app/kontakty/page.tsx",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "app_o_nas_page_topic_accent",
+      "label": "Sekční téma school pro pastelový akcent bez změny obsahu či layoutu",
+      "file_type": "concept",
+      "source_file": "app/o-nas/page.tsx",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "app_tridy_page_topic_accent",
+      "label": "Sekční téma school pro pastelový akcent bez změny obsahu či layoutu",
+      "file_type": "concept",
+      "source_file": "app/tridy/page.tsx",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "app_galerie_page_topic_accent",
+      "label": "Sekční téma gallery pro pastelový akcent bez změny obsahu či layoutu",
+      "file_type": "concept",
+      "source_file": "app/galerie/page.tsx",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "app_zapisy_page_topic_accent",
+      "label": "Sekční téma parents pro pastelový akcent bez změny obsahu či layoutu",
+      "file_type": "concept",
+      "source_file": "app/zapisy/page.tsx",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "app_jidelnicek_page_topic_accent",
+      "label": "Sekční téma menu pro pastelový akcent bez změny obsahu či layoutu",
+      "file_type": "concept",
+      "source_file": "app/jidelnicek/page.tsx",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "app_svp_page_topic_accent",
+      "label": "Sekční téma school pro pastelový akcent bez změny obsahu či layoutu",
+      "file_type": "concept",
+      "source_file": "app/svp/page.tsx",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "docs_design_implemented_pastel_direction",
+      "label": "Jemné pastelové akcenty implementované na žádost uživatele; schválení školou nedoloženo",
+      "file_type": "concept",
+      "source_file": "docs/design.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "rationale": "Zachovat minimalismus, typografii a fotografie; nepřidávat theme engine ani velké syté dlaždice."
+    },
+    {
+      "id": "docs_design_acceptance_targets",
+      "label": "Kontrast, focus, 44px ovladače, 320px šířka, 200% zoom a schválení ukázky jsou cíle, nikoli potvrzené výsledky auditu",
+      "file_type": "concept",
+      "source_file": "docs/design.md",
+      "source_location": null,
       "source_url": null,
       "captured_at": null,
       "author": null,
@@ -2816,7 +3144,7 @@
       "target": "package_scripts_toolchain",
       "relation": "references",
       "source_file": "eslint.config.mjs",
-      "source_location": "L2",
+      "source_location": null,
       "confidence": "EXTRACTED",
       "confidence_score": 1,
       "weight": 1
@@ -2826,7 +3154,7 @@
       "target": "docs_developing_guide",
       "relation": "references",
       "source_file": "README.md",
-      "source_location": "L17",
+      "source_location": null,
       "confidence": "EXTRACTED",
       "confidence_score": 1,
       "weight": 1
@@ -2836,7 +3164,7 @@
       "target": "docs_graph_guide",
       "relation": "references",
       "source_file": "README.md",
-      "source_location": "L17",
+      "source_location": null,
       "confidence": "EXTRACTED",
       "confidence_score": 1,
       "weight": 1
@@ -2846,7 +3174,7 @@
       "target": "docs_ui_guide",
       "relation": "references",
       "source_file": "README.md",
-      "source_location": "L17",
+      "source_location": null,
       "confidence": "EXTRACTED",
       "confidence_score": 1,
       "weight": 1
@@ -2856,7 +3184,7 @@
       "target": "docs_content_guide",
       "relation": "references",
       "source_file": "README.md",
-      "source_location": "L17",
+      "source_location": null,
       "confidence": "EXTRACTED",
       "confidence_score": 1,
       "weight": 1
@@ -2866,7 +3194,7 @@
       "target": "docs_assets_guide",
       "relation": "references",
       "source_file": "README.md",
-      "source_location": "L17",
+      "source_location": null,
       "confidence": "EXTRACTED",
       "confidence_score": 1,
       "weight": 1
@@ -4018,7 +4346,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1,
       "source_file": "app/page.tsx",
-      "source_location": "L42",
+      "source_location": null,
       "weight": 1
     },
     {
@@ -4028,7 +4356,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1,
       "source_file": "app/aktuality/page.tsx",
-      "source_location": "L33",
+      "source_location": null,
       "weight": 1
     },
     {
@@ -4038,7 +4366,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1,
       "source_file": "app/aktuality/[slug]/page.tsx",
-      "source_location": "L49",
+      "source_location": null,
       "weight": 1
     },
     {
@@ -4048,7 +4376,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1,
       "source_file": "app/galerie/page.tsx",
-      "source_location": "L116",
+      "source_location": null,
       "weight": 1
     },
     {
@@ -4058,7 +4386,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1,
       "source_file": "app/jidelnicek/page.tsx",
-      "source_location": "L11",
+      "source_location": null,
       "weight": 1
     },
     {
@@ -4118,7 +4446,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1,
       "source_file": "app/svp/page.tsx",
-      "source_location": "L11",
+      "source_location": null,
       "weight": 1
     },
     {
@@ -4128,7 +4456,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1,
       "source_file": "app/kontakty/page.tsx",
-      "source_location": "L54",
+      "source_location": null,
       "weight": 1
     },
     {
@@ -4138,7 +4466,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1,
       "source_file": "app/o-nas/page.tsx",
-      "source_location": "L50",
+      "source_location": null,
       "weight": 1
     },
     {
@@ -4148,7 +4476,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1,
       "source_file": "app/tridy/page.tsx",
-      "source_location": "L83",
+      "source_location": null,
       "weight": 1
     },
     {
@@ -4178,7 +4506,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1,
       "source_file": "app/zapisy/page.tsx",
-      "source_location": "L94",
+      "source_location": null,
       "weight": 1
     },
     {
@@ -4188,7 +4516,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1,
       "source_file": "app/components/nav.tsx",
-      "source_location": "L14",
+      "source_location": null,
       "weight": 1
     },
     {
@@ -4198,7 +4526,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1,
       "source_file": "app/components/nav.tsx",
-      "source_location": "L14",
+      "source_location": null,
       "weight": 1
     },
     {
@@ -4208,7 +4536,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1,
       "source_file": "app/components/nav.tsx",
-      "source_location": "L14",
+      "source_location": null,
       "weight": 1
     },
     {
@@ -4218,7 +4546,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1,
       "source_file": "app/components/nav.tsx",
-      "source_location": "L14",
+      "source_location": null,
       "weight": 1
     },
     {
@@ -4228,7 +4556,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1,
       "source_file": "app/components/nav.tsx",
-      "source_location": "L14",
+      "source_location": null,
       "weight": 1
     },
     {
@@ -4238,7 +4566,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1,
       "source_file": "app/components/nav.tsx",
-      "source_location": "L14",
+      "source_location": null,
       "weight": 1
     },
     {
@@ -4248,7 +4576,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1,
       "source_file": "app/components/nav.tsx",
-      "source_location": "L14",
+      "source_location": null,
       "weight": 1
     },
     {
@@ -4258,7 +4586,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1,
       "source_file": "app/components/nav.tsx",
-      "source_location": "L14",
+      "source_location": null,
       "weight": 1
     },
     {
@@ -4268,7 +4596,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1,
       "source_file": "app/components/nav.tsx",
-      "source_location": "L14",
+      "source_location": null,
       "weight": 1
     },
     {
@@ -4278,7 +4606,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1,
       "source_file": "app/components/nav.tsx",
-      "source_location": "L14",
+      "source_location": null,
       "weight": 1
     },
     {
@@ -4288,7 +4616,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1,
       "source_file": "app/components/nav.tsx",
-      "source_location": "L14",
+      "source_location": null,
       "weight": 1
     },
     {
@@ -4298,7 +4626,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1,
       "source_file": "app/components/nav.tsx",
-      "source_location": "L48",
+      "source_location": null,
       "weight": 1
     },
     {
@@ -4308,17 +4636,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1,
       "source_file": "app/components/nav.tsx",
-      "source_location": "L254",
-      "weight": 1
-    },
-    {
-      "source": "app_components_nav_mobile_focus_gap",
-      "target": "app_components_nav_mobile_dialog_behavior",
-      "relation": "conceptually_related_to",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1,
-      "source_file": "app/components/nav.tsx",
-      "source_location": "L76",
+      "source_location": null,
       "weight": 1
     },
     {
@@ -4328,7 +4646,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1,
       "source_file": "app/components/nav.tsx",
-      "source_location": "L14",
+      "source_location": null,
       "weight": 1
     },
     {
@@ -4378,7 +4696,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.95,
       "source_file": "app/page.tsx",
-      "source_location": "L25",
+      "source_location": null,
       "weight": 1
     },
     {
@@ -4388,7 +4706,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.85,
       "source_file": "app/page.tsx",
-      "source_location": "L25",
+      "source_location": null,
       "weight": 1
     },
     {
@@ -4408,7 +4726,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1,
       "source_file": "app/components/hero.tsx",
-      "source_location": "L10",
+      "source_location": null,
       "weight": 1
     },
     {
@@ -4418,7 +4736,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.95,
       "source_file": "app/components/hero.tsx",
-      "source_location": "L10",
+      "source_location": null,
       "weight": 1
     },
     {
@@ -4428,7 +4746,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1,
       "source_file": "app/page.tsx",
-      "source_location": "L42",
+      "source_location": null,
       "weight": 1
     },
     {
@@ -4438,7 +4756,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1,
       "source_file": "app/components/hero.tsx",
-      "source_location": "L10",
+      "source_location": null,
       "weight": 1
     },
     {
@@ -4448,7 +4766,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1,
       "source_file": "app/components/hero.tsx",
-      "source_location": "L10",
+      "source_location": null,
       "weight": 1
     },
     {
@@ -4458,7 +4776,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.85,
       "source_file": "app/components/proc-my.tsx",
-      "source_location": "L6",
+      "source_location": null,
       "weight": 1
     },
     {
@@ -4498,7 +4816,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1,
       "source_file": "app/aktuality/[slug]/page.tsx",
-      "source_location": "L49",
+      "source_location": null,
       "weight": 1
     },
     {
@@ -4508,7 +4826,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1,
       "source_file": "app/aktuality/[slug]/page.tsx",
-      "source_location": "L49",
+      "source_location": null,
       "weight": 1
     },
     {
@@ -4528,7 +4846,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1,
       "source_file": "app/page.tsx",
-      "source_location": "L42",
+      "source_location": null,
       "weight": 1
     },
     {
@@ -4538,7 +4856,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1,
       "source_file": "app/galerie/page.tsx",
-      "source_location": "L116",
+      "source_location": null,
       "weight": 1
     },
     {
@@ -4548,17 +4866,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1,
       "source_file": "app/galerie/page.tsx",
-      "source_location": "L116",
-      "weight": 1
-    },
-    {
-      "source": "app_galerie_page_lightbox_flow",
-      "target": "app_galerie_page_modal_accessibility_gap",
-      "relation": "conceptually_related_to",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1,
-      "source_file": "app/galerie/page.tsx",
-      "source_location": "L123",
+      "source_location": null,
       "weight": 1
     },
     {
@@ -4568,27 +4876,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.85,
       "source_file": "app/galerie/page.tsx",
-      "source_location": "L123",
-      "weight": 1
-    },
-    {
-      "source": "app_galerie_page_body_scroll_lock",
-      "target": "app_components_nav_mobile_dialog_behavior",
-      "relation": "conceptually_related_to",
-      "confidence": "INFERRED",
-      "confidence_score": 0.95,
-      "source_file": "app/galerie/page.tsx",
-      "source_location": "L24",
-      "weight": 1
-    },
-    {
-      "source": "app_galerie_page_body_scroll_lock",
-      "target": "app_galerie_page_lightbox_flow",
-      "relation": "conceptually_related_to",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1,
-      "source_file": "app/galerie/page.tsx",
-      "source_location": "L24",
+      "source_location": null,
       "weight": 1
     },
     {
@@ -4598,7 +4886,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1,
       "source_file": "app/jidelnicek/page.tsx",
-      "source_location": "L11",
+      "source_location": null,
       "weight": 1
     },
     {
@@ -4658,7 +4946,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1,
       "source_file": "app/svp/page.tsx",
-      "source_location": "L11",
+      "source_location": null,
       "weight": 1
     },
     {
@@ -4668,7 +4956,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1,
       "source_file": "app/components/static-content-page.tsx",
-      "source_location": "L121",
+      "source_location": null,
       "weight": 1
     },
     {
@@ -4678,7 +4966,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1,
       "source_file": "app/components/static-content-page.tsx",
-      "source_location": "L121",
+      "source_location": null,
       "weight": 1
     },
     {
@@ -4688,7 +4976,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.95,
       "source_file": "app/zapisy/page.tsx",
-      "source_location": "L19",
+      "source_location": null,
       "weight": 1
     },
     {
@@ -4698,7 +4986,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1,
       "source_file": "app/zapisy/page.tsx",
-      "source_location": "L94",
+      "source_location": null,
       "weight": 1
     },
     {
@@ -4718,7 +5006,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1,
       "source_file": "app/tridy/page.tsx",
-      "source_location": "L83",
+      "source_location": null,
       "weight": 1
     },
     {
@@ -4728,7 +5016,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.85,
       "source_file": "app/tridy/page.tsx",
-      "source_location": "L14",
+      "source_location": null,
       "weight": 1
     },
     {
@@ -4738,7 +5026,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1,
       "source_file": "app/kontakty/page.tsx",
-      "source_location": "L54",
+      "source_location": null,
       "weight": 1
     },
     {
@@ -4758,7 +5046,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1,
       "source_file": "app/globals.css",
-      "source_location": "L65",
+      "source_location": null,
       "weight": 1
     },
     {
@@ -4768,7 +5056,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1,
       "source_file": "app/globals.css",
-      "source_location": "L65",
+      "source_location": null,
       "weight": 1
     },
     {
@@ -4808,7 +5096,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1,
       "source_file": "components/ui/button.tsx",
-      "source_location": "L7",
+      "source_location": null,
       "weight": 1
     },
     {
@@ -4822,43 +5110,233 @@
       "weight": 1
     },
     {
-      "source": "app_components_proc_my_independent_button_styles",
-      "target": "components_ui_button_button_variants_contract",
-      "relation": "semantically_similar_to",
-      "confidence": "INFERRED",
-      "confidence_score": 0.95,
-      "source_file": "app/components/proc-my.tsx",
-      "source_location": "L3",
-      "weight": 1
-    },
-    {
-      "source": "app_components_aktuality_puvodni_legacy_news_ui",
-      "target": "app_components_aktuality_latest_five_news",
-      "relation": "semantically_similar_to",
-      "confidence": "INFERRED",
-      "confidence_score": 0.95,
-      "source_file": "app/components/aktuality-puvodni.tsx",
-      "source_location": "L22",
-      "weight": 1
-    },
-    {
-      "source": "components_logoloop_unused_logo_carousel",
-      "target": "components_logoloop_reduced_motion_behavior",
+      "source": "app_components_nav_mobile_dialog_behavior",
+      "target": "components_ui_sheet_radix_modal",
       "relation": "implements",
       "confidence": "EXTRACTED",
       "confidence_score": 1,
-      "source_file": "components/LogoLoop.tsx",
-      "source_location": "L198",
+      "source_file": "app/components/nav.tsx",
+      "source_location": null,
       "weight": 1
     },
     {
-      "source": "components_logoloop_unused_logo_carousel",
-      "target": "app_spoluprace_page_static_partner_rows",
-      "relation": "conceptually_related_to",
-      "confidence": "INFERRED",
-      "confidence_score": 0.65,
-      "source_file": "components/LogoLoop.tsx",
-      "source_location": "L198",
+      "source": "app_components_nav_mobile_dialog_behavior",
+      "target": "components_ui_accordion_radix_accordion",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "app/components/nav.tsx",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "app_components_nav_desktop_dropdown_behavior",
+      "target": "components_ui_navigation_menu_radix_navigation",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "app/components/nav.tsx",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "app_galerie_page_lightbox_flow",
+      "target": "app_galerie_photo_lightbox_library_viewer",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "app/galerie/page.tsx",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "app_galerie_page_tabs_selection",
+      "target": "components_ui_tabs_radix_tabs",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "app/galerie/page.tsx",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "app_components_proc_my_shared_cta",
+      "target": "lib_button_link_classes_server_safety",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "app/components/proc-my.tsx",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "app_zapisy_page_separate_markdown_renderer",
+      "target": "app_components_static_content_page_shared_markdown_text",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "app/zapisy/page.tsx",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "scripts_check_built_metadata_title_regression",
+      "target": "app_page_absolute_home_title",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "scripts/check-built-metadata.mjs",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "docs_ui_guide",
+      "target": "docs_ui_browser_scope",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "docs/UI.md",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "docs_developing_guide",
+      "target": "docs_developing_validation_boundaries",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "docs/DEVELOPING.md",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "package_scripts_toolchain",
+      "target": "package_typescript_compatibility",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "package.json",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "docs_graph_pnpm_evidence",
+      "target": "scripts_build_graph_pnpm_topology",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "docs/GRAPH.md",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "app_components_static_content_page_section_contract",
+      "target": "app_globals_pastel_topic_tokens",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "app/components/static-content-page.tsx",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "app_aktuality_page_topic_accent",
+      "target": "app_globals_pastel_topic_tokens",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "app/aktuality/page.tsx",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "app_aktuality__slug__page_topic_accent",
+      "target": "app_globals_pastel_topic_tokens",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "app/aktuality/[slug]/page.tsx",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "app_kontakty_page_topic_accent",
+      "target": "app_globals_pastel_topic_tokens",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "app/kontakty/page.tsx",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "app_o_nas_page_topic_accent",
+      "target": "app_globals_pastel_topic_tokens",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "app/o-nas/page.tsx",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "app_tridy_page_topic_accent",
+      "target": "app_globals_pastel_topic_tokens",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "app/tridy/page.tsx",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "app_galerie_page_topic_accent",
+      "target": "app_globals_pastel_topic_tokens",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "app/galerie/page.tsx",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "app_zapisy_page_topic_accent",
+      "target": "app_globals_pastel_topic_tokens",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "app/zapisy/page.tsx",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "app_jidelnicek_page_topic_accent",
+      "target": "app_globals_pastel_topic_tokens",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "app/jidelnicek/page.tsx",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "app_svp_page_topic_accent",
+      "target": "app_globals_pastel_topic_tokens",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "app/svp/page.tsx",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "docs_design_implemented_pastel_direction",
+      "target": "app_globals_pastel_topic_tokens",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "docs/design.md",
+      "source_location": null,
       "weight": 1
     }
   ],
@@ -4959,28 +5437,27 @@
     }
   ],
   "source_hashes": {
-    "README.md": "5bae544f2121285754e39e9b4789802f18af78c34804a3ba42677d322e5cfbb2",
-    "app/aktuality/[slug]/page.tsx": "4e0da97a7ca37a168f897b83e2c72a93d47cd8d9d8100de9967cfb786495e68b",
-    "app/aktuality/page.tsx": "b04be5624bd8a3b4166b77f770dca8563f7cecfb088ab2f7ee5e2ed2c1f2fe6c",
-    "app/components/aktuality-puvodni.tsx": "f01afb3cba21e064cbfa494e921fea73b3637db056ea98219c134398be0e7013",
-    "app/components/aktuality.tsx": "6f211b9749c87fb3bd9b5cad68b609cd0cf830f97cf3fb1baa34679398735050",
+    "README.md": "9400011134d497c819a2c94e7c229729e48cd01a9c4b7952ed08c1f7c8995518",
+    "app/aktuality/[slug]/page.tsx": "87101b582206090375488acdb1c4b993093eaeed07df14b95b549ee42632fab8",
+    "app/aktuality/page.tsx": "f4e3f4c55f50dada5663511351b2d76cc5c1ffa762435f33b0b112fa67732619",
+    "app/components/aktuality.tsx": "32f4e2653b6bc1541d25f966756c759c6568e63424ee51310b5577ae5e424edd",
     "app/components/dostanete-zapisy.tsx": "a3e45540977c010705c584ed949e7aee99fcd407cbfacd0de3c23594978c56db",
     "app/components/footer.tsx": "a82aca4503c17ab20349ae306de985ea6e2ba016bd2c0f689afb05b00f4ee502",
-    "app/components/hero.tsx": "3d98ade52b5c1c35962d8ea41cea897682096a1c79569643e4fde650ebbdf771",
-    "app/components/nav.tsx": "bb772eb43f2108234262ad7162be6457adac6e6390e21a803920c7f8637fbd55",
-    "app/components/proc-my.tsx": "23264edfc34e47910f486745ee7c3bbf3eb15e442e1785266d4a91fd2a53559d",
-    "app/components/static-content-page.tsx": "d488f4d320931b3a8fcd851f2c1f2910b4bfd9e0e2053d5734ea3e683c1d9ab0",
+    "app/components/hero.tsx": "55e5a1c5e13ddbef868481bbe0b25ccc0a73aceb78146185b37df80eb489363e",
+    "app/components/nav.tsx": "2c13b7b131d52e376bd01abc869831eb565b4641b65b83acdef5d46354890725",
+    "app/components/proc-my.tsx": "4112f1af022da01e5126a0e23b7fd16c882dabe0035d60e603d4eda7d533b5bc",
+    "app/components/static-content-page.tsx": "bba0a174edbc5c7a6e282d55a36afde18d1356a8c4ef536c0d540ac6ae242079",
     "app/data/aktuality.json": "ef7cebf059e40d64282d1b15a4280d3ccee9399f267078715c1f6dd71c8c781c",
     "app/galerie/content.ts": "951a761c871d72b3fc0495a2a84d4cf56a76e062d6a47c72144e74bd5860bb18",
-    "app/galerie/page.tsx": "bb4e0b77524db14487f0a63692c15c9327c1bfb5f77013cb133b6dc48e4e4f33",
-    "app/globals.css": "4c8c1e810e351dd1b812167e78258e20566665328648cbabc6ce287db43b6f05",
-    "app/jidelnicek/page.tsx": "da7301f10a6b4747d0b0967e0995ef749c8f220ce8ec4c5ee0ff26acf2a8312e",
+    "app/galerie/page.tsx": "dea46f3882cac7b7764bc6c31083584170e7cb0b156011276384fd9460b60748",
+    "app/globals.css": "ffcefb95496b70c9390eb6ee4dfb45b6c164a30e1f882d09b127c96df5fcaeeb",
+    "app/jidelnicek/page.tsx": "1f2f1e1d09724659349e84a73168226c0274b6baa94c7a847ad58914b2ab1bc0",
     "app/kontakty/content.ts": "ff8104ee50ed2723bf505254f0417fc344a97ae125091e08aaa4aee3c9831fab",
-    "app/kontakty/page.tsx": "97b326f5774c5cfb4ae83c84017ca697b14044d609eeda1a1dbb955611bdfbdc",
+    "app/kontakty/page.tsx": "6d78b1cd092837dacbe47130fab01b8b936edf70d2c15a56dbf0ef424fc3324e",
     "app/layout.tsx": "29dfa6f343d68bf0046334179b96563f7d0643ff29847dadfb57c1882af3abbc",
     "app/nove-prijati/page.tsx": "07245d37065bca87465b9fa52db05a76d4786beb5eca44d85675f945e8cfeb5d",
-    "app/o-nas/page.tsx": "38bdb35dfccb51cad1d4e24aff9ddd2165cf28b73b5c88719ae0f3524798c94b",
-    "app/page.tsx": "9f992a857ba7b11154cd3f25506ada788912122f5fe86abd79b2ceb4a372ae49",
+    "app/o-nas/page.tsx": "2f0e961513b4b7c9b9addf70352f8f9007b8d72b2fec01d5c7da8d6fb319ec67",
+    "app/page.tsx": "9827a121c811f73f35fd5b6c301756fdb92f5cfedda7691fd65ee06673333148",
     "app/plan-akci/page.tsx": "09161c5afffb17572c08e0dadb95a854787114f4e2084f4404d6fbfa763ab1d1",
     "app/pro-zajemce/page.tsx": "0082f4f2b398eaf7fa8faef06e96c355a59484ae980a1c63482a68e6d10473fc",
     "app/projekty-a-vyzvy/page.tsx": "9b21a05faf289f2e6e1ee7de516a4bad874068617353d91702067c72c4e2efd0",
@@ -4989,31 +5466,30 @@
     "app/sitemap.ts": "6dcd26f22628ad03dd44bc96297abfb7cb3e7851060451294ca5b7bd2173c291",
     "app/spoluprace/content.ts": "32f953a733407ebb07547e1015d21c84eb435f9aa5f96ebf148ee4249933ca7c",
     "app/spoluprace/page.tsx": "7b0e30ee5b8b2b157f6b275c7424b6c74d3b0dec86369ff355d0b0bf1a0094eb",
-    "app/svp/page.tsx": "c8e66c22af283134f70d205704727b48e1d8a44c96b41dc17946d8ea7a792cb5",
-    "app/tridy/page.tsx": "cfa8f0c52d4b963b18f484035ee1f28e00a4cfc22b15e4d89471587930164ce7",
+    "app/svp/page.tsx": "6e525b4383cefd1b04cc1f2ccf09b2ae4240b3e7804e98d0c80ec5f67038ca09",
+    "app/tridy/page.tsx": "db041379efd87aff42048297f3276dd6096cb79e5cb3ad99605a94148086591e",
     "app/uredni-deska/content.ts": "1c22630f8e8accae0d593bf7eb6305e74bb0292c55fd412b33f6ec1e34578d9e",
     "app/uredni-deska/page.tsx": "ae0a05ca3945000de328445d7b9573c73c0f322790841e827af76aacb3cb90d3",
     "app/zapisy/content.ts": "80a2fff1f80aed3216a00d49fe418f954a45990e1a1942f04e527805d6a76190",
-    "app/zapisy/page.tsx": "086ba5a9246d2d51e8450a83dbf04e333cbf82288a3ab131ae7c59ac1a7d6649",
+    "app/zapisy/page.tsx": "945e58fa9bcd2fe860d257dac3a695d7024c7dad4264936d016bfbdf58f5c98a",
     "components.json": "f7020669c891a4b96aaafc854a6db6ec73609b14aae3febb8216f90114eddd57",
-    "components/LogoLoop.tsx": "734102af23cbd46809563056cc75e19093ebd8a9acfaf8d695c89273cdb33890",
     "components/ui/badge.tsx": "3bffec1c43e0ae1a3bfc696b287472c79e60ab3425e558a6b56c2eeef039cd83",
-    "components/ui/button.tsx": "5499f5ba496436c5fea49d5a913c9ab86d75dd23f9ccac64aa682a848baa6165",
+    "components/ui/button.tsx": "e46dbc5b9a34e0a683a2a31d34727017ab9176024fe347ef1e88b81ff4da7d55",
     "components/ui/card.tsx": "70682f14285ad2bd83b8ebdbb5d26b68fa6a07ce3f4dd20c6323f61099dc2dd2",
     "components/ui/separator.tsx": "13285499f063b16e365add3b735bb8a1c95e16f841a0c0c8cdef7dd2227f4c36",
     "docs/ASSETS.md": "b47a474e0443f4a4faf6b7b96ca168fd83b7dae535d59d02be1d2703544dc17b",
     "docs/CONTENT.md": "1949ca56d7cc49a6dffbe04e0a40f2f2b1a3485d59bb6d5bd94937dbed8fc4fd",
-    "docs/DEVELOPING.md": "b6f4fb483e06c35c727ecf4904a48d036c0bbce3d217257ef7c3b91d29fb34a9",
-    "docs/GRAPH.md": "74ea5304343756b53b194c2d6cce50139a2cc08f01209fb523979014ec2b2d49",
-    "docs/UI.md": "ef1d519b70572c8f103ef998a46aa0a2cb7a67a9abd04bc7c27c8fa6ef8cba04",
-    "eslint.config.mjs": "870f1adccecf3051cbcd9fd307cef51d7633cf510979c181a81f4b1797273493",
-    "lib/button-link-classes.ts": "52ac6277063c17be9755ab806e0267afc6cc4e838f4e44bec04c18efff8eb6fe",
+    "docs/DEVELOPING.md": "e741141b452dcdefd22d2ed1ddac67e2c1cb7eaddfecc9dded1957d4ccd6e2d8",
+    "docs/GRAPH.md": "5ea00da8dc73076cc87fde679e34362c1b4a59a9b74f28177c9a7d03c7de4f70",
+    "docs/UI.md": "1d03177d98ec2b7e255629cbc2bd99c1f9780baf39f4064b6e461d0e2770012e",
+    "eslint.config.mjs": "12301cd60e4b2e5f18aa848808f55808bbf09f66a94c2a8f93a2faca8a512abb",
+    "lib/button-link-classes.ts": "e4b3cfe1390a5b79e50bb2ed264be5e3c572485e857053cd340e0ee4e697e9a2",
     "lib/seo.ts": "e73d94c03fa09fbc28e474e4986522ba914b3265eeb83095c405545d3726e681",
     "lib/site-content.ts": "fa3a1fdea698dfef713970ab49d8c502d56c3ddbf014c6ad3d39d1b37af43610",
     "lib/static-page-content.ts": "b7386578236e275b0b8f4c3e162296510802113d7ca7afecc5fb30454d03d1b6",
     "lib/utils.ts": "7c8c3dfc0cdd370d44932828eb067ef771c8fe7996693221d5d4b90af6d54f2d",
     "next.config.ts": "d30964ccf65f6fa43cc071cb14a31d0de37d1253ff1d7276e3ec0b29549eac7f",
-    "package.json": "564b43e0818a21de2c536f37d752273318785f950b251601a2f66413bd611d59",
+    "package.json": "47ae1a26ab14d40e82d17dd6d685444ea73e79d15b6ec7f3f70c88b07a1e30a7",
     "pnpm-workspace.yaml": "8da6c332692a1998ec6baee77b5b05a764b9b9e9d3bdd822bef02355d64cea8d",
     "postcss.config.mjs": "dfac7ac2d86d326a0e5adb024e7943c181393ed17a5fcb8f0315b24c7da6ddde",
     "public/file.svg": "2b67812c325c199a02536cdbeea0c593a72f707d323b72ee3e08dbab06753bd4",
@@ -5034,7 +5510,16 @@
     "public/vercel.svg": "f081337b2fee635b455b63275406a3e7f39d6a014e25ad90dab5a67e62a12ac4",
     "public/window.svg": "644768c4aaeb4767bce293344eeb0c125fb804a94d801440424072202d85e3a1",
     "tsconfig.json": "be18523b23b78b6e1a876ddd107d330f0168bddf09d751b57e0b5edce69c66f3",
-    "vercel.json": "45b75114811d97e557ad562c51ef9852fde9bcc376bece3c1394dedb0ddf45e0"
+    "vercel.json": "45b75114811d97e557ad562c51ef9852fde9bcc376bece3c1394dedb0ddf45e0",
+    "app/galerie/photo-lightbox.tsx": "7e3906171ef079255ae83a2927c1457a31288125d41ee748155707e5e39a77ef",
+    "components/ui/accordion.tsx": "5a681d099979370265d2be4403126bcda8446278c60b6260239e54a2ceee4b6c",
+    "components/ui/sheet.tsx": "1d23894bf4aca59d7726ae1777f34f7f3f007e75173cc0b988e70b30eddf988c",
+    "components/ui/navigation-menu.tsx": "31fd4d9a806614e3281bbc7379cf1eb5a0648a6b8dbd5a99d656db32a1c8f913",
+    "components/ui/tabs.tsx": "97b5e051f561ef93daadbcb00a1fcf196210a8b9edeb98edb2190af69621c6ea",
+    "scripts/check-built-metadata.mjs": "b61dadc1118db227d10191432ad90e047f38e1c4707fbf7132874587ec179fdc",
+    "scripts/build-graph.py": "f58e8540901b693cf399ae964d6398366efcbb9924aa22f29051712ef73a83c3",
+    "scripts/check-graph.py": "6579fb08d6add6f0c15bdf6be4197cb2681080c3969c35f9a94f01eb16f97ef3",
+    "docs/design.md": "c44ebc92016ef58ddf541fac3b934aecf9f445892498fb03ed7735aa2f40250b"
   },
   "token_usage": "unavailable"
 }

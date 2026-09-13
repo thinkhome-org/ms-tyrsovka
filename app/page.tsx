@@ -12,7 +12,7 @@ const homeMetadata = buildPageMetadata({
 });
 export const metadata = {
     ...homeMetadata,
-    title: undefined,
+    title: { absolute: "MŠ Tyršovka" },
 };
 
 function getOrganizationJsonLd() {

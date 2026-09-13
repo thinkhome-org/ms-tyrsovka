@@ -3,6 +3,7 @@ import hashlib
 import json
 import re
 import subprocess
+import yaml
 from pathlib import Path
 
 root = Path(__file__).resolve().parents[1]
@@ -18,6 +19,18 @@ assert all(e["source"] in ids and e["target"] in ids for e in extraction["edges"
 assert all(h["nodes"] and set(h["nodes"]) <= ids for h in extraction["hyperedges"]), "Dangling hyperedge"
 assert not health["dangling_endpoint_edges"] and not health["missing_endpoint_edges"]
 assert not coverage["stale_semantic_sources"], "Semantic refresh required"
+locked = yaml.safe_load((root / "pnpm-lock.yaml").read_text())
+package = json.loads((root / "package.json").read_text())
+for field in ("dependencies", "devDependencies"):
+    assert package[field] == {
+        name: data["specifier"]
+        for name, data in locked["importers"]["."].get(field, {}).items()
+    }, f"Manifest/pnpm drift: {field}"
+represented_packages = {
+    n["package_path"] for n in extraction["nodes"]
+    if n.get("source_file") == "pnpm-lock.yaml" and "package_path" in n
+}
+assert represented_packages == set(locked["snapshots"]), "pnpm snapshot coverage drift"
 for path, expected in semantic["source_hashes"].items():
     assert hashlib.sha256((root / path).read_bytes()).hexdigest() == expected, path
 inventory = set(filter(None, subprocess.check_output(

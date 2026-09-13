@@ -29,7 +29,7 @@ Routy a kompozice: [UI.md](UI.md). Texty: [CONTENT.md](CONTENT.md). Obrázky: [A
 |---|---|
 | `package.json` | Dev/build/start/lint; manifest Next 16.3.5, React 19.3.0, TS ^7.0.2, ESLint ^10.10.0. Nejde o nové ověření npm latest. |
 | `pnpm-lock.yaml` | Zamčené řešení pnpm, které používá Vercel. |
-| `package-lock.json` | Zamčené řešení npm; graf obsahuje jeho tranzitivní vztahy, ne fyzický strom pnpm. |
+| `package-lock.json` | Zamčené řešení npm; historický a nyní neaktuální. Vývoj a graf používají pnpm-lock.yaml. |
 | `pnpm-workspace.yaml` | allowBuilds: msw, sharp, unrs-resolver; 12 minimumReleaseAgeExclude výjimek pro Next 16.3.5. Při zahájení dokumentace untracked; přítomnost v deploymentu nedoložena. |
 | `vercel.json:2` | `pnpm install --no-frozen-lockfile` může přepočítat lockfile; není důkazem deploymentu. |
 | `next.config.ts:4` | HTTPS obrázky files.site.site3.eu a raw.githubusercontent.com. |
@@ -39,7 +39,7 @@ Routy a kompozice: [UI.md](UI.md). Texty: [CONTENT.md](CONTENT.md). Obrázky: [A
 | `components.json` | shadcn new-york, RSC/TSX, CSS variables, lucide, registry Aceternity/React Bits. |
 | `.gitignore` | Vyloučení instalací, buildů, environment souborů a generovaných typů. |
 
-`cn()` (`lib/utils.ts`) spojuje clsx a tailwind-merge. `lib/button-link-classes.ts` poskytuje serverově bezpečné třídy tlačítek; komentář vysvětluje vyhnutí se volání klientské buttonVariants ze serveru. Při upgradu zachovat konzistenci obou lockfilů, nebo sjednocení řešit samostatně. Graphify/Python není závislost webu.
+`cn()` (`lib/utils.ts`) spojuje clsx a tailwind-merge. `lib/button-link-classes.ts` odvozuje třídy ze serverově bezpečného `buttonVariants`; není druhým zdrojem stylů. Autoritativní je pnpm-lock.yaml. Synchronizaci historického npm lockfilu zastavila lokální politika EALLOWREMOTE; nepoužívat jej pro reprodukci aktuálního buildu. Graphify/Python není závislost webu.
 
 ## SEO a prostředí
 
@@ -57,7 +57,7 @@ Routy a kompozice: [UI.md](UI.md). Texty: [CONTENT.md](CONTENT.md). Obrázky: [A
 | Kontakty/zápisy | app/*/content.ts | Metadata, navigace, duplicity |
 | Nová routa | app/<cesta>/page.tsx | Layout, canonical, navigace, sitemap |
 | Vzhled | globals.css, layout.tsx | Kontrast, focus, sdílené UI |
-| Balíček | Manifest + oba lockfily | Build, lint, interakce |
+| Balíček | Manifest + pnpm-lock.yaml | Build, lint, interakce |
 
 ## Ověřování
 
@@ -68,6 +68,10 @@ rtk pnpm exec next build --webpack
 rtk git diff --check
 ```
 
-Webpack je diagnostická alternativa. V předchozím upgradu v této relaci webpack build prošel; lint selhal na kompatibilitě TS 7 s typescript-eslint. Není to nové ověření v dokumentačním kroku. Původní inventář nemá samostatnou testovací sadu ani CI workflow.
+Webpack je diagnostická alternativa k Turbopacku, který zde v sandboxu selhává při práci s portem. Dne 2026-09-13 prošel produkční webpack build. Po odstranění nepoužívaného LogoLoop prošel ESLint 10 bez chyb i upozornění. Kompilátor zůstává TypeScript 7; alias `typescript` poskytuje kompatibilní TypeScript 6 API pro lintovací nástroje. `@eslint/compat` dočasně přizpůsobuje Next presety ESLintu 10.
+
+Pokud pnpm při spuštění skriptu hlásí `ERR_PNPM_ABORTED_REMOVE_MODULES_DIR_NO_TTY`, porovnat `pnpm store path` s `storeDir` v `node_modules/.modules.yaml`. V tomto prostředí sandbox volí projektové `.pnpm-store/v11`, zatímco instalace používá uživatelské `Library/pnpm/store/v11`. Ověřený `pnpm run lint` mimo sandbox funguje. Kvůli tomuto rozdílu nepotvrzovat odstranění `node_modules` ani nevypínat bezpečnostní kontrolu; spouštět příkazy se stejným přístupem k úložišti jako instalaci.
+
+Po buildu lze spustit `node scripts/check-built-metadata.mjs`: ověřuje neprázdné titulky vygenerovaných HTML stránek a přesný titulek homepage. Neověřuje interakce ani dostupnost externích obrázků.
 
 Po změně UI ověřit routy, mobilní menu, klávesnici, lightbox, neexistující slug, odkazy, externí obrázky a doménu metadata/sitemap. Návod netvrdí, že tyto kontroly byly právě provedeny. Před změnou hledat spotřebitele v grafu, potom číst skutečné řádky. Obnova: [GRAPH.md](GRAPH.md).

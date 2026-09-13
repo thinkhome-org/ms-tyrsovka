@@ -70,7 +70,7 @@ export default async function AktualitaDetailPage({
     };
 
     return (
-        <main className="flex-1 text-zinc-900">
+        <main data-section="news" className="flex-1 text-zinc-900">
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
@@ -128,4 +128,3 @@ export default async function AktualitaDetailPage({
         </main>
     );
 }
-

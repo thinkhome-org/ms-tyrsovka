@@ -2,7 +2,7 @@
 
 ## Pokrytí a výstupy
 
-AST zachycuje symboly, importy a volání. Ověřená sémantika doplňuje stránky, interakce, data a obsah obrázků. Skript přidává souborový inventář, routy včetně článků, literální odkazy a npm lockfile. Přesné pokrytí je v coverage.json. Vyloučené jsou .git, node_modules, .next, environment soubory a obsah vzdálených webů/PDF. Tranzitivní topologie pochází z npm lockfilu, ne fyzického stromu pnpm.
+AST zachycuje symboly, importy a volání. Ověřená sémantika doplňuje stránky, interakce, data a obsah obrázků. Skript přidává souborový inventář, routy včetně článků, literální odkazy a pnpm lockfile. Přesné pokrytí je v coverage.json. Vyloučené jsou .git, node_modules, .next, environment soubory a obsah vzdálených webů/PDF. Tranzitivní topologie pochází z `snapshots` v pnpm-lock.yaml, přímé závislosti z importéru `.`. Zachovává peer kontexty i npm aliasy. Nejde o kontrolu fyzického node_modules; historický npm lockfile je jen inventarizován.
 
 | Soubor v graphify-out/ | Účel |
 |---|---|

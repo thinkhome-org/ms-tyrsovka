@@ -71,7 +71,7 @@ export default function Aktuality() {
                             >
                                 {formatDateCs(item.publishedAt)}
                             </time>
-                            <span className="flex-1 text-base font-medium text-foreground sm:text-lg">
+                            <span className="min-w-0 flex-1 wrap-break-word text-base font-medium text-foreground sm:text-lg">
                                 {item.title}
                             </span>
                             <time

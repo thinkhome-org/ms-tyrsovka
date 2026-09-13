@@ -29,7 +29,7 @@ export type StaticPageContent = {
     buttonLinks?: StaticPageButtonLink[];
 };
 
-const markdownComponents = {
+export const markdownTextComponents = {
     h2: ({ children }: { children?: React.ReactNode }) => (
         <h2 className="mt-2 text-2xl font-semibold tracking-tight text-foreground first:mt-0 sm:text-[2rem]">
             {children}
@@ -82,6 +82,10 @@ const markdownComponents = {
             {children}
         </blockquote>
     ),
+};
+
+const markdownComponents = {
+    ...markdownTextComponents,
     img: ({ src, alt }: ComponentPropsWithoutRef<"img">) =>
         typeof src === "string" ? (
             <span className="my-4 block overflow-hidden rounded-lg border border-border bg-muted">
@@ -120,8 +124,10 @@ const markdownComponents = {
 
 export default function StaticContentPage({
     content,
+    section = "parents",
 }: {
     content: StaticPageContent;
+    section?: "parents" | "school" | "menu";
 }) {
     const sections = content.markdown
         .split(/\n---\n/g)
@@ -129,7 +135,7 @@ export default function StaticContentPage({
         .filter(Boolean);
 
     return (
-        <main className="flex-1 text-zinc-900">
+        <main data-section={section} className="flex-1 text-zinc-900">
             <div className="page-shell section-shell">
                 <div className="mx-auto max-w-5xl">
                     <header className="flex flex-wrap items-end justify-between gap-6">

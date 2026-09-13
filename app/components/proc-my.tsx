@@ -1,7 +1,6 @@
 import Link from "next/link";
 
-const primaryButtonClass =
-    "inline-flex h-10 items-center justify-center gap-2 rounded-md bg-primary px-5 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline focus-visible:ring-2 focus-visible:ring-ring/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background";
+import { linkButtonPrimaryLg } from "@/lib/button-link-classes";
 
 const VALUES = [
     {
@@ -45,7 +44,7 @@ export default function ProcMy() {
                             Jsme školka, kde se děti cítí bezpečně, pohybují
                             se s radostí a rostou v přirozeném prostředí.
                         </p>
-                        <Link href="/o-nas" className={primaryButtonClass}>
+                        <Link href="/o-nas" className={linkButtonPrimaryLg}>
                             O nás
                         </Link>
                     </div>

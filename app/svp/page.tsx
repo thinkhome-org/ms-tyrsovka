@@ -9,5 +9,5 @@ export const metadata = buildPageMetadata({
 });
 
 export default function SvpPage() {
-    return <StaticContentPage content={SVP_PAGE} />;
+    return <StaticContentPage section="school" content={SVP_PAGE} />;
 }

@@ -9,5 +9,5 @@ export const metadata = buildPageMetadata({
 });
 
 export default function JidelnicekPage() {
-    return <StaticContentPage content={JIDELNICEK_PAGE} />;
+    return <StaticContentPage section="menu" content={JIDELNICEK_PAGE} />;
 }

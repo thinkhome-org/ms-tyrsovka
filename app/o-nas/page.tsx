@@ -49,7 +49,7 @@ const OPERATIONS_STAFF = [
 
 export default function ONasPage() {
     return (
-        <main className="flex-1 text-zinc-900">
+        <main data-section="school" className="flex-1 text-zinc-900">
             <div className="page-shell section-shell">
                 <div className="flex flex-wrap items-end justify-between gap-4">
                     <div className="max-w-3xl">
@@ -181,4 +181,3 @@ export default function ONasPage() {
         </main>
     );
 }
-

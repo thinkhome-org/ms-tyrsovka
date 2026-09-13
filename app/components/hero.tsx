@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { GALLERY_ALBUMS } from "@/app/galerie/content";
@@ -99,12 +98,10 @@ export default function Hero() {
                     style={MOBILE_GRID}
                 >
                     {photos.slice(0, 4).map((photo, i) => (
-                        <motion.div
+                        <div
                             key={photo.src}
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ duration: 0.6, delay: i * 0.1 }}
-                            className="overflow-hidden rounded-xl bg-muted"
+                            style={{ animationDelay: `${i * 100}ms` }}
+                            className="overflow-hidden rounded-xl bg-muted motion-safe:animate-in motion-safe:fade-in-0 motion-safe:duration-700"
                         >
                             {/* eslint-disable-next-line @next/next/no-img-element */}
                             <img
@@ -112,7 +109,7 @@ export default function Hero() {
                                 alt={photo.alt}
                                 className="h-full w-full object-cover"
                             />
-                        </motion.div>
+                        </div>
                     ))}
                 </div>
 
@@ -122,13 +119,11 @@ export default function Hero() {
                     style={DESKTOP_GRID}
                 >
                     {photos.slice(0, 7).map((photo, i) => (
-                        <motion.div
+                        <div
                             key={photo.src}
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ duration: 0.6, delay: i * 0.08 }}
-                            className="relative overflow-hidden rounded-xl bg-muted"
+                            className="relative overflow-hidden rounded-xl bg-muted motion-safe:animate-in motion-safe:fade-in-0 motion-safe:duration-700"
                             style={{
+                                animationDelay: `${i * 80}ms`,
                                 gridColumn: BENTO[i].col,
                                 gridRow: BENTO[i].row,
                             }}
@@ -137,9 +132,9 @@ export default function Hero() {
                             <img
                                 src={photo.src}
                                 alt={photo.alt}
-                                className="h-full w-full object-cover transition-transform duration-300 hover:scale-[1.02]"
+                                className="h-full w-full object-cover transition-transform duration-300 motion-safe:hover:scale-[1.02] motion-reduce:transition-none"
                             />
-                        </motion.div>
+                        </div>
                     ))}
                 </div>
 

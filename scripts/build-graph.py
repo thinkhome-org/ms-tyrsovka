@@ -7,6 +7,7 @@ import hashlib
 import json
 import re
 import subprocess
+import yaml
 from collections import Counter
 from pathlib import Path
 
@@ -150,29 +151,35 @@ def main():
                 edge(file_ids[path], target, "references", path, text[:match.start()].count("\n") + 1)
 
     package = json.loads((ROOT / "package.json").read_text())
-    locked = json.loads((ROOT / "package-lock.json").read_text())["packages"]
+    locked = yaml.safe_load((ROOT / "pnpm-lock.yaml").read_text())
+    snapshots = locked["snapshots"]
     package_ids = {}
-    for path, metadata in locked.items():
-        if not path:
-            continue
-        name = path.rsplit("node_modules/", 1)[-1]
-        package_ids[path] = node("package_lock_" + key(path),
-                                name + "@" + metadata.get("version", "unknown"),
-                                "package-lock.json", package_name=name,
-                                version=metadata.get("version"), package_path=path)
-    for path, metadata in locked.items():
-        source = package_ids.get(path, file_ids["package.json"])
-        for field in ("dependencies", "devDependencies", "optionalDependencies", "peerDependencies"):
-            for name in metadata.get(field, {}):
-                base = path
-                while True:
-                    candidate = (base + "/" if base else "") + "node_modules/" + name
-                    if candidate in package_ids:
-                        edge(source, package_ids[candidate], field, "package-lock.json")
-                        break
-                    if not base:
-                        break  # Optional/peer package need not be installed.
-                    base = base.rsplit("/node_modules/", 1)[0] if "/node_modules/" in base else ""
+    for identity in snapshots:
+        base = identity.split("(", 1)[0]
+        name, version = base.rsplit("@", 1)
+        package_ids[identity] = node(
+            "package_pnpm_" + hashlib.sha256(identity.encode()).hexdigest()[:20],
+            identity, "pnpm-lock.yaml", package_name=name, version=version,
+            package_path=identity)
+
+    def resolved_package(name, version):
+        # pnpm aliases carry the real package name in their resolved version.
+        identity = version if version in package_ids else name + "@" + version
+        assert identity in package_ids, f"Unresolved pnpm dependency: {name}@{version}"
+        return package_ids[identity]
+
+    importer = locked["importers"]["."]
+    direct_packages = {}
+    for field in ("dependencies", "devDependencies", "optionalDependencies"):
+        for name, metadata in importer.get(field, {}).items():
+            target = resolved_package(name, metadata["version"])
+            direct_packages[name] = target
+            edge(file_ids["package.json"], target, field, "pnpm-lock.yaml")
+    for identity, metadata in snapshots.items():
+        for field in ("dependencies", "optionalDependencies"):
+            for name, version in metadata.get(field, {}).items():
+                edge(package_ids[identity], resolved_package(name, version),
+                     field, "pnpm-lock.yaml")
     for name, command in package["scripts"].items():
         nid = node("package_script_" + key(name), name + ": " + command, "package.json")
         edge(file_ids["package.json"], nid, "defines_script", "package.json")
@@ -180,7 +187,7 @@ def main():
         if nid.startswith("ref_"):
             for name in sorted({**package["dependencies"], **package["devDependencies"]}, key=len, reverse=True):
                 if nid == "ref_" + key(name) or nid.startswith("ref_" + key(name) + "_"):
-                    target = package_ids.get("node_modules/" + name)
+                    target = direct_packages.get(name)
                     if target:
                         edge(nid, target, "provided_by", "package.json")
                     break
@@ -206,7 +213,7 @@ def main():
     for cid, members in communities.items():
         paths = [graph.nodes[n].get("source_file", "") for n in members]
         common = Counter(paths).most_common(1)[0][0]
-        labels[cid] = "Balíčky a závislosti" if common == "package-lock.json" else common
+        labels[cid] = "Balíčky a závislosti" if common == "pnpm-lock.yaml" else common
     curated = OUT / "community-labels.json"
     if curated.exists():
         # Reuse labels only for identical membership, never by unstable cluster id.

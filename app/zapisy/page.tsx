@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { ComponentPropsWithoutRef } from "react";
 import ReactMarkdown from "react-markdown";
+import { markdownTextComponents } from "@/app/components/static-content-page";
 import remarkGfm from "remark-gfm";
 import { Card, CardContent } from "@/components/ui/card";
 import { linkButtonOutlineSm } from "@/lib/button-link-classes";
@@ -21,58 +22,7 @@ const MARKDOWN_SECTIONS = ZAPISY_MARKDOWN.split(/\n---\n/g)
     .filter(Boolean);
 
 const markdownComponents = {
-    h2: ({ children }: { children?: React.ReactNode }) => (
-        <h2 className="mt-2 text-2xl font-semibold tracking-tight text-foreground first:mt-0 sm:text-[2rem]">
-            {children}
-        </h2>
-    ),
-    h3: ({ children }: { children?: React.ReactNode }) => (
-        <h3 className="mt-8 max-w-prose text-xl font-semibold tracking-tight text-foreground first:mt-0 sm:text-[1.4rem]">
-            {children}
-        </h3>
-    ),
-    p: ({ children }: { children?: React.ReactNode }) => (
-        <p className="mb-5 max-w-prose text-base leading-relaxed text-muted-foreground last:mb-0">
-            {children}
-        </p>
-    ),
-    ul: ({ children }: { children?: React.ReactNode }) => (
-        <ul className="mb-7 max-w-prose list-disc space-y-2.5 pl-6 text-base leading-relaxed text-muted-foreground">
-            {children}
-        </ul>
-    ),
-    ol: ({ children }: { children?: React.ReactNode }) => (
-        <ol className="mb-7 max-w-prose list-decimal space-y-2.5 pl-6 text-base leading-relaxed text-muted-foreground">
-            {children}
-        </ol>
-    ),
-    li: ({ children }: { children?: React.ReactNode }) => (
-        <li className="leading-relaxed">{children}</li>
-    ),
-    strong: ({ children }: { children?: React.ReactNode }) => (
-        <strong className="font-semibold text-foreground">{children}</strong>
-    ),
-    a: ({
-        href,
-        children,
-    }: {
-        href?: string;
-        children?: React.ReactNode;
-    }) => (
-        <a
-            href={href}
-            target={href?.startsWith("http") ? "_blank" : undefined}
-            rel={href?.startsWith("http") ? "noopener noreferrer" : undefined}
-            className="text-primary underline underline-offset-2 hover:text-primary/90"
-        >
-            {children}
-        </a>
-    ),
-    blockquote: ({ children }: { children?: React.ReactNode }) => (
-        <blockquote className="my-8 max-w-prose border-l-2 border-border pl-4 text-base italic leading-relaxed text-muted-foreground">
-            {children}
-        </blockquote>
-    ),
+    ...markdownTextComponents,
     img: ({ src, alt }: ComponentPropsWithoutRef<"img">) =>
         typeof src === "string" ? (
             <span className="my-4 block overflow-hidden rounded-lg bg-muted">
@@ -90,7 +40,7 @@ const markdownComponents = {
 
 export default function ZapisyPage() {
     return (
-        <main className="flex-1 text-zinc-900">
+        <main data-section="parents" className="flex-1 text-zinc-900">
             <div className="page-shell section-shell">
                 <div className="mx-auto max-w-4xl">
                     <header className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between md:gap-8">

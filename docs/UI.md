@@ -6,7 +6,7 @@ Stav podle úplného čtení zdrojů 13. 9. 2026. Jde o dokumentaci implementace
 
 [RootLayout](../app/layout.tsx), ř. 42–58, obaluje všechny stránky: český dokument `lang="cs"`, sticky navigace, obsah stránky a patička. Serverový layout načítá Lora pro nadpisy a Source Sans 3 pro běžný text přes `next/font/google` (ř. 8–16). Tělo je flex sloupec s minimální výškou obrazovky. Každá stránka má vlastní `main`; layout nepřidává druhý. Metadata zahrnují šablonu titulku, favicon `/logo.png`, Open Graph a Twitter (ř. 18–40). Galerie má vlastní serverový layout pro metadata, protože její stránka je klientská.
 
-Serverové komponenty tvoří všechny stránky kromě galerie. Klientské hranice jsou `Nav`, `Hero`, `GaleriePage`, modul tlačítek a nepoužívaný `LogoLoop`. Klientská komponenta neznamená absenci počátečního serverového HTML; konkrétně Hero však fotografie vloží až po mountu. V UI není implementace přihlášení, CMS editoru, databázového formuláře ani odesílání kontaktního formuláře; Správa MŠ je odkaz na externí službu.
+Serverové komponenty tvoří všechny stránky kromě galerie. Klientské hranice jsou `Nav`, `Hero`, `GaleriePage`, dynamicky načítaný `PhotoLightbox` a interaktivní shadcn primitiva. Modul tlačítek je serverově bezpečný. Klientská komponenta neznamená absenci počátečního serverového HTML; Hero však fotografie vloží až po mountu. V UI není přihlášení, CMS editor, databázový formulář ani odesílání kontaktního formuláře; Správa MŠ je odkaz na externí službu.
 
 ## Všechny routy
 
@@ -36,15 +36,15 @@ Sedm tenkých statických stránek odvozuje titulek i popis metadat ze stejné o
 
 [nav.tsx](../app/components/nav.tsx), ř. 14–44, je skutečný zdroj menu. Život ve školce otevírá Aktuality a Galerii. Informace obsahují Jídelníček, Nově přijatí, Režim dne a provozní dobu, Plán akcí. O škole obsahuje O nás, Třídy a ŠVP. Samostatné CTA vedou na Pro zájemce, `https://nasems.cz/` a Kontakty. `/zapisy` vede z homepage a obsahových stránek, nikoli přímo z hlavního seznamu navigace. Úřední deska, Projekty a výzvy a Spolupráce jsou v patičce.
 
-Desktopové dropdowny (`DesktopNav`, ř. 254–338) se přepínají kliknutím, zavřou se po výběru odkazu nebo kliknutí mimo kontejner. V jednom okamžiku může být otevřena pouze jedna sekce. Odkaz O škole ve skutečnosti slouží jako tlačítko dropdownu; `/o-nas` se volí uvnitř.
+Desktopové dropdowny (`DesktopNav`) používají shadcn `NavigationMenu` nad Radix UI. Knihovna vlastní stav otevření, klávesnicové ovládání a focus; aplikace pouze mapuje data do triggerů a Next odkazů přes `asChild`. O škole je trigger dropdownu; `/o-nas` se volí uvnitř.
 
-Mobilní menu (`MobileMenu`, ř. 48–251) se portálem vykreslí přímo do `document.body` (ř. 427–432), má fullscreen vrstvu z-index 9999, vlastní scroll a akordeon s jednou otevřenou sekcí. Otevření uzamkne scroll stránky a zaměří zavírací tlačítko, Escape a výběr odkazu menu zavřou. Cleanup obnoví předchozí hodnotu `body.style.overflow`. Přechod na šířku alespoň 1024 px menu zavře (ř. 347–355). Desktop je od `lg`, do té doby hamburger; drobný popis značky se zobrazuje od `sm`.
+Mobilní menu (`MobileMenu`) používá shadcn `Sheet` a `Accordion type="single" collapsible`. Sheet obsahuje přístupný titulek a popis, zabírá celou šířku a má vlastní scroll. Radix řeší portál, modalitu, focus trap, Escape, návrat focusu a scroll lock; aplikace nemá vlastní obsluhu těchto mechanismů. Stav `mobileOpen` umožňuje zavřít menu po výběru odkazu. Jediný resize efekt ho zavře od 1024 px. Desktop je od `lg`, do té doby hamburger; drobný popis značky je od `sm`.
 
 Patička [footer.tsx](../app/components/footer.tsx), ř. 7–85, obsahuje identitu, IČ, datovou schránku a kontaktní údaje natvrdo, čtyři interní CTA a externí kredit `https://new.thinkhome.org`. Logo kreditu pochází z `raw.githubusercontent.com` (ř. 74). Telefon/e-mail v patičce nejsou `tel:`/`mailto:` odkazy. Na `md` se footer mění na sloupce s dekorativním vertikálním oddělovačem.
 
 ## Homepage a sdílená data
 
-Hero [hero.tsx](../app/components/hero.tsx), ř. 10–49, spojuje fotografie všech alb a po mountu provede Fisher–Yates shuffle, z něhož vezme sedm fotografií. Počáteční stav je prázdný; komentář výslovně vysvětluje ochranu před hydration mismatch. Mobil vykreslí první čtyři do mřížky 3:5 × 5:3; desktop sedm do pěti sloupců 2:3:5:3:2 a dvou řádků 3:5 (ř. 21–40, 96–143). Framer Motion postupně mění opacity. Jde o běžné `img`, nikoli Next Image. Změna galerie automaticky mění kandidáty na úvodní fotografii; výběr není stabilní mezi návštěvami. CTA vedou na Aktuality a Pro zájemce.
+Hero [hero.tsx](../app/components/hero.tsx), ř. 10–49, spojuje fotografie všech alb a po mountu provede Fisher–Yates shuffle, z něhož vezme sedm fotografií. Počáteční stav je prázdný; komentář výslovně vysvětluje ochranu před hydration mismatch. Mobil vykreslí první čtyři do mřížky 3:5 × 5:3; desktop sedm do pěti sloupců 2:3:5:3:2 a dvou řádků 3:5 (ř. 21–40, 96–143). Postupný fade řeší CSS z tw-animate-css s `motion-safe` a zpožděním jednotlivých fotografií; Framer Motion se zde už neimportuje. Jde o běžné `img`, nikoli Next Image. Změna galerie automaticky mění kandidáty na úvodní fotografii; výběr není stabilní mezi návštěvami. CTA vedou na Aktuality a Pro zájemce.
 
 Proč my [proc-my.tsx](../app/components/proc-my.tsx), ř. 6–27, má čtyři lokální hodnoty: pohyb a zdraví, bezpečné prostředí, spolupráce s rodiči, bohatý program. Počet sloupců je 1 / 2 na `sm` / 4 na `lg` (ř. 55); CTA vede `/o-nas`. Texty jsou nezávislé na pilířích stránky O nás.
 
@@ -58,11 +58,11 @@ Kontaktní identita existuje nezávisle v homepage JSON-LD, patičce, homepage m
 
 ## Galerie a modalita
 
-[GaleriePage](../app/galerie/page.tsx), ř. 116–139: počáteční slug `akce`; při nenalezení fallback na první album. Prázdné `GALLERY_ALBUMS` není ošetřeno před přístupem k `.photos`. Kliknutí na miniaturu uloží snapshot aktuálního pole fotografií a index. Předchozí/další se cyklicky počítají modulo délka alba. Filtr alb není uložen do URL a nemá samostatné routy.
+[GaleriePage](../app/galerie/page.tsx): počáteční slug `akce`; při nenalezení fallback na první album. `GALLERY_ALBUMS` musí obsahovat alespoň jedno album. shadcn `Tabs` řídí výběr alba a zobrazuje počty fotografií. Kliknutí na miniaturu uloží index; zavření ho nastaví na -1. Filtr není uložen do URL a nemá samostatné routy.
 
-Masonry používá CSS columns 2 / 3 (`sm`) / 4 (`lg`) / 5 (`xl`), fotografie jsou `img loading="lazy" decoding="async"`, přístupné přes tlačítka s `aria-label` a focus ringem (ř. 164–213). Přepínání alba animuje opacity a vertikální posun; počty pocházejí ze skutečné délky alba.
+Masonry používá nativní CSS columns 2 / 3 (`sm`) / 4 (`lg`) / 5 (`xl`). Fotografie jsou `img loading="lazy" decoding="async"`, přístupné přes tlačítka s `aria-label`, focus ringem a minimální výškou 44 px. Aktivní `TabsContent` vykresluje jen vybrané album; jeho fade animace a hover zoom respektují `prefers-reduced-motion`.
 
-Lightbox (ř. 13–114) používá fullscreen tmavý overlay, Framer Motion, titulek z alt a čítač. Escape zavírá, šipky listují, kliknutí na backdrop zavírá a kliknutí uvnitř obrázku zastaví propagaci. Zamyká scroll, ale cleanup nastaví overflow na prázdný řetězec místo obnovy původní hodnoty. Tlačítka mají české popisky. Obrázek je limitován 90dvh / 90vw.
+Detail fotografií zajišťuje `yet-another-react-lightbox` s pluginy Zoom a Counter v [photo-lightbox.tsx](../app/galerie/photo-lightbox.tsx). Next `dynamic` ho načítá při prvním otevření, bez SSR. Dostává fotografie aktivního alba a počáteční index. Aplikace nastavuje české popisky, ARIA podporu a zavření kliknutím na pozadí; listování, zoom, dotyková gesta, modalitu a obnovu focusu vlastní knihovna. Nevytvářet druhý vlastní dialog ani globální listenery pro stejnou funkci.
 
 ## Markdown a dokumenty
 
@@ -70,7 +70,7 @@ Lightbox (ř. 13–114) používá fullscreen tmavý overlay, Framer Motion, tit
 
 Externí markdown odkazy a buttonLinks, jejichž href začíná `http`, otevírají novou kartu s `noopener noreferrer`. QuickLinks jsou karty 1 / 2 (`sm`) / 3 (`lg`) se dvěma odkazy na stejný cíl; jejich renderer zvláštní externí target nepřidává. Zpět je standardně `/`, nikoli browser history. Obsahová šířka je `max-w-5xl`.
 
-Zápisy [page.tsx](../app/zapisy/page.tsx), ř. 19–92, mají vlastní podobný GFM renderer a stejný oddělovač sekcí. Nemají vlastní styly tabulek. Jejich markdown obrázky používají 800×500. Hlavičkové obrázky mají mobilní horizontální overflow, na `sm` mřížku a na `md` sloupec. Stránka je omezena `max-w-4xl`. Změny markdown vzhledu je nutné posoudit v obou implementacích.
+Zápisy [page.tsx](../app/zapisy/page.tsx), ř. 19–92, sdílejí `markdownTextComponents` ze StaticContentPage a stejný oddělovač sekcí. Vlastní zůstává renderer obrázků. Nemají vlastní styly tabulek. Jejich markdown obrázky používají 800×500. Hlavičkové obrázky mají mobilní horizontální overflow, na `sm` mřížku a na `md` sloupec. Stránka je omezena `max-w-4xl`. Změna sdílených textových stylů zasáhne obě stránky; obrázky a tabulky se ověřují samostatně.
 
 Úřední deska [page.tsx](../app/uredni-deska/page.tsx), ř. 55–83, podle přesného textu `kind === "Přímé stažení PDF"` pouze volí Download versus ExternalLink ikonu. Ani PDF odkaz nemá atribut `download`; všechny položky se otevírají v nové kartě. Změna textu `kind` tedy může změnit ikonu.
 
@@ -80,16 +80,16 @@ Kontakty [page.tsx](../app/kontakty/page.tsx), ř. 21–51, mají `DetailRow` pr
 
 [globals.css](../app/globals.css), ř. 1–48, propojuje Tailwind, tw-animate-css, shadcn styl a semantic tokeny přes `@theme inline`. `:root` (ř. 65–98) obsahuje světlé OKLCH barvy: téměř bílé pozadí, bílou kartu, tmavý text, modrou primární barvu; radius je 0,875 rem. `.dark` (ř. 100–132) má samostatné tokeny, ale ve čteném UI není theme provider ani přepínač, který ji aplikuje. Některé stránky používají pevné `text-zinc-900` a footer černou/bílou; samotné dark tokeny proto nejsou důkazem hotového dark režimu.
 
-Globálně: sans text, serif nadpisy h1–h6, stabilní scrollbar gutter, smooth scroll, barva označení textu. Utility `page-shell` omezuje šířku na `max-w-7xl` a padding 6 / md:10 / xl:14; `section-shell` vertikální padding 16 / sm:20 / lg:24; `content-card` sjednocuje rounded-xl, border, background a shadow-sm (ř. 150–170). Breakpointy jsou standardní Tailwind utility; konkrétní mobilní menu navíc explicitně používá 1024 px.
+Globálně: sans text, serif nadpisy h1–h6, stabilní scrollbar gutter, smooth scroll pouze při `motion-safe`, barva označení textu. Utility `page-shell` omezuje šířku na `max-w-7xl` a padding 6 / md:10 / xl:14; `section-shell` vertikální padding 16 / sm:20 / lg:24; `content-card` sjednocuje rounded-xl, border, background a shadow-sm (ř. 150–170). Breakpointy jsou standardní Tailwind utility; konkrétní mobilní menu navíc explicitně používá 1024 px.
 
 | Primitivum | Zdroj | Smlouva / použití |
 | --- | --- | --- |
 | Badge | [badge.tsx](../components/ui/badge.tsx), 5–33 | `div`, varianty default/secondary/outline/soft; výchozí outline; aktuality |
-| Button a buttonVariants | [button.tsx](../components/ui/button.tsx), 7–53 | Client modul; varianty default/secondary/outline/ghost/soft/dark; velikosti default/sm/lg/icon; forwardRef, disabled a focus-visible styly; runtime UI používá `buttonVariants` pro odkazy, nikoli nalezené `<Button>` |
+| Button a buttonVariants | [button.tsx](../components/ui/button.tsx) | Serverově bezpečný modul; varianty default/secondary/outline/ghost/soft/dark; velikosti default/sm/lg/icon. React 19 ref přes props, disabled a focus-visible styly. Button spouští mobilní Sheet; odkazy sdílejí buttonVariants. |
 | Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter | [card.tsx](../components/ui/card.tsx), 4–74 | Stylované HTML kontejnery; CardTitle je h3; padding 6 / sm:8, content/footer pt-0; nejsou samy interaktivní |
 | Separator | [separator.tsx](../components/ui/separator.tsx), 4–26 | Horizontální nebo vertikální div; výchozí decorative=true a aria-hidden; nepřidává role separator; používá footer |
 
-Serverové stránky používají server-safe řetězce z `lib/button-link-classes.ts`; Hero a Nav klientské `buttonVariants`. Proč my má navíc vlastní primární třídy. Při úpravě vzhledu tlačítek je tedy více zdrojů stylů.
+`buttonVariants` je jediný zdroj variant tlačítek a lze ho volat i na serveru. `lib/button-link-classes.ts` z něj odvozuje sdílené řetězce pro odkazy; používá je také Proč my. Interaktivní shadcn komponenty jsou v `components/ui/{accordion,sheet,navigation-menu,tabs}.tsx` a používají již instalované `radix-ui` a `cn` z `lib/utils.ts`.
 
 ## Přístupnost a hranice ověření
 
@@ -97,10 +97,10 @@ Ve zdrojích jsou český jazyk dokumentu, main landmarky, skutečné odkazy/tla
 
 Konkrétní nehotové detaily pro další vývoj, zjištěné statickým čtením:
 
-- Hamburger `aria-controls="mobile-nav-dialog"` (nav ř. 411) nemá odpovídající id na dialogu (ř. 76). Mobilní dialog nemá focus trap, inert pozadí ani obnovu focusu na spouštěč; počáteční fokus a Escape implementovány jsou.
-- Desktop dropdown tlačítko (nav ř. 277) nemá `aria-expanded` a neřeší Escape/šipkové ovládání; běžný Tab a aktivace nativního button fungují.
-- Lightbox nemá `role="dialog"`, `aria-modal`, focus trap, počáteční fokus ani návrat focusu. Přepínače alb nemají `aria-pressed` nebo tab semantics. Čítač není live region.
-- Hero a galerie nemají explicitní reduced-motion větev; globální smooth scroll ji také nevypíná. U nepoužívaného LogoLoop taková větev existuje.
+- Mobilní Sheet byl ověřen na 390 × 844: otevření, akordeon, Escape a návrat focusu. Finální desktop NavigationMenu prošel ve všech třech podmenu aktivací Enter, přesunem ArrowDown na odkaz, Escape a obnovou focusu na trigger. Samotné ArrowDown na zavřeném menu nebylo tímto testem prokázáno.
+- Všech osm alb prošlo přepnutím a kontrolou počtu tlačítek miniatur proti počtu v názvu tabu (25, 13, 5, 8, 99, 18, 16, 26). Počet neprokazuje úspěšné načtení každého externího obrázku.
+- Knihovní lightbox prošel mobilním testem otevření klávesnicí, tlačítek Další/Předchozí/Přiblížit, Escape a návratu focusu. Tento test neprokazuje swipe, přesný index všech snímků ani všechna alba.
+- Hero, galerie a globální smooth scroll používají `motion-safe` / `motion-reduce`. Ověření výsledného pohybu v prohlížeči s reduced-motion je samostatná kontrola.
 - CardTitle vždy h3; stránky jej někdy používají rovnou pod h1. Po změně rozvržení je třeba kontrolovat hierarchii nadpisů.
 - Telefonní čísla tříd na `/tridy` obsahují `XXX` (ř. 20 a další záznamy), homepage zápisy a těla aktualit jsou placeholdery. Nejde o ověřené produkční údaje.
 
@@ -108,10 +108,10 @@ Dokumentace tyto body neopravuje; runtime klávesnicové ovládání, kontrast, 
 
 ## Nepoužívané a historické UI
 
-[aktuality-puvodni.tsx](../app/components/aktuality-puvodni.tsx), ř. 22–93, nemá nalezeného konzumenta v `app`, `components` ani `lib`. Je to stará serverová varianta: čtyři novinky, horizontálně scrollované karty, číselné datum, pevná bílá/modrá paleta. Není aktuální homepage komponentou; změna pouze tohoto souboru aktuální homepage neupraví.
-
-[LogoLoop.tsx](../components/LogoLoop.tsx), 1–502, také nemá nalezeného konzumenta. Klientská memo komponenta pro nekonečný pás obrazových nebo React-node log: rychlost 120, směr left/right/up/down, mezera 32, výška 28, vlastní renderItem, fade, scale-on-hover, hoverSpeed/pauseOnHover. Měří sekvenci přes ResizeObserver (fallback resize), čeká na load/error obrázků, dopočítá počet kopií (nejméně dvě) a animuje requestAnimationFrame s exponenciálním vyhlazením a modulo posunem. Reduced motion zastaví transformaci; kopie nad první jsou aria-hidden; odkazy se otevírají bezpečně do nové karty. Cleanup odpojuje listenery/observery a ruší RAF. Tato schopnost není aktivní funkcí stránky Spolupráce, která používá statický seznam.
+Dne 2026-09-13 byly odstraněny `app/components/aktuality-puvodni.tsx` a `components/LogoLoop.tsx`: vyhledávání importů i dynamických konzumentů potvrdilo, že nejsou používány. Aktuální výpis aktualit a statický seznam partnerů zůstaly zachovány. Historické komponenty jsou obnovitelné z Gitu. Po odstranění prošel build i ESLint bez chyb a upozornění.
 
 ## Kontrola při dalším vývoji
 
-Při změně menu zkontrolovat desktop i mobil a dostupnost všech 17 routních šablon. Při změně fotografie zkontrolovat galerii i náhodné Hero; při změně aktuality homepage, archiv, detail i metadata; při změně kontaktů homepage JSON-LD, footer, mapovou sekci, kontakty a třídy. Při změně markdown stylu kontrolovat všech sedm statických stránek a samostatné Zápisy. Změna společných CSS tokenů nebo Card se projeví napříč webem; změna nepoužívaných legacy komponent nikoli.
+Smoke test produkčního webpack buildu 2026-09-13 v Playwrightu: všech 16 statických URL a pět článků načteno na šířkách 390 a 1440 px (výška 900 px), HTTP 200, přítomný h1 a bez horizontálního přetékání dokumentu. U statických URL navíc ověřen právě jeden h1 a neprázdný title. Neexistující slug článku vrátil HTTP 404; jediný zaznamenaný console error odpovídal této záměrné 404. Jde o kontrolu načtení a rozměrů, nikoli úplný vizuální nebo obsahový audit a nikoli důkaz načtení všech vzdálených obrázků.
+
+Při změně menu zkontrolovat desktop i mobil a dostupnost všech 17 routních šablon. Při změně fotografie zkontrolovat galerii i náhodné Hero; při změně aktuality homepage, archiv, detail i metadata; při změně kontaktů homepage JSON-LD, footer, mapovou sekci, kontakty a třídy. Při změně markdown stylu kontrolovat všech sedm statických stránek a samostatné Zápisy. Změna společných CSS tokenů nebo Card se projeví napříč webem.

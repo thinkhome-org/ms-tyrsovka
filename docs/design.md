@@ -1,6 +1,10 @@
 # Design MŠ Tyršovka
 
-Designový směr pro další vývoj · 13. 9. 2026 · **návrh, dosud neimplementovaný**.
+Designový směr · 13. 9. 2026 · **jemné pastelové akcenty implementovány na žádost uživatele; schválení školou zatím nedoloženo**.
+
+## Implementovaná varianta
+
+Šest proměnných `--section-*` v globals.css odpovídá paletě níže. Neutrální pozadí je `#FAFAF8`. Konkrétní navigační odkazy mají tenkou pastelovou spodní linku, obsahové h1 krátkou linku pod nadpisem a aktivní album modrý podklad s tmavým textem. Sdílené obsahové stránky přijímají explicitní `section`; Jídelníček používá menu, ŠVP school, rodičovské stránky parents. Fotografie, hlavní CTA, layout a typografie zůstaly zachovány. Následující pravidla popisují i další možné použití, nikoli tvrzení, že je každý příklad realizován.
 
 ## Zadání a hlavní rozhodnutí
 
@@ -108,4 +112,4 @@ Hotovo znamená: původní minimalistický charakter je zachovaný, všech šest
 
 ## Rozsah tohoto dokumentu
 
-Podkladem jsou dodaný screenshot, současné CSS a komponenty a existující [mapa UI](UI.md). Screenshot aktuálního webu nebyl v tomto kroku nově pořízen. Tento soubor nemění aplikaci; neřeší obsahové placeholdery, redesign navigace ani nasazení. Existující Graphify snapshot tento nový návrh zatím nezahrnuje.
+Podkladem jsou dodaný screenshot, CSS a komponenty a [mapa UI](UI.md). Pastelová implementace neřeší obsahové placeholdery, redesign navigace ani schválení školou. Graphify se obnovuje společně se zdroji.

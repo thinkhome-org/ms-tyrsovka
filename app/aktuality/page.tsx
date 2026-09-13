@@ -36,7 +36,7 @@ export default function AktualityPage() {
         .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
 
     return (
-        <main className="flex-1 text-zinc-900">
+        <main data-section="news" className="flex-1 text-zinc-900">
             <div className="page-shell section-shell">
                 <div className="flex flex-wrap items-end justify-between gap-4">
                     <div>
@@ -101,4 +101,3 @@ export default function AktualityPage() {
         </main>
     );
 }
-

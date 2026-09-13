@@ -2,12 +2,13 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
-import { createPortal } from "react-dom";
-import { ChevronDown, Menu, Shield, X } from "lucide-react";
-import { buttonVariants } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
+import { useEffect, useState } from "react";
+import { Menu, Shield } from "lucide-react";
+import { Button, buttonVariants } from "@/components/ui/button";
+import { NavigationMenu, NavigationMenuList, NavigationMenuItem, NavigationMenuTrigger, NavigationMenuContent, NavigationMenuLink, navigationMenuTriggerStyle } from "@/components/ui/navigation-menu";
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 import { cn } from "@/lib/utils";
+import { Sheet, SheetTrigger, SheetContent, SheetHeader, SheetTitle, SheetDescription } from "@/components/ui/sheet";
 
 // ─── data ────────────────────────────────────────────────────────────────────
 
@@ -46,150 +47,29 @@ const DESKTOP_NAV = NAV_ITEMS.slice(0, 4);
 // ─── Mobile overlay ───────────────────────────────────────────────────────────
 
 function MobileMenu({ onClose }: { onClose: () => void }) {
-    const [openSection, setOpenSection] = useState<string | null>(null);
-    const closeRef = useRef<HTMLButtonElement>(null);
-
-    // Lock scroll
-    useEffect(() => {
-        const prev = document.body.style.overflow;
-        document.body.style.overflow = "hidden";
-        return () => {
-            document.body.style.overflow = prev;
-        };
-    }, []);
-
-    // Escape to close
-    useEffect(() => {
-        const onKey = (e: KeyboardEvent) => {
-            if (e.key === "Escape") onClose();
-        };
-        document.addEventListener("keydown", onKey);
-        return () => document.removeEventListener("keydown", onKey);
-    }, [onClose]);
-
-    // Focus the close button when menu opens
-    useEffect(() => {
-        closeRef.current?.focus();
-    }, []);
-
     return (
-        <div
-            role="dialog"
-            aria-modal="true"
-            aria-label="Navigace"
-            style={{
-                position: "fixed",
-                inset: 0,
-                zIndex: 9999,
-                backgroundColor: "var(--background)",
-                display: "flex",
-                flexDirection: "column",
-                overflowY: "auto",
-            }}
-        >
-            {/* Header row — identical markup/classes to the sticky navbar */}
-            <div className="page-shell flex items-center justify-between gap-4 border-b border-border py-3">
-                <Link
-                    href="/"
-                    onClick={onClose}
-                    className="flex shrink-0 items-center gap-3"
-                >
-                    <div className="relative flex size-12 items-center justify-center overflow-hidden rounded-md bg-card">
-                        <Image
-                            src="/logo.png"
-                            alt="MŠ Tyršovka logo"
-                            width={44}
-                            height={44}
-                            priority
-                            className="object-contain"
-                        />
-                    </div>
-                    <div className="hidden min-w-0 sm:block">
-                        <div className="truncate text-base font-semibold tracking-tight">
-                            MŠ Tyršovka
-                        </div>
-                        <div className="truncate text-sm text-muted-foreground">
-                            Mateřská škola pro radost z pohybu
-                        </div>
-                    </div>
-                    <span className="truncate text-base font-semibold tracking-tight sm:hidden">
-                        MŠ Tyršovka
-                    </span>
-                </Link>
-
-                <button
-                    ref={closeRef}
-                    type="button"
-                    aria-label="Zavřít menu"
-                    onClick={onClose}
-                    className="flex size-10 shrink-0 items-center justify-center rounded-md border border-border bg-background text-foreground"
-                >
-                    <X className="size-5" />
-                </button>
-            </div>
-
+        <SheetContent side="right" className="w-full overflow-y-auto sm:max-w-none">
+            <SheetHeader className="page-shell pr-16">
+                <SheetTitle>Navigace MŠ Tyršovka</SheetTitle>
+                <SheetDescription>Mateřská škola pro radost z pohybu</SheetDescription>
+                <Link href="/" onClick={onClose} className="py-3">Úvodní stránka</Link>
+            </SheetHeader>
             {/* Nav links */}
             <nav className="page-shell flex flex-1 flex-col py-6">
+                <Accordion type="single" collapsible>
                 {DESKTOP_NAV.map((item) =>
                     "sub" in item ? (
-                        <div
-                            key={item.label}
-                            style={{ borderBottom: "1px solid var(--border)" }}
-                        >
-                            <button
-                                type="button"
-                                aria-expanded={openSection === item.label}
-                                onClick={() =>
-                                    setOpenSection((s) =>
-                                        s === item.label ? null : item.label
-                                    )
-                                }
-                                className="font-(family-name:--font-heading-serif)"
-                                style={{
-                                    display: "flex",
-                                    width: "100%",
-                                    alignItems: "center",
-                                    justifyContent: "space-between",
-                                    padding: "1.1rem 0",
-                                    background: "none",
-                                    border: "none",
-                                    cursor: "pointer",
-                                    textAlign: "left",
-                                    fontSize: "1.5rem",
-                                    fontWeight: 600,
-                                    letterSpacing: "-0.02em",
-                                    color: "var(--foreground)",
-                                }}
-                            >
-                                <span>{item.label}</span>
-                                <ChevronDown
-                                    className={cn(
-                                        "size-5 shrink-0 text-muted-foreground transition-transform duration-200",
-                                        openSection === item.label && "rotate-180"
-                                    )}
-                                />
-                            </button>
-
-                            {openSection === item.label && (
-                                <div style={{ paddingBottom: "1rem" }}>
-                                    {SUB_ITEMS[item.label]?.map((sub) => (
-                                        <Link
-                                            key={sub.label}
-                                            href={sub.href}
-                                            onClick={onClose}
-                                            style={{
-                                                display: "block",
-                                                padding: "0.55rem 0.25rem",
-                                                fontSize: "1rem",
-                                                color: "var(--muted-foreground)",
-                                            }}
-                                        >
-                                            {sub.label}
-                                        </Link>
-                                    ))}
-                                </div>
-                            )}
-                        </div>
+                        <AccordionItem key={item.label} value={item.label}>
+                            <AccordionTrigger>{item.label}</AccordionTrigger>
+                            <AccordionContent>
+                                {SUB_ITEMS[item.label]?.map((sub) => (
+                                    <Link key={sub.href} href={sub.href} onClick={onClose}
+                                        className="block py-3 text-muted-foreground hover:text-foreground">
+                                        {sub.label}
+                                    </Link>
+                                ))}
+                            </AccordionContent>
+                        </AccordionItem>
                     ) : (
                         <div
                             key={item.label}
@@ -198,21 +78,15 @@ function MobileMenu({ onClose }: { onClose: () => void }) {
                             <Link
                                 href={item.href}
                                 onClick={onClose}
-                                className="font-(family-name:--font-heading-serif)"
-                                style={{
-                                    display: "block",
-                                    padding: "1.1rem 0",
-                                    fontSize: "1.5rem",
-                                    fontWeight: 600,
-                                    letterSpacing: "-0.02em",
-                                    color: "var(--foreground)",
-                                }}
+                                className="block py-4 text-sm font-medium hover:underline"
                             >
                                 {item.label}
                             </Link>
                         </div>
                     )
                 )}
+
+                </Accordion>
 
                 {/* CTA buttons */}
                 <div
@@ -246,93 +120,42 @@ function MobileMenu({ onClose }: { onClose: () => void }) {
                     </Link>
                 </div>
             </nav>
-        </div>
+        </SheetContent>
     );
 }
 
 // ─── Desktop dropdown ─────────────────────────────────────────────────────────
 
 function DesktopNav() {
-    const [openDropdown, setOpenDropdown] = useState<string | null>(null);
-    const containerRef = useRef<HTMLDivElement>(null);
-
-    useEffect(() => {
-        const handler = (e: MouseEvent) => {
-            if (
-                containerRef.current &&
-                !containerRef.current.contains(e.target as Node)
-            ) {
-                setOpenDropdown(null);
-            }
-        };
-        document.addEventListener("mousedown", handler);
-        return () => document.removeEventListener("mousedown", handler);
-    }, []);
-
     return (
-        <div ref={containerRef} className="flex flex-wrap items-center gap-2">
-            {DESKTOP_NAV.map((item) => (
-                <div key={item.label} className="relative">
-                    {"sub" in item ? (
-                        <>
-                            <button
-                                type="button"
-                                onClick={() =>
-                                    setOpenDropdown((d) =>
-                                        d === item.label ? null : item.label
-                                    )
-                                }
-                                className={cn(
-                                    buttonVariants({
-                                        variant:
-                                            openDropdown === item.label
-                                                ? "secondary"
-                                                : "ghost",
-                                        size: "sm",
-                                    }),
-                                    "rounded-md px-4 text-sm"
-                                )}
-                            >
-                                {item.label}
-                                <ChevronDown
-                                    className={cn(
-                                        "size-4 text-muted-foreground transition-transform",
-                                        openDropdown === item.label && "rotate-180"
-                                    )}
-                                />
-                            </button>
-
-                            {openDropdown === item.label && (
-                                <div className="absolute left-0 top-full z-50 mt-2 w-56">
-                                    <Card className="border border-border bg-background p-1">
-                                        {SUB_ITEMS[item.label]?.map((sub) => (
-                                            <Link
-                                                key={sub.label}
-                                                href={sub.href}
-                                                onClick={() => setOpenDropdown(null)}
-                                                className="block rounded px-3 py-2.5 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
-                                            >
-                                                {sub.label}
-                                            </Link>
+        <NavigationMenu aria-label="Hlavní navigace">
+            <NavigationMenuList>
+                {DESKTOP_NAV.map((item) => (
+                    <NavigationMenuItem key={item.label}>
+                        {"sub" in item ? (
+                            <>
+                                <NavigationMenuTrigger>{item.label}</NavigationMenuTrigger>
+                                <NavigationMenuContent>
+                                    <ul className="w-56">
+                                        {SUB_ITEMS[item.label].map((sub) => (
+                                            <li key={sub.href}>
+                                                <NavigationMenuLink asChild>
+                                                    <Link href={sub.href}>{sub.label}</Link>
+                                                </NavigationMenuLink>
+                                            </li>
                                         ))}
-                                    </Card>
-                                </div>
-                            )}
-                        </>
-                    ) : (
-                        <Link
-                            href={item.href}
-                            className={cn(
-                                buttonVariants({ variant: "ghost", size: "sm" }),
-                                "rounded-md px-4 text-sm"
-                            )}
-                        >
-                            {item.label}
-                        </Link>
-                    )}
-                </div>
-            ))}
-        </div>
+                                    </ul>
+                                </NavigationMenuContent>
+                            </>
+                        ) : (
+                            <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
+                                <Link href={item.href}>{item.label}</Link>
+                            </NavigationMenuLink>
+                        )}
+                    </NavigationMenuItem>
+                ))}
+            </NavigationMenuList>
+        </NavigationMenu>
     );
 }
 
@@ -340,7 +163,6 @@ function DesktopNav() {
 
 export default function Nav() {
     const [mobileOpen, setMobileOpen] = useState(false);
-    const canUsePortal = typeof document !== "undefined";
 
     // Close mobile menu when resizing to desktop
     useEffect(() => {
@@ -353,7 +175,7 @@ export default function Nav() {
     }, []);
 
     return (
-        <>
+        <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
             <header className="sticky top-0 z-50 w-full border-b border-border bg-background">
                 <div className="page-shell flex items-center justify-between gap-4 py-3">
                     {/* Logo */}
@@ -407,31 +229,16 @@ export default function Nav() {
                         </Link>
                     </div>
 
-                    {/* Hamburger (mobile only) */}
-                    <button
-                        type="button"
-                        aria-label={mobileOpen ? "Zavřít menu" : "Otevřít menu"}
-                        aria-expanded={mobileOpen}
-                        aria-controls="mobile-nav-dialog"
-                        onClick={() => setMobileOpen((o) => !o)}
-                        className="flex size-10 shrink-0 items-center justify-center rounded-md border border-border bg-background text-foreground lg:hidden"
-                    >
-                        {mobileOpen ? (
-                            <X className="size-5" />
-                        ) : (
-                            <Menu className="size-5" />
-                        )}
-                    </button>
+                    <SheetTrigger asChild>
+                        <Button type="button" variant="outline" size="icon"
+                            aria-label="Otevřít menu" className="size-11 lg:hidden">
+                            <Menu />
+                        </Button>
+                    </SheetTrigger>
                 </div>
             </header>
 
-            {/* Full-screen mobile overlay — portalled to <body> */}
-            {canUsePortal &&
-                mobileOpen &&
-                createPortal(
-                    <MobileMenu onClose={() => setMobileOpen(false)} />,
-                    document.body
-                )}
-        </>
+            <MobileMenu onClose={() => setMobileOpen(false)} />
+        </Sheet>
     );
 }

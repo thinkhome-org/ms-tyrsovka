@@ -55,7 +55,7 @@ export default function KontaktyPage() {
     const content = KONTAKTY_CONTENT;
 
     return (
-        <main className="flex-1 text-zinc-900">
+        <main data-section="contact" className="flex-1 text-zinc-900">
             <div className="page-shell section-shell">
                 <div className="mx-auto max-w-6xl">
                     <header className="flex flex-wrap items-end justify-between gap-6">
