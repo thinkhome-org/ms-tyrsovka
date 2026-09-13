@@ -1,0 +1,209 @@
+{
+  "node_count": 1727,
+  "unverified_node_count": 0,
+  "raw_edge_count": 3972,
+  "non_object_edges": 0,
+  "missing_endpoint_edges": 0,
+  "dangling_endpoint_edges": 0,
+  "self_loop_edges": 0,
+  "valid_candidate_edges": 3972,
+  "exact_duplicate_edges": 0,
+  "directed_unique_endpoint_pairs": 3932,
+  "directed_same_endpoint_collapsed_edges": 40,
+  "undirected_unique_endpoint_pairs": 3912,
+  "undirected_same_endpoint_collapsed_edges": 60,
+  "same_endpoint_group_count": 25,
+  "relation_variant_groups": 7,
+  "source_file_variant_groups": 0,
+  "source_location_variant_groups": 18,
+  "context_variant_groups": 0,
+  "post_build_graph_type": "DiGraph",
+  "post_build_node_count": 1707,
+  "post_build_edge_count": 3890,
+  "post_build_error": "",
+  "producer_suppression": {
+    "path": "/Users/samuel/.local/share/uv/tools/graphifyy/lib/python3.11/site-packages/graphify/extract.py",
+    "total_sites": 12,
+    "sites": [
+      {
+        "line": 1204,
+        "name": "seen_ids",
+        "tuple_arity": 0,
+        "sample": "seen_ids = {n[\"id\"] for n in nodes}"
+      },
+      {
+        "line": 1520,
+        "name": "seen_ids",
+        "tuple_arity": 0,
+        "sample": "seen_ids = {n[\"id\"] for n in nodes}"
+      },
+      {
+        "line": 1522,
+        "name": "seen_doc_refs",
+        "tuple_arity": 0,
+        "sample": "seen_doc_refs: set[str] = set()"
+      },
+      {
+        "line": 1885,
+        "name": "seen_ids",
+        "tuple_arity": 0,
+        "sample": "seen_ids: set[str] = {n[\"id\"] for n in nodes}"
+      },
+      {
+        "line": 2032,
+        "name": "seen_ids",
+        "tuple_arity": 0,
+        "sample": "seen_ids = {n.get(\"id\") for n in nodes}"
+      },
+      {
+        "line": 2670,
+        "name": "seen_keys",
+        "tuple_arity": 0,
+        "sample": "seen_keys: set[tuple] = set()"
+      },
+      {
+        "line": 2839,
+        "name": "seen_keys",
+        "tuple_arity": 0,
+        "sample": "seen_keys: set[tuple] = set()"
+      },
+      {
+        "line": 4436,
+        "name": "seen_ids",
+        "tuple_arity": 0,
+        "sample": "seen_ids: set[str] = set()"
+      },
+      {
+        "line": 4544,
+        "name": "seen_ids",
+        "tuple_arity": 0,
+        "sample": "seen_ids: set[str] = set()"
+      },
+      {
+        "line": 4623,
+        "name": "seen_ids",
+        "tuple_arity": 0,
+        "sample": "seen_ids: set[str] = set()"
+      },
+      {
+        "line": 5138,
+        "name": "seen_ids",
+        "tuple_arity": 0,
+        "sample": "seen_ids: set[str] = set()"
+      },
+      {
+        "line": 5139,
+        "name": "seen_edges",
+        "tuple_arity": 4,
+        "sample": "seen_edges: set[tuple[str, str, str, str | None]] = set()"
+      }
+    ],
+    "error": ""
+  },
+  "examples": [
+    {
+      "source": "file_app_uredni_deska_content_ts",
+      "target": "external_56e61c68fd964db4",
+      "edge_count": 7,
+      "relations": [
+        "references_url"
+      ],
+      "source_files": [
+        "app/uredni-deska/content.ts"
+      ],
+      "source_locations": [
+        "L49",
+        "L54",
+        "L59",
+        "L64",
+        "L69",
+        "L74",
+        "L79"
+      ],
+      "contexts": [
+        ""
+      ]
+    },
+    {
+      "source": "file_docs_ui_md",
+      "target": "app_page_tsx_route",
+      "edge_count": 6,
+      "relations": [
+        "references"
+      ],
+      "source_files": [
+        "docs/UI.md"
+      ],
+      "source_locations": [
+        "L15",
+        "L16",
+        "L18",
+        "L26",
+        "L43",
+        "L71"
+      ],
+      "contexts": [
+        ""
+      ]
+    },
+    {
+      "source": "file_docs_ui_md",
+      "target": "app_o_nas_page_tsx_route",
+      "edge_count": 4,
+      "relations": [
+        "references"
+      ],
+      "source_files": [
+        "docs/UI.md"
+      ],
+      "source_locations": [
+        "L27",
+        "L28",
+        "L39",
+        "L49"
+      ],
+      "contexts": [
+        ""
+      ]
+    },
+    {
+      "source": "file_docs_ui_md",
+      "target": "app_zapisy_page_tsx_route",
+      "edge_count": 4,
+      "relations": [
+        "references"
+      ],
+      "source_files": [
+        "docs/UI.md"
+      ],
+      "source_locations": [
+        "L31",
+        "L33",
+        "L37",
+        "L55"
+      ],
+      "contexts": [
+        ""
+      ]
+    },
+    {
+      "source": "file_app_data_aktuality_json",
+      "target": "file_public_tyrsovka_2_jpg",
+      "edge_count": 3,
+      "relations": [
+        "references"
+      ],
+      "source_files": [
+        "app/data/aktuality.json"
+      ],
+      "source_locations": [
+        "L12",
+        "L18",
+        "L24"
+      ],
+      "contexts": [
+        ""
+      ]
+    }
+  ]
+}
