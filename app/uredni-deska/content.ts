@@ -24,7 +24,7 @@ export const UREDNI_DESKA_SECTIONS: UredniDeskaSection[] = [
         items: [
             {
                 label: "Výroční zpráva 2024/25",
-                href: "http://files.site.site3.eu/f8/3e/f83e2234-030b-4972-8792-fc03e7b481f3.pdf",
+                href: "https://files.site.site3.eu/f8/3e/f83e2234-030b-4972-8792-fc03e7b481f3.pdf",
                 kind: "Přímé stažení PDF",
             },
             {

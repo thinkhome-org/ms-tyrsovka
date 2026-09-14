@@ -3,7 +3,7 @@ import Link from "next/link";
 import type { ComponentPropsWithoutRef } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { linkButtonOutlineSm } from "@/lib/button-link-classes";
 
 export type StaticPageLink = {
@@ -179,14 +179,14 @@ export default function StaticContentPage({
                                         className="content-card overflow-hidden transition-shadow hover:shadow-md"
                                     >
                                         <CardHeader className="pb-2">
-                                            <CardTitle className="text-xl">
+                                            <h2 className="text-xl font-semibold tracking-tight">
                                                 <Link
                                                     href={link.href}
                                                     className="transition-colors hover:text-primary"
                                                 >
                                                     {link.label}
                                                 </Link>
-                                            </CardTitle>
+                                            </h2>
                                         </CardHeader>
                                         <CardContent className="space-y-4 pt-0">
                                             <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">

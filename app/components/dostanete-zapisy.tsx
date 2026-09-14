@@ -25,7 +25,7 @@ export default function DostaneteZapisy() {
                             <div className="aspect-16/10 w-full">
                                 <iframe
                                     title="Mapa – MŠ Tyršovka"
-                                    src="https://www.google.com/maps?q=Praha&z=13&output=embed"
+                                    src="https://www.google.com/maps?q=M%C5%A0+Tyr%C5%A1ovka,+Lysinsk%C3%A1+184%2F45,+Praha+4&z=16&output=embed"
                                     className="h-full w-full"
                                     loading="lazy"
                                     referrerPolicy="no-referrer-when-downgrade"

@@ -199,7 +199,7 @@ export const SVP_PAGE: StaticPageContent = {
     buttonLinks: [
         {
             label: "Otevřít ŠVP (PDF)",
-            href: "http://files.site.site3.eu/4b/b0/4bb03022-3f21-4c9c-9d24-cdba6f56369b.pdf",
+            href: "https://files.site.site3.eu/4b/b0/4bb03022-3f21-4c9c-9d24-cdba6f56369b.pdf",
         },
     ],
     markdown: `
@@ -232,4 +232,3 @@ Každoročně se škola zapojuje do projektu **Se Sokolem do života**, který v
 MŠ Tyršovka je zapojena také do projektu **Recyklohraní**, v rámci kterého děti i škola plní různé úkoly a sbírají například baterie, tonery nebo drobná elektrozařízení.
 `.trim(),
 };
-

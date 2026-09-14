@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { linkButtonOutlineSm } from "@/lib/button-link-classes";
 import { buildPageMetadata } from "@/lib/seo";
 
@@ -105,7 +105,7 @@ export default function TridyPage() {
                 </div>
 
                 <div className="mt-10 grid gap-6 xl:grid-cols-2">
-                    {CLASSROOMS.map((classroom) => (
+                    {CLASSROOMS.map((classroom, index) => (
                         <Card
                             key={classroom.name}
                             className="overflow-hidden bg-card"
@@ -117,6 +117,7 @@ export default function TridyPage() {
                                             src={classroom.image}
                                             alt={classroom.name}
                                             fill
+                                            loading={index === 0 ? "eager" : "lazy"}
                                             className="object-cover"
                                             sizes="220px"
                                         />
@@ -127,9 +128,9 @@ export default function TridyPage() {
                                         <p className="text-sm font-medium text-muted-foreground">
                                             {classroom.age}
                                         </p>
-                                        <CardTitle className="text-2xl">
+                                        <h2 className="text-2xl font-semibold tracking-tight">
                                             {classroom.name}
-                                        </CardTitle>
+                                        </h2>
                                     </CardHeader>
                                     <CardContent className="space-y-4">
                                         {classroom.paragraphs.map((paragraph) => (

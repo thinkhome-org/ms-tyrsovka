@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import aktuality from "@/app/data/aktuality.json";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { linkButtonOutlineSm } from "@/lib/button-link-classes";
 import { buildPageMetadata } from "@/lib/seo";
 
@@ -82,9 +82,9 @@ export default function AktualityPage() {
                                                     {formatDateCs(item.publishedAt)}
                                                 </time>
                                             </Badge>
-                                            <CardTitle className="w-full truncate text-xl">
+                                            <h2 className="w-full truncate text-xl font-semibold tracking-tight">
                                                 {item.title}
-                                            </CardTitle>
+                                            </h2>
                                         </CardHeader>
                                         <CardContent>
                                             <p className="text-sm leading-relaxed text-muted-foreground">

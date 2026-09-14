@@ -74,7 +74,9 @@ export default function ONasPage() {
                 <section className="mt-10">
                     <Card className="bg-card">
                         <CardHeader>
-                            <CardTitle className="text-2xl">MŠ Tyršovka</CardTitle>
+                            <h2 className="text-2xl font-semibold tracking-tight">
+                                MŠ Tyršovka
+                            </h2>
                         </CardHeader>
                         <CardContent className="space-y-4 text-base leading-relaxed text-muted-foreground">
                             <p>
@@ -135,7 +137,9 @@ export default function ONasPage() {
                 <section className="mt-14 border-t border-border pt-10">
                     <Card className="bg-card">
                         <CardHeader className="gap-3">
-                            <CardTitle className="text-2xl">Třídy v MŠ</CardTitle>
+                            <h2 className="text-2xl font-semibold tracking-tight">
+                                Třídy v MŠ
+                            </h2>
             
                         </CardHeader>
                         <CardContent>
@@ -181,4 +185,3 @@ export default function ONasPage() {
         </main>
     );
 }
-

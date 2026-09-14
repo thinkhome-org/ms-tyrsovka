@@ -101,9 +101,9 @@ export default function KontaktyPage() {
                     <div className="mt-12 grid gap-6 lg:grid-cols-[1.4fr_0.9fr]">
                         <Card className="content-card overflow-hidden">
                             <CardHeader className="border-b border-border/80 bg-muted/40 py-6">
-                                <CardTitle className="text-2xl">
+                                <h2 className="text-2xl font-semibold tracking-tight">
                                     {content.introTitle}
-                                </CardTitle>
+                                </h2>
                             </CardHeader>
                             <CardContent className="space-y-5 p-6 sm:p-8">
                                 <p className="max-w-prose text-base leading-relaxed text-muted-foreground">
@@ -128,9 +128,9 @@ export default function KontaktyPage() {
 
                         <Card className="content-card overflow-hidden">
                             <CardHeader className="border-b border-border/80 bg-muted/40 py-6">
-                                <CardTitle className="text-2xl">
+                                <h2 className="text-2xl font-semibold tracking-tight">
                                     Hlavní údaje školy
-                                </CardTitle>
+                                </h2>
                             </CardHeader>
                             <CardContent className="grid gap-5 p-6 sm:p-8">
                                 <DetailRow
@@ -177,9 +177,9 @@ export default function KontaktyPage() {
                     <section className="mt-12">
                         <Card className="content-card overflow-hidden">
                             <CardHeader className="border-b border-border/80 bg-muted/40 py-6 sm:py-8">
-                                <CardTitle className="text-2xl">
+                                <h2 className="text-2xl font-semibold tracking-tight">
                                     Vedení a provoz školky
-                                </CardTitle>
+                                </h2>
                                 <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
                                     {content.school.founder}
                                 </p>
