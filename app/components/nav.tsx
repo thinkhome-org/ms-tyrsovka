@@ -98,10 +98,9 @@ function MobileMenu({ onClose }: { onClose: () => void }) {
                         <Image
                             src="/logo.png"
                             alt="MŠ Tyršovka logo"
-                            width={44}
-                            height={44}
-                            priority
-                            className="object-contain"
+                            width={161}
+                            height={154}
+                            className="h-auto w-11 object-contain"
                         />
                     </div>
                     <div className="hidden min-w-0 sm:block">
@@ -362,10 +361,10 @@ export default function Nav() {
                             <Image
                                 src="/logo.png"
                                 alt="MŠ Tyršovka logo"
-                                width={44}
-                                height={44}
-                                priority
-                                className="object-contain"
+                                width={161}
+                                height={154}
+                                preload
+                                className="h-auto w-11 object-contain"
                             />
                         </div>
                         <div className="hidden min-w-0 sm:block">

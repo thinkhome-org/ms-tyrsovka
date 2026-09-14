@@ -41,7 +41,7 @@ export default function SpolupracePage() {
                             key={item.title}
                             className="grid grid-cols-1 items-center gap-6 border-b border-border py-8 sm:grid-cols-[auto_80px_1fr_2fr] sm:gap-10 sm:py-10"
                         >
-                            <span className="hidden text-xs font-medium tabular-nums text-muted-foreground/60 sm:block sm:pt-0.5">
+                            <span className="hidden text-xs font-medium tabular-nums text-muted-foreground sm:block sm:pt-0.5">
                                 0{i + 1}
                             </span>
 

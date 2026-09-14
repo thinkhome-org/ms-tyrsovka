@@ -69,7 +69,7 @@ export default function Footer() {
                         className="inline-flex h-6 items-center gap-2 opacity-50 transition-opacity hover:opacity-70"
                         aria-label="Vytvořeno Thinkhome"
                     >
-                        <span className="text-xs leading-none text-white/70">Vytvořeno</span>
+                        <span className="text-xs leading-none text-white">Vytvořeno</span>
                         <Image
                             src="https://raw.githubusercontent.com/thinkhome-org/web-new/master/images/logo/primary/SVG%20Transparent/primary_white-on-transparent.svg"
                             alt="Thinkhome"

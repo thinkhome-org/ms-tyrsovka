@@ -95,6 +95,7 @@ export default async function AktualitaDetailPage({
                             src={item.image}
                             alt={item.title}
                             fill
+                            loading="eager"
                             className="object-cover"
                             sizes="100vw"
                         />
@@ -110,22 +111,9 @@ export default async function AktualitaDetailPage({
                             {item.title}
                         </h1>
 
-                        <div className="mt-8 space-y-4 leading-relaxed text-muted-foreground">
-                            <p>
-                                Tohle je zatím ukázková stránka detailu aktuality.
-                                Až budeš chtít, napojíme sem reálný obsah z CMS
-                                nebo z JSON/MD souborů.
-                            </p>
-                            <p>
-                                Pro teď řešíme hlavně to, aby karta z domovské
-                                stránky vedla na hezkou URL podle slugu a měla
-                                sjednocený vzhled s novým homepage designem.
-                            </p>
-                        </div>
                     </CardContent>
                 </Card>
             </div>
         </main>
     );
 }
-

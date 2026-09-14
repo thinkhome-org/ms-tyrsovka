@@ -54,9 +54,8 @@ export default function DostaneteZapisy() {
                         </h2>
 
                         <p className="mt-6 text-base leading-relaxed text-muted-foreground sm:text-lg">
-                            Sem přijde krátké info k zápisům, termínům a
-                            potřebným dokumentům. Prozatím placeholder text,
-                            který později nahradíme reálným obsahem.
+                            Najdete zde termíny předzápisu a osobního zápisu,
+                            potřebné dokumenty, kritéria přijetí i kontakty.
                         </p>
 
                         <div className="mt-10 border-t border-border">

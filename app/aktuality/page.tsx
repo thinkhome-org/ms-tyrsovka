@@ -57,7 +57,7 @@ export default function AktualityPage() {
                 </div>
 
                 <div className="mt-10 grid grid-cols-1 gap-5 lg:grid-cols-2">
-                    {items.map((item) => (
+                    {items.map((item, index) => (
                         <Link
                             key={item.slug}
                             href={`/aktuality/${item.slug}`}
@@ -70,6 +70,7 @@ export default function AktualityPage() {
                                             src={item.image}
                                             alt={item.title}
                                             fill
+                                            loading={index === 0 ? "eager" : "lazy"}
                                             className="object-cover"
                                             sizes="(max-width: 640px) 100vw, 200px"
                                         />
@@ -101,4 +102,3 @@ export default function AktualityPage() {
         </main>
     );
 }
-

@@ -58,7 +58,7 @@ export default function ProcMy() {
                             key={item.title}
                             className="flex flex-col gap-4 border-b border-r-0 border-border px-0 py-10 sm:border-r sm:px-8 sm:last:border-r-0 lg:py-12 lg:first:pl-0"
                         >
-                            <span className="text-xs font-medium tabular-nums text-muted-foreground/60">
+                            <span className="text-xs font-medium tabular-nums text-muted-foreground">
                                 0{i + 1}
                             </span>
                             <h3 className="text-lg font-semibold tracking-tight text-foreground">

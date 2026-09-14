@@ -35,7 +35,7 @@ export const UREDNI_DESKA_SECTIONS: UredniDeskaSection[] = [
             {
                 label: "Zprávy ČŠI",
                 href: "https://www.tyrsovka.cz/o-%C5%A1kole/v%C3%BDro%C4%8Dn%C3%AD-zpr%C3%A1vy",
-                kind: "Připravit další položky",
+                kind: "Zdrojová stránka",
             },
         ],
     },

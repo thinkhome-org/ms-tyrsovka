@@ -90,6 +90,7 @@ const markdownComponents = {
                     alt={alt ?? ""}
                     width={1600}
                     height={1200}
+                    loading="eager"
                     className="h-auto w-full object-cover"
                 />
             </span>
