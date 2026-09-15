@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Download, ExternalLink } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { linkButtonOutlineSm } from "@/lib/button-link-classes";
 import { buildPageMetadata } from "@/lib/seo";
 import { UREDNI_DESKA_SECTIONS } from "./content";
@@ -22,7 +22,7 @@ export default function UredniDeskaPage() {
                             Dokumenty a oznámení
                         </p>
                         <h1 className="mt-2 text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
-                            Úřední deska
+                            Úřední deska a dokumenty
                         </h1>
                         <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
                             Přehled důležitých dokumentů školy v nové struktuře:
@@ -38,13 +38,14 @@ export default function UredniDeskaPage() {
                 <div className="mt-12 space-y-8 sm:mt-14">
                     {UREDNI_DESKA_SECTIONS.map((section) => (
                         <Card
-                            key={section.title}
-                            className="content-card overflow-hidden"
+                            key={section.id}
+                            id={section.id}
+                            className="content-card scroll-mt-28 overflow-hidden"
                         >
                             <CardHeader className="border-b border-border/80 bg-muted/40 py-6 sm:py-8">
-                                <CardTitle className="text-2xl">
+                                <h2 className="text-2xl font-semibold tracking-tight">
                                     {section.title}
-                                </CardTitle>
+                                </h2>
                                 <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
                                     {section.description}
                                 </p>
@@ -99,4 +100,3 @@ export default function UredniDeskaPage() {
         </main>
     );
 }
-

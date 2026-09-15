@@ -169,3 +169,107 @@ h6 {
     @apply rounded-xl border border-border bg-card shadow-sm;
   }
 }
+
+body:has([data-admin-shell]) [data-site-nav],
+body:has([data-admin-shell]) [data-site-footer] {
+    display: none;
+}
+
+.admin-shell {
+    --admin-paper: oklch(0.97 0.012 85);
+    --admin-ink: oklch(0.27 0.03 55);
+    background-color: var(--admin-paper);
+    background-image:
+        radial-gradient(circle at 12% 8%, color-mix(in oklch, var(--primary) 10%, transparent) 0 18%, transparent 42%),
+        radial-gradient(circle at 88% 0%, color-mix(in oklch, var(--primary) 8%, transparent) 0 16%, transparent 40%),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E");
+    color: var(--admin-ink);
+}
+
+.aktualita-body {
+    max-width: 42rem;
+}
+
+.aktualita-body > *:first-child {
+    margin-top: 0;
+}
+
+.aktualita-body p {
+    margin-bottom: 1.15rem;
+    max-width: 42rem;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--muted-foreground);
+}
+
+.aktualita-body p:last-child {
+    margin-bottom: 0;
+}
+
+.aktualita-body h2 {
+    margin: 1.75rem 0 0.7rem;
+    font-size: 1.45rem;
+    letter-spacing: -0.02em;
+    color: var(--foreground);
+}
+
+.aktualita-body h3 {
+    margin: 1.4rem 0 0.55rem;
+    font-size: 1.2rem;
+    letter-spacing: -0.02em;
+    color: var(--foreground);
+}
+
+.aktualita-body ul,
+.aktualita-body ol {
+    margin: 0 0 1.25rem;
+    padding-left: 1.4rem;
+    color: var(--muted-foreground);
+}
+
+.aktualita-body ul {
+    list-style: disc;
+}
+
+.aktualita-body ol {
+    list-style: decimal;
+}
+
+.aktualita-body li {
+    margin-bottom: 0.4rem;
+    line-height: 1.65;
+}
+
+.aktualita-body a {
+    color: var(--primary);
+    text-underline-offset: 3px;
+    text-decoration: underline;
+}
+
+.aktualita-body blockquote {
+    margin: 1.5rem 0;
+    border-left: 2px solid var(--border);
+    padding-left: 1rem;
+    font-style: italic;
+    color: var(--muted-foreground);
+}
+
+.aktualita-body img {
+    margin: 1.1rem 0;
+    width: 100%;
+    border-radius: 0.75rem;
+    border: 1px solid var(--border);
+}
+
+.tiptap {
+    min-height: 18rem;
+    outline: none;
+}
+
+.tiptap p.is-editor-empty:first-child::before {
+    color: var(--muted-foreground);
+    content: attr(data-placeholder);
+    float: left;
+    height: 0;
+    pointer-events: none;
+}

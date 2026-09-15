@@ -7,7 +7,7 @@ export const PRO_ZAJEMCE_PAGE: StaticPageContent = {
     quickLinks: [
         {
             href: "/zapisy",
-            label: "Zápisy 2026/2027",
+            label: "Zápis a přijetí 2026/2027",
             description: "Termíny, předzápis, osobní zápis a kritéria přijímání do MŠ.",
         },
         {
@@ -16,8 +16,8 @@ export const PRO_ZAJEMCE_PAGE: StaticPageContent = {
             description: "Adaptace, co s sebou do MŠ a důležité první informace pro nástup.",
         },
         {
-            href: "/rezim-dne-a-provozni-doba",
-            label: "Režim dne",
+            href: "/prakticke-informace",
+            label: "Praktické informace",
             description: "Příchody, vyzvedávání, omluvenky a provozní doba školky.",
         },
     ],
@@ -29,16 +29,33 @@ Pokud o MŠ Tyršovka teprve uvažujete, začněte stránkou se zápisy – najd
 
 ## Nejbližší termíny
 
-- **Zápisy do MŠ pro školní rok 2026/2027**
+- **Zápis a přijetí do MŠ pro školní rok 2026/2027**
 - **Den otevřených dveří – 19. 3. 2026**
 - **Vítání jara – 31. 3. 2026**
 `.trim(),
 };
 
 export const NOVE_PRIJATI_PAGE: StaticPageContent = {
-    eyebrow: "Informace",
+    eyebrow: "Pro rodiče",
     title: "Nově přijatí",
     description: "Vše, co potřebujete vědět před nástupem dítěte do MŠ Tyršovka – co si připravit, jak probíhá adaptace a kde najdete průběžné informace.",
+    quickLinks: [
+        {
+            href: "/prakticke-informace",
+            label: "Praktické informace",
+            description: "Provozní doba, vyzvedávání, omluvenky, strava a platby.",
+        },
+        {
+            href: "/uredni-deska#dokumenty",
+            label: "Dokumenty",
+            description: "Formuláře ke stažení na úřední desce.",
+        },
+        {
+            href: "/tridy",
+            label: "Třídy",
+            description: "Přehled tříd a kontakty na učitelky.",
+        },
+    ],
     markdown: `
 ## Setkání pro rodiče nově přijatých dětí
 
@@ -129,13 +146,39 @@ Docházku je možné omlouvat přes aplikaci **Naše MŠ**, výjimečně pomocí
 };
 
 export const JIDELNICEK_PAGE: StaticPageContent = {
-    eyebrow: "Informace",
+    eyebrow: "Jídelníček",
     title: "Jídelníček",
-    description: "Aktuální jídelní lístek.",
+    description: "Aktuální týden, alergeny a praktické informace ke stravování.",
     markdown: `
-## Aktuální jídelní lístek
+## Aktuální týden a jídelníček
 
 ![Aktuální jídelní lístek](https://files.site.site3.eu/03/f6/03f6cdea-3f9e-47fb-b705-89d491a38e44.jpg)
+
+Jídelní lístek je na stránce i v telefonu čitelný jako obrázek aktuálního týdne.
+
+---
+
+## Alergeny a vysvětlivky
+
+Čísla alergenů jsou uvedená u jídel na jídelníčku. Podrobnější vysvětlivky doplníme sem, jakmile je jídelna sjednotí na jednom místě.
+
+---
+
+## Praktické informace ke stravování
+
+Přihlašování a odhlašování stravy, omlouvání docházky a související postupy jsou na stránce [praktických informací](/prakticke-informace#strava).
+
+---
+
+## Odhlašování obědů
+
+Postup odhlašování obědů je v oddílu [Přihlašování a odhlašování stravy](/prakticke-informace#strava). Omluva má být nahlášena do 8:30 v den absence, jinak je účtováno stravné.
+
+---
+
+## Kontakt na jídelnu
+
+Otázky ke stravování směřujte na vedoucí školní jídelny — kontakt je v [kontaktech školy](/kontakty#jidelna).
 `.trim(),
 };
 
@@ -199,7 +242,7 @@ export const SVP_PAGE: StaticPageContent = {
     buttonLinks: [
         {
             label: "Otevřít ŠVP (PDF)",
-            href: "http://files.site.site3.eu/4b/b0/4bb03022-3f21-4c9c-9d24-cdba6f56369b.pdf",
+            href: "https://files.site.site3.eu/4b/b0/4bb03022-3f21-4c9c-9d24-cdba6f56369b.pdf",
         },
     ],
     markdown: `
@@ -232,4 +275,3 @@ Každoročně se škola zapojuje do projektu **Se Sokolem do života**, který v
 MŠ Tyršovka je zapojena také do projektu **Recyklohraní**, v rámci kterého děti i škola plní různé úkoly a sbírají například baterie, tonery nebo drobná elektrozařízení.
 `.trim(),
 };
-

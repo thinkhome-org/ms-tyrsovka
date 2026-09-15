@@ -25,7 +25,7 @@ export default function DostaneteZapisy() {
                             <div className="aspect-16/10 w-full">
                                 <iframe
                                     title="Mapa – MŠ Tyršovka"
-                                    src="https://www.google.com/maps?q=Praha&z=13&output=embed"
+                                    src="https://www.google.com/maps?q=M%C5%A0+Tyr%C5%A1ovka,+Lysinsk%C3%A1+184%2F45,+Praha+4&z=16&output=embed"
                                     className="h-full w-full"
                                     loading="lazy"
                                     referrerPolicy="no-referrer-when-downgrade"
@@ -54,9 +54,8 @@ export default function DostaneteZapisy() {
                         </h2>
 
                         <p className="mt-6 text-base leading-relaxed text-muted-foreground sm:text-lg">
-                            Sem přijde krátké info k zápisům, termínům a
-                            potřebným dokumentům. Prozatím placeholder text,
-                            který později nahradíme reálným obsahem.
+                            Najdete zde termíny předzápisu a osobního zápisu,
+                            potřebné dokumenty, kritéria přijetí i kontakty.
                         </p>
 
                         <div className="mt-10 border-t border-border">

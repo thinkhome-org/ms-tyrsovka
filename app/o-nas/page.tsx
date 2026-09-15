@@ -7,9 +7,9 @@ import {
 import { buildPageMetadata } from "@/lib/seo";
 
 export const metadata = buildPageMetadata({
-    title: "O nás",
+    title: "Představení školy",
     description:
-        "Představení MŠ Tyršovka: zaměření na zdravý životní styl, podpora každého dítěte a klidné zázemí v Modřanech. Provozní zaměstnanci.",
+        "Kdo jsme, jak přistupujeme k dětem a jak probíhá vzdělávání v MŠ Tyršovka v Modřanech.",
     path: "/o-nas",
 });
 
@@ -28,23 +28,11 @@ const SCHOOL_PILLARS = [
     },
 ];
 
-const OPERATIONS_STAFF = [
-    {
-        role: "Kuchařky",
-        people: ["Kateřina Maudrová", "Marta Terdy", "Hana Fáberová"],
-    },
-    {
-        role: "Uklízečky",
-        people: ["Denisa Ježková", "Jana Záleská", "Tereza Svobodová"],
-    },
-    {
-        role: "Školnice",
-        people: ["Hana Fáberová"],
-    },
-    {
-        role: "Obsluha kotelny",
-        people: ["Michal Hřebíček"],
-    },
+const RELATED_LINKS = [
+    { href: "/tridy", label: "Třídy" },
+    { href: "/galerie", label: "Fotogalerie" },
+    { href: "/svp", label: "ŠVP" },
+    { href: "/zprava-csi", label: "Zpráva ČŠI" },
 ];
 
 export default function ONasPage() {
@@ -57,12 +45,12 @@ export default function ONasPage() {
                             O škole
                         </p>
                         <h1 className="mt-3 text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
-                            O nás
+                            Představení školy
                         </h1>
                         <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
                             MŠ Tyršovka je mateřská škola zaměřená na zdravý
                             životní styl, pohyb, bezpečné prostředí a respektující
-                            přístup k dětem. 
+                            přístup k dětem.
                         </p>
                     </div>
 
@@ -74,7 +62,9 @@ export default function ONasPage() {
                 <section className="mt-10">
                     <Card className="bg-card">
                         <CardHeader>
-                            <CardTitle className="text-2xl">MŠ Tyršovka</CardTitle>
+                            <h2 className="text-2xl font-semibold tracking-tight">
+                                Kdo jsme
+                            </h2>
                         </CardHeader>
                         <CardContent className="space-y-4 text-base leading-relaxed text-muted-foreground">
                             <p>
@@ -108,7 +98,7 @@ export default function ONasPage() {
 
                 <section className="mt-14 border-t border-border pt-10">
                     <div className="max-w-2xl">
-                        <h2 className="section-title">Co je pro školu důležité</h2>
+                        <h2 className="section-title">Jak přistupujeme k dětem</h2>
                     </div>
 
                     <div className="mt-8 grid gap-5 md:grid-cols-3">
@@ -135,50 +125,28 @@ export default function ONasPage() {
                 <section className="mt-14 border-t border-border pt-10">
                     <Card className="bg-card">
                         <CardHeader className="gap-3">
-                            <CardTitle className="text-2xl">Třídy v MŠ</CardTitle>
-            
+                            <h2 className="text-2xl font-semibold tracking-tight">
+                                Třídy, galerie a dokumenty
+                            </h2>
+                            <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
+                                Podrobnosti o třídách, fotografie a oficiální dokumenty
+                                vedeme na samostatných stránkách.
+                            </p>
                         </CardHeader>
-                        <CardContent>
-                            <Link href="/tridy" className={linkButtonPrimaryLg}>
-                                Zobrazit třídy
-                            </Link>
+                        <CardContent className="flex flex-wrap gap-3">
+                            {RELATED_LINKS.map((link) => (
+                                <Link
+                                    key={link.href}
+                                    href={link.href}
+                                    className={linkButtonPrimaryLg}
+                                >
+                                    {link.label}
+                                </Link>
+                            ))}
                         </CardContent>
                     </Card>
-                </section>
-
-                <section className="mt-14 border-t border-border pt-10">
-                    <div className="max-w-2xl">
-                        <h2 className="section-title">Provozní zaměstnanci</h2>
-                        <p className="section-copy mt-3">
-                            Lidé, kteří zajišťují každodenní zázemí školy a podílí
-                            se na jejím plynulém provozu.
-                        </p>
-                    </div>
-
-                    <div className="mt-8 grid gap-5 md:grid-cols-2">
-                        {OPERATIONS_STAFF.map((group) => (
-                            <Card
-                                key={group.role}
-                                className="bg-card"
-                            >
-                                <CardHeader className="pb-3">
-                                    <CardTitle className="text-xl">
-                                        {group.role}
-                                    </CardTitle>
-                                </CardHeader>
-                                <CardContent>
-                                    <ul className="space-y-2 text-sm leading-relaxed text-muted-foreground sm:text-base">
-                                        {group.people.map((person) => (
-                                            <li key={person}>{person}</li>
-                                        ))}
-                                    </ul>
-                                </CardContent>
-                            </Card>
-                        ))}
-                    </div>
                 </section>
             </div>
         </main>
     );
 }
-

@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { CalendarDays, ArrowRight } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { GALLERY_ALBUMS } from "@/app/galerie/content";
@@ -44,6 +43,8 @@ export default function Hero() {
     const [photos, setPhotos] = useState<typeof ALL_PHOTOS>([]);
 
     useEffect(() => {
+        // Keep the random selection client-only to avoid a hydration mismatch.
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setPhotos(shuffle(ALL_PHOTOS).slice(0, 7));
     }, []);
 
@@ -66,18 +67,18 @@ export default function Hero() {
                             Mateřská škola zaměřená na zdravý životní styl,
                             pohyb a bezpečné prostředí pro vaše děti.
                         </p>
-                        <div className="flex gap-3 lg:justify-end">
+                        <div className="flex flex-wrap gap-3 lg:justify-end">
                             <Link
-                                href="/aktuality"
+                                href="/pro-zajemce/mladsi-deti"
                                 className={cn(
                                     buttonVariants({ size: "lg" }),
                                     "rounded-md px-6"
                                 )}
                             >
-                                Aktuality
+                                Pro mladší děti
                             </Link>
                             <Link
-                                href="/pro-zajemce"
+                                href="/pro-zajemce/predskolaci"
                                 className={cn(
                                     buttonVariants({
                                         variant: "outline",
@@ -86,7 +87,7 @@ export default function Hero() {
                                     "rounded-md px-6"
                                 )}
                             >
-                                Pro zájemce
+                                Pro předškoláky
                             </Link>
                         </div>
                     </div>

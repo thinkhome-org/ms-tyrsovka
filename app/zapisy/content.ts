@@ -1,16 +1,10 @@
-/**
- * Default content for the Zápisy page.
- * Replace this with a CMS fetch (e.g. get markdown from your CMS API) when ready.
- */
+import type { StaticPageContent } from "@/app/components/static-content-page";
 
-/** Optional images shown in the page header. When empty, only title + intro are shown. */
-export const ZAPISY_HEADER_IMAGES: { src: string; alt: string }[] = [
-    // Example (uncomment and add your images):
-    // { src: "/zapisy-1.jpg", alt: "Zápis do MŠ" },
-    // { src: "/zapisy-2.jpg", alt: "Den otevřených dveří" },
-];
-
-export const ZAPISY_MARKDOWN = `
+export const ZAPISY_PAGE: StaticPageContent = {
+    eyebrow: "Pro zájemce",
+    title: "Zápis a přijetí",
+    description: "Termíny, kdo může dítě přihlásit, postup, kritéria a dokumenty ke stažení.",
+    markdown: `
 ## Zápis pro rok 26/27
 
 Informace pro rodiče a nově příchozí děti.
@@ -79,6 +73,12 @@ V polovině června se uskuteční schůzka rodičů nových dětí k adaptaci a
 
 ### Dokumenty ke stažení
 
-- 26. směrnice – přijímání dětí 26–27, kritéria (PDF)
-- Jak pracovat v elektronickém předzápisu (PDF)
-`.trim();
+Formuláře a kritéria spravujeme na jednom místě:
+
+- [Žádost k předškolnímu vzdělávání](/uredni-deska#dokumenty)
+- [Kritéria pro přijetí](/uredni-deska#dokumenty)
+- [Evidenční list a potvrzení lékaře](/uredni-deska#dokumenty)
+
+Další dokumenty najdete na [úřední desce](/uredni-deska).
+`.trim(),
+};

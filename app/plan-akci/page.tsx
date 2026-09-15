@@ -1,13 +1,5 @@
-import StaticContentPage from "@/app/components/static-content-page";
-import { PLAN_AKCI_PAGE } from "@/lib/static-page-content";
-import { buildPageMetadata } from "@/lib/seo";
+import { redirect } from "next/navigation";
 
-export const metadata = buildPageMetadata({
-    title: PLAN_AKCI_PAGE.title,
-    description: PLAN_AKCI_PAGE.description,
-    path: "/plan-akci",
-});
-
-export default function PlanAkciPage() {
-    return <StaticContentPage content={PLAN_AKCI_PAGE} />;
+export default function PlanAkciRedirect() {
+    redirect("/aktuality");
 }

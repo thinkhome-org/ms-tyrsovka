@@ -1,18 +1,21 @@
 import Hero from "./components/hero";
+import { HomePaths } from "./components/home-paths";
+import { HomeParentLinks } from "./components/home-parent-links";
 import Aktuality from "./components/aktuality";
 import ProcMy from "./components/proc-my";
-import DostaneteZapisy from "./components/dostanete-zapisy";
+import { HomeGallery } from "./components/home-gallery";
+import HomeLocation from "./components/home-location";
 import { buildPageMetadata, buildAbsoluteUrl } from "@/lib/seo";
 
 const homeMetadata = buildPageMetadata({
     title: "MŠ Tyršovka",
     description:
-        "Mateřská škola Tyršovka v Praze 4 – Modřanech. Zápisy, aktuality, režim dne a kontakty pro rodiče.",
+        "Mateřská škola Tyršovka v Praze 4 – Modřanech. Informace pro zájemce i rodiče, aktuality a kontakty.",
     path: "/",
 });
 export const metadata = {
     ...homeMetadata,
-    title: undefined,
+    title: { absolute: "MŠ Tyršovka" },
 };
 
 function getOrganizationJsonLd() {
@@ -49,9 +52,12 @@ export default function Home() {
                 }}
             />
             <Hero />
-            <ProcMy />
+            <HomePaths />
+            <HomeParentLinks />
             <Aktuality />
-            <DostaneteZapisy />
+            <ProcMy />
+            <HomeGallery />
+            <HomeLocation />
         </main>
     );
 }

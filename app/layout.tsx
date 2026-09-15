@@ -45,7 +45,7 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="cs">
+        <html lang="cs" data-scroll-behavior="smooth">
             <body
                 className={`${lora.variable} ${sourceSans3.variable} flex min-h-screen flex-col antialiased font-sans`}
             >

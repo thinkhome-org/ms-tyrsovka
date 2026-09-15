@@ -2,32 +2,16 @@ import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import aktuality from "@/app/data/aktuality.json";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { linkButtonOutlineSm } from "@/lib/button-link-classes";
 import { buildPageMetadata, buildAbsoluteUrl } from "@/lib/seo";
+import { getBySlug } from "@/lib/cms/aktuality";
+import { formatDateCs } from "@/lib/cms/dates";
+import { coverSrc } from "@/lib/cms/media";
+import { AktualitaBody } from "@/app/components/aktualita-body";
 
-type Aktualita = {
-    title: string;
-    slug: string;
-    publishedAt: string; // YYYY-MM-DD
-    image: string;
-};
-
-function formatDateCs(dateIso: string) {
-    const date = new Date(dateIso);
-    if (Number.isNaN(date.getTime())) return dateIso;
-    return new Intl.DateTimeFormat("cs-CZ", {
-        day: "2-digit",
-        month: "2-digit",
-        year: "numeric",
-    }).format(date);
-}
-
-export function generateStaticParams() {
-    return (aktuality as Aktualita[]).map((a) => ({ slug: a.slug }));
-}
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({
     params,
@@ -35,14 +19,18 @@ export async function generateMetadata({
     params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
     const { slug } = await params;
-    const item = (aktuality as Aktualita[]).find((a) => a.slug === slug);
+    const item = await getBySlug(slug);
     if (!item) return {};
-    const path = `/aktuality/${slug}`;
+    const image = coverSrc(item.cover_key);
     return buildPageMetadata({
         title: item.title,
-        description: `${item.title} – aktuality MŠ Tyršovka.`,
-        path,
-        imagePath: item.image.startsWith("http") ? item.image : buildAbsoluteUrl(item.image),
+        description: item.excerpt || `${item.title} – aktuality MŠ Tyršovka.`,
+        path: `/aktuality/${slug}`,
+        imagePath: image
+            ? image.startsWith("http")
+                ? image
+                : buildAbsoluteUrl(image)
+            : "/logo.png",
     });
 }
 
@@ -52,16 +40,17 @@ export default async function AktualitaDetailPage({
     params: Promise<{ slug: string }>;
 }) {
     const { slug } = await params;
-
-    const item = (aktuality as Aktualita[]).find((a) => a.slug === slug);
+    const item = await getBySlug(slug);
     if (!item) notFound();
 
+    const image = coverSrc(item.cover_key);
+    const date = item.published_at || item.created_at;
     const articleJsonLd = {
         "@context": "https://schema.org",
         "@type": "NewsArticle",
         headline: item.title,
-        datePublished: item.publishedAt,
-        image: buildAbsoluteUrl(item.image.startsWith("http") ? item.image : item.image),
+        datePublished: date,
+        image: image ? buildAbsoluteUrl(image) : buildAbsoluteUrl("/logo.png"),
         publisher: {
             "@type": "Organization",
             name: "MŠ Tyršovka",
@@ -90,42 +79,34 @@ export default async function AktualitaDetailPage({
                 </div>
 
                 <Card className="mt-8 overflow-hidden bg-card">
-                    <div className="relative h-64 w-full bg-muted sm:h-80 lg:h-112">
-                        <Image
-                            src={item.image}
-                            alt={item.title}
-                            fill
-                            className="object-cover"
-                            sizes="100vw"
-                        />
-                    </div>
+                    {image ? (
+                        <div className="relative h-64 w-full bg-muted sm:h-80 lg:h-112">
+                            <Image
+                                src={image}
+                                alt={item.title}
+                                fill
+                                loading="eager"
+                                className="object-cover"
+                                sizes="100vw"
+                            />
+                        </div>
+                    ) : null}
                     <CardContent className="p-6 sm:p-8">
                         <Badge variant="soft" className="mb-4">
                             Publikováno{" "}
-                            <time dateTime={item.publishedAt}>
-                                {formatDateCs(item.publishedAt)}
-                            </time>
+                            <time dateTime={date}>{formatDateCs(date)}</time>
                         </Badge>
                         <h1 className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
                             {item.title}
                         </h1>
-
-                        <div className="mt-8 space-y-4 leading-relaxed text-muted-foreground">
-                            <p>
-                                Tohle je zatím ukázková stránka detailu aktuality.
-                                Až budeš chtít, napojíme sem reálný obsah z CMS
-                                nebo z JSON/MD souborů.
-                            </p>
-                            <p>
-                                Pro teď řešíme hlavně to, aby karta z domovské
-                                stránky vedla na hezkou URL podle slugu a měla
-                                sjednocený vzhled s novým homepage designem.
-                            </p>
-                        </div>
+                        {item.body_html ? (
+                            <div className="mt-6">
+                                <AktualitaBody html={item.body_html} />
+                            </div>
+                        ) : null}
                     </CardContent>
                 </Card>
             </div>
         </main>
     );
 }
-

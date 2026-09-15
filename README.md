@@ -1,36 +1,40 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# MŠ Tyršovka
 
-## Getting Started
+Web MŠ Tyršovka postavený na Next.js.
 
-First, run the development server:
+## Vývoj
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+pnpm install
+cp .dev.vars.example .dev.vars
+pnpm db:migrate:local
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Redakce aktualit je na `/admin`. Heslo nastavte v `.dev.vars` (`ADMIN_PASSWORD` a `AUTH_SECRET`).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Cloudflare (produkce)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. Vytvořte D1 databázi a R2 bucket:
 
-## Learn More
+```bash
+pnpm wrangler d1 create tyrsovka
+pnpm wrangler r2 bucket create tyrsovka-media
+```
 
-To learn more about Next.js, take a look at the following resources:
+2. Do `wrangler.jsonc` doplňte skutečné `database_id`.
+3. Spusťte migrace a nastavte tajemství:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+pnpm db:migrate:remote
+pnpm wrangler secret put ADMIN_PASSWORD
+pnpm wrangler secret put AUTH_SECRET
+pnpm cf-typegen
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Kontroly
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+pnpm lint
+pnpm build
+```

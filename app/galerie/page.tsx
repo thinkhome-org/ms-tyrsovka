@@ -176,7 +176,7 @@ export default function GaleriePage() {
                                 )}
                             >
                                 {album.title}
-                                <span className="ml-2 rounded-full bg-white/20 px-1.5 py-0.5 text-xs font-normal tabular-nums leading-none">
+                                <span className="ml-2 rounded-full border border-current px-1.5 py-0.5 text-xs font-normal tabular-nums leading-none">
                                     {album.photos.length}
                                 </span>
                             </button>

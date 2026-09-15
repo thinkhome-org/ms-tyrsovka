@@ -34,10 +34,10 @@ export default function ProcMy() {
                 <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
                     <div>
                         <p className="text-sm font-medium uppercase tracking-[0.18em] text-muted-foreground">
-                            O nás
+                            Jak to u nás chodí
                         </p>
                         <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl lg:text-5xl">
-                            Proč my
+                            Přístup a prostředí
                         </h2>
                     </div>
                     <div className="flex max-w-lg flex-col gap-6 lg:items-end lg:text-right">
@@ -46,7 +46,7 @@ export default function ProcMy() {
                             se s radostí a rostou v přirozeném prostředí.
                         </p>
                         <Link href="/o-nas" className={primaryButtonClass}>
-                            O nás
+                            O škole
                         </Link>
                     </div>
                 </div>
@@ -58,7 +58,7 @@ export default function ProcMy() {
                             key={item.title}
                             className="flex flex-col gap-4 border-b border-r-0 border-border px-0 py-10 sm:border-r sm:px-8 sm:last:border-r-0 lg:py-12 lg:first:pl-0"
                         >
-                            <span className="text-xs font-medium tabular-nums text-muted-foreground/60">
+                            <span className="text-xs font-medium tabular-nums text-muted-foreground">
                                 0{i + 1}
                             </span>
                             <h3 className="text-lg font-semibold tracking-tight text-foreground">

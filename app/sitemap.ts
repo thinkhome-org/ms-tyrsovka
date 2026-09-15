@@ -1,19 +1,21 @@
 import type { MetadataRoute } from "next";
 import { getBaseUrl } from "@/lib/seo";
-import aktuality from "@/app/data/aktuality.json";
+import { listPublished } from "@/lib/cms/aktuality";
+import { CLASSROOMS } from "@/lib/classrooms";
 
-type Aktualita = { slug: string };
+export const dynamic = "force-dynamic";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const base = getBaseUrl();
 
     const staticPaths = [
         "",
         "pro-zajemce",
+        "pro-zajemce/mladsi-deti",
+        "pro-zajemce/predskolaci",
         "zapisy",
         "nove-prijati",
-        "rezim-dne-a-provozni-doba",
-        "plan-akci",
+        "prakticke-informace",
         "jidelnicek",
         "kontakty",
         "o-nas",
@@ -24,6 +26,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
         "projekty-a-vyzvy",
         "uredni-deska",
         "spoluprace",
+        "zprava-csi",
+        "informacni-memorandum",
+        "pracovni-prilezitosti",
+        "ochrana-osobnich-udaju",
+        "prohlaseni-o-pristupnosti",
+        ...CLASSROOMS.map((classroom) => `tridy/${classroom.slug}`),
     ];
 
     const staticRoutes: MetadataRoute.Sitemap = staticPaths.map((path) => ({
@@ -33,9 +41,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
         priority: path === "" ? 1 : 0.8,
     }));
 
-    const aktualitySlugs = (aktuality as Aktualita[]).map((a) => ({
-        url: `${base}/aktuality/${a.slug}`,
-        lastModified: new Date(),
+    const published = await listPublished();
+    const aktualitySlugs = published.map((item) => ({
+        url: `${base}/aktuality/${item.slug}`,
+        lastModified: item.updated_at ? new Date(item.updated_at) : new Date(),
         changeFrequency: "monthly" as const,
         priority: 0.6,
     }));

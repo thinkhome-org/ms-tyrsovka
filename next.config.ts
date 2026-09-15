@@ -13,6 +13,20 @@ const nextConfig: NextConfig = {
             },
         ],
     },
+    async redirects() {
+        return [
+            {
+                source: "/rezim-dne-a-provozni-doba",
+                destination: "/prakticke-informace",
+                permanent: true,
+            },
+            {
+                source: "/plan-akci",
+                destination: "/aktuality",
+                permanent: true,
+            },
+        ];
+    },
 };
 
 export default nextConfig;

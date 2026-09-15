@@ -10,6 +10,7 @@ export type UredniDeskaItem = {
 };
 
 export type UredniDeskaSection = {
+    id: string;
     title: string;
     description: string;
     items: UredniDeskaItem[];
@@ -18,13 +19,14 @@ export type UredniDeskaSection = {
 
 export const UREDNI_DESKA_SECTIONS: UredniDeskaSection[] = [
     {
+        id: "zpravy",
         title: "Zprávy",
         description:
             "Výroční zprávy a další zveřejňované dokumenty školy.",
         items: [
             {
                 label: "Výroční zpráva 2024/25",
-                href: "http://files.site.site3.eu/f8/3e/f83e2234-030b-4972-8792-fc03e7b481f3.pdf",
+                href: "https://files.site.site3.eu/f8/3e/f83e2234-030b-4972-8792-fc03e7b481f3.pdf",
                 kind: "Přímé stažení PDF",
             },
             {
@@ -35,11 +37,12 @@ export const UREDNI_DESKA_SECTIONS: UredniDeskaSection[] = [
             {
                 label: "Zprávy ČŠI",
                 href: "https://www.tyrsovka.cz/o-%C5%A1kole/v%C3%BDro%C4%8Dn%C3%AD-zpr%C3%A1vy",
-                kind: "Připravit další položky",
+                kind: "Zdrojová stránka",
             },
         ],
     },
     {
+        id: "dokumenty",
         title: "Dokumenty ke stažení",
         description:
             "Formuláře a potvrzení pro rodiče, které škola zveřejňuje ke stažení.",
@@ -83,6 +86,7 @@ export const UREDNI_DESKA_SECTIONS: UredniDeskaSection[] = [
         note: "Potvrzení o výši vynaložených nákladů za umístění dítěte škola podle původního webu vydává vždy začátkem kalendářního roku ve třídách.",
     },
     {
+        id: "skolni-rad",
         title: "Školní řád",
         description:
             "Oficiální školní řád zveřejněný ke stažení pro rodiče i zájemce.",

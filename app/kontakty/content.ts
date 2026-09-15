@@ -5,18 +5,11 @@ export type ContactPerson = {
     phone?: string;
 };
 
-export type ClassroomContact = {
-    title: string;
-    teachers: string[];
-    location: string;
-    note?: string;
-};
-
 export const KONTAKTY_CONTENT = {
     eyebrow: "Kontakty",
     title: "Kontakty",
     description:
-        "Přehled kontaktů na vedení školy, provoz i jednotlivé třídy.",
+        "Vedení školy, třídy, jídelna, adresa a oficiální údaje MŠ Tyršovka.",
     introTitle: "Jak nás nejlépe kontaktovat",
     introText:
         "Omluvenky zadávejte do aplikace Naše MŠ. Do tříd volejte nebo pište jen v naléhavých případech. Při ranním provozu, odpoledním provozu nebo pobytu na zahradě škola doporučuje kontaktovat Citrónovou třídu.",
@@ -71,41 +64,4 @@ export const KONTAKTY_CONTENT = {
             "V případě brzkého ranního provozu, odpoledního provozu nebo pobytu dětí na zahradě kontaktujte tuto třídu.",
         phone: "+420 731 252 242",
     },
-    classroomContacts: [
-        {
-            title: "Jahodová třída",
-            teachers: ["Romana Novotná", "Iveta Masopustová"],
-            location: "3. pavilon, přízemí",
-        },
-        {
-            title: "Meruňková třída",
-            teachers: ["Gabriela Chajruševová", "Michaela Hartmannová"],
-            location: "1. pavilon, přízemí",
-        },
-        {
-            title: "Borůvková třída",
-            teachers: ["Kateřina Kovandová", "Julie Langová"],
-            location: "1. pavilon, patro",
-        },
-        {
-            title: "Citrónová třída",
-            teachers: [
-                "Kateřina Kroutilová",
-                "Karolína Rotmanová, DiS.",
-                "Karolína Nováková",
-            ],
-            location: "2. pavilon, přízemí",
-            note: "Během ranního a odpoledního provozu zajišťuje kontakt pro celou školku.",
-        },
-        {
-            title: "Jablková třída",
-            teachers: ["Mgr. Kateřina Novotná", "Jakub Mach, DiS."],
-            location: "2. pavilon, patro",
-        },
-        {
-            title: "Hrušková třída",
-            teachers: ["Petra Skružná", "Hana Flekalová, DiS."],
-            location: "3. pavilon, patro",
-        },
-    ] satisfies ClassroomContact[],
 } as const;
