@@ -9,7 +9,6 @@ import { buttonVariants } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { MAIN_NAV, type NavLink } from "@/lib/site-nav";
-import { ClassBar } from "./class-bar";
 
 function NavLinkItem({
     item,
@@ -31,6 +30,51 @@ function NavLinkItem({
             {item.label}
             {item.external ? <ArrowUpRight className="size-3.5 opacity-70" /> : null}
         </Link>
+    );
+}
+
+function SubNavItems({
+    items,
+    onClick,
+    itemClassName,
+    nestedClassName,
+}: {
+    items: NavLink[];
+    onClick?: () => void;
+    itemClassName: string;
+    nestedClassName: string;
+}) {
+    return (
+        <>
+            {items.map((sub) =>
+                sub.children?.length ? (
+                    <div key={sub.label} className="py-1">
+                        <NavLinkItem
+                            item={sub}
+                            onClick={onClick}
+                            className={cn(itemClassName, "font-medium text-foreground")}
+                        />
+                        <div className="ml-3 flex flex-col border-l border-border/80 pl-2">
+                            {sub.children.map((child) => (
+                                <NavLinkItem
+                                    key={child.href}
+                                    item={child}
+                                    onClick={onClick}
+                                    className={nestedClassName}
+                                />
+                            ))}
+                        </div>
+                    </div>
+                ) : (
+                    <NavLinkItem
+                        key={sub.label}
+                        item={sub}
+                        onClick={onClick}
+                        className={itemClassName}
+                    />
+                ),
+            )}
+        </>
     );
 }
 
@@ -112,14 +156,12 @@ function MobileMenu({ onClose }: { onClose: () => void }) {
                             </button>
                             {openSection === item.label ? (
                                 <div className="flex flex-col gap-1 pb-4">
-                                    {item.sub.map((sub) => (
-                                        <NavLinkItem
-                                            key={sub.label}
-                                            item={sub}
-                                            onClick={onClose}
-                                            className="flex items-center gap-1 py-2 text-base text-muted-foreground"
-                                        />
-                                    ))}
+                                    <SubNavItems
+                                        items={item.sub}
+                                        onClick={onClose}
+                                        itemClassName="flex items-center gap-1 py-2 text-base text-muted-foreground"
+                                        nestedClassName="flex items-center gap-1 py-1.5 text-sm text-muted-foreground"
+                                    />
                                 </div>
                             ) : null}
                         </div>
@@ -180,16 +222,14 @@ function DesktopNav() {
                                 />
                             </button>
                             {openDropdown === item.label ? (
-                                <div className="absolute left-0 top-full z-50 mt-2 w-56">
+                                <div className="absolute left-0 top-full z-50 mt-2 w-60">
                                     <Card className="border border-border bg-background p-1">
-                                        {item.sub.map((sub) => (
-                                            <NavLinkItem
-                                                key={sub.label}
-                                                item={sub}
-                                                onClick={() => setOpenDropdown(null)}
-                                                className="flex items-center justify-between gap-2 rounded px-3 py-2.5 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
-                                            />
-                                        ))}
+                                        <SubNavItems
+                                            items={item.sub}
+                                            onClick={() => setOpenDropdown(null)}
+                                            itemClassName="flex items-center justify-between gap-2 rounded px-3 py-2.5 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+                                            nestedClassName="flex items-center gap-2 rounded px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+                                        />
                                     </Card>
                                 </div>
                             ) : null}
@@ -265,7 +305,6 @@ export default function Nav() {
                         Menu
                     </button>
                 </div>
-                <ClassBar />
             </header>
 
             {canUsePortal &&

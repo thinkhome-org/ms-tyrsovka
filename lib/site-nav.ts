@@ -1,9 +1,12 @@
+import { CLASSROOMS } from "@/lib/classrooms";
+
 export const NASE_MS_URL = "https://nasems.cz/";
 
 export type NavLink = {
     label: string;
     href: string;
     external?: boolean;
+    children?: NavLink[];
 };
 
 export type NavItem = {
@@ -11,6 +14,11 @@ export type NavItem = {
     href?: string;
     sub?: NavLink[];
 };
+
+const CLASS_NAV_LINKS: NavLink[] = CLASSROOMS.map((classroom) => ({
+    label: `${classroom.symbol} ${classroom.name}`,
+    href: `/tridy/${classroom.slug}`,
+}));
 
 export const MAIN_NAV: NavItem[] = [
     { label: "Aktuality", href: "/aktuality" },
@@ -35,7 +43,7 @@ export const MAIN_NAV: NavItem[] = [
         label: "O škole",
         sub: [
             { label: "Představení školy", href: "/o-nas" },
-            { label: "Třídy", href: "/tridy" },
+            { label: "Třídy", href: "/tridy", children: CLASS_NAV_LINKS },
             { label: "Fotogalerie", href: "/galerie" },
             { label: "Zpráva ČŠI", href: "/zprava-csi" },
         ],
