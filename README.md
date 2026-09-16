@@ -7,11 +7,11 @@ Web MŠ Tyršovka postavený na Next.js.
 ```bash
 pnpm install
 cp .dev.vars.example .dev.vars
-pnpm db:migrate:local
+pnpm db:setup:local
 pnpm dev
 ```
 
-Redakce aktualit je na `/admin`. Heslo nastavte v `.dev.vars` (`ADMIN_PASSWORD` a `AUTH_SECRET`).
+`pnpm db:setup:local` vytvoří lokální D1 a nahraje ukázkové aktuality ze `seed/d1.sql` (stejná data jsou i v `seed/tyrsovka.sqlite`). Redakce je na `/admin`. Heslo nastavte v `.dev.vars` (`ADMIN_PASSWORD` a `AUTH_SECRET`).
 
 ## Cloudflare (produkce)
 
