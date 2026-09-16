@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { GALLERY_ALBUMS } from "@/app/galerie/content";
+import { linkButtonOutlineSm } from "@/lib/button-link-classes";
 
 export function HomeGallery() {
     const photos = GALLERY_ALBUMS.flatMap((album) =>
@@ -21,7 +22,7 @@ export function HomeGallery() {
                     </div>
                     <Link
                         href="/galerie"
-                        className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-foreground"
+                        className={`${linkButtonOutlineSm} gap-2`}
                     >
                         Celá galerie
                         <ArrowRight className="size-4" />

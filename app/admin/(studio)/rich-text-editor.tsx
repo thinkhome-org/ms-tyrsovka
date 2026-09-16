@@ -39,8 +39,8 @@ function ToolbarButton({
             title={label}
             onClick={onClick}
             className={cn(
-                "inline-flex size-9 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-accent hover:text-foreground",
-                active && "bg-primary/10 text-primary",
+                "btn-3d btn-3d-ghost inline-flex size-9 items-center justify-center text-muted-foreground",
+                active && "btn-3d-soft text-primary",
             )}
         >
             {children}

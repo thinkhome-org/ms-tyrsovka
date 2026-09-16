@@ -5,6 +5,7 @@ import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import { linkButtonOutlineSm } from "@/lib/button-link-classes";
+import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { GALLERY_ALBUMS, type GalleryPhoto } from "./content";
 
@@ -53,7 +54,7 @@ function Lightbox({
                         type="button"
                         aria-label="Předchozí"
                         onClick={(e) => { e.stopPropagation(); onPrev(); }}
-                        className="absolute left-3 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white/10 p-3 text-white transition hover:bg-white/25 sm:left-5"
+                        className="btn-3d btn-3d-on-dark absolute left-3 top-1/2 z-10 size-12 -translate-y-1/2 sm:left-5"
                     >
                         <ChevronLeft className="size-6" />
                     </button>
@@ -88,7 +89,7 @@ function Lightbox({
                         type="button"
                         aria-label="Další"
                         onClick={(e) => { e.stopPropagation(); onNext(); }}
-                        className="absolute right-3 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white/10 p-3 text-white transition hover:bg-white/25 sm:right-5"
+                        className="btn-3d btn-3d-on-dark absolute right-3 top-1/2 z-10 size-12 -translate-y-1/2 sm:right-5"
                     >
                         <ChevronRight className="size-6" />
                     </button>
@@ -98,7 +99,7 @@ function Lightbox({
                         type="button"
                         aria-label="Zavřít"
                         onClick={onClose}
-                        className="absolute right-3 top-3 z-10 rounded-full bg-white/10 p-2 text-white transition hover:bg-white/25 sm:right-5 sm:top-5"
+                        className="btn-3d btn-3d-on-dark absolute right-3 top-3 z-10 size-10 sm:right-5 sm:top-5"
                     >
                         <X className="size-5" />
                     </button>
@@ -169,10 +170,10 @@ export default function GaleriePage() {
                                 type="button"
                                 onClick={() => setActiveSlug(album.slug)}
                                 className={cn(
-                                    "inline-flex h-9 items-center rounded-md px-4 text-sm font-medium transition-colors",
-                                    activeSlug === album.slug
-                                        ? "bg-foreground text-background"
-                                        : "border border-border bg-background text-foreground hover:bg-muted"
+                                    buttonVariants({
+                                        variant: activeSlug === album.slug ? "dark" : "outline",
+                                        size: "sm",
+                                    }),
                                 )}
                             >
                                 {album.title}

@@ -5,6 +5,7 @@ import { SchoolEventsList } from "@/app/components/school-events";
 import { listPublished } from "@/lib/cms/aktuality";
 import { formatDateCs } from "@/lib/cms/dates";
 import { coverSrc } from "@/lib/cms/media";
+import { linkButtonOutlineSm } from "@/lib/button-link-classes";
 import { upcomingEvents } from "@/lib/events";
 
 export default async function Aktuality() {
@@ -29,7 +30,7 @@ export default async function Aktuality() {
                     </div>
                     <Link
                         href="/aktuality"
-                        className="hidden shrink-0 items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground sm:flex"
+                        className={`${linkButtonOutlineSm} hidden gap-2 sm:inline-flex`}
                     >
                         Všechny aktuality
                         <ArrowRight className="size-4" />
@@ -95,7 +96,7 @@ export default async function Aktuality() {
                 <div className="mt-8 flex sm:hidden">
                     <Link
                         href="/aktuality"
-                        className="flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+                        className={`${linkButtonOutlineSm} gap-2`}
                     >
                         Všechny aktuality
                         <ArrowRight className="size-4" />

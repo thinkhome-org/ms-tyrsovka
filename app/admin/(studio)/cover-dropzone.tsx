@@ -4,6 +4,7 @@ import { useCallback, useRef, useState } from "react";
 import { ImageIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { coverSrc } from "@/lib/cms/media";
+import { Button } from "@/components/ui/button";
 
 const ACCEPT = "image/jpeg,image/png,image/webp";
 
@@ -113,13 +114,15 @@ export function CoverDropzone({
                 }}
             />
             {coverKey ? (
-                <button
+                <Button
                     type="button"
-                    className="self-start text-sm text-muted-foreground underline-offset-2 hover:text-foreground hover:underline"
+                    variant="outline"
+                    size="sm"
+                    className="self-start"
                     onClick={() => onChange(null)}
                 >
                     Odebrat fotku
-                </button>
+                </Button>
             ) : null}
             {error ? (
                 <p className="text-sm text-destructive" role="alert">

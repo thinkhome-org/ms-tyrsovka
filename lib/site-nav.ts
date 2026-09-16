@@ -9,9 +9,12 @@ export type NavLink = {
     children?: NavLink[];
 };
 
+export type NavTone = "jahoda" | "merunka" | "boruvka" | "citron" | "jablko" | "hruska";
+
 export type NavItem = {
     label: string;
     href?: string;
+    tone: NavTone;
     sub?: NavLink[];
 };
 
@@ -21,9 +24,10 @@ const CLASS_NAV_LINKS: NavLink[] = CLASSROOMS.map((classroom) => ({
 }));
 
 export const MAIN_NAV: NavItem[] = [
-    { label: "Aktuality", href: "/aktuality" },
+    { label: "Aktuality", href: "/aktuality", tone: "jahoda" },
     {
         label: "Pro zájemce",
+        tone: "merunka",
         sub: [
             { label: "Pro mladší děti", href: "/pro-zajemce/mladsi-deti" },
             { label: "Pro předškoláky", href: "/pro-zajemce/predskolaci" },
@@ -32,15 +36,17 @@ export const MAIN_NAV: NavItem[] = [
     },
     {
         label: "Pro rodiče",
+        tone: "boruvka",
         sub: [
             { label: "Nově přijatí", href: "/nove-prijati" },
             { label: "Praktické informace", href: "/prakticke-informace" },
             { label: "Naše MŠ", href: NASE_MS_URL, external: true },
         ],
     },
-    { label: "Jídelníček", href: "/jidelnicek" },
+    { label: "Jídelníček", href: "/jidelnicek", tone: "citron" },
     {
         label: "O škole",
+        tone: "jablko",
         sub: [
             { label: "Představení školy", href: "/o-nas" },
             { label: "Třídy", href: "/tridy", children: CLASS_NAV_LINKS },
@@ -48,7 +54,7 @@ export const MAIN_NAV: NavItem[] = [
             { label: "Zpráva ČŠI", href: "/zprava-csi" },
         ],
     },
-    { label: "Kontakty", href: "/kontakty" },
+    { label: "Kontakty", href: "/kontakty", tone: "hruska" },
 ];
 
 export const FOOTER_COLUMNS: { title: string; links: NavLink[] }[] = [

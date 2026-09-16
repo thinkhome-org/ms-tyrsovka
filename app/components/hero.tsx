@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { buttonVariants } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 import { GALLERY_ALBUMS } from "@/app/galerie/content";
 
 const ALL_PHOTOS = GALLERY_ALBUMS.flatMap((a) => a.photos);
@@ -70,22 +69,16 @@ export default function Hero() {
                         <div className="flex flex-wrap gap-3 lg:justify-end">
                             <Link
                                 href="/pro-zajemce/mladsi-deti"
-                                className={cn(
-                                    buttonVariants({ size: "lg" }),
-                                    "rounded-md px-6"
-                                )}
+                                className={buttonVariants({ size: "lg" })}
                             >
                                 Pro mladší děti
                             </Link>
                             <Link
                                 href="/pro-zajemce/predskolaci"
-                                className={cn(
-                                    buttonVariants({
-                                        variant: "outline",
-                                        size: "lg",
-                                    }),
-                                    "rounded-md px-6"
-                                )}
+                                className={buttonVariants({
+                                    variant: "outline",
+                                    size: "lg",
+                                })}
                             >
                                 Pro předškoláky
                             </Link>
