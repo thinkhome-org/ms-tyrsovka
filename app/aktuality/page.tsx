@@ -8,7 +8,7 @@ import { buildPageMetadata } from "@/lib/seo";
 import { listPublished } from "@/lib/cms/aktuality";
 import { formatDateCs } from "@/lib/cms/dates";
 import { coverSrc } from "@/lib/cms/media";
-import { pastEvents, upcomingEvents } from "@/lib/events";
+import { pastEvents, upcomingEvents } from "@/lib/cms/events";
 
 export const dynamic = "force-dynamic";
 
@@ -21,8 +21,10 @@ export const metadata = buildPageMetadata({
 
 export default async function AktualityPage() {
     const items = await listPublished();
-    const upcoming = upcomingEvents();
-    const past = pastEvents();
+    const [upcoming, past] = await Promise.all([
+        upcomingEvents(),
+        pastEvents(),
+    ]);
 
     return (
         <main className="flex-1 text-zinc-900">
@@ -46,9 +48,14 @@ export default async function AktualityPage() {
                 </div>
 
                 <section className="mt-12">
-                    <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
-                        Nadcházející akce
-                    </h2>
+                    <div className="flex flex-wrap items-end justify-between gap-3">
+                        <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
+                            Nadcházející akce
+                        </h2>
+                        <Link href="/plan-akci" className={linkButtonOutlineSm}>
+                            Celý plán akcí
+                        </Link>
+                    </div>
                     <div className="mt-6">
                         <SchoolEventsList
                             events={upcoming}

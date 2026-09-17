@@ -6,11 +6,11 @@ import { listPublished } from "@/lib/cms/aktuality";
 import { formatDateCs } from "@/lib/cms/dates";
 import { coverSrc } from "@/lib/cms/media";
 import { linkButtonOutlineSm } from "@/lib/button-link-classes";
-import { upcomingEvents } from "@/lib/events";
+import { upcomingEvents } from "@/lib/cms/events";
 
 export default async function Aktuality() {
     const items = await listPublished(5);
-    const events = upcomingEvents().slice(0, 4);
+    const events = (await upcomingEvents()).slice(0, 4);
 
     if (items.length === 0 && events.length === 0) {
         return null;

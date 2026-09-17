@@ -150,14 +150,6 @@ export const JIDELNICEK_PAGE: StaticPageContent = {
     title: "Jídelníček",
     description: "Aktuální týden, alergeny a praktické informace ke stravování.",
     markdown: `
-## Aktuální týden a jídelníček
-
-![Aktuální jídelní lístek](https://files.site.site3.eu/03/f6/03f6cdea-3f9e-47fb-b705-89d491a38e44.jpg)
-
-Jídelní lístek je na stránce i v telefonu čitelný jako obrázek aktuálního týdne.
-
----
-
 ## Alergeny a vysvětlivky
 
 Čísla alergenů jsou uvedená u jídel na jídelníčku. Podrobnější vysvětlivky doplníme sem, jakmile je jídelna sjednotí na jednom místě.

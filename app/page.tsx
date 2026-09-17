@@ -1,4 +1,5 @@
 import Hero from "./components/hero";
+import { SiteBanner } from "./components/site-banner";
 import { HomePaths } from "./components/home-paths";
 import { HomeParentLinks } from "./components/home-parent-links";
 import Aktuality from "./components/aktuality";
@@ -17,6 +18,8 @@ export const metadata = {
     ...homeMetadata,
     title: { absolute: "MŠ Tyršovka" },
 };
+
+export const dynamic = "force-dynamic";
 
 function getOrganizationJsonLd() {
     return {
@@ -51,6 +54,7 @@ export default function Home() {
                     __html: JSON.stringify(getOrganizationJsonLd()),
                 }}
             />
+            <SiteBanner />
             <Hero />
             <HomePaths />
             <HomeParentLinks />

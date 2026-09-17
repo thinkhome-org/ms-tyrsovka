@@ -1,6 +1,12 @@
 import { SCHOOL_CONTACT } from "@/lib/site-nav";
 
-export function SchoolMap({ className }: { className?: string }) {
+export function SchoolMap({
+    className,
+    address = SCHOOL_CONTACT.address,
+}: {
+    className?: string;
+    address?: string;
+}) {
     return (
         <div className={className}>
             <div className="overflow-hidden rounded-xl bg-muted">
@@ -16,7 +22,7 @@ export function SchoolMap({ className }: { className?: string }) {
                 </div>
             </div>
             <p className="mt-4 text-sm leading-relaxed text-muted-foreground sm:text-base">
-                {SCHOOL_CONTACT.address}
+                {address}
             </p>
         </div>
     );

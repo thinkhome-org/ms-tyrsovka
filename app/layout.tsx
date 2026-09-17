@@ -15,6 +15,8 @@ const sourceSans3 = Source_Sans_3({
     subsets: ["latin"],
 });
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
     metadataBase: new URL(getBaseUrl()),
     title: {

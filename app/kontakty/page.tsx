@@ -10,10 +10,14 @@ import {
 } from "lucide-react";
 import { SchoolMap } from "@/app/components/school-map";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { CLASSROOMS } from "@/lib/classrooms";
+import { listClassroomsWithContacts } from "@/lib/cms/classrooms";
+import { listPeople } from "@/lib/cms/people";
+import { getSettingsMap } from "@/lib/cms/settings";
 import { linkButtonOutlineSm } from "@/lib/button-link-classes";
 import { buildPageMetadata } from "@/lib/seo";
 import { KONTAKTY_CONTENT } from "./content";
+
+export const dynamic = "force-dynamic";
 
 export const metadata = buildPageMetadata({
     title: KONTAKTY_CONTENT.title,
@@ -54,14 +58,30 @@ function DetailRow({
     );
 }
 
-export default function KontaktyPage() {
+export default async function KontaktyPage() {
     const content = KONTAKTY_CONTENT;
-    const leadership = content.managementContacts.filter(
-        (person) => person.role !== "Hospodářka a vedoucí školní jídelny",
-    );
-    const kitchen = content.managementContacts.find(
-        (person) => person.role === "Hospodářka a vedoucí školní jídelny",
-    );
+    const [settings, people, classrooms] = await Promise.all([
+        getSettingsMap(),
+        listPeople(),
+        listClassroomsWithContacts(),
+    ]);
+    const leadership = people.filter((person) => person.section === "vedeni");
+    const kitchen = people.filter((person) => person.section === "jidelna");
+    const phoneHref = `tel:${settings.phone.replace(/\s+/g, "")}`;
+    const urgentHref = settings.urgent_phone
+        ? `tel:${settings.urgent_phone.replace(/\s+/g, "")}`
+        : undefined;
+    const quickLinks = [
+        {
+            label: "Napsat ředitelce",
+            href: `mailto:${settings.email}`,
+        },
+        {
+            label: "Zavolat do MŠ",
+            href: phoneHref,
+        },
+        ...content.quickLinks.filter((link) => link.href.startsWith("http")),
+    ];
 
     return (
         <main className="flex-1 text-zinc-900">
@@ -86,7 +106,7 @@ export default function KontaktyPage() {
                     </header>
 
                     <div className="mt-8 flex flex-wrap gap-3">
-                        {content.quickLinks.map((link) => (
+                        {quickLinks.map((link) => (
                             <Link
                                 key={link.href}
                                 href={link.href}
@@ -114,63 +134,71 @@ export default function KontaktyPage() {
                                     Vedení školy
                                 </h2>
                                 <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
-                                    {content.school.founder}
+                                    {settings.founder}
                                 </p>
                             </CardHeader>
                             <CardContent className="p-6 sm:p-8">
-                                <div className="grid gap-4 md:grid-cols-2">
-                                    {leadership.map((person) => (
-                                        <div
-                                            key={person.role}
-                                            className="rounded-xl border border-border bg-background p-5"
-                                        >
-                                            <p className="text-sm font-medium uppercase tracking-[0.14em] text-muted-foreground">
-                                                {person.role}
-                                            </p>
-                                            <h3 className="mt-3 text-xl font-semibold tracking-tight text-foreground">
-                                                {person.name}
-                                            </h3>
-                                            <div className="mt-4 space-y-2 text-sm leading-relaxed text-muted-foreground">
-                                                {person.email ? (
-                                                    <p>
-                                                        E-mail:{" "}
-                                                        <a
-                                                            href={`mailto:${person.email}`}
-                                                            className="font-medium text-foreground underline-offset-2 hover:text-primary hover:underline"
-                                                        >
-                                                            {person.email}
-                                                        </a>
-                                                    </p>
-                                                ) : null}
-                                                {person.phone ? (
-                                                    <p>
-                                                        Telefon:{" "}
-                                                        <a
-                                                            href={`tel:${person.phone.replace(/\s+/g, "")}`}
-                                                            className="font-medium text-foreground underline-offset-2 hover:text-primary hover:underline"
-                                                        >
-                                                            {person.phone}
-                                                        </a>
-                                                    </p>
-                                                ) : null}
+                                {leadership.length === 0 ? (
+                                    <p className="text-sm text-muted-foreground">
+                                        Kontakty vedení zatím nejsou vyplněné.
+                                    </p>
+                                ) : (
+                                    <div className="grid gap-4 md:grid-cols-2">
+                                        {leadership.map((person) => (
+                                            <div
+                                                key={person.id}
+                                                className="rounded-xl border border-border bg-background p-5"
+                                            >
+                                                <p className="text-sm font-medium uppercase tracking-[0.14em] text-muted-foreground">
+                                                    {person.role}
+                                                </p>
+                                                <h3 className="mt-3 text-xl font-semibold tracking-tight text-foreground">
+                                                    {person.name}
+                                                </h3>
+                                                <div className="mt-4 space-y-2 text-sm leading-relaxed text-muted-foreground">
+                                                    {person.email ? (
+                                                        <p>
+                                                            E-mail:{" "}
+                                                            <a
+                                                                href={`mailto:${person.email}`}
+                                                                className="font-medium text-foreground underline-offset-2 hover:text-primary hover:underline"
+                                                            >
+                                                                {person.email}
+                                                            </a>
+                                                        </p>
+                                                    ) : null}
+                                                    {person.phone ? (
+                                                        <p>
+                                                            Telefon:{" "}
+                                                            <a
+                                                                href={`tel:${person.phone.replace(/\s+/g, "")}`}
+                                                                className="font-medium text-foreground underline-offset-2 hover:text-primary hover:underline"
+                                                            >
+                                                                {person.phone}
+                                                            </a>
+                                                        </p>
+                                                    ) : null}
+                                                </div>
                                             </div>
-                                        </div>
-                                    ))}
-                                </div>
-                                <div className="mt-6 rounded-xl border border-border/80 bg-muted/30 p-4">
-                                    <p className="text-sm font-medium text-foreground">
-                                        {content.urgentClassPhone.title}
-                                    </p>
-                                    <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
-                                        {content.urgentClassPhone.description}
-                                    </p>
-                                    <a
-                                        href={`tel:${content.urgentClassPhone.phone.replace(/\s+/g, "")}`}
-                                        className="mt-3 inline-flex text-sm font-medium text-primary underline underline-offset-2"
-                                    >
-                                        {content.urgentClassPhone.phone}
-                                    </a>
-                                </div>
+                                        ))}
+                                    </div>
+                                )}
+                                {settings.urgent_phone ? (
+                                    <div className="mt-6 rounded-xl border border-border/80 bg-muted/30 p-4">
+                                        <p className="text-sm font-medium text-foreground">
+                                            {settings.urgent_title}
+                                        </p>
+                                        <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+                                            {settings.urgent_description}
+                                        </p>
+                                        <a
+                                            href={urgentHref}
+                                            className="mt-3 inline-flex text-sm font-medium text-primary underline underline-offset-2"
+                                        >
+                                            {settings.urgent_phone}
+                                        </a>
+                                    </div>
+                                ) : null}
                             </CardContent>
                         </Card>
                     </section>
@@ -186,7 +214,7 @@ export default function KontaktyPage() {
                         </div>
 
                         <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-                            {CLASSROOMS.map((classroom) => (
+                            {classrooms.map((classroom) => (
                                 <Card
                                     key={classroom.slug}
                                     className="content-card overflow-hidden"
@@ -233,7 +261,7 @@ export default function KontaktyPage() {
                         </div>
                     </section>
 
-                    {kitchen ? (
+                    {kitchen.length > 0 ? (
                         <section id="jidelna" className="mt-12 scroll-mt-28">
                             <Card className="content-card overflow-hidden">
                                 <CardHeader className="border-b border-border/80 bg-muted/40 py-6">
@@ -244,14 +272,40 @@ export default function KontaktyPage() {
                                         Kontakt pro otázky ke stravování.
                                     </p>
                                 </CardHeader>
-                                <CardContent className="p-6 sm:p-8">
-                                    <p className="text-sm font-medium uppercase tracking-[0.14em] text-muted-foreground">
-                                        {kitchen.role}
-                                    </p>
-                                    <h3 className="mt-3 text-xl font-semibold tracking-tight">
-                                        {kitchen.name}
-                                    </h3>
-                                    <p className="mt-4 text-sm text-muted-foreground">
+                                <CardContent className="space-y-8 p-6 sm:p-8">
+                                    {kitchen.map((person) => (
+                                        <div key={person.id}>
+                                            <p className="text-sm font-medium uppercase tracking-[0.14em] text-muted-foreground">
+                                                {person.role}
+                                            </p>
+                                            <h3 className="mt-3 text-xl font-semibold tracking-tight">
+                                                {person.name}
+                                            </h3>
+                                            {person.email ? (
+                                                <p className="mt-3 text-sm text-muted-foreground">
+                                                    E-mail:{" "}
+                                                    <a
+                                                        href={`mailto:${person.email}`}
+                                                        className="font-medium text-foreground underline-offset-2 hover:text-primary hover:underline"
+                                                    >
+                                                        {person.email}
+                                                    </a>
+                                                </p>
+                                            ) : null}
+                                            {person.phone ? (
+                                                <p className="mt-2 text-sm text-muted-foreground">
+                                                    Telefon:{" "}
+                                                    <a
+                                                        href={`tel:${person.phone.replace(/\s+/g, "")}`}
+                                                        className="font-medium text-foreground underline-offset-2 hover:text-primary hover:underline"
+                                                    >
+                                                        {person.phone}
+                                                    </a>
+                                                </p>
+                                            ) : null}
+                                        </div>
+                                    ))}
+                                    <p className="text-sm text-muted-foreground">
                                         Aktuální jídelníček je na stránce{" "}
                                         <Link
                                             href="/jidelnicek"
@@ -274,7 +328,7 @@ export default function KontaktyPage() {
                                 </h2>
                             </CardHeader>
                             <CardContent className="p-6 sm:p-8">
-                                <SchoolMap />
+                                <SchoolMap address={settings.address} />
                             </CardContent>
                         </Card>
                     </section>
@@ -290,39 +344,39 @@ export default function KontaktyPage() {
                                 <DetailRow
                                     icon={<School className="size-4" />}
                                     label="Škola"
-                                    value={content.school.name}
+                                    value={settings.org_name}
                                 />
                                 <DetailRow
                                     icon={<MapPin className="size-4" />}
                                     label="Adresa"
-                                    value={content.school.address.join(", ")}
+                                    value={settings.address}
                                 />
                                 <DetailRow
                                     icon={<Mail className="size-4" />}
                                     label="E-mail"
-                                    value={content.school.email}
-                                    href={`mailto:${content.school.email}`}
+                                    value={settings.email}
+                                    href={`mailto:${settings.email}`}
                                 />
                                 <DetailRow
                                     icon={<Phone className="size-4" />}
                                     label="Telefon"
-                                    value={content.school.phone}
-                                    href={`tel:${content.school.phone.replace(/\s+/g, "")}`}
+                                    value={settings.phone}
+                                    href={phoneHref}
                                 />
                                 <DetailRow
                                     icon={<Building2 className="size-4" />}
                                     label="IČ"
-                                    value={content.school.ico}
+                                    value={settings.ico}
                                 />
                                 <DetailRow
                                     icon={<Building2 className="size-4" />}
                                     label="Datová schránka"
-                                    value={content.school.databox}
+                                    value={settings.databox}
                                 />
                                 <DetailRow
                                     icon={<CreditCard className="size-4" />}
                                     label="Běžný účet"
-                                    value={content.school.bankAccount}
+                                    value={settings.bank_account}
                                 />
                             </CardContent>
                         </Card>

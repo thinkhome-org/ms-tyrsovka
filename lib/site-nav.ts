@@ -63,6 +63,7 @@ export const FOOTER_COLUMNS: { title: string; links: NavLink[] }[] = [
         links: [
             { label: "Praktické informace", href: "/prakticke-informace" },
             { label: "Jídelníček", href: "/jidelnicek" },
+            { label: "Plán akcí", href: "/plan-akci" },
             { label: "Naše MŠ", href: NASE_MS_URL, external: true },
             { label: "Kontakty", href: "/kontakty" },
         ],

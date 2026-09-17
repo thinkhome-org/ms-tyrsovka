@@ -1,9 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import { FOOTER_COLUMNS, SCHOOL_CONTACT } from "@/lib/site-nav";
+import { FOOTER_COLUMNS } from "@/lib/site-nav";
+import { getSchoolContact } from "@/lib/cms/settings";
 
-export default function Footer() {
+export default async function Footer() {
+    const contact = await getSchoolContact();
+
     return (
         <footer data-site-footer id="kontakt" className="w-full bg-black text-white">
             <div className="page-shell py-14 sm:py-16">
@@ -21,24 +24,24 @@ export default function Footer() {
                             </div>
                             <div>
                                 <div className="text-xl font-semibold tracking-tight text-white">
-                                    {SCHOOL_CONTACT.name}
+                                    {contact.name}
                                 </div>
                                 <div className="text-sm text-white/65">Mateřská škola</div>
                             </div>
                         </div>
                         <div className="space-y-1 text-sm leading-relaxed text-white/75">
-                            <p>{SCHOOL_CONTACT.address}</p>
+                            <p>{contact.address}</p>
                             <p>
-                                <a href={SCHOOL_CONTACT.phoneHref} className="hover:text-white">
-                                    {SCHOOL_CONTACT.phone}
+                                <a href={contact.phoneHref} className="hover:text-white">
+                                    {contact.phone}
                                 </a>
                             </p>
                             <p>
                                 <a
-                                    href={`mailto:${SCHOOL_CONTACT.email}`}
+                                    href={`mailto:${contact.email}`}
                                     className="hover:text-white"
                                 >
-                                    {SCHOOL_CONTACT.email}
+                                    {contact.email}
                                 </a>
                             </p>
                         </div>

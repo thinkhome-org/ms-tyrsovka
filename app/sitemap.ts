@@ -22,6 +22,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         "tridy",
         "galerie",
         "aktuality",
+        "plan-akci",
         "svp",
         "projekty-a-vyzvy",
         "uredni-deska",

@@ -1,11 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { CLASSROOMS, getClassroom } from "@/lib/classrooms";
+import { CLASSROOMS } from "@/lib/classrooms";
+import { getClassroomWithContacts } from "@/lib/cms/classrooms";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { linkButtonOutlineSm } from "@/lib/button-link-classes";
 import { buildPageMetadata } from "@/lib/seo";
+
+export const dynamic = "force-dynamic";
 
 export function generateStaticParams() {
     return CLASSROOMS.map((classroom) => ({ slug: classroom.slug }));
@@ -17,7 +20,7 @@ export async function generateMetadata({
     params: Promise<{ slug: string }>;
 }) {
     const { slug } = await params;
-    const classroom = getClassroom(slug);
+    const classroom = await getClassroomWithContacts(slug);
     if (!classroom) return {};
     return buildPageMetadata({
         title: classroom.fullName,
@@ -32,7 +35,7 @@ export default async function ClassroomPage({
     params: Promise<{ slug: string }>;
 }) {
     const { slug } = await params;
-    const classroom = getClassroom(slug);
+    const classroom = await getClassroomWithContacts(slug);
     if (!classroom) notFound();
 
     return (

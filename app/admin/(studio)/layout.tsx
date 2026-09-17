@@ -3,6 +3,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { isAdmin } from "@/lib/cms/auth";
 import { LogoutButton } from "./logout-button";
+import { StudioNav } from "./studio-nav";
 
 export const dynamic = "force-dynamic";
 
@@ -34,19 +35,25 @@ export default async function AdminStudioLayout({
                                 Nástěnka
                             </p>
                             <p className="truncate font-heading text-lg font-semibold tracking-tight">
-                                Redakce aktualit
+                                Redakce
                             </p>
                         </div>
                     </Link>
-                    <div className="flex items-center gap-2 sm:gap-3">
+                    <div className="flex min-w-0 flex-1 items-center justify-end gap-2 sm:gap-3">
+                        <div className="hidden min-w-0 flex-1 justify-center lg:flex">
+                            <StudioNav />
+                        </div>
                         <Link
-                            href="/aktuality"
+                            href="/"
                             className="hidden text-sm text-muted-foreground transition-colors hover:text-foreground sm:inline"
                         >
                             Zobrazit web
                         </Link>
                         <LogoutButton />
                     </div>
+                </div>
+                <div className="mx-auto w-full max-w-7xl px-5 pb-3 lg:hidden sm:px-8">
+                    <StudioNav />
                 </div>
             </header>
             <div className="flex-1">{children}</div>

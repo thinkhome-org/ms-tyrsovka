@@ -1,8 +1,10 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { SchoolMap } from "@/app/components/school-map";
+import { getSchoolContact } from "@/lib/cms/settings";
 
-export default function HomeLocation() {
+export default async function HomeLocation() {
+    const contact = await getSchoolContact();
     return (
         <section className="text-zinc-900">
             <div className="page-shell py-20 sm:py-24">
@@ -13,7 +15,7 @@ export default function HomeLocation() {
                     Adresa a příchod
                 </h2>
                 <div className="mt-10">
-                    <SchoolMap />
+                    <SchoolMap address={contact.address} />
                 </div>
                 <div className="mt-6 flex justify-end">
                     <Link

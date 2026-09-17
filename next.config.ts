@@ -20,11 +20,6 @@ const nextConfig: NextConfig = {
                 destination: "/prakticke-informace",
                 permanent: true,
             },
-            {
-                source: "/plan-akci",
-                destination: "/aktuality",
-                permanent: true,
-            },
         ];
     },
 };
