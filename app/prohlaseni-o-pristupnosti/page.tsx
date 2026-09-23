@@ -12,11 +12,31 @@ export default function AccessibilityPage() {
         <StubPage
             eyebrow="Web"
             title="Prohlášení o přístupnosti"
-            description="Stránka pro prohlášení o přístupnosti webu podle požadavků na weby veřejné správy."
+            description="Jak je web MŠ Tyršovka připravený pro čtení, klávesnici a běžné prohlížeče."
         >
-            <p>
-                Text prohlášení sem doplníme. Web je v češtině, používá sémantické nadpisy a ovladatelnou navigaci z klávesnice.
-            </p>
+            <div className="space-y-4">
+                <p>
+                    Web je v češtině. Stránky používají sémantické nadpisy, odkazy s textem a
+                    ovladatelnou navigaci z klávesnice. Hlavní menu lze otevřít a zavřít klávesou
+                    Escape.
+                </p>
+                <p>
+                    Obrázky mají popisek, kde nese význam. Logo, maskoti tříd a schéma příchodu jsou
+                    doplněné alternativním textem. Barvy v menu slouží k rozlišení položek a text
+                    zůstává čitelný i bez nich.
+                </p>
+                <p>
+                    Mapa Google je volitelná a nenačte se bez souhlasu, aby stránka šla používat i
+                    bez obsahu třetí strany. Pokud narazíte na překážku v přístupnosti, napište na{" "}
+                    <a
+                        href="mailto:reditelka@tyrsovka.cz"
+                        className="text-primary underline underline-offset-2"
+                    >
+                        reditelka@tyrsovka.cz
+                    </a>
+                    .
+                </p>
+            </div>
         </StubPage>
     );
 }

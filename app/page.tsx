@@ -1,6 +1,5 @@
 import Hero from "./components/hero";
 import { SiteBanner } from "./components/site-banner";
-import { HomePaths } from "./components/home-paths";
 import { HomeParentLinks } from "./components/home-parent-links";
 import Aktuality from "./components/aktuality";
 import ProcMy from "./components/proc-my";
@@ -56,7 +55,6 @@ export default function Home() {
             />
             <SiteBanner />
             <Hero />
-            <HomePaths />
             <HomeParentLinks />
             <Aktuality />
             <ProcMy />

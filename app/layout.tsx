@@ -3,6 +3,7 @@ import { Lora, Source_Sans_3 } from "next/font/google";
 import "./globals.css";
 import Nav from "./components/nav";
 import Footer from "./components/footer";
+import { CookieBanner } from "./components/cookie-banner";
 import { getBaseUrl, defaultMetadata } from "@/lib/seo";
 
 const lora = Lora({
@@ -32,7 +33,7 @@ export const metadata: Metadata = {
         description: defaultMetadata.defaultDescription,
         locale: "cs_CZ",
         type: "website",
-        images: [{ url: "/logo.png", width: 512, height: 512, alt: defaultMetadata.siteName }],
+        images: [{ url: "/logo.png", width: 548, height: 520, alt: defaultMetadata.siteName }],
     },
     twitter: {
         card: "summary_large_image",
@@ -54,6 +55,7 @@ export default function RootLayout({
                 <Nav />
                 {children}
                 <Footer />
+                <CookieBanner />
             </body>
         </html>
     );

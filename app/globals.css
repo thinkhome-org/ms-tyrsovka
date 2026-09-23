@@ -378,10 +378,10 @@ h6 {
 }
 
 .nav-chip-hruska {
-    --raised-fill: oklch(0.93 0.07 118 / 0.52);
-    --raised-ink: oklch(0.35 0.1 122);
-    --raised-line: oklch(0.7 0.1 118 / 0.3);
-    --raised-glow: oklch(0.68 0.11 118 / 0.24);
+    --raised-fill: oklch(0.9 0.07 255 / 0.5);
+    --raised-ink: oklch(0.34 0.12 255);
+    --raised-line: oklch(0.62 0.1 255 / 0.3);
+    --raised-glow: oklch(0.52 0.12 255 / 0.26);
 }
 }
 
@@ -477,11 +477,12 @@ h6 {
     .nav-chip-boruvka { --raised-fill: oklch(0.94 0.045 292); }
     .nav-chip-citron { --raised-fill: oklch(0.96 0.055 98); }
     .nav-chip-jablko { --raised-fill: oklch(0.94 0.045 142); }
-    .nav-chip-hruska { --raised-fill: oklch(0.95 0.045 118); }
+    .nav-chip-hruska { --raised-fill: oklch(0.93 0.05 255); }
 }
 
 body:has([data-admin-shell]) [data-site-nav],
-body:has([data-admin-shell]) [data-site-footer] {
+body:has([data-admin-shell]) [data-site-footer],
+body:has([data-admin-shell]) [data-cookie-banner] {
     display: none;
 }
 

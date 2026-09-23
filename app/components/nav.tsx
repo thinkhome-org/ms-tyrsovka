@@ -99,18 +99,16 @@ function BrandChip({ onClick }: { onClick?: () => void }) {
         <Link
             href="/"
             onClick={onClick}
-            className={cn(navChipClass("frost"), "gap-2.5 py-0 pl-1.5 pr-1.5 sm:pr-4")}
+            className={cn(navChipClass("frost"), "h-12 gap-2.5 py-0 pl-1 pr-3 sm:pr-4")}
         >
-            <span className="relative flex size-9 shrink-0 items-center justify-center overflow-hidden rounded-[0.9rem] bg-white/70">
-                <Image
-                    src="/logo.png"
-                    alt="MŠ Tyršovka logo"
-                    width={161}
-                    height={154}
-                    preload={!onClick}
-                    className="h-auto w-8 object-contain"
-                />
-            </span>
+            <Image
+                src="/logo.png"
+                alt="MŠ Tyršovka logo"
+                width={548}
+                height={520}
+                preload={!onClick}
+                className="h-10 w-auto shrink-0 object-contain"
+            />
             <span className="hidden min-w-0 text-left sm:block">
                 <span className="block truncate text-sm font-semibold tracking-tight">
                     MŠ Tyršovka

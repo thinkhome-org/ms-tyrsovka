@@ -31,6 +31,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         "informacni-memorandum",
         "pracovni-prilezitosti",
         "ochrana-osobnich-udaju",
+        "cookies",
         "prohlaseni-o-pristupnosti",
         ...CLASSROOMS.map((classroom) => `tridy/${classroom.slug}`),
     ];

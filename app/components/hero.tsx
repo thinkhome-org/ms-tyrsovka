@@ -7,6 +7,8 @@ import { buttonVariants } from "@/components/ui/button";
 import { GALLERY_ALBUMS } from "@/app/galerie/content";
 
 const ALL_PHOTOS = GALLERY_ALBUMS.flatMap((a) => a.photos);
+const DESKTOP_COUNT = 6;
+const MOBILE_COUNT = 4;
 
 function shuffle<T>(arr: T[]): T[] {
     const a = [...arr];
@@ -17,41 +19,19 @@ function shuffle<T>(arr: T[]): T[] {
     return a;
 }
 
-// Fibonacci grid — 5 cols (2:3:5:3:2) × 2 rows (3:5)
-const DESKTOP_GRID = {
-    gridTemplateColumns: "2fr 3fr 5fr 3fr 2fr",
-    gridTemplateRows: "3fr 5fr",
-};
-
-const BENTO = [
-    { col: "1 / 2", row: "1 / 3" },
-    { col: "2 / 4", row: "1 / 2" },
-    { col: "4 / 5", row: "1 / 2" },
-    { col: "5 / 6", row: "1 / 2" },
-    { col: "2 / 3", row: "2 / 3" },
-    { col: "3 / 5", row: "2 / 3" },
-    { col: "5 / 6", row: "2 / 3" },
-];
-
-const MOBILE_GRID = {
-    gridTemplateColumns: "3fr 5fr",
-    gridTemplateRows: "5fr 3fr",
-};
-
 export default function Hero() {
     const [photos, setPhotos] = useState<typeof ALL_PHOTOS>([]);
 
     useEffect(() => {
         // Keep the random selection client-only to avoid a hydration mismatch.
         // eslint-disable-next-line react-hooks/set-state-in-effect
-        setPhotos(shuffle(ALL_PHOTOS).slice(0, 7));
+        setPhotos(shuffle(ALL_PHOTOS).slice(0, DESKTOP_COUNT));
     }, []);
 
     return (
-        <section id="hero" className="relative isolate overflow-hidden">
-            <div className="page-shell flex flex-col gap-12 py-12 sm:gap-14 sm:py-16 lg:min-h-[calc(100dvh-5rem)] lg:gap-16 lg:py-20">
-                {/* Header */}
-                <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+        <section id="hero" className="relative isolate flex min-h-[calc(100dvh-4.5rem)] flex-col overflow-hidden">
+            <div className="page-shell flex min-h-[calc(100dvh-4.5rem)] flex-1 flex-col gap-8 py-8 sm:gap-10 sm:py-10">
+                <div className="flex shrink-0 flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
                     <div className="space-y-4">
                         <p className="text-sm font-medium uppercase tracking-[0.18em] text-muted-foreground">
                             Mateřská škola
@@ -68,12 +48,6 @@ export default function Hero() {
                         </p>
                         <div className="flex flex-wrap gap-3 lg:justify-end">
                             <Link
-                                href="/pro-zajemce/mladsi-deti"
-                                className={buttonVariants({ size: "lg" })}
-                            >
-                                Pro mladší děti
-                            </Link>
-                            <Link
                                 href="/pro-zajemce/predskolaci"
                                 className={buttonVariants({
                                     variant: "outline",
@@ -82,60 +56,43 @@ export default function Hero() {
                             >
                                 Pro předškoláky
                             </Link>
+                            <Link
+                                href="/pro-zajemce/mladsi-deti"
+                                className={buttonVariants({ size: "lg" })}
+                            >
+                                Pro mladší děti
+                            </Link>
                         </div>
                     </div>
                 </div>
 
-                {/* Photo grid – mobile */}
-                <div
-                    className="grid min-h-[260px] gap-3 sm:min-h-[320px] lg:hidden"
-                    style={MOBILE_GRID}
-                >
-                    {photos.slice(0, 4).map((photo, i) => (
-                        <motion.div
-                            key={photo.src}
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ duration: 0.6, delay: i * 0.1 }}
-                            className="overflow-hidden rounded-xl bg-muted"
-                        >
-                            {/* eslint-disable-next-line @next/next/no-img-element */}
-                            <img
-                                src={photo.src}
-                                alt={photo.alt}
-                                className="h-full w-full object-cover"
-                            />
-                        </motion.div>
-                    ))}
+                <div className="grid min-h-0 flex-1 grid-cols-2 grid-rows-2 gap-3 lg:grid-cols-3">
+                    {Array.from({ length: DESKTOP_COUNT }, (_, i) => {
+                        const photo = photos[i];
+                        const mobileHidden = i >= MOBILE_COUNT;
+                        return (
+                            <div
+                                key={photo?.src ?? i}
+                                className={
+                                    mobileHidden
+                                        ? "relative hidden min-h-0 overflow-hidden rounded-xl bg-muted lg:block"
+                                        : "relative min-h-0 overflow-hidden rounded-xl bg-muted"
+                                }
+                            >
+                                {photo ? (
+                                    <motion.img
+                                        src={photo.src}
+                                        alt={photo.alt}
+                                        initial={{ opacity: 0 }}
+                                        animate={{ opacity: 1 }}
+                                        transition={{ duration: 0.5 }}
+                                        className="absolute inset-0 h-full w-full object-cover"
+                                    />
+                                ) : null}
+                            </div>
+                        );
+                    })}
                 </div>
-
-                {/* Photo grid – desktop */}
-                <div
-                    className="hidden flex-1 gap-3 lg:grid"
-                    style={DESKTOP_GRID}
-                >
-                    {photos.slice(0, 7).map((photo, i) => (
-                        <motion.div
-                            key={photo.src}
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ duration: 0.6, delay: i * 0.08 }}
-                            className="relative overflow-hidden rounded-xl bg-muted"
-                            style={{
-                                gridColumn: BENTO[i].col,
-                                gridRow: BENTO[i].row,
-                            }}
-                        >
-                            {/* eslint-disable-next-line @next/next/no-img-element */}
-                            <img
-                                src={photo.src}
-                                alt={photo.alt}
-                                className="h-full w-full object-cover transition-transform duration-300 hover:scale-[1.02]"
-                            />
-                        </motion.div>
-                    ))}
-                </div>
-
             </div>
         </section>
     );

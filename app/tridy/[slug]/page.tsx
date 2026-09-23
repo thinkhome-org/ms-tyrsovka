@@ -79,12 +79,12 @@ export default async function ClassroomPage({
 
                 <div className="mt-10 grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
                     <Card className="content-card overflow-hidden">
-                        <div className="relative aspect-4/3 bg-muted">
+                        <div className="relative aspect-square bg-[oklch(0.97_0.01_90)]">
                             <Image
                                 src={classroom.image}
                                 alt={classroom.fullName}
                                 fill
-                                className="object-cover"
+                                className="object-contain p-6"
                                 sizes="(max-width: 1024px) 100vw, 50vw"
                             />
                         </div>

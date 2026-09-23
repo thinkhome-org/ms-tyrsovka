@@ -40,12 +40,12 @@ export default function TridyPage() {
                                 <div className={`px-5 py-3 text-sm font-semibold ${classroom.barClass}`}>
                                     <span aria-hidden="true">{classroom.symbol}</span> {classroom.name}
                                 </div>
-                                <div className="relative aspect-4/3 bg-muted">
+                                <div className="relative aspect-square bg-[oklch(0.97_0.01_90)]">
                                     <Image
                                         src={classroom.image}
                                         alt={classroom.fullName}
                                         fill
-                                        className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+                                        className="object-contain p-6"
                                         sizes="(max-width: 768px) 100vw, 33vw"
                                     />
                                 </div>

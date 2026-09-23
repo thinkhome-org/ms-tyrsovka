@@ -83,6 +83,7 @@ export const FOOTER_COLUMNS: { title: string; links: NavLink[] }[] = [
             { label: "Pracovní příležitosti", href: "/pracovni-prilezitosti" },
             { label: "Zpráva ČŠI", href: "/zprava-csi" },
             { label: "Ochrana osobních údajů", href: "/ochrana-osobnich-udaju" },
+            { label: "Cookies", href: "/cookies" },
             { label: "Prohlášení o přístupnosti", href: "/prohlaseni-o-pristupnosti" },
         ],
     },
