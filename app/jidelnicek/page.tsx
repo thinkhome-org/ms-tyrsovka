@@ -5,8 +5,13 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { JIDELNICEK_PAGE } from "@/lib/static-page-content";
 import { linkButtonOutlineSm } from "@/lib/button-link-classes";
 import { buildPageMetadata } from "@/lib/seo";
-import { addDays, czechWeekday, formatDateCs, mondayOfWeek } from "@/lib/cms/dates";
-import { getWeekMenu, isMenuDayFilled, type MenuDay } from "@/lib/cms/menu";
+import { addDays, formatDateCs } from "@/lib/cms/dates";
+import {
+    getPublishedMenus,
+    isMenuPdf,
+    menuFileUrl,
+    type MenuFile,
+} from "@/lib/cms/menu";
 
 export const dynamic = "force-dynamic";
 
@@ -40,66 +45,55 @@ const noteMarkdown = {
 function WeekMenu({
     id,
     title,
-    days,
+    weekStart,
+    file,
     emptyText,
 }: {
     id: string;
     title: string;
-    days: MenuDay[];
+    weekStart: string;
+    file: MenuFile | null;
     emptyText: string;
 }) {
-    const hasMeals = days.some(isMenuDayFilled);
+    const src = menuFileUrl(file);
+    const pdf = Boolean(file && isMenuPdf(file.file_key));
 
     return (
         <Card id={id} className="content-card scroll-mt-28 overflow-hidden">
             <CardHeader className="border-b border-border/80 bg-muted/40 py-6 sm:py-8">
                 <h2 className="text-2xl font-semibold tracking-tight">{title}</h2>
                 <p className="mt-2 text-sm text-muted-foreground">
-                    {formatDateCs(days[0]?.day_date ?? "")} –{" "}
-                    {formatDateCs(days[4]?.day_date ?? "")}
+                    {formatDateCs(weekStart)} – {formatDateCs(addDays(weekStart, 4))}
                 </p>
             </CardHeader>
-            <CardContent className="p-0">
-                {hasMeals ? (
-                    <div className="overflow-x-auto">
-                        <table className="min-w-[40rem] w-full text-left text-sm">
-                            <thead className="border-b border-border bg-muted/30 text-xs uppercase tracking-[0.14em] text-muted-foreground">
-                                <tr>
-                                    <th className="px-4 py-3 sm:px-6">Den</th>
-                                    <th className="px-3 py-3">Přesnídávka</th>
-                                    <th className="px-3 py-3">Polévka</th>
-                                    <th className="px-3 py-3">Hlavní</th>
-                                    <th className="px-3 py-3 sm:pr-6">Svačina</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {days.map((day) => (
-                                    <tr
-                                        key={day.day_date}
-                                        className="border-b border-border last:border-0"
-                                    >
-                                        <td className="whitespace-nowrap px-4 py-4 font-medium sm:px-6">
-                                            {czechWeekday(day.day_date)}
-                                        </td>
-                                        <td className="px-3 py-4 text-muted-foreground">
-                                            {day.snack_1 || "—"}
-                                        </td>
-                                        <td className="px-3 py-4 text-muted-foreground">
-                                            {day.soup || "—"}
-                                        </td>
-                                        <td className="px-3 py-4 text-muted-foreground">
-                                            {day.main_meal || "—"}
-                                        </td>
-                                        <td className="px-3 py-4 text-muted-foreground sm:pr-6">
-                                            {day.snack_2 || "—"}
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
+            <CardContent className="p-6 sm:p-8">
+                {src && pdf ? (
+                    <div className="space-y-4">
+                        <iframe
+                            src={src}
+                            title={`${title} (PDF)`}
+                            className="h-[70vh] min-h-96 w-full rounded-xl border border-border bg-white"
+                        />
+                        <a
+                            href={src}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex text-sm font-medium text-primary underline underline-offset-2"
+                        >
+                            Otevřít PDF
+                        </a>
                     </div>
+                ) : src ? (
+                    <a href={src} target="_blank" rel="noopener noreferrer">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                            src={src}
+                            alt={title}
+                            className="mx-auto h-auto w-full max-w-3xl rounded-xl"
+                        />
+                    </a>
                 ) : (
-                    <p className="p-6 text-sm leading-relaxed text-muted-foreground sm:p-8">
+                    <p className="text-sm leading-relaxed text-muted-foreground">
                         {emptyText}
                     </p>
                 )}
@@ -109,12 +103,7 @@ function WeekMenu({
 }
 
 export default async function JidelnicekPage() {
-    const thisMonday = mondayOfWeek();
-    const nextMonday = addDays(thisMonday, 7);
-    const [thisWeek, nextWeek] = await Promise.all([
-        getWeekMenu(thisMonday),
-        getWeekMenu(nextMonday),
-    ]);
+    const menus = await getPublishedMenus();
     const noteSections = JIDELNICEK_PAGE.markdown
         .split(/\n---\n/g)
         .map((section) => section.trim())
@@ -145,13 +134,15 @@ export default async function JidelnicekPage() {
                         <WeekMenu
                             id="aktualni"
                             title="Aktuální týden"
-                            days={thisWeek}
+                            weekStart={menus.currentStart}
+                            file={menus.current}
                             emptyText="Jídelníček na tento týden zatím není zveřejněný."
                         />
                         <WeekMenu
                             id="pristi"
                             title="Příští týden"
-                            days={nextWeek}
+                            weekStart={menus.nextStart}
+                            file={menus.next}
                             emptyText="Jídelníček na příští týden zatím není zveřejněný."
                         />
                     </div>

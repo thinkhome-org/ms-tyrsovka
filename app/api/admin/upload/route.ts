@@ -43,7 +43,9 @@ export async function POST(request: Request) {
         );
     }
 
-    const folder = form.get("folder") === "galerie" ? "galerie" : "aktuality";
+    const requested = form.get("folder");
+    const folder =
+        requested === "galerie" || requested === "tridy" ? requested : "aktuality";
     const key = `${folder}/${crypto.randomUUID()}.${ext}`;
     const bytes = await file.arrayBuffer();
     await bucket.put(key, bytes, {

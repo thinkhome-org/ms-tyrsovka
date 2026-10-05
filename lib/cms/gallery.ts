@@ -10,6 +10,7 @@ export type CmsGalleryPhoto = {
     alt: string;
     position_order: number;
     created_at: string;
+    show_in_hero?: number;
 };
 
 export type CmsGalleryAlbum = {
@@ -144,6 +145,26 @@ export async function listGalleryAlbums(): Promise<CmsGalleryAlbum[]> {
     }));
 }
 
+export async function listHeroPhotos(): Promise<PublicGalleryPhoto[]> {
+    const fallback = GALLERY_ALBUMS.flatMap((album) => album.photos);
+    const db = await getDb();
+    if (!db) return fallback;
+    try {
+        const albums = await listGalleryAlbums();
+        const photos = albums.flatMap((album) => album.photos);
+        const picked = photos.filter((photo) => photo.show_in_hero);
+        const source = picked.length > 0 ? picked : photos;
+        if (source.length === 0) return fallback;
+        return source.map((photo) => ({
+            src: coverSrc(photo.src) ?? photo.src,
+            alt: photo.alt,
+        }));
+    } catch (error) {
+        if (isMissingTable(error)) return fallback;
+        throw error;
+    }
+}
+
 export async function listPublicAlbums(): Promise<PublicGalleryAlbum[]> {
     const db = await getDb();
     if (!db) return GALLERY_ALBUMS;
@@ -274,7 +295,7 @@ export async function addGalleryPhoto(
 
 export async function updateGalleryPhoto(
     id: string,
-    input: { alt?: string; direction?: GalleryDirection },
+    input: { alt?: string; direction?: GalleryDirection; show_in_hero?: boolean },
 ): Promise<CmsGalleryPhoto> {
     const db = await getDb();
     if (!db) throw new Error("Databáze není dostupná.");
@@ -286,6 +307,12 @@ export async function updateGalleryPhoto(
         await db
             .prepare(`UPDATE gallery_photos SET alt = ? WHERE id = ?`)
             .bind(alt, id)
+            .run();
+    }
+    if (typeof input.show_in_hero === "boolean") {
+        await db
+            .prepare(`UPDATE gallery_photos SET show_in_hero = ? WHERE id = ?`)
+            .bind(input.show_in_hero ? 1 : 0, id)
             .run();
     }
     const updated = await getPhoto(id);

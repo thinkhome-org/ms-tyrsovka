@@ -1,6 +1,9 @@
 import { NextResponse } from "next/server";
 import { requireAdmin } from "@/lib/cms/auth";
-import { upsertClassroomContact } from "@/lib/cms/classrooms";
+import {
+    toClassroomDraft,
+    upsertClassroomPage,
+} from "@/lib/cms/classrooms";
 
 export const dynamic = "force-dynamic";
 
@@ -15,9 +18,16 @@ export async function PATCH(
         const input = (await request.json()) as {
             email?: string;
             phone?: string | null;
+            age?: string;
+            location?: string;
+            teachers?: string;
+            body?: string;
+            note?: string;
+            dayText?: string;
+            imageKey?: string;
         };
-        const item = await upsertClassroomContact(slug, input);
-        return NextResponse.json({ item });
+        const page = await upsertClassroomPage(slug, input);
+        return NextResponse.json({ item: toClassroomDraft(page) });
     } catch (error) {
         const message =
             error instanceof Error ? error.message : "Uložení se nepovedlo.";

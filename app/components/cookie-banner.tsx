@@ -32,8 +32,9 @@ export function CookieBanner() {
         >
             <div className="page-shell flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                 <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
-                    Na webu používáme jen nezbytné cookies. Mapa Google se načte, až ji
-                    povolíte. Podrobnosti jsou na stránce{" "}
+                    Na webu používáme nezbytné cookies. Mapa Google a Google Analytics se
+                    načtou, až je povolíte. Cloudflare Web Analytics cookie nenastavuje.
+                    Podrobnosti jsou na stránce{" "}
                     <Link href="/cookies" className="font-medium text-foreground underline underline-offset-2">
                         Cookies
                     </Link>
@@ -52,7 +53,7 @@ export function CookieBanner() {
                         className={cn(buttonVariants({ size: "sm" }))}
                         onClick={() => writeMapConsent("accepted")}
                     >
-                        Povolit mapu
+                        Povolit
                     </button>
                 </div>
             </div>

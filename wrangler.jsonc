@@ -28,6 +28,8 @@
 		{
 			"binding": "DB",
 			"database_name": "tyrsovka",
+			"database_id": "15225377-103a-44a2-b4d7-35ab542e6f22",
+			"preview_database_id": "DB",
 			"migrations_dir": "migrations"
 		}
 	],

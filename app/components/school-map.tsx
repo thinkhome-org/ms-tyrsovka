@@ -48,14 +48,14 @@ export function SchoolMap({
                         ) : (
                             <div className="flex h-full flex-col items-start justify-center gap-3 px-6 py-8">
                                 <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
-                                    Mapa Google se zobrazí po souhlasu s cookies třetí strany.
+                                    Mapa Google se zobrazí po souhlasu s volitelnými cookies.
                                 </p>
                                 <button
                                     type="button"
                                     className={cn(buttonVariants({ size: "sm" }))}
                                     onClick={() => writeMapConsent("accepted")}
                                 >
-                                    Povolit mapu
+                                    Povolit
                                 </button>
                             </div>
                         )}

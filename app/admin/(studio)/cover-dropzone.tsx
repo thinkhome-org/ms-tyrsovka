@@ -10,7 +10,7 @@ const ACCEPT = "image/jpeg,image/png,image/webp";
 
 export async function uploadCmsImage(
     file: File,
-    folder?: "aktuality" | "galerie",
+    folder?: "aktuality" | "galerie" | "tridy",
 ): Promise<{ key: string; url: string }> {
     if (file.size > 5 * 1024 * 1024) {
         throw new Error("Obrázek může mít nejvýše 5 MB.");

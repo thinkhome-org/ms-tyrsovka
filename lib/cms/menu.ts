@@ -1,103 +1,174 @@
-import { getDb } from "./env";
 import { addDays, mondayOfWeek } from "./dates";
+import { getDb, getMediaBucket } from "./env";
+import { mediaUrl } from "./media";
 
-export type MenuDay = {
-    day_date: string;
-    snack_1: string;
-    soup: string;
-    main_meal: string;
-    snack_2: string;
+const MAX_BYTES = 15 * 1024 * 1024;
+
+const ALLOWED_TYPES: Record<string, { ext: string; contentType: string }> = {
+    "application/pdf": { ext: "pdf", contentType: "application/pdf" },
+    "image/png": { ext: "png", contentType: "image/png" },
+    "image/jpeg": { ext: "jpg", contentType: "image/jpeg" },
+    "image/webp": { ext: "webp", contentType: "image/webp" },
+};
+
+const ALLOWED_EXTENSIONS: Record<string, { ext: string; contentType: string }> = {
+    pdf: ALLOWED_TYPES["application/pdf"],
+    png: ALLOWED_TYPES["image/png"],
+    jpg: ALLOWED_TYPES["image/jpeg"],
+    jpeg: ALLOWED_TYPES["image/jpeg"],
+    webp: ALLOWED_TYPES["image/webp"],
+};
+
+export type MenuFile = {
+    week_start: string;
+    file_key: string;
+    file_name: string;
     updated_at: string;
 };
 
-export type MenuDayInput = {
-    day_date: string;
-    snack_1?: string;
-    soup?: string;
-    main_meal?: string;
-    snack_2?: string;
+export type PublishedMenus = {
+    currentStart: string;
+    nextStart: string;
+    current: MenuFile | null;
+    next: MenuFile | null;
 };
 
-function emptyDay(day_date: string): MenuDay {
+export function publishedWeekStarts(today?: string): {
+    current: string;
+    next: string;
+} {
+    const current = mondayOfWeek(today);
+    return { current, next: addDays(current, 7) };
+}
+
+export function isMenuPdf(fileKey: string): boolean {
+    return fileKey.toLowerCase().endsWith(".pdf");
+}
+
+export function menuFileUrl(file: MenuFile | null): string | null {
+    if (!file?.file_key) return null;
+    return mediaUrl(file.file_key);
+}
+
+function extensionOf(name: string): string | null {
+    const match = name.toLowerCase().match(/\.([a-z0-9]+)$/);
+    return match?.[1] ?? null;
+}
+
+function fileMeta(file: File): { ext: string; contentType: string } {
+    const fromType = ALLOWED_TYPES[file.type];
+    if (fromType) return fromType;
+    const fromName = ALLOWED_EXTENSIONS[extensionOf(file.name) ?? ""];
+    if (fromName) return fromName;
+    throw new Error("Povolené formáty jsou PDF, PNG, JPEG a WebP.");
+}
+
+function safeFileName(name: string): string {
+    const base = name.split(/[/\\]/).pop()?.trim() || "jidelnicek";
+    return base.slice(0, 180);
+}
+
+function assertPublishedWeek(weekStart: string): string {
+    const monday = mondayOfWeek(weekStart);
+    const weeks = publishedWeekStarts();
+    if (monday !== weeks.current && monday !== weeks.next) {
+        throw new Error("Jídelníček lze nahrát jen pro aktuální a příští týden.");
+    }
+    return monday;
+}
+
+export async function getMenuFile(weekStart: string): Promise<MenuFile | null> {
+    const db = await getDb();
+    if (!db) return null;
+    try {
+        const row = await db
+            .prepare(
+                `SELECT week_start, file_key, file_name, updated_at
+                 FROM menu_files
+                 WHERE week_start = ?`,
+            )
+            .bind(mondayOfWeek(weekStart))
+            .first<MenuFile>();
+        return row ?? null;
+    } catch {
+        return null;
+    }
+}
+
+export async function getPublishedMenus(): Promise<PublishedMenus> {
+    const weeks = publishedWeekStarts();
+    const [current, next] = await Promise.all([
+        getMenuFile(weeks.current),
+        getMenuFile(weeks.next),
+    ]);
     return {
-        day_date,
-        snack_1: "",
-        soup: "",
-        main_meal: "",
-        snack_2: "",
-        updated_at: "",
+        currentStart: weeks.current,
+        nextStart: weeks.next,
+        current,
+        next,
     };
 }
 
-export function weekDates(start = mondayOfWeek()): string[] {
-    const monday = mondayOfWeek(start);
-    return Array.from({ length: 5 }, (_, index) => addDays(monday, index));
+async function removeStoredObject(key: string): Promise<void> {
+    if (!key || key.startsWith("http://") || key.startsWith("https://") || key.startsWith("/")) {
+        return;
+    }
+    const bucket = await getMediaBucket();
+    if (!bucket) return;
+    try {
+        await bucket.delete(key);
+    } catch {
+        // The new file is already saved; a leftover object can be cleaned later.
+    }
 }
 
-export function isMenuDayFilled(day: MenuDay): boolean {
-    return Boolean(
-        day.snack_1.trim() ||
-            day.soup.trim() ||
-            day.main_meal.trim() ||
-            day.snack_2.trim(),
-    );
-}
-
-export async function listMenuRange(start: string, end: string): Promise<MenuDay[]> {
-    const db = await getDb();
-    if (!db) return [];
-    const result = await db
-        .prepare(
-            `SELECT * FROM menu_days
-             WHERE day_date >= ? AND day_date <= ?
-             ORDER BY day_date ASC`,
-        )
-        .bind(start, end)
-        .all<MenuDay>();
-    return result.results ?? [];
-}
-
-export async function getWeekMenu(start = mondayOfWeek()): Promise<MenuDay[]> {
-    const dates = weekDates(start);
-    const rows = await listMenuRange(dates[0], dates[4]);
-    const byDate = new Map(rows.map((row) => [row.day_date, row]));
-    return dates.map((day) => byDate.get(day) ?? emptyDay(day));
-}
-
-export async function upsertMenuDays(days: MenuDayInput[]): Promise<MenuDay[]> {
+export async function putMenuFile(weekStart: string, file: File): Promise<MenuFile> {
+    const monday = assertPublishedWeek(weekStart);
     const db = await getDb();
     if (!db) throw new Error("Databáze není dostupná.");
-    if (!Array.isArray(days) || days.length === 0) {
-        throw new Error("Chybí dny jídelníčku.");
+    const bucket = await getMediaBucket();
+    if (!bucket) throw new Error("Úložiště souborů není dostupné.");
+    if (file.size === 0) throw new Error("Vyberte soubor.");
+    if (file.size > MAX_BYTES) {
+        throw new Error("Soubor může mít nejvýše 15 MB.");
     }
-    const now = new Date().toISOString();
-    const statements = days.map((day) => {
-        const date = day.day_date?.trim() ?? "";
-        if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) {
-            throw new Error("Zadejte platné datum dne.");
-        }
-        return db
-            .prepare(
-                `INSERT INTO menu_days (day_date, snack_1, soup, main_meal, snack_2, updated_at)
-                 VALUES (?, ?, ?, ?, ?, ?)
-                 ON CONFLICT(day_date) DO UPDATE SET
-                    snack_1 = excluded.snack_1,
-                    soup = excluded.soup,
-                    main_meal = excluded.main_meal,
-                    snack_2 = excluded.snack_2,
-                    updated_at = excluded.updated_at`,
-            )
-            .bind(
-                date,
-                day.snack_1?.trim() ?? "",
-                day.soup?.trim() ?? "",
-                day.main_meal?.trim() ?? "",
-                day.snack_2?.trim() ?? "",
-                now,
-            );
+    const meta = fileMeta(file);
+    const previous = await getMenuFile(monday);
+    const key = `jidelnicek/${crypto.randomUUID()}.${meta.ext}`;
+    const bytes = await file.arrayBuffer();
+    await bucket.put(key, bytes, {
+        httpMetadata: { contentType: meta.contentType },
     });
-    await db.batch(statements);
-    const dates = days.map((day) => day.day_date);
-    dates.sort();
-    return listMenuRange(dates[0], dates[dates.length - 1]);
+    const now = new Date().toISOString();
+    const fileName = safeFileName(file.name);
+    await db
+        .prepare(
+            `INSERT INTO menu_files (week_start, file_key, file_name, updated_at)
+             VALUES (?, ?, ?, ?)
+             ON CONFLICT(week_start) DO UPDATE SET
+                file_key = excluded.file_key,
+                file_name = excluded.file_name,
+                updated_at = excluded.updated_at`,
+        )
+        .bind(monday, key, fileName, now)
+        .run();
+    if (previous && previous.file_key !== key) {
+        await removeStoredObject(previous.file_key);
+    }
+    return {
+        week_start: monday,
+        file_key: key,
+        file_name: fileName,
+        updated_at: now,
+    };
+}
+
+export async function deleteMenuFile(weekStart: string): Promise<void> {
+    const monday = assertPublishedWeek(weekStart);
+    const db = await getDb();
+    if (!db) throw new Error("Databáze není dostupná.");
+    const existing = await getMenuFile(monday);
+    if (!existing) return;
+    await db.prepare(`DELETE FROM menu_files WHERE week_start = ?`).bind(monday).run();
+    await removeStoredObject(existing.file_key);
 }

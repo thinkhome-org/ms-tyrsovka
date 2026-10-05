@@ -1,12 +1,10 @@
-import { getWeekMenu } from "@/lib/cms/menu";
-import { mondayOfWeek } from "@/lib/cms/dates";
+import { getPublishedMenus } from "@/lib/cms/menu";
 import { MenuStudio } from "./menu-studio";
 
 export const dynamic = "force-dynamic";
 
 export default async function AdminJidelnicekPage() {
-    const start = mondayOfWeek();
-    const items = await getWeekMenu(start);
+    const menus = await getPublishedMenus();
 
     return (
         <main className="mx-auto w-full max-w-7xl px-5 py-10 sm:px-8 sm:py-14">
@@ -17,11 +15,16 @@ export default async function AdminJidelnicekPage() {
                 Jídelníček
             </h1>
             <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground sm:text-base">
-                Na webu jsou dva jídelníčky: tento týden a příští. V noci z
-                neděle na pondělí se příští týden sám stane aktuálním. Prázdný
-                týden na webu zůstane jako prázdný stav.
+                Nahrajte jídelníček jako PDF nebo obrázek. Na webu jsou dva
+                soubory: tento týden a příští. V pondělí se příští týden sám
+                stane aktuálním.
             </p>
-            <MenuStudio initialDays={items} initialStart={start} />
+            <MenuStudio
+                current={menus.current}
+                next={menus.next}
+                currentStart={menus.currentStart}
+                nextStart={menus.nextStart}
+            />
         </main>
     );
 }

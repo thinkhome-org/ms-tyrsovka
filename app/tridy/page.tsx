@@ -1,9 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
-import { CLASSROOMS } from "@/lib/classrooms";
+import { listClassroomsWithContacts } from "@/lib/cms/classrooms";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { linkButtonOutlineSm } from "@/lib/button-link-classes";
 import { buildPageMetadata } from "@/lib/seo";
+
+export const dynamic = "force-dynamic";
 
 export const metadata = buildPageMetadata({
     title: "Třídy",
@@ -12,7 +14,8 @@ export const metadata = buildPageMetadata({
     path: "/tridy",
 });
 
-export default function TridyPage() {
+export default async function TridyPage() {
+    const classrooms = await listClassroomsWithContacts();
     return (
         <main className="flex-1 text-zinc-900">
             <div className="page-shell section-shell">
@@ -34,20 +37,29 @@ export default function TridyPage() {
                 </div>
 
                 <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-                    {CLASSROOMS.map((classroom) => (
+                    {classrooms.map((classroom) => (
                         <Link key={classroom.slug} href={`/tridy/${classroom.slug}`} className="group">
                             <Card className="h-full overflow-hidden bg-card">
                                 <div className={`px-5 py-3 text-sm font-semibold ${classroom.barClass}`}>
                                     <span aria-hidden="true">{classroom.symbol}</span> {classroom.name}
                                 </div>
                                 <div className="relative aspect-square bg-[oklch(0.97_0.01_90)]">
-                                    <Image
-                                        src={classroom.image}
-                                        alt={classroom.fullName}
-                                        fill
-                                        className="object-contain p-6"
-                                        sizes="(max-width: 768px) 100vw, 33vw"
-                                    />
+                                    {classroom.imageKey ? (
+                                        // eslint-disable-next-line @next/next/no-img-element
+                                        <img
+                                            src={classroom.image}
+                                            alt={classroom.fullName}
+                                            className="absolute inset-0 size-full object-contain p-6"
+                                        />
+                                    ) : (
+                                        <Image
+                                            src={classroom.image}
+                                            alt={classroom.fullName}
+                                            fill
+                                            className="object-contain p-6"
+                                            sizes="(max-width: 768px) 100vw, 33vw"
+                                        />
+                                    )}
                                 </div>
                                 <CardHeader className="pb-2">
                                     <p className="text-sm text-muted-foreground">{classroom.age}</p>

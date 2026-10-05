@@ -80,13 +80,22 @@ export default async function ClassroomPage({
                 <div className="mt-10 grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
                     <Card className="content-card overflow-hidden">
                         <div className="relative aspect-square bg-[oklch(0.97_0.01_90)]">
-                            <Image
-                                src={classroom.image}
-                                alt={classroom.fullName}
-                                fill
-                                className="object-contain p-6"
-                                sizes="(max-width: 1024px) 100vw, 50vw"
-                            />
+                            {classroom.imageKey ? (
+                                // eslint-disable-next-line @next/next/no-img-element
+                                <img
+                                    src={classroom.image}
+                                    alt={classroom.fullName}
+                                    className="absolute inset-0 size-full object-contain p-6"
+                                />
+                            ) : (
+                                <Image
+                                    src={classroom.image}
+                                    alt={classroom.fullName}
+                                    fill
+                                    className="object-contain p-6"
+                                    sizes="(max-width: 1024px) 100vw, 50vw"
+                                />
+                            )}
                         </div>
                         <CardContent className="space-y-4 p-6 sm:p-8">
                             <Badge variant="soft">Pro koho třída je</Badge>
@@ -126,7 +135,7 @@ export default async function ClassroomPage({
                                     Den ve třídě
                                 </h2>
                                 <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-                                    Společný režim školy, vyzvedávání a omluvenky jsou v praktických informacích. Třídní specifika doplníme sem.
+                                    {classroom.dayText}
                                 </p>
                                 <Link
                                     href="/prakticke-informace"

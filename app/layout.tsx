@@ -4,6 +4,7 @@ import "./globals.css";
 import Nav from "./components/nav";
 import Footer from "./components/footer";
 import { CookieBanner } from "./components/cookie-banner";
+import { SiteAnalytics } from "./components/site-analytics";
 import { getBaseUrl, defaultMetadata } from "@/lib/seo";
 
 const lora = Lora({
@@ -56,6 +57,7 @@ export default function RootLayout({
                 {children}
                 <Footer />
                 <CookieBanner />
+                <SiteAnalytics />
             </body>
         </html>
     );

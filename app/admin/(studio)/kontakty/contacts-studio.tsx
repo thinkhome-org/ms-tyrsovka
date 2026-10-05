@@ -2,8 +2,6 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { CLASSROOMS } from "@/lib/classrooms";
-import type { ClassroomContact } from "@/lib/cms/classrooms";
 import type { Person, PersonSection } from "@/lib/cms/people";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -15,13 +13,7 @@ const SECTION_LABELS: Record<PersonSection, string> = {
     jidelna: "Jídelna",
 };
 
-export function ContactsStudio({
-    people,
-    classrooms,
-}: {
-    people: Person[];
-    classrooms: ClassroomContact[];
-}) {
+export function ContactsStudio({ people }: { people: Person[] }) {
     const router = useRouter();
     const [name, setName] = useState("");
     const [role, setRole] = useState("");
@@ -31,15 +23,6 @@ export function ContactsStudio({
     const [error, setError] = useState("");
     const [pending, setPending] = useState(false);
     const [deleting, setDeleting] = useState<string | null>(null);
-    const [savingSlug, setSavingSlug] = useState<string | null>(null);
-    const [classroomDrafts, setClassroomDrafts] = useState(() =>
-        Object.fromEntries(
-            classrooms.map((item) => [
-                item.slug,
-                { email: item.email, phone: item.phone ?? "" },
-            ]),
-        ),
-    );
 
     async function addPerson() {
         setPending(true);
@@ -91,32 +74,6 @@ export function ContactsStudio({
             router.refresh();
         } finally {
             setDeleting(null);
-        }
-    }
-
-    async function saveClassroom(slug: string) {
-        setSavingSlug(slug);
-        setError("");
-        try {
-            const draft = classroomDrafts[slug];
-            const response = await fetch(`/api/admin/kontakty/tridy/${slug}`, {
-                method: "PATCH",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    email: draft?.email ?? "",
-                    phone: draft?.phone || null,
-                }),
-            });
-            if (!response.ok) {
-                const data = (await response.json().catch(() => null)) as
-                    | { error?: string }
-                    | null;
-                setError(data?.error || "Uložení se nepovedlo.");
-                return;
-            }
-            router.refresh();
-        } finally {
-            setSavingSlug(null);
         }
     }
 
@@ -225,76 +182,15 @@ export function ContactsStudio({
 
             <section>
                 <h2 className="font-heading text-2xl font-semibold tracking-tight">
-                    Kontakty tříd
+                    Třídy
                 </h2>
                 <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
-                    Mění se jen e-mail a telefon. Popis třídy, učitelky a fotka
-                    zůstávají v kódu webu.
+                    Text, učitelky, věk, místo a fotku třídy upravíte v sekci{" "}
+                    <a href="/admin/tridy" className="font-medium text-primary underline underline-offset-2">
+                        Třídy
+                    </a>
+                    .
                 </p>
-                <div className="mt-4 grid gap-4">
-                    {CLASSROOMS.map((classroom) => {
-                        const draft = classroomDrafts[classroom.slug] ?? {
-                            email: classroom.email,
-                            phone: classroom.phone ?? "",
-                        };
-                        return (
-                            <form
-                                key={classroom.slug}
-                                className="grid gap-3 rounded-2xl border border-border bg-card p-5 sm:grid-cols-[1fr_1fr_auto] sm:items-end"
-                                onSubmit={(event) => {
-                                    event.preventDefault();
-                                    void saveClassroom(classroom.slug);
-                                }}
-                            >
-                                <div className="sm:col-span-3">
-                                    <p className="font-medium">
-                                        {classroom.symbol} {classroom.fullName}
-                                    </p>
-                                </div>
-                                <div className="flex flex-col gap-2">
-                                    <Label htmlFor={`${classroom.slug}-email`}>E-mail</Label>
-                                    <Input
-                                        id={`${classroom.slug}-email`}
-                                        type="email"
-                                        value={draft.email}
-                                        onChange={(event) =>
-                                            setClassroomDrafts((current) => ({
-                                                ...current,
-                                                [classroom.slug]: {
-                                                    ...draft,
-                                                    email: event.target.value,
-                                                },
-                                            }))
-                                        }
-                                    />
-                                </div>
-                                <div className="flex flex-col gap-2">
-                                    <Label htmlFor={`${classroom.slug}-phone`}>Telefon</Label>
-                                    <Input
-                                        id={`${classroom.slug}-phone`}
-                                        value={draft.phone}
-                                        onChange={(event) =>
-                                            setClassroomDrafts((current) => ({
-                                                ...current,
-                                                [classroom.slug]: {
-                                                    ...draft,
-                                                    phone: event.target.value,
-                                                },
-                                            }))
-                                        }
-                                    />
-                                </div>
-                                <Button
-                                    type="submit"
-                                    variant="outline"
-                                    disabled={savingSlug === classroom.slug}
-                                >
-                                    {savingSlug === classroom.slug ? "Ukládám…" : "Uložit"}
-                                </Button>
-                            </form>
-                        );
-                    })}
-                </div>
             </section>
         </div>
     );

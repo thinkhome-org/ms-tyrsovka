@@ -23,10 +23,15 @@ export async function PATCH(
         const input = (await request.json()) as {
             alt?: string;
             direction?: unknown;
+            show_in_hero?: unknown;
         };
         const photo = await updateGalleryPhoto(id, {
             alt: input.alt,
             direction: isDirection(input.direction) ? input.direction : undefined,
+            show_in_hero:
+                typeof input.show_in_hero === "boolean"
+                    ? input.show_in_hero
+                    : undefined,
         });
         return NextResponse.json({ photo });
     } catch (error) {

@@ -24,8 +24,9 @@ export default async function AdminGaleriePage() {
                 Galerie
             </h1>
             <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground sm:text-base">
-                Alba a fotky se ukážou na stránce galerie, na úvodní fotografii
-                a v náhledu na homepage. Nové snímky nahrajte přímo sem.
+                Alba a fotky se ukážou na stránce galerie a v náhledu na
+                homepage. U fotky zaškrtněte „Úvod“, pokud se má střídat na
+                hlavní stránce. Když není vybraná žádná, použijí se všechny.
             </p>
             {loadError ? (
                 <p className="mt-8 text-sm text-destructive" role="alert">

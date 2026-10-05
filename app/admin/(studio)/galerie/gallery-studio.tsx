@@ -357,6 +357,7 @@ function PhotoCard({
 }) {
     const router = useRouter();
     const [alt, setAlt] = useState(photo.alt);
+    const [inHero, setInHero] = useState(Boolean(photo.show_in_hero));
     const [busy, setBusy] = useState(false);
     const preview = coverSrc(photo.src);
 
@@ -374,6 +375,27 @@ function PhotoCard({
             if (!response.ok) {
                 onError(await readError(response, "Popisek se nepodařilo uložit."));
                 setAlt(photo.alt);
+                return;
+            }
+            router.refresh();
+        } finally {
+            setBusy(false);
+        }
+    }
+
+    async function toggleHero(next: boolean) {
+        setInHero(next);
+        setBusy(true);
+        onError("");
+        try {
+            const response = await fetch(`/api/admin/galerie/fotky/${photo.id}`, {
+                method: "PATCH",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ show_in_hero: next }),
+            });
+            if (!response.ok) {
+                setInHero(!next);
+                onError(await readError(response, "Úvodní fotku se nepodařilo uložit."));
                 return;
             }
             router.refresh();
@@ -436,6 +458,16 @@ function PhotoCard({
                         void saveAlt();
                     }}
                 />
+                <label className="flex items-center gap-2 text-xs font-medium text-foreground">
+                    <input
+                        type="checkbox"
+                        className="size-4 accent-primary"
+                        checked={inHero}
+                        disabled={busy}
+                        onChange={(event) => void toggleHero(event.target.checked)}
+                    />
+                    Úvod
+                </label>
                 <div className="flex gap-1">
                     <Button
                         type="button"
