@@ -10,6 +10,7 @@ const MODULES = [
     { href: "/admin/plan-akci", label: "Plán akcí" },
     { href: "/admin/jidelnicek", label: "Jídelníček" },
     { href: "/admin/kontakty", label: "Kontakty" },
+    { href: "/admin/galerie", label: "Galerie" },
     { href: "/admin/nastaveni", label: "Nastavení" },
 ] as const;
 

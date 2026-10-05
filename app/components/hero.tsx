@@ -4,9 +4,8 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { buttonVariants } from "@/components/ui/button";
-import { GALLERY_ALBUMS } from "@/app/galerie/content";
+import type { PublicGalleryPhoto } from "@/lib/cms/gallery";
 
-const ALL_PHOTOS = GALLERY_ALBUMS.flatMap((a) => a.photos);
 const DESKTOP_COUNT = 6;
 const MOBILE_COUNT = 4;
 
@@ -19,14 +18,14 @@ function shuffle<T>(arr: T[]): T[] {
     return a;
 }
 
-export default function Hero() {
-    const [photos, setPhotos] = useState<typeof ALL_PHOTOS>([]);
+export default function Hero({ photos: source }: { photos: PublicGalleryPhoto[] }) {
+    const [photos, setPhotos] = useState<PublicGalleryPhoto[]>([]);
 
     useEffect(() => {
         // Keep the random selection client-only to avoid a hydration mismatch.
         // eslint-disable-next-line react-hooks/set-state-in-effect
-        setPhotos(shuffle(ALL_PHOTOS).slice(0, DESKTOP_COUNT));
-    }, []);
+        setPhotos(shuffle(source).slice(0, DESKTOP_COUNT));
+    }, [source]);
 
     return (
         <section id="hero" className="relative isolate flex min-h-[calc(100dvh-4.5rem)] flex-col overflow-hidden">
@@ -43,25 +42,49 @@ export default function Hero() {
 
                     <div className="max-w-md space-y-5 lg:text-right">
                         <p className="text-base leading-relaxed text-muted-foreground sm:text-lg">
-                            Mateřská škola zaměřená na zdravý životní styl,
-                            pohyb a bezpečné prostředí pro vaše děti.
+                            Zaměřujeme se na výchovu a vzdělávání ke zdravému
+                            životnímu stylu. Důraz klademe na pohyb, zdravé
+                            stravování, pobyt venku a na emoční i sociální odolnost.
                         </p>
-                        <div className="flex flex-wrap gap-3 lg:justify-end">
-                            <Link
-                                href="/pro-zajemce/predskolaci"
-                                className={buttonVariants({
-                                    variant: "outline",
-                                    size: "lg",
-                                })}
-                            >
-                                Pro předškoláky
-                            </Link>
-                            <Link
-                                href="/pro-zajemce/mladsi-deti"
-                                className={buttonVariants({ size: "lg" })}
-                            >
-                                Pro mladší děti
-                            </Link>
+                        <div className="space-y-4">
+                            <div className="space-y-2">
+                                <p className="text-xs font-medium uppercase tracking-[0.16em] text-muted-foreground">
+                                    Pro zájemce o školku
+                                </p>
+                                <div className="flex flex-wrap gap-3 lg:justify-end">
+                                    <Link
+                                        href="/pro-zajemce/mladsi-deti"
+                                        className={buttonVariants({
+                                            variant: "outline",
+                                            size: "lg",
+                                        })}
+                                    >
+                                        Mladší děti
+                                    </Link>
+                                    <Link
+                                        href="/pro-zajemce/predskolaci"
+                                        className={buttonVariants({
+                                            variant: "outline",
+                                            size: "lg",
+                                        })}
+                                    >
+                                        Předškoláci
+                                    </Link>
+                                </div>
+                            </div>
+                            <div className="space-y-2">
+                                <p className="text-xs font-medium uppercase tracking-[0.16em] text-muted-foreground">
+                                    Pro naše rodiče
+                                </p>
+                                <div className="flex flex-wrap gap-3 lg:justify-end">
+                                    <Link
+                                        href="/#aktuality"
+                                        className={buttonVariants({ size: "lg" })}
+                                    >
+                                        Aktuality ze školky
+                                    </Link>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

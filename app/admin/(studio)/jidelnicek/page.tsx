@@ -17,8 +17,9 @@ export default async function AdminJidelnicekPage() {
                 Jídelníček
             </h1>
             <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground sm:text-base">
-                Uložte pondělí až pátek. Prázdný týden na webu zůstane jako
-                prázdný stav.
+                Na webu jsou dva jídelníčky: tento týden a příští. V noci z
+                neděle na pondělí se příští týden sám stane aktuálním. Prázdný
+                týden na webu zůstane jako prázdný stav.
             </p>
             <MenuStudio initialDays={items} initialStart={start} />
         </main>

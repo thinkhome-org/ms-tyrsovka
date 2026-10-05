@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { ArrowUpRight, ChevronDown, Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { MAIN_NAV, type NavLink, type NavTone } from "@/lib/site-nav";
+import { MAIN_NAV, SCHOOL_MOTTO, type NavLink, type NavTone } from "@/lib/site-nav";
 
 const VEIL_LAYERS = [
     { blur: 2, height: "100%" },
@@ -114,7 +114,7 @@ function BrandChip({ onClick }: { onClick?: () => void }) {
                     MŠ Tyršovka
                 </span>
                 <span className="block truncate text-[0.7rem] leading-tight text-current/65">
-                    Mateřská škola pro radost z pohybu
+                    {SCHOOL_MOTTO}
                 </span>
             </span>
         </Link>

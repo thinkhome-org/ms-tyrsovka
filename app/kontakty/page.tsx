@@ -71,17 +71,6 @@ export default async function KontaktyPage() {
     const urgentHref = settings.urgent_phone
         ? `tel:${settings.urgent_phone.replace(/\s+/g, "")}`
         : undefined;
-    const quickLinks = [
-        {
-            label: "Napsat ředitelce",
-            href: `mailto:${settings.email}`,
-        },
-        {
-            label: "Zavolat do MŠ",
-            href: phoneHref,
-        },
-        ...content.quickLinks.filter((link) => link.href.startsWith("http")),
-    ];
 
     return (
         <main className="flex-1 text-zinc-900">
@@ -104,28 +93,6 @@ export default async function KontaktyPage() {
                             ← Zpět
                         </Link>
                     </header>
-
-                    <div className="mt-8 flex flex-wrap gap-3">
-                        {quickLinks.map((link) => (
-                            <Link
-                                key={link.href}
-                                href={link.href}
-                                target={
-                                    link.href.startsWith("http")
-                                        ? "_blank"
-                                        : undefined
-                                }
-                                rel={
-                                    link.href.startsWith("http")
-                                        ? "noopener noreferrer"
-                                        : undefined
-                                }
-                                className={linkButtonOutlineSm}
-                            >
-                                {link.label}
-                            </Link>
-                        ))}
-                    </div>
 
                     <section id="vedeni" className="mt-12 scroll-mt-28">
                         <Card className="content-card overflow-hidden">
@@ -269,7 +236,14 @@ export default async function KontaktyPage() {
                                         Jídelna
                                     </h2>
                                     <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                                        Kontakt pro otázky ke stravování.
+                                        Kontakt pro otázky ke stravování. E-mail školní jídelny:{" "}
+                                        <a
+                                            href="mailto:sjtyrsovka@tyrsovka.cz"
+                                            className="font-medium text-foreground underline-offset-2 hover:text-primary hover:underline"
+                                        >
+                                            sjtyrsovka@tyrsovka.cz
+                                        </a>
+                                        .
                                     </p>
                                 </CardHeader>
                                 <CardContent className="space-y-8 p-6 sm:p-8">

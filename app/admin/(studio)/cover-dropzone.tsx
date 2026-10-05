@@ -8,7 +8,10 @@ import { Button } from "@/components/ui/button";
 
 const ACCEPT = "image/jpeg,image/png,image/webp";
 
-export async function uploadCmsImage(file: File): Promise<{ key: string; url: string }> {
+export async function uploadCmsImage(
+    file: File,
+    folder?: "aktuality" | "galerie",
+): Promise<{ key: string; url: string }> {
     if (file.size > 5 * 1024 * 1024) {
         throw new Error("Obrázek může mít nejvýše 5 MB.");
     }
@@ -17,6 +20,7 @@ export async function uploadCmsImage(file: File): Promise<{ key: string; url: st
     }
     const form = new FormData();
     form.append("file", file);
+    if (folder) form.append("folder", folder);
     const response = await fetch("/api/admin/upload", {
         method: "POST",
         body: form,

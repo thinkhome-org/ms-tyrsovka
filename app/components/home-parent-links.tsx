@@ -1,13 +1,21 @@
 import Link from "next/link";
-import { ArrowUpRight, UtensilsCrossed, Info, AppWindow } from "lucide-react";
+import {
+    ArrowUpRight,
+    BookOpen,
+    Handshake,
+    Newspaper,
+    UtensilsCrossed,
+    Info,
+    AppWindow,
+} from "lucide-react";
 import { NASE_MS_URL } from "@/lib/site-nav";
 
 const LINKS = [
     {
-        href: "/jidelnicek",
-        label: "Jídelníček",
-        text: "Aktuální týden, alergeny a stravování.",
-        icon: UtensilsCrossed,
+        href: "/#aktuality",
+        label: "Aktuality",
+        text: "Co se ve školce právě děje.",
+        icon: Newspaper,
     },
     {
         href: "/prakticke-informace",
@@ -16,9 +24,27 @@ const LINKS = [
         icon: Info,
     },
     {
+        href: "/edukacni-materialy",
+        label: "Edukační materiály",
+        text: "Desatero, profil předškoláka a profil prvňáka.",
+        icon: BookOpen,
+    },
+    {
+        href: "/jidelnicek",
+        label: "Jídelníček",
+        text: "Aktuální a příští týden, alergeny a stravování.",
+        icon: UtensilsCrossed,
+    },
+    {
+        href: "/spoluprace",
+        label: "Spolupráce",
+        text: "PPP, DDM Modřany, META a další partneři.",
+        icon: Handshake,
+    },
+    {
         href: NASE_MS_URL,
         label: "Naše MŠ",
-        text: "Rodičovský portál pro docházku a aktuální dění.",
+        text: "Rodičovský portál pro docházku a omluvenky.",
         icon: AppWindow,
         external: true,
     },
@@ -31,7 +57,9 @@ export function HomeParentLinks() {
                 <p className="text-sm font-medium uppercase tracking-[0.18em] text-muted-foreground">
                     Pro rodiče
                 </p>
-                <h2 className="mt-3 text-3xl font-semibold tracking-tight">Rychlé odkazy</h2>
+                <h2 className="mt-3 text-3xl font-semibold tracking-tight">
+                    Co tu najdou naši rodiče
+                </h2>
                 <div className="mt-8 grid gap-4 md:grid-cols-3">
                     {LINKS.map((link) => {
                         const Icon = link.icon;

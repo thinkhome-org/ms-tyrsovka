@@ -97,6 +97,19 @@ const SECTIONS = [
         ),
     },
     {
+        id: "materialy",
+        title: "Edukační materiály",
+        body: (
+            <p>
+                Desatero předškoláka, profil předškoláka a profil prvňáka jsou na samostatné stránce{" "}
+                <Link href="/edukacni-materialy" className="text-primary underline underline-offset-2">
+                    Edukační materiály
+                </Link>
+                .
+            </p>
+        ),
+    },
+    {
         id: "platby",
         title: "Platby a potřebné údaje",
         body: (

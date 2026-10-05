@@ -1,6 +1,8 @@
 import { CLASSROOMS } from "@/lib/classrooms";
 
 export const NASE_MS_URL = "https://nasems.cz/";
+export const OLD_SITE_URL = "https://www.tyrsovka.cz/";
+export const SCHOOL_MOTTO = "Skákej, běhej, dováděj";
 
 export type NavLink = {
     label: string;
@@ -38,18 +40,30 @@ export const MAIN_NAV: NavItem[] = [
         label: "Pro rodiče",
         tone: "boruvka",
         sub: [
+            { label: "Aktuality", href: "/aktuality" },
             { label: "Nově přijatí", href: "/nove-prijati" },
             { label: "Praktické informace", href: "/prakticke-informace" },
+            { label: "Edukační materiály", href: "/edukacni-materialy" },
             { label: "Naše MŠ", href: NASE_MS_URL, external: true },
         ],
     },
-    { label: "Jídelníček", href: "/jidelnicek", tone: "citron" },
+    {
+        label: "Jídelníček",
+        tone: "citron",
+        sub: [
+            { label: "Aktuální týden", href: "/jidelnicek#aktualni" },
+            { label: "Příští týden", href: "/jidelnicek#pristi" },
+            { label: "Informace k platbám", href: "/prakticke-informace#platby" },
+        ],
+    },
     {
         label: "O škole",
         tone: "jablko",
         sub: [
             { label: "Představení školy", href: "/o-nas" },
             { label: "Třídy", href: "/tridy", children: CLASS_NAV_LINKS },
+            { label: "Spolupráce", href: "/spoluprace" },
+            { label: "ŠVP (školní vzdělávací program)", href: "/svp" },
             { label: "Fotogalerie", href: "/galerie" },
             { label: "Zpráva ČŠI", href: "/zprava-csi" },
         ],
@@ -61,7 +75,9 @@ export const FOOTER_COLUMNS: { title: string; links: NavLink[] }[] = [
     {
         title: "Pro rodiče",
         links: [
+            { label: "Aktuality", href: "/aktuality" },
             { label: "Praktické informace", href: "/prakticke-informace" },
+            { label: "Edukační materiály", href: "/edukacni-materialy" },
             { label: "Jídelníček", href: "/jidelnicek" },
             { label: "Plán akcí", href: "/plan-akci" },
             { label: "Naše MŠ", href: NASE_MS_URL, external: true },
@@ -72,7 +88,7 @@ export const FOOTER_COLUMNS: { title: string; links: NavLink[] }[] = [
         title: "Dokumenty",
         links: [
             { label: "Úřední deska a dokumenty", href: "/uredni-deska" },
-            { label: "ŠVP", href: "/svp" },
+            { label: "ŠVP (školní vzdělávací program)", href: "/svp" },
             { label: "Školní řád", href: "/uredni-deska#skolni-rad" },
             { label: "Informační memorandum", href: "/informacni-memorandum" },
         ],
@@ -80,6 +96,8 @@ export const FOOTER_COLUMNS: { title: string; links: NavLink[] }[] = [
     {
         title: "Další informace",
         links: [
+            { label: "Spolupráce", href: "/spoluprace" },
+            { label: "Archiv původního webu", href: OLD_SITE_URL, external: true },
             { label: "Pracovní příležitosti", href: "/pracovni-prilezitosti" },
             { label: "Zpráva ČŠI", href: "/zprava-csi" },
             { label: "Ochrana osobních údajů", href: "/ochrana-osobnich-udaju" },

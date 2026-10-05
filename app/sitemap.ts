@@ -16,6 +16,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         "zapisy",
         "nove-prijati",
         "prakticke-informace",
+        "edukacni-materialy",
         "jidelnicek",
         "kontakty",
         "o-nas",

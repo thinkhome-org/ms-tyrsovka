@@ -653,10 +653,10 @@ INSERT OR IGNORE INTO people (
 	),
 	(
 		'seed-person-hospodarka',
-		'Dobroslava Perevuzníková',
+		'Natália Kytseliak',
 		'Hospodářka a vedoucí školní jídelny',
-		'',
-		'',
+		'hospodarka@tyrsovka.cz',
+		'+420 702 290 904',
 		'jidelna',
 		1,
 		'2026-01-01T08:00:00.000Z',

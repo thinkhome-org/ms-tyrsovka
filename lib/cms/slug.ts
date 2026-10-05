@@ -19,7 +19,7 @@ const CZECH_MAP: Record<string, string> = {
     ž: "z",
 };
 
-export function slugifyCs(input: string): string {
+export function slugifyCs(input: string, fallback = "aktualita"): string {
     const lowered = input.trim().toLowerCase();
     const transliterated = lowered.replace(/[áäčďéěíňóöřšťúůüýž]/g, (char) => {
         return CZECH_MAP[char] ?? char;
@@ -30,5 +30,5 @@ export function slugifyCs(input: string): string {
         .replace(/[^a-z0-9]+/g, "-")
         .replace(/^-+|-+$/g, "")
         .replace(/-{2,}/g, "-");
-    return slug || "aktualita";
+    return slug || fallback;
 }

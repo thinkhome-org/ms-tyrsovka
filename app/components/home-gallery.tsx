@@ -1,12 +1,14 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { GALLERY_ALBUMS } from "@/app/galerie/content";
+import type { PublicGalleryAlbum } from "@/lib/cms/gallery";
 import { linkButtonOutlineSm } from "@/lib/button-link-classes";
 
-export function HomeGallery() {
-    const photos = GALLERY_ALBUMS.flatMap((album) =>
-        album.photos.slice(0, 2).map((photo) => ({ ...photo, album: album.title })),
-    ).slice(0, 6);
+export function HomeGallery({ albums }: { albums: PublicGalleryAlbum[] }) {
+    const photos = albums
+        .flatMap((album) => album.photos.slice(0, 2))
+        .slice(0, 6);
+
+    if (photos.length === 0) return null;
 
     return (
         <section className="text-zinc-900">

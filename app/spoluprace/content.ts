@@ -5,6 +5,13 @@ export type SpolupraceItem = {
     category: string;
     description: string;
     logo: string;
+    href?: string;
+};
+
+export type SpolupraceLink = {
+    title: string;
+    text: string;
+    href: string;
 };
 
 export const SPOLUPRACE_CONTENT = {
@@ -12,6 +19,23 @@ export const SPOLUPRACE_CONTENT = {
     title: "Spolupráce",
     description:
         "Přehled institucí a partnerů, se kterými MŠ Tyršovka dlouhodobě spolupracuje.",
+    links: [
+        {
+            title: "PPP Praha 12",
+            text: "Pedagogicko-psychologická poradna, školní zralost a podpora dětí.",
+            href: "https://www.ppp11a12.cz/12",
+        },
+        {
+            title: "DDM Modřany",
+            text: "Kroužky, divadlo a sportovní akce.",
+            href: "https://www.ddmm.cz/",
+        },
+        {
+            title: "META, o.p.s.",
+            text: "Podpora dětí s odlišným mateřským jazykem a jejich rodin.",
+            href: "https://www.meta-ops.eu/",
+        },
+    ] satisfies SpolupraceLink[],
     items: [
         {
             title: "DDM Modřany",
@@ -19,6 +43,7 @@ export const SPOLUPRACE_CONTENT = {
             description:
                 "S DDM Modřany spolupracujeme již spoustu let, ať již zajišťují většinu kroužků u nás v MŠ, či návštěvou jejich divadla, nebo sportovních akcí.",
             logo: `${F}/0e/c8/0ec837a4-fe8a-4ad7-8c3e-8a7963d19888.jpg`,
+            href: "https://www.ddmm.cz/",
         },
         {
             title: "ZUŠ Adolfa Voborského",

@@ -13,24 +13,6 @@ export const KONTAKTY_CONTENT = {
     introTitle: "Jak nás nejlépe kontaktovat",
     introText:
         "Omluvenky zadávejte do aplikace Naše MŠ. Do tříd volejte nebo pište jen v naléhavých případech. Při ranním provozu, odpoledním provozu nebo pobytu na zahradě škola doporučuje kontaktovat Citrónovou třídu.",
-    quickLinks: [
-        {
-            label: "Napsat ředitelce",
-            href: "mailto:reditelka@tyrsovka.cz",
-        },
-        {
-            label: "Zavolat do MŠ",
-            href: "tel:+420737381935",
-        },
-        {
-            label: "Původní kontakt na provoz",
-            href: "https://www.tyrsovka.cz/kontakty/provoz-skolky",
-        },
-        {
-            label: "Původní kontakt na třídy",
-            href: "https://www.tyrsovka.cz/kontakty/tridy",
-        },
-    ],
     school: {
         name: "Mateřská škola Tyršovka v Praze 12",
         founder:
@@ -55,7 +37,9 @@ export const KONTAKTY_CONTENT = {
         },
         {
             role: "Hospodářka a vedoucí školní jídelny",
-            name: "Dobroslava Perevuzníková",
+            name: "Natália Kytseliak",
+            email: "hospodarka@tyrsovka.cz",
+            phone: "+420 702 290 904",
         },
     ] satisfies ContactPerson[],
     urgentClassPhone: {

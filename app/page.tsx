@@ -5,6 +5,7 @@ import Aktuality from "./components/aktuality";
 import ProcMy from "./components/proc-my";
 import { HomeGallery } from "./components/home-gallery";
 import HomeLocation from "./components/home-location";
+import { listPublicAlbums } from "@/lib/cms/gallery";
 import { buildPageMetadata, buildAbsoluteUrl } from "@/lib/seo";
 
 const homeMetadata = buildPageMetadata({
@@ -44,7 +45,9 @@ function getOrganizationJsonLd() {
     };
 }
 
-export default function Home() {
+export default async function Home() {
+    const albums = await listPublicAlbums();
+
     return (
         <main className="flex min-h-screen flex-1 flex-col">
             <script
@@ -54,11 +57,11 @@ export default function Home() {
                 }}
             />
             <SiteBanner />
-            <Hero />
+            <Hero photos={albums.flatMap((album) => album.photos)} />
             <HomeParentLinks />
             <Aktuality />
             <ProcMy />
-            <HomeGallery />
+            <HomeGallery albums={albums} />
             <HomeLocation />
         </main>
     );

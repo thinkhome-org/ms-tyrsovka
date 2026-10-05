@@ -22,10 +22,10 @@ export default async function Aktuality() {
                 <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
                     <div>
                         <p className="text-sm font-medium uppercase tracking-[0.18em] text-muted-foreground">
-                            Aktuálně ve škole
+                            Pro naše rodiče
                         </p>
                         <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl lg:text-5xl">
-                            Akce a zprávy
+                            Aktuality ze školky
                         </h2>
                     </div>
                     <Link

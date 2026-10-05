@@ -5,8 +5,8 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { JIDELNICEK_PAGE } from "@/lib/static-page-content";
 import { linkButtonOutlineSm } from "@/lib/button-link-classes";
 import { buildPageMetadata } from "@/lib/seo";
-import { czechWeekday, formatDateCs } from "@/lib/cms/dates";
-import { getWeekMenu, isMenuDayFilled } from "@/lib/cms/menu";
+import { addDays, czechWeekday, formatDateCs, mondayOfWeek } from "@/lib/cms/dates";
+import { getWeekMenu, isMenuDayFilled, type MenuDay } from "@/lib/cms/menu";
 
 export const dynamic = "force-dynamic";
 
@@ -37,9 +37,84 @@ const noteMarkdown = {
     ),
 };
 
-export default async function JidelnicekPage() {
-    const days = await getWeekMenu();
+function WeekMenu({
+    id,
+    title,
+    days,
+    emptyText,
+}: {
+    id: string;
+    title: string;
+    days: MenuDay[];
+    emptyText: string;
+}) {
     const hasMeals = days.some(isMenuDayFilled);
+
+    return (
+        <Card id={id} className="content-card scroll-mt-28 overflow-hidden">
+            <CardHeader className="border-b border-border/80 bg-muted/40 py-6 sm:py-8">
+                <h2 className="text-2xl font-semibold tracking-tight">{title}</h2>
+                <p className="mt-2 text-sm text-muted-foreground">
+                    {formatDateCs(days[0]?.day_date ?? "")} –{" "}
+                    {formatDateCs(days[4]?.day_date ?? "")}
+                </p>
+            </CardHeader>
+            <CardContent className="p-0">
+                {hasMeals ? (
+                    <div className="overflow-x-auto">
+                        <table className="min-w-[40rem] w-full text-left text-sm">
+                            <thead className="border-b border-border bg-muted/30 text-xs uppercase tracking-[0.14em] text-muted-foreground">
+                                <tr>
+                                    <th className="px-4 py-3 sm:px-6">Den</th>
+                                    <th className="px-3 py-3">Přesnídávka</th>
+                                    <th className="px-3 py-3">Polévka</th>
+                                    <th className="px-3 py-3">Hlavní</th>
+                                    <th className="px-3 py-3 sm:pr-6">Svačina</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {days.map((day) => (
+                                    <tr
+                                        key={day.day_date}
+                                        className="border-b border-border last:border-0"
+                                    >
+                                        <td className="whitespace-nowrap px-4 py-4 font-medium sm:px-6">
+                                            {czechWeekday(day.day_date)}
+                                        </td>
+                                        <td className="px-3 py-4 text-muted-foreground">
+                                            {day.snack_1 || "—"}
+                                        </td>
+                                        <td className="px-3 py-4 text-muted-foreground">
+                                            {day.soup || "—"}
+                                        </td>
+                                        <td className="px-3 py-4 text-muted-foreground">
+                                            {day.main_meal || "—"}
+                                        </td>
+                                        <td className="px-3 py-4 text-muted-foreground sm:pr-6">
+                                            {day.snack_2 || "—"}
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                ) : (
+                    <p className="p-6 text-sm leading-relaxed text-muted-foreground sm:p-8">
+                        {emptyText}
+                    </p>
+                )}
+            </CardContent>
+        </Card>
+    );
+}
+
+export default async function JidelnicekPage() {
+    const thisMonday = mondayOfWeek();
+    const nextMonday = addDays(thisMonday, 7);
+    const [thisWeek, nextWeek] = await Promise.all([
+        getWeekMenu(thisMonday),
+        getWeekMenu(nextMonday),
+    ]);
     const noteSections = JIDELNICEK_PAGE.markdown
         .split(/\n---\n/g)
         .map((section) => section.trim())
@@ -66,62 +141,20 @@ export default async function JidelnicekPage() {
                         </Link>
                     </header>
 
-                    <Card className="content-card mt-12 overflow-hidden sm:mt-14">
-                        <CardHeader className="border-b border-border/80 bg-muted/40 py-6 sm:py-8">
-                            <h2 className="text-2xl font-semibold tracking-tight">
-                                Aktuální týden
-                            </h2>
-                            <p className="mt-2 text-sm text-muted-foreground">
-                                {formatDateCs(days[0]?.day_date ?? "")} –{" "}
-                                {formatDateCs(days[4]?.day_date ?? "")}
-                            </p>
-                        </CardHeader>
-                        <CardContent className="p-0">
-                            {hasMeals ? (
-                                <div className="overflow-x-auto">
-                                    <table className="min-w-[40rem] w-full text-left text-sm">
-                                        <thead className="border-b border-border bg-muted/30 text-xs uppercase tracking-[0.14em] text-muted-foreground">
-                                            <tr>
-                                                <th className="px-4 py-3 sm:px-6">Den</th>
-                                                <th className="px-3 py-3">Přesnídávka</th>
-                                                <th className="px-3 py-3">Polévka</th>
-                                                <th className="px-3 py-3">Hlavní</th>
-                                                <th className="px-3 py-3 sm:pr-6">Svačina</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {days.map((day) => (
-                                                <tr
-                                                    key={day.day_date}
-                                                    className="border-b border-border last:border-0"
-                                                >
-                                                    <td className="whitespace-nowrap px-4 py-4 font-medium sm:px-6">
-                                                        {czechWeekday(day.day_date)}
-                                                    </td>
-                                                    <td className="px-3 py-4 text-muted-foreground">
-                                                        {day.snack_1 || "—"}
-                                                    </td>
-                                                    <td className="px-3 py-4 text-muted-foreground">
-                                                        {day.soup || "—"}
-                                                    </td>
-                                                    <td className="px-3 py-4 text-muted-foreground">
-                                                        {day.main_meal || "—"}
-                                                    </td>
-                                                    <td className="px-3 py-4 text-muted-foreground sm:pr-6">
-                                                        {day.snack_2 || "—"}
-                                                    </td>
-                                                </tr>
-                                            ))}
-                                        </tbody>
-                                    </table>
-                                </div>
-                            ) : (
-                                <p className="p-6 text-sm leading-relaxed text-muted-foreground sm:p-8">
-                                    Jídelníček na tento týden zatím není zveřejněný.
-                                </p>
-                            )}
-                        </CardContent>
-                    </Card>
+                    <div className="mt-12 space-y-8 sm:mt-14">
+                        <WeekMenu
+                            id="aktualni"
+                            title="Aktuální týden"
+                            days={thisWeek}
+                            emptyText="Jídelníček na tento týden zatím není zveřejněný."
+                        />
+                        <WeekMenu
+                            id="pristi"
+                            title="Příští týden"
+                            days={nextWeek}
+                            emptyText="Jídelníček na příští týden zatím není zveřejněný."
+                        />
+                    </div>
 
                     <div className="mt-8 space-y-8">
                         {noteSections.map((section) => (

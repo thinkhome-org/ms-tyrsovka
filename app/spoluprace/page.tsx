@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
 import { linkButtonOutlineSm } from "@/lib/button-link-classes";
 import { buildPageMetadata } from "@/lib/seo";
 import { SPOLUPRACE_CONTENT } from "./content";
@@ -11,7 +12,7 @@ export const metadata = buildPageMetadata({
 });
 
 export default function SpolupracePage() {
-    const { eyebrow, title, description, items } = SPOLUPRACE_CONTENT;
+    const { eyebrow, title, description, links, items } = SPOLUPRACE_CONTENT;
 
     return (
         <main className="flex-1 text-zinc-900">
@@ -33,6 +34,26 @@ export default function SpolupracePage() {
                         ← Zpět
                     </Link>
                 </header>
+
+                <div className="mt-12 grid gap-4 md:grid-cols-3">
+                    {links.map((link) => (
+                        <a
+                            key={link.href}
+                            href={link.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="rounded-xl border border-border bg-card p-5"
+                        >
+                            <p className="inline-flex items-center gap-1 text-lg font-semibold tracking-tight">
+                                {link.title}
+                                <ArrowUpRight className="size-4 opacity-70" />
+                            </p>
+                            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                                {link.text}
+                            </p>
+                        </a>
+                    ))}
+                </div>
 
                 {/* Partner list */}
                 <div className="mt-16 border-t border-border">
@@ -60,7 +81,19 @@ export default function SpolupracePage() {
                                     {item.category}
                                 </p>
                                 <h2 className="mt-1.5 text-xl font-semibold tracking-tight text-foreground sm:text-2xl">
-                                    {item.title}
+                                    {item.href ? (
+                                        <a
+                                            href={item.href}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="inline-flex items-center gap-1 underline-offset-2 hover:underline"
+                                        >
+                                            {item.title}
+                                            <ArrowUpRight className="size-4 opacity-70" />
+                                        </a>
+                                    ) : (
+                                        item.title
+                                    )}
                                 </h2>
                             </div>
 

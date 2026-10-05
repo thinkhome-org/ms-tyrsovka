@@ -148,7 +148,7 @@ Docházku je možné omlouvat přes aplikaci **Naše MŠ**, výjimečně pomocí
 export const JIDELNICEK_PAGE: StaticPageContent = {
     eyebrow: "Jídelníček",
     title: "Jídelníček",
-    description: "Aktuální týden, alergeny a praktické informace ke stravování.",
+    description: "Aktuální a příští týden. V pondělí se jídelníček sám posune.",
     markdown: `
 ## Alergeny a vysvětlivky
 
@@ -230,7 +230,8 @@ Bližší informace škola uvádí ve třídách. Další akce mohou být průb�
 export const SVP_PAGE: StaticPageContent = {
     eyebrow: "O škole",
     title: "ŠVP",
-    description: "Školní vzdělávací program.",
+    description:
+        "Školní vzdělávací program. Není to škola v přírodě.",
     buttonLinks: [
         {
             label: "Otevřít ŠVP (PDF)",
@@ -238,6 +239,7 @@ export const SVP_PAGE: StaticPageContent = {
         },
     ],
     markdown: `
+**ŠVP** je zkratka pro **školní vzdělávací program**. Jde o dokument, podle kterého škola vzdělává děti. Nejde o školu v přírodě.
 `.trim(),
 };
 

@@ -43,7 +43,8 @@ export async function POST(request: Request) {
         );
     }
 
-    const key = `aktuality/${crypto.randomUUID()}.${ext}`;
+    const folder = form.get("folder") === "galerie" ? "galerie" : "aktuality";
+    const key = `${folder}/${crypto.randomUUID()}.${ext}`;
     const bytes = await file.arrayBuffer();
     await bucket.put(key, bytes, {
         httpMetadata: { contentType: file.type },

@@ -31,7 +31,7 @@ const SCHOOL_PILLARS = [
 const RELATED_LINKS = [
     { href: "/tridy", label: "Třídy" },
     { href: "/galerie", label: "Fotogalerie" },
-    { href: "/svp", label: "ŠVP" },
+    { href: "/svp", label: "ŠVP (školní vzdělávací program)" },
     { href: "/zprava-csi", label: "Zpráva ČŠI" },
 ];
 
