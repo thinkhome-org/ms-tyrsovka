@@ -4,6 +4,7 @@ import { putDocument } from "@/lib/cms/documents";
 import {
     deleteNotice,
     getNoticeById,
+    moveNotice,
     updateNotice,
     type NoticeInput,
 } from "@/lib/cms/notices";
@@ -54,6 +55,18 @@ export async function PATCH(
     if (denied) return denied;
     const { id } = await params;
     try {
+        const contentType = request.headers.get("content-type") ?? "";
+        if (contentType.includes("application/json")) {
+            const body = (await request.json()) as NoticeInput & {
+                direction?: "up" | "down";
+            };
+            if (body.direction === "up" || body.direction === "down") {
+                const item = await moveNotice(id, body.direction);
+                return NextResponse.json({ item });
+            }
+            const item = await updateNotice(id, body);
+            return NextResponse.json({ item });
+        }
         const input = await noticeInputFromRequest(request);
         const item = await updateNotice(id, input);
         return NextResponse.json({ item });

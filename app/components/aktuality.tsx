@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Image from "next/image";
+import { CmsImage } from "@/components/cms-image";
 import { ArrowRight } from "lucide-react";
 import { SchoolEventsList } from "@/app/components/school-events";
 import { listPublished } from "@/lib/cms/aktuality";
@@ -61,7 +61,7 @@ export default async function Aktuality() {
                                     >
                                         <div className="relative h-14 w-20 shrink-0 overflow-hidden rounded-md bg-muted sm:h-16 sm:w-24">
                                             {image ? (
-                                                <Image
+                                                <CmsImage
                                                     src={image}
                                                     alt={item.title}
                                                     fill

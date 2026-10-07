@@ -290,7 +290,7 @@ function AlbumEditor({
 
             <label
                 className={cn(
-                    "flex cursor-pointer flex-col items-center gap-2 rounded-2xl border border-dashed border-border bg-card px-6 py-8 text-center transition-colors",
+                    "relative flex cursor-pointer flex-col items-center gap-2 rounded-2xl border border-dashed border-border bg-card px-6 py-8 text-center transition-colors",
                     dragOver && "border-primary bg-accent/60",
                     uploading && "pointer-events-none opacity-70",
                 )}
@@ -309,15 +309,16 @@ function AlbumEditor({
                 <span className="font-heading text-lg font-semibold tracking-tight">
                     {uploading || "Přidat fotky"}
                 </span>
-                <span className="max-w-md text-xs leading-relaxed text-muted-foreground">
-                    JPEG, PNG nebo WebP, každá nejvýše 5 MB. Můžete vybrat víc
-                    souborů najednou nebo je sem přetáhnout.
+                <span className="pointer-events-none max-w-md text-xs leading-relaxed text-muted-foreground">
+                    Klepněte a vyberte fotky z telefonu. Můžete jich vzít víc
+                    najednou, velké snímky se před odesláním zmenší.
                 </span>
                 <input
                     type="file"
-                    accept="image/jpeg,image/png,image/webp"
+                    accept="image/*,.heic,.heif,.jpg,.jpeg,.png,.webp"
                     multiple
-                    className="sr-only"
+                    aria-label="Přidat fotky"
+                    className="absolute inset-0 z-20 size-full cursor-pointer opacity-0"
                     onChange={(event) => {
                         if (event.target.files) void onUpload(event.target.files);
                         event.target.value = "";
@@ -328,7 +329,7 @@ function AlbumEditor({
             {album.photos.length === 0 ? (
                 <p className="text-sm text-muted-foreground">V albu zatím není žádná fotka.</p>
             ) : (
-                <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 xl:grid-cols-4">
+                <ul className="grid grid-cols-1 gap-3 min-[420px]:grid-cols-2 sm:grid-cols-3 xl:grid-cols-4">
                     {album.photos.map((photo, index) => (
                         <PhotoCard
                             key={`${photo.id}:${photo.alt}`}

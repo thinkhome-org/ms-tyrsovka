@@ -12,6 +12,7 @@ export type Aktualita = {
     excerpt: string;
     body_html: string;
     cover_key: string | null;
+    photo_keys: string[];
     status: AktualitaStatus;
     published_at: string | null;
     created_at: string;
@@ -24,18 +25,55 @@ export type AktualitaInput = {
     excerpt?: string;
     body_html?: string;
     cover_key?: string | null;
+    photo_keys?: string[];
     status?: AktualitaStatus;
     published_at?: string | null;
 };
 
-type AktualitaRow = Omit<Aktualita, "status"> & { status: string };
+type AktualitaRow = Omit<Aktualita, "status" | "photo_keys"> & {
+    status: string;
+    photo_keys: string | null;
+};
+
+const MAX_PHOTOS = 30;
+
+function parsePhotoKeys(raw: string | null | undefined): string[] {
+    if (!raw) return [];
+    try {
+        const parsed = JSON.parse(raw) as unknown;
+        if (!Array.isArray(parsed)) return [];
+        return parsed
+            .filter((item): item is string => typeof item === "string")
+            .map((item) => item.trim())
+            .filter((item) => item.length > 0 && item.length <= 500 && !item.includes(".."))
+            .slice(0, MAX_PHOTOS);
+    } catch {
+        return [];
+    }
+}
 
 function mapRow(row: AktualitaRow): Aktualita {
     return {
         ...row,
+        photo_keys: parsePhotoKeys(row.photo_keys),
         status: row.status === "published" ? "published" : "draft",
         body_html: sanitizeBody(row.body_html ?? ""),
     };
+}
+
+function settlePhotos(
+    photoKeys: string[] | undefined,
+    coverKey: string | null,
+): { photo_keys: string[]; cover_key: string | null } {
+    const photos = [...(photoKeys ?? [])];
+    let cover = coverKey?.trim() || null;
+    if (cover && !photos.includes(cover)) photos.unshift(cover);
+    if (!cover && photos[0]) cover = photos[0];
+    if (photos.length === 0) cover = null;
+    if (photos.length > MAX_PHOTOS) {
+        throw new Error("K jedné aktualitě jde přidat nejvýše 30 fotek.");
+    }
+    return { photo_keys: photos, cover_key: cover };
 }
 
 export async function listPublished(limit?: number): Promise<Aktualita[]> {
@@ -130,11 +168,12 @@ export async function createAktualita(input: AktualitaInput): Promise<Aktualita>
     const id = crypto.randomUUID();
     const slug = await uniqueSlug(db, input.slug?.trim() || title);
     const excerpt = normalizeExcerpt(input.excerpt, bodyHtml);
+    const photos = settlePhotos(input.photo_keys, input.cover_key ?? null);
     await db
         .prepare(
             `INSERT INTO aktuality
-                (id, slug, title, excerpt, body_html, cover_key, status, published_at, created_at, updated_at)
-             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+                (id, slug, title, excerpt, body_html, cover_key, photo_keys, status, published_at, created_at, updated_at)
+             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
         )
         .bind(
             id,
@@ -142,7 +181,8 @@ export async function createAktualita(input: AktualitaInput): Promise<Aktualita>
             title,
             excerpt,
             bodyHtml,
-            input.cover_key ?? null,
+            photos.cover_key,
+            JSON.stringify(photos.photo_keys),
             status,
             publishedAt,
             now,
@@ -172,12 +212,16 @@ export async function updateAktualita(
             : input.published_at?.trim() || null;
     const slug = await uniqueSlug(db, input.slug?.trim() || existing.slug, id);
     const excerpt = normalizeExcerpt(input.excerpt, bodyHtml);
+    const photos = settlePhotos(
+        input.photo_keys === undefined ? existing.photo_keys : input.photo_keys,
+        input.cover_key === undefined ? existing.cover_key : input.cover_key,
+    );
     const now = new Date().toISOString();
     await db
         .prepare(
             `UPDATE aktuality SET
                 slug = ?, title = ?, excerpt = ?, body_html = ?, cover_key = ?,
-                status = ?, published_at = ?, updated_at = ?
+                photo_keys = ?, status = ?, published_at = ?, updated_at = ?
              WHERE id = ?`,
         )
         .bind(
@@ -185,7 +229,8 @@ export async function updateAktualita(
             title,
             excerpt,
             bodyHtml,
-            input.cover_key === undefined ? existing.cover_key : input.cover_key,
+            photos.cover_key,
+            JSON.stringify(photos.photo_keys),
             status,
             publishedAt,
             now,

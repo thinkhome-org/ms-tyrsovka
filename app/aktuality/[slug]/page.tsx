@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Image from "next/image";
+import { CmsImage } from "@/components/cms-image";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { Badge } from "@/components/ui/badge";
@@ -44,6 +44,10 @@ export default async function AktualitaDetailPage({
     if (!item) notFound();
 
     const image = coverSrc(item.cover_key);
+    const extraPhotos = item.photo_keys
+        .filter((key) => key !== item.cover_key)
+        .map((key) => coverSrc(key))
+        .filter((src): src is string => Boolean(src));
     const date = item.published_at || item.created_at;
     const articleJsonLd = {
         "@context": "https://schema.org",
@@ -81,7 +85,7 @@ export default async function AktualitaDetailPage({
                 <Card className="mt-8 overflow-hidden bg-card">
                     {image ? (
                         <div className="relative h-64 w-full bg-muted sm:h-80 lg:h-112">
-                            <Image
+                            <CmsImage
                                 src={image}
                                 alt={item.title}
                                 fill
@@ -92,8 +96,8 @@ export default async function AktualitaDetailPage({
                         </div>
                     ) : null}
                     <CardContent className="p-6 sm:p-8">
-                        <Badge variant="soft" className="mb-4">
-                            Publikováno{" "}
+                        <Badge variant="soft" className="mb-4 gap-1.5">
+                            <span>Publikováno</span>
                             <time dateTime={date}>{formatDateCs(date)}</time>
                         </Badge>
                         <h1 className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
@@ -102,6 +106,24 @@ export default async function AktualitaDetailPage({
                         {item.body_html ? (
                             <div className="mt-6">
                                 <AktualitaBody html={item.body_html} />
+                            </div>
+                        ) : null}
+                        {extraPhotos.length > 0 ? (
+                            <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3">
+                                {extraPhotos.map((src) => (
+                                    <div
+                                        key={src}
+                                        className="relative aspect-4/3 overflow-hidden rounded-lg bg-muted"
+                                    >
+                                        <CmsImage
+                                            src={src}
+                                            alt=""
+                                            fill
+                                            className="object-cover"
+                                            sizes="(max-width: 640px) 50vw, 240px"
+                                        />
+                                    </div>
+                                ))}
                             </div>
                         ) : null}
                     </CardContent>

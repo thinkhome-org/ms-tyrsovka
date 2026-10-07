@@ -137,6 +137,35 @@ export async function updatePerson(id: string, input: PersonInput): Promise<Pers
     return updated;
 }
 
+export async function movePerson(
+    id: string,
+    direction: "up" | "down",
+): Promise<Person> {
+    const db = await getDb();
+    if (!db) throw new Error("Databáze není dostupná.");
+    const person = await getPersonById(id);
+    if (!person) throw new Error("Kontakt neexistuje.");
+    const siblings = (await listPeople()).filter(
+        (item) => item.section === person.section,
+    );
+    const index = siblings.findIndex((item) => item.id === id);
+    const target = direction === "up" ? index - 1 : index + 1;
+    if (index < 0 || target < 0 || target >= siblings.length) return person;
+    const next = [...siblings];
+    const [item] = next.splice(index, 1);
+    if (!item) return person;
+    next.splice(target, 0, item);
+    const statements = next.map((entry, position) =>
+        db
+            .prepare(`UPDATE people SET position_order = ? WHERE id = ?`)
+            .bind(position, entry.id),
+    );
+    if (statements.length > 0) await db.batch(statements);
+    const updated = await getPersonById(id);
+    if (!updated) throw new Error("Kontakt neexistuje.");
+    return updated;
+}
+
 export async function deletePerson(id: string): Promise<boolean> {
     const db = await getDb();
     if (!db) throw new Error("Databáze není dostupná.");

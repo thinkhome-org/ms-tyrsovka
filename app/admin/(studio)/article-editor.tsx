@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { AktualitaBody } from "@/app/components/aktualita-body";
-import { CoverDropzone } from "./cover-dropzone";
+import { ArticlePhotos } from "./cover-dropzone";
 import { RichTextEditor } from "./rich-text-editor";
 
 type SaveStatus = "draft" | "published";
@@ -20,6 +20,13 @@ export function ArticleEditor({ initial }: { initial?: Aktualita }) {
     const [slug, setSlug] = useState(initial?.slug ?? "");
     const [excerpt, setExcerpt] = useState(initial?.excerpt ?? "");
     const [bodyHtml, setBodyHtml] = useState(initial?.body_html ?? "");
+    const [photos, setPhotos] = useState<string[]>(() => {
+        const keys = initial?.photo_keys ?? [];
+        if (initial?.cover_key && !keys.includes(initial.cover_key)) {
+            return [initial.cover_key, ...keys];
+        }
+        return keys;
+    });
     const [coverKey, setCoverKey] = useState<string | null>(initial?.cover_key ?? null);
     const [publishedAt, setPublishedAt] = useState(
         toDateInput(initial?.published_at) || todayIsoDate(),
@@ -38,6 +45,7 @@ export function ArticleEditor({ initial }: { initial?: Aktualita }) {
             excerpt,
             body_html: bodyHtml,
             cover_key: coverKey,
+            photo_keys: photos,
             status,
             published_at: publishedAt || null,
         };
@@ -92,7 +100,14 @@ export function ArticleEditor({ initial }: { initial?: Aktualita }) {
     return (
         <div className="mt-8 grid gap-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(20rem,0.95fr)]">
             <div className="flex flex-col gap-5">
-                <CoverDropzone coverKey={coverKey} onChange={setCoverKey} />
+                <ArticlePhotos
+                    photos={photos}
+                    coverKey={coverKey}
+                    onChange={({ photos: nextPhotos, coverKey: nextCover }) => {
+                        setPhotos(nextPhotos);
+                        setCoverKey(nextCover);
+                    }}
+                />
                 <div className="flex flex-col gap-2">
                     <Label htmlFor="title">Nadpis</Label>
                     <Input
@@ -183,10 +198,27 @@ export function ArticleEditor({ initial }: { initial?: Aktualita }) {
                             <img src={cover} alt="" className="size-full object-cover" />
                         ) : (
                             <div className="flex h-full items-center justify-center text-xs uppercase tracking-[0.18em] text-muted-foreground">
-                                Fotografie
+                                Hlavní fotografie
                             </div>
                         )}
                     </div>
+                    {photos.length > 1 ? (
+                        <div className="flex gap-2 overflow-x-auto border-t border-border p-3">
+                            {photos.map((key) => {
+                                const src = coverSrc(key);
+                                if (!src) return null;
+                                return (
+                                    // eslint-disable-next-line @next/next/no-img-element
+                                    <img
+                                        key={key}
+                                        src={src}
+                                        alt=""
+                                        className="size-14 shrink-0 rounded-md object-cover"
+                                    />
+                                );
+                            })}
+                        </div>
+                    ) : null}
                     <div className="p-5 sm:p-6">
                         <p className="text-xs text-muted-foreground">
                             {publishedAt || "Datum se doplní při zveřejnění"}

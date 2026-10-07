@@ -1,25 +1,21 @@
 "use client";
 
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useState } from "react";
 import { ImageIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { coverSrc } from "@/lib/cms/media";
 import { Button } from "@/components/ui/button";
+import { prepareCmsImage } from "./prepare-image";
 
-const ACCEPT = "image/jpeg,image/png,image/webp";
+const ACCEPT = "image/*,.heic,.heif,.jpg,.jpeg,.png,.webp";
 
 export async function uploadCmsImage(
     file: File,
     folder?: "aktuality" | "galerie" | "tridy",
 ): Promise<{ key: string; url: string }> {
-    if (file.size > 5 * 1024 * 1024) {
-        throw new Error("Obrázek může mít nejvýše 5 MB.");
-    }
-    if (!["image/jpeg", "image/png", "image/webp"].includes(file.type)) {
-        throw new Error("Povolené formáty jsou JPEG, PNG a WebP.");
-    }
+    const prepared = await prepareCmsImage(file);
     const form = new FormData();
-    form.append("file", file);
+    form.append("file", prepared);
     if (folder) form.append("folder", folder);
     const response = await fetch("/api/admin/upload", {
         method: "POST",
@@ -34,41 +30,68 @@ export async function uploadCmsImage(
     return { key: payload.key, url: payload.url };
 }
 
-export function CoverDropzone({
+export function ArticlePhotos({
+    photos,
     coverKey,
     onChange,
 }: {
+    photos: string[];
     coverKey: string | null;
-    onChange: (key: string | null) => void;
+    onChange: (next: { photos: string[]; coverKey: string | null }) => void;
 }) {
-    const inputRef = useRef<HTMLInputElement>(null);
     const [error, setError] = useState("");
-    const [pending, setPending] = useState(false);
+    const [pending, setPending] = useState("");
     const [dragOver, setDragOver] = useState(false);
-    const preview = coverSrc(coverKey);
 
-    const handleFile = useCallback(
-        async (file: File | undefined) => {
-            if (!file) return;
+    const handleFiles = useCallback(
+        async (list: FileList | File[]) => {
+            const files = [...list];
+            if (files.length === 0) return;
+            if (photos.length >= 30) {
+                setError("K jedné aktualitě jde přidat nejvýše 30 fotek.");
+                return;
+            }
             setError("");
-            setPending(true);
+            const uploaded: string[] = [];
+            let failed = 0;
+            let message = "Nahrání se nepovedlo.";
+            setPending(`1 / ${files.length}`);
             try {
-                const uploaded = await uploadCmsImage(file);
-                onChange(uploaded.key);
-            } catch (err) {
-                setError(err instanceof Error ? err.message : "Nahrání se nepovedlo.");
+                for (let index = 0; index < files.length; index++) {
+                    const file = files[index];
+                    if (!file) continue;
+                    if (photos.length + uploaded.length >= 30) {
+                        setError("K jedné aktualitě jde přidat nejvýše 30 fotek.");
+                        break;
+                    }
+                    setPending(`${index + 1} / ${files.length}`);
+                    try {
+                        const result = await uploadCmsImage(file);
+                        uploaded.push(result.key);
+                    } catch (err) {
+                        failed += 1;
+                        message =
+                            err instanceof Error ? err.message : "Nahrání se nepovedlo.";
+                    }
+                }
+                if (uploaded.length > 0) {
+                    const next = [...photos, ...uploaded];
+                    onChange({
+                        photos: next,
+                        coverKey: coverKey ?? uploaded[0] ?? null,
+                    });
+                }
+                if (failed > 0) setError(message);
             } finally {
-                setPending(false);
+                setPending("");
             }
         },
-        [onChange],
+        [coverKey, onChange, photos],
     );
 
     return (
-        <div className="flex flex-col gap-2">
-            <button
-                type="button"
-                onClick={() => inputRef.current?.click()}
+        <div className="flex flex-col gap-3">
+            <div
                 onDragOver={(event) => {
                     event.preventDefault();
                     setDragOver(true);
@@ -77,56 +100,101 @@ export function CoverDropzone({
                 onDrop={(event) => {
                     event.preventDefault();
                     setDragOver(false);
-                    void handleFile(event.dataTransfer.files[0]);
+                    void handleFiles(event.dataTransfer.files);
                 }}
                 className={cn(
-                    "relative flex min-h-48 w-full overflow-hidden rounded-2xl border border-dashed border-border bg-card text-left transition-colors",
+                    "relative flex min-h-36 w-full overflow-clip rounded-2xl border border-dashed border-border bg-card text-left transition-colors",
                     dragOver && "border-primary bg-accent/60",
+                    pending && "pointer-events-none opacity-70",
                 )}
             >
-                {preview ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img
-                        src={preview}
-                        alt=""
-                        className="absolute inset-0 size-full object-cover"
-                    />
-                ) : null}
-                <span
-                    className={cn(
-                        "relative z-10 m-auto flex max-w-xs flex-col items-center gap-2 px-6 py-8 text-center",
-                        preview && "rounded-xl bg-background/85 px-5 py-4 shadow-sm",
-                    )}
-                >
+                <span className="relative z-10 m-auto flex max-w-sm flex-col items-center gap-2 px-6 py-8 text-center">
                     <ImageIcon className="size-5 text-primary" />
                     <span className="font-heading text-lg font-semibold tracking-tight">
-                        {pending ? "Nahrávám fotku…" : "Položit fotografii"}
+                        {pending ? `Nahrávám ${pending}…` : "Přidat fotografie"}
                     </span>
                     <span className="text-xs leading-relaxed text-muted-foreground">
-                        JPEG, PNG nebo WebP, nejvýše 5 MB. Klikněte nebo přetáhněte.
+                        Vyberte jednu nebo víc fotek z telefonu. Velké snímky se před
+                        odesláním zmenší. Jednu potom označte jako hlavní.
                     </span>
                 </span>
-            </button>
-            <input
-                ref={inputRef}
-                type="file"
-                accept={ACCEPT}
-                className="sr-only"
-                onChange={(event) => {
-                    void handleFile(event.target.files?.[0]);
-                    event.target.value = "";
-                }}
-            />
-            {coverKey ? (
-                <Button
-                    type="button"
-                    variant="outline"
-                    size="sm"
-                    className="self-start"
-                    onClick={() => onChange(null)}
-                >
-                    Odebrat fotku
-                </Button>
+                <input
+                    type="file"
+                    accept={ACCEPT}
+                    multiple
+                    disabled={pending !== ""}
+                    aria-label="Vybrat fotky"
+                    className="absolute inset-0 z-20 size-full cursor-pointer opacity-0"
+                    onChange={(event) => {
+                        void handleFiles(event.target.files ?? []);
+                        event.target.value = "";
+                    }}
+                />
+            </div>
+            {photos.length > 0 ? (
+                <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+                    {photos.map((key) => {
+                        const src = coverSrc(key);
+                        const main = key === coverKey;
+                        return (
+                            <li
+                                key={key}
+                                className={cn(
+                                    "overflow-hidden rounded-xl border bg-card",
+                                    main ? "border-primary" : "border-border",
+                                )}
+                            >
+                                <div className="relative aspect-4/3 bg-muted">
+                                    {src ? (
+                                        // eslint-disable-next-line @next/next/no-img-element
+                                        <img
+                                            src={src}
+                                            alt=""
+                                            className="size-full object-cover"
+                                        />
+                                    ) : null}
+                                    {main ? (
+                                        <span className="absolute left-2 top-2 rounded-md bg-primary px-2 py-0.5 text-[0.65rem] font-medium uppercase tracking-[0.14em] text-primary-foreground">
+                                            Hlavní
+                                        </span>
+                                    ) : null}
+                                </div>
+                                <div className="flex flex-col gap-1 p-2">
+                                    {main ? null : (
+                                        <Button
+                                            type="button"
+                                            variant="outline"
+                                            size="sm"
+                                            onClick={() =>
+                                                onChange({ photos, coverKey: key })
+                                            }
+                                        >
+                                            Nastavit jako hlavní
+                                        </Button>
+                                    )}
+                                    <Button
+                                        type="button"
+                                        variant="ghost"
+                                        size="sm"
+                                        className="text-destructive hover:text-destructive"
+                                        onClick={() => {
+                                            const next = photos.filter((item) => item !== key);
+                                            onChange({
+                                                photos: next,
+                                                coverKey:
+                                                    coverKey === key
+                                                        ? (next[0] ?? null)
+                                                        : coverKey,
+                                            });
+                                        }}
+                                    >
+                                        Odebrat
+                                    </Button>
+                                </div>
+                            </li>
+                        );
+                    })}
+                </ul>
             ) : null}
             {error ? (
                 <p className="text-sm text-destructive" role="alert">

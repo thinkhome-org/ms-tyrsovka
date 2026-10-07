@@ -203,36 +203,27 @@ export function GalerieView({ albums }: { albums: PublicGalleryAlbum[] }) {
                         ))}
                     </div>
 
-                    {/* Masonry grid */}
-                    <AnimatePresence mode="wait">
-                        <motion.div
-                            key={activeAlbum?.slug ?? "prazdna"}
-                            initial={{ opacity: 0, y: 8 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -8 }}
-                            transition={{ duration: 0.2 }}
-                            className="mt-8 columns-2 gap-3 sm:columns-3 lg:columns-4 xl:columns-5"
-                        >
-                            {photos.map((photo, i) => (
-                                <button
-                                    key={`${photo.src}-${i}`}
-                                    type="button"
-                                    onClick={() => openLightbox(i)}
-                                    className="mb-3 block w-full overflow-hidden rounded-lg focus-visible:outline focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
-                                    aria-label={`Otevřít: ${photo.alt}`}
-                                >
-                                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                                    <img
-                                        src={photo.src}
-                                        alt={photo.alt}
-                                        loading="lazy"
-                                        decoding="async"
-                                        className="w-full transition-transform duration-300 hover:scale-[1.03]"
-                                    />
-                                </button>
-                            ))}
-                        </motion.div>
-                    </AnimatePresence>
+                    <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+                        {photos.map((photo, i) => (
+                            <button
+                                key={`${photo.src}-${i}`}
+                                type="button"
+                                onClick={() => openLightbox(i)}
+                                className="relative aspect-4/3 overflow-hidden rounded-lg bg-muted focus-visible:outline focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+                                aria-label={`Otevřít: ${photo.alt}`}
+                            >
+                                {/* eslint-disable-next-line @next/next/no-img-element */}
+                                <img
+                                    src={photo.src}
+                                    alt={photo.alt}
+                                    loading={i < 8 ? "eager" : "lazy"}
+                                    decoding="async"
+                                    fetchPriority={i < 4 ? "high" : "auto"}
+                                    className="absolute inset-0 size-full object-cover"
+                                />
+                            </button>
+                        ))}
+                    </div>
                     </>
                     )}
                 </div>

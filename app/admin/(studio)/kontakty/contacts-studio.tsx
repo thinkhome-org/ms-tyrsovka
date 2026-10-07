@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { ChevronDown, ChevronUp } from "lucide-react";
 import type { Person, PersonSection } from "@/lib/cms/people";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -23,6 +24,7 @@ export function ContactsStudio({ people }: { people: Person[] }) {
     const [error, setError] = useState("");
     const [pending, setPending] = useState(false);
     const [deleting, setDeleting] = useState<string | null>(null);
+    const [moving, setMoving] = useState<string | null>(null);
 
     async function addPerson() {
         setPending(true);
@@ -37,7 +39,13 @@ export function ContactsStudio({ people }: { people: Person[] }) {
                     email,
                     phone,
                     section,
-                    position_order: people.length + 1,
+                    position_order:
+                        people
+                            .filter((person) => person.section === section)
+                            .reduce(
+                                (max, person) => Math.max(max, person.position_order),
+                                -1,
+                            ) + 1,
                 }),
             });
             const data = (await response.json().catch(() => null)) as
@@ -54,6 +62,28 @@ export function ContactsStudio({ people }: { people: Person[] }) {
             router.refresh();
         } finally {
             setPending(false);
+        }
+    }
+
+    async function movePerson(id: string, direction: "up" | "down") {
+        setMoving(id);
+        setError("");
+        try {
+            const response = await fetch(`/api/admin/kontakty/${id}`, {
+                method: "PATCH",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ direction }),
+            });
+            if (!response.ok) {
+                const data = (await response.json().catch(() => null)) as
+                    | { error?: string }
+                    | null;
+                setError(data?.error || "Pořadí se nepodařilo změnit.");
+                return;
+            }
+            router.refresh();
+        } finally {
+            setMoving(null);
         }
     }
 
@@ -151,33 +181,87 @@ export function ContactsStudio({ people }: { people: Person[] }) {
                     </div>
                 </form>
 
-                <ul className="mt-4 divide-y divide-border overflow-hidden rounded-2xl border border-border bg-card">
-                    {people.map((person) => (
-                        <li
-                            key={person.id}
-                            className="flex flex-col gap-3 p-4 sm:flex-row sm:items-center sm:justify-between"
-                        >
-                            <div>
-                                <p className="font-medium">{person.name}</p>
-                                <p className="mt-1 text-sm text-muted-foreground">
-                                    {SECTION_LABELS[person.section]}
-                                    {person.role ? ` · ${person.role}` : ""}
-                                    {person.email ? ` · ${person.email}` : ""}
-                                    {person.phone ? ` · ${person.phone}` : ""}
-                                </p>
-                            </div>
-                            <Button
-                                type="button"
-                                variant="ghost"
-                                className="self-start text-destructive hover:text-destructive"
-                                disabled={deleting === person.id}
-                                onClick={() => void removePerson(person.id)}
-                            >
-                                {deleting === person.id ? "Mažu…" : "Smazat"}
-                            </Button>
-                        </li>
-                    ))}
-                </ul>
+                <div className="mt-6 space-y-8">
+                    <p className="text-sm text-muted-foreground">
+                        Šipkami změníte pořadí v sekci. Stejně se kontakty seřadí na webu.
+                    </p>
+                    {(["vedeni", "jidelna"] as const).map((group) => {
+                        const groupPeople = people.filter(
+                            (person) => person.section === group,
+                        );
+                        if (groupPeople.length === 0) return null;
+                        return (
+                            <section key={group}>
+                                <h3 className="text-lg font-semibold tracking-tight">
+                                    {SECTION_LABELS[group]}
+                                </h3>
+                                <ul className="mt-3 divide-y divide-border overflow-hidden rounded-2xl border border-border bg-card">
+                                    {groupPeople.map((person, index) => {
+                                        const busy =
+                                            moving === person.id || deleting === person.id;
+                                        return (
+                                            <li
+                                                key={person.id}
+                                                className="flex flex-col gap-3 p-4 sm:flex-row sm:items-center sm:justify-between"
+                                            >
+                                                <div>
+                                                    <p className="font-medium">{person.name}</p>
+                                                    <p className="mt-1 text-sm text-muted-foreground">
+                                                        {person.role ? person.role : "Bez funkce"}
+                                                        {person.email ? ` · ${person.email}` : ""}
+                                                        {person.phone ? ` · ${person.phone}` : ""}
+                                                    </p>
+                                                </div>
+                                                <div className="flex items-center gap-2 self-start">
+                                                    <Button
+                                                        type="button"
+                                                        variant="outline"
+                                                        size="icon"
+                                                        aria-label="Posunout výš"
+                                                        disabled={busy || index === 0}
+                                                        onClick={() =>
+                                                            void movePerson(person.id, "up")
+                                                        }
+                                                    >
+                                                        <ChevronUp />
+                                                    </Button>
+                                                    <Button
+                                                        type="button"
+                                                        variant="outline"
+                                                        size="icon"
+                                                        aria-label="Posunout níž"
+                                                        disabled={
+                                                            busy ||
+                                                            index === groupPeople.length - 1
+                                                        }
+                                                        onClick={() =>
+                                                            void movePerson(person.id, "down")
+                                                        }
+                                                    >
+                                                        <ChevronDown />
+                                                    </Button>
+                                                    <Button
+                                                        type="button"
+                                                        variant="ghost"
+                                                        className="text-destructive hover:text-destructive"
+                                                        disabled={busy}
+                                                        onClick={() =>
+                                                            void removePerson(person.id)
+                                                        }
+                                                    >
+                                                        {deleting === person.id
+                                                            ? "Mažu…"
+                                                            : "Smazat"}
+                                                    </Button>
+                                                </div>
+                                            </li>
+                                        );
+                                    })}
+                                </ul>
+                            </section>
+                        );
+                    })}
+                </div>
             </section>
 
             <section>

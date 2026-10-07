@@ -35,7 +35,7 @@ export function StudioNav() {
     const pathname = usePathname();
 
     return (
-        <nav className="flex gap-1 overflow-x-auto pb-1">
+        <nav className="flex flex-wrap gap-1 lg:flex-nowrap lg:overflow-x-auto lg:pb-1">
             {MODULES.map((item) => {
                 const active = isActive(pathname, item.href);
                 return (

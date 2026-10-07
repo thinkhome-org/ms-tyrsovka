@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Image from "next/image";
+import { CmsImage } from "@/components/cms-image";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { SchoolEventsList } from "@/app/components/school-events";
@@ -87,7 +87,7 @@ export default async function AktualityPage() {
                                             <div className="grid gap-0 sm:grid-cols-[200px_1fr]">
                                                 <div className="relative h-48 bg-muted sm:h-full">
                                                     {image ? (
-                                                        <Image
+                                                        <CmsImage
                                                             src={image}
                                                             alt={item.title}
                                                             fill

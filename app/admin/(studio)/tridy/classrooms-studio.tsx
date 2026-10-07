@@ -6,7 +6,7 @@ import { ImageIcon } from "lucide-react";
 import type { ClassroomDraft } from "@/lib/cms/classrooms";
 import { coverSrc } from "@/lib/cms/media";
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { textareaClassName } from "../form-classes";
@@ -139,27 +139,26 @@ function ClassroomEditor({ classroom }: { classroom: ClassroomDraft }) {
                     )}
                 </div>
                 <div className="flex min-w-0 flex-wrap gap-2">
-                    <input
-                        id={`${classroom.slug}-photo`}
-                        type="file"
-                        accept="image/jpeg,image/png,image/webp"
-                        className="sr-only"
-                        disabled={uploading || pending}
-                        onChange={(event) => {
-                            void upload(event.target.files?.[0]);
-                            event.target.value = "";
-                        }}
-                    />
-                    <Button
-                        type="button"
-                        variant="outline"
-                        disabled={uploading || pending}
-                        onClick={() =>
-                            document.getElementById(`${classroom.slug}-photo`)?.click()
-                        }
+                    <label
+                        className={cn(
+                            buttonVariants({ variant: "outline" }),
+                            "relative",
+                            (uploading || pending) && "pointer-events-none opacity-50",
+                        )}
                     >
                         {uploading ? "Nahrávám…" : "Vybrat fotku"}
-                    </Button>
+                        <input
+                            type="file"
+                            accept="image/*,.heic,.heif,.jpg,.jpeg,.png,.webp"
+                            disabled={uploading || pending}
+                            aria-label="Vybrat fotku"
+                            className="absolute inset-0 z-20 size-full cursor-pointer opacity-0"
+                            onChange={(event) => {
+                                void upload(event.target.files?.[0]);
+                                event.target.value = "";
+                            }}
+                        />
+                    </label>
                     {draft.imageKey ? (
                         <Button
                             type="button"
@@ -179,7 +178,7 @@ function ClassroomEditor({ classroom }: { classroom: ClassroomDraft }) {
                     <p className="w-full text-xs text-muted-foreground">
                         {uploading
                             ? "Nahrávám fotku…"
-                            : "JPEG, PNG nebo WebP, nejvýše 5 MB. Změna se zveřejní až po uložení."}
+                            : "Fotku vyberte z telefonu. Velké snímky se zmenší. Změna se zveřejní až po uložení."}
                     </p>
                 </div>
             </div>

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { ChevronDown, ChevronUp } from "lucide-react";
 import type { Notice, NoticeCategory } from "@/lib/cms/notices";
 import { noticeHref, noticeKind } from "@/lib/cms/notice-view";
 import { formatDateCs, toDateInput } from "@/lib/cms/dates";
@@ -22,6 +23,7 @@ export function NoticesStudio({ items }: { items: Notice[] }) {
     const [error, setError] = useState("");
     const [pending, setPending] = useState(false);
     const [deleting, setDeleting] = useState<string | null>(null);
+    const [moving, setMoving] = useState<string | null>(null);
 
     async function create() {
         setPending(true);
@@ -51,6 +53,28 @@ export function NoticesStudio({ items }: { items: Notice[] }) {
             router.refresh();
         } finally {
             setPending(false);
+        }
+    }
+
+    async function move(id: string, direction: "up" | "down") {
+        setMoving(id);
+        setError("");
+        try {
+            const response = await fetch(`/api/admin/uredni-deska/${id}`, {
+                method: "PATCH",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ direction }),
+            });
+            if (!response.ok) {
+                const data = (await response.json().catch(() => null)) as
+                    | { error?: string }
+                    | null;
+                setError(data?.error || "Pořadí se nepodařilo změnit.");
+                return;
+            }
+            router.refresh();
+        } finally {
+            setMoving(null);
         }
     }
 
@@ -156,48 +180,89 @@ export function NoticesStudio({ items }: { items: Notice[] }) {
                     Na desce zatím nic není.
                 </p>
             ) : (
-                <ul className="divide-y divide-border overflow-hidden rounded-2xl border border-border bg-card">
-                    {items.map((item) => {
-                        const href = noticeHref(item);
+                <div className="space-y-8">
+                    <p className="text-sm text-muted-foreground">
+                        Šipkami změníte pořadí v dané skupině. Stejně se dokumenty
+                        seřadí na webu.
+                    </p>
+                    {CATEGORIES.map((group) => {
+                        const groupItems = items.filter((item) => item.category === group);
+                        if (groupItems.length === 0) return null;
                         return (
-                            <li
-                                key={item.id}
-                                className="flex flex-col gap-3 p-4 sm:flex-row sm:items-center sm:justify-between"
-                            >
-                                <div className="min-w-0">
-                                    {href ? (
-                                        <a
-                                            href={href}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="font-medium text-foreground underline-offset-2 hover:underline"
-                                        >
-                                            {item.title}
-                                        </a>
-                                    ) : (
-                                        <p className="font-medium">{item.title}</p>
-                                    )}
-                                    <p className="mt-1 text-sm text-muted-foreground">
-                                        {NOTICE_CATEGORY_LABELS[item.category]} ·{" "}
-                                        {noticeKind(item)}
-                                        {item.expires_at
-                                            ? ` · do ${formatDateCs(toDateInput(item.expires_at) || item.expires_at)}`
-                                            : ""}
-                                    </p>
-                                </div>
-                                <Button
-                                    type="button"
-                                    variant="ghost"
-                                    className="self-start text-destructive hover:text-destructive"
-                                    disabled={deleting === item.id}
-                                    onClick={() => void remove(item.id)}
-                                >
-                                    {deleting === item.id ? "Mažu…" : "Smazat"}
-                                </Button>
-                            </li>
+                            <section key={group}>
+                                <h2 className="font-heading text-2xl font-semibold tracking-tight">
+                                    {NOTICE_CATEGORY_LABELS[group]}
+                                </h2>
+                                <ul className="mt-3 divide-y divide-border overflow-hidden rounded-2xl border border-border bg-card">
+                                    {groupItems.map((item, index) => {
+                                        const href = noticeHref(item);
+                                        const busy = moving === item.id || deleting === item.id;
+                                        return (
+                                            <li
+                                                key={item.id}
+                                                className="flex flex-col gap-3 p-4 sm:flex-row sm:items-center sm:justify-between"
+                                            >
+                                                <div className="min-w-0">
+                                                    {href ? (
+                                                        <a
+                                                            href={href}
+                                                            target="_blank"
+                                                            rel="noopener noreferrer"
+                                                            className="font-medium text-foreground underline-offset-2 hover:underline"
+                                                        >
+                                                            {item.title}
+                                                        </a>
+                                                    ) : (
+                                                        <p className="font-medium">{item.title}</p>
+                                                    )}
+                                                    <p className="mt-1 text-sm text-muted-foreground">
+                                                        {noticeKind(item)}
+                                                        {item.expires_at
+                                                            ? ` · do ${formatDateCs(toDateInput(item.expires_at) || item.expires_at)}`
+                                                            : ""}
+                                                    </p>
+                                                </div>
+                                                <div className="flex items-center gap-2 self-start">
+                                                    <Button
+                                                        type="button"
+                                                        variant="outline"
+                                                        size="icon"
+                                                        aria-label="Posunout výš"
+                                                        disabled={busy || index === 0}
+                                                        onClick={() => void move(item.id, "up")}
+                                                    >
+                                                        <ChevronUp />
+                                                    </Button>
+                                                    <Button
+                                                        type="button"
+                                                        variant="outline"
+                                                        size="icon"
+                                                        aria-label="Posunout níž"
+                                                        disabled={
+                                                            busy || index === groupItems.length - 1
+                                                        }
+                                                        onClick={() => void move(item.id, "down")}
+                                                    >
+                                                        <ChevronDown />
+                                                    </Button>
+                                                    <Button
+                                                        type="button"
+                                                        variant="ghost"
+                                                        className="text-destructive hover:text-destructive"
+                                                        disabled={busy}
+                                                        onClick={() => void remove(item.id)}
+                                                    >
+                                                        {deleting === item.id ? "Mažu…" : "Smazat"}
+                                                    </Button>
+                                                </div>
+                                            </li>
+                                        );
+                                    })}
+                                </ul>
+                            </section>
                         );
                     })}
-                </ul>
+                </div>
             )}
         </div>
     );

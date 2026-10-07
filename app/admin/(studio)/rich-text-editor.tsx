@@ -114,7 +114,7 @@ export function RichTextEditor({
     }
 
     return (
-        <div className="overflow-hidden rounded-2xl border border-border bg-card">
+        <div className="overflow-clip rounded-2xl border border-border bg-card">
             <div className="flex flex-wrap items-center gap-0.5 border-b border-border px-2 py-1.5">
                 <ToolbarButton
                     label="Nadpis"
@@ -182,12 +182,24 @@ export function RichTextEditor({
                 >
                     <Link2 className="size-4" />
                 </ToolbarButton>
-                <ToolbarButton
-                    label="Obrázek v textu"
-                    onClick={() => fileRef.current?.click()}
+                <label
+                    className="btn-3d btn-3d-ghost relative inline-flex size-9 items-center justify-center text-muted-foreground"
+                    title="Obrázek v textu"
                 >
-                    <ImageIcon className="size-4" />
-                </ToolbarButton>
+                    <ImageIcon className="pointer-events-none size-4" />
+                    <span className="sr-only">Obrázek v textu</span>
+                    <input
+                        ref={fileRef}
+                        type="file"
+                        accept="image/*,.heic,.heif,.jpg,.jpeg,.png,.webp"
+                        aria-label="Obrázek v textu"
+                        className="absolute inset-0 z-20 size-full cursor-pointer opacity-0"
+                        onChange={(event) => {
+                            void insertImage(event.target.files?.[0]);
+                            event.target.value = "";
+                        }}
+                    />
+                </label>
             </div>
             {linkOpen ? (
                 <div className="flex flex-wrap items-center gap-2 border-b border-border bg-muted/40 px-3 py-2">
@@ -228,16 +240,6 @@ export function RichTextEditor({
                 </div>
             ) : null}
             <EditorContent editor={editor} />
-            <input
-                ref={fileRef}
-                type="file"
-                accept="image/jpeg,image/png,image/webp"
-                className="sr-only"
-                onChange={(event) => {
-                    void insertImage(event.target.files?.[0]);
-                    event.target.value = "";
-                }}
-            />
             {uploadError ? (
                 <p className="border-t border-border px-4 py-2 text-sm text-destructive">
                     {uploadError}

@@ -486,6 +486,15 @@ body:has([data-admin-shell]) [data-cookie-banner] {
     display: none;
 }
 
+@media (max-width: 1023px) {
+    .admin-shell input,
+    .admin-shell textarea,
+    .admin-shell select,
+    .admin-shell .tiptap {
+        font-size: 16px;
+    }
+}
+
 .admin-shell {
     --admin-paper: oklch(0.97 0.012 85);
     --admin-ink: oklch(0.27 0.03 55);

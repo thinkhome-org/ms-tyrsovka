@@ -3,6 +3,7 @@ import { requireAdmin } from "@/lib/cms/auth";
 import {
     deletePerson,
     getPersonById,
+    movePerson,
     updatePerson,
     type PersonInput,
 } from "@/lib/cms/people";
@@ -31,7 +32,13 @@ export async function PATCH(
     if (denied) return denied;
     const { id } = await params;
     try {
-        const input = (await request.json()) as PersonInput;
+        const input = (await request.json()) as PersonInput & {
+            direction?: "up" | "down";
+        };
+        if (input.direction === "up" || input.direction === "down") {
+            const item = await movePerson(id, input.direction);
+            return NextResponse.json({ item });
+        }
         const item = await updatePerson(id, input);
         return NextResponse.json({ item });
     } catch (error) {

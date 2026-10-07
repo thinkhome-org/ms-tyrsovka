@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { CmsImage } from "@/components/cms-image";
 import Link from "next/link";
 import type { ComponentPropsWithoutRef } from "react";
 import ReactMarkdown from "react-markdown";
@@ -85,7 +85,7 @@ const markdownComponents = {
     img: ({ src, alt }: ComponentPropsWithoutRef<"img">) =>
         typeof src === "string" ? (
             <span className="my-4 block overflow-hidden rounded-lg border border-border bg-muted">
-                <Image
+                <CmsImage
                     src={src}
                     alt={alt ?? ""}
                     width={1600}

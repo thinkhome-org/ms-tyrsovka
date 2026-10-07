@@ -8,19 +8,19 @@ import { addDays, formatDateCs } from "@/lib/cms/dates";
 import { coverSrc } from "@/lib/cms/media";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { prepareCmsImage } from "../prepare-image";
 
-const ACCEPT = "application/pdf,image/png,image/jpeg,image/webp,.pdf,.png,.jpg,.jpeg,.webp";
+const ACCEPT = "application/pdf,image/*,.pdf,.heic,.heif,.png,.jpg,.jpeg,.webp";
 const MAX_BYTES = 15 * 1024 * 1024;
-const ALLOWED_TYPES = new Set([
-    "application/pdf",
-    "image/png",
-    "image/jpeg",
-    "image/webp",
-]);
+
+function isPdfUpload(file: File): boolean {
+    return file.type === "application/pdf" || file.name.toLowerCase().endsWith(".pdf");
+}
 
 function isAllowedMenuFile(file: File): boolean {
-    if (ALLOWED_TYPES.has(file.type)) return true;
-    return /\.(pdf|png|jpe?g|webp)$/i.test(file.name);
+    if (isPdfUpload(file)) return true;
+    if (file.type.startsWith("image/")) return true;
+    return /\.(png|jpe?g|webp|heic|heif)$/i.test(file.name);
 }
 
 function isPdf(file: MenuFile): boolean {
@@ -50,17 +50,19 @@ function WeekSlot({
             if (!nextFile) return;
             setError("");
             if (!isAllowedMenuFile(nextFile)) {
-                setError("Povolené formáty jsou PDF, PNG, JPEG a WebP.");
+                setError("Povolené formáty jsou PDF a fotka.");
                 return;
             }
-            if (nextFile.size > MAX_BYTES) {
+            const pdf = isPdfUpload(nextFile);
+            if (pdf && nextFile.size > MAX_BYTES) {
                 setError("Soubor může mít nejvýše 15 MB.");
                 return;
             }
             setPending(true);
             try {
+                const prepared = pdf ? nextFile : await prepareCmsImage(nextFile);
                 const form = new FormData();
-                form.append("file", nextFile);
+                form.append("file", prepared);
                 form.append("week_start", weekStart);
                 const response = await fetch("/api/admin/jidelnicek", {
                     method: "POST",
@@ -111,10 +113,7 @@ function WeekSlot({
                 {formatDateCs(weekStart)} – {formatDateCs(addDays(weekStart, 4))}
             </p>
 
-            <button
-                type="button"
-                disabled={pending}
-                onClick={() => inputRef.current?.click()}
+            <div
                 onDragOver={(event) => {
                     event.preventDefault();
                     setDragOver(true);
@@ -126,7 +125,7 @@ function WeekSlot({
                     void upload(event.dataTransfer.files[0]);
                 }}
                 className={cn(
-                    "mt-5 flex min-h-56 w-full flex-col items-center justify-center overflow-hidden rounded-2xl border border-dashed border-border bg-background px-6 py-8 text-center transition-colors",
+                    "relative mt-5 flex min-h-56 w-full flex-col items-center justify-center overflow-clip rounded-2xl border border-dashed border-border bg-background px-6 py-8 text-center transition-colors",
                     dragOver && "border-primary bg-accent/60",
                     pending && "opacity-70",
                 )}
@@ -151,25 +150,26 @@ function WeekSlot({
                           : "Vložit jídelníček"}
                 </span>
                 <span className="mt-2 max-w-xs text-xs leading-relaxed text-muted-foreground">
-                    PDF, PNG, JPEG nebo WebP, nejvýše 15 MB. Přetáhněte soubor sem,
-                    nebo klikněte a vyberte ho.
+                    PDF nebo fotka z telefonu. Velké snímky se před odesláním zmenší.
                 </span>
                 {file ? (
                     <span className="mt-3 max-w-full truncate text-sm font-medium text-foreground">
                         {file.file_name || "Nahraný soubor"}
                     </span>
                 ) : null}
-            </button>
-            <input
-                ref={inputRef}
-                type="file"
-                accept={ACCEPT}
-                className="sr-only"
-                onChange={(event) => {
-                    void upload(event.target.files?.[0]);
-                    event.target.value = "";
-                }}
-            />
+                <input
+                    ref={inputRef}
+                    type="file"
+                    accept={ACCEPT}
+                    disabled={pending}
+                    aria-label="Vložit jídelníček"
+                    className="absolute inset-0 z-20 size-full cursor-pointer opacity-0"
+                    onChange={(event) => {
+                        void upload(event.target.files?.[0]);
+                        event.target.value = "";
+                    }}
+                />
+            </div>
 
             <div className="mt-4 flex flex-wrap items-center gap-3">
                 {pdfUrl ? (

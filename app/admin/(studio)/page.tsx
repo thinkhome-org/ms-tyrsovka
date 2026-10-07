@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { CmsImage } from "@/components/cms-image";
 import Link from "next/link";
 import { listAll } from "@/lib/cms/aktuality";
 import { formatDateCs } from "@/lib/cms/dates";
@@ -51,7 +51,7 @@ export default async function AdminHomePage() {
                                 >
                                     <div className="relative h-36 bg-muted sm:h-full">
                                         {image ? (
-                                            <Image
+                                            <CmsImage
                                                 src={image}
                                                 alt=""
                                                 fill
